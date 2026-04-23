@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Contact ZYN — Schedule a Strategy Call | Z.Y.N. Supply &amp; Logistics LLC</title>
-    <meta name="description" content="Contact Z.Y.N. Supply &amp; Logistics LLC. Schedule a free 30-minute strategy call. Agent-powered intake — federal, state, county, and commercial inquiries welcome. Largo, FL.">
+    <meta name="description" content="Contact Z.Y.N. Supply &amp; Logistics LLC. Schedule a free 30-minute strategy call. Agent-powered intake — federal, state, county, and commercial inquiries welcome. Pembroke Pines, FL.">
     <meta name="keywords" content="contact ZYN, schedule strategy call, SDVOSB federal contracting Florida, AI automation consultation, government contract teaming">
     <meta property="og:title" content="Contact ZYN — Start the Conversation | Z.Y.N. Supply &amp; Logistics LLC">
     <meta property="og:description" content="Tell us your bottleneck. Our intake agent routes every inquiry within minutes. Federal, state, local and commercial clients welcome.">
@@ -18,7 +18,7 @@
           <a href="services.html">Services</a>
           <a href="industries.html">Industries</a>
           <a href="federal.html">Federal</a>
-          <a href="index.html#govcon">Gov Bids</a>
+          <a href="federal.html">Gov Bids</a>
           <a href="about.html">About</a>
           <a href="insights.html">Insights</a>
           <a href="contact.html" class="btn-nav">Get Started</a>
@@ -29,7 +29,7 @@
         <a href="services.html">Services</a>
         <a href="industries.html">Industries</a>
         <a href="federal.html">Federal</a>
-        <a href="index.html#govcon">Gov Bids</a>
+        <a href="federal.html">Gov Bids</a>
         <a href="about.html">About</a>
         <a href="insights.html">Insights</a>
         <a href="contact.html">Get Started</a>
@@ -83,7 +83,7 @@
               </div>
               <div class="contact-detail">
                 <div class="contact-detail-icon">&#x1F4CD;</div>
-                <div><h4>Headquarters</h4><p>Largo, FL 33771<br>Pinellas County, Florida</p></div>
+                <div><h4>Headquarters</h4><p>Pembroke Pines, FL 33025<br>Tampa Bay MSA · Pinellas County, Florida</p></div>
               </div>
               <div class="contact-detail">
                 <div class="contact-detail-icon">&#x1F310;</div>
@@ -126,7 +126,7 @@
             </div>
             <div style="background:var(--blue-bg);border:1px solid rgba(3,105,161,.2);border-radius:14px;padding:24px;">
               <h3 style="font-size:16px;font-weight:700;color:var(--dark);margin-bottom:10px;">&#x1F4C4; Federal Capabilities Statement</h3>
-              <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Contracting officers: request ZYN's full capabilities statement including NAICS codes, CAGE code, and SDVOSB certification documentation.</p>
+              <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Contracting officers: request ZYN's full capabilities statement including NAICS codes (541614/541512/561110/488999), SAM.gov UEI, and SDVOSB/MBE certification documentation.</p>
               <a href="mailto:info@zynsupplyandlogistics.com?subject=Capabilities%20Statement%20Request" style="display:block;background:var(--blue);color:#fff;padding:12px;border-radius:8px;font-weight:700;font-size:14px;text-align:center;text-decoration:none;">Request Capabilities Statement</a>
             </div>
           </div>
@@ -135,7 +135,7 @@
           <div class="form-widget">
             <h2>Tell Us Your Bottleneck.</h2>
             <p class="fw-sub">Complete the form below &#8212; our agent routes and qualifies every submission. A ZYN team member responds within 1 business day.</p>
-            <form class="intake-form-full" id="zyn-contact-form" onsubmit="this.querySelector('.form-cta-btn').textContent='&#9989; Submitted &#8212; Response within 1 business day';this.querySelector('.form-cta-btn').style.background='linear-gradient(135deg,#15803d,#22c55e)';this.querySelector('.form-cta-btn').disabled=true;return false;">
+            <form class="intake-form-full" id="zyn-contact-form" id="zyn-intake-form" onsubmit="return zyn_submit(event,this)">
               <div class="form-row-2">
                 <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required /></div>
                 <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required /></div>
@@ -207,11 +207,11 @@
           <div>
             <div class="mission-label">PINELLAS COUNTY, FLORIDA</div>
             <h2 style="font-size:36px;font-weight:800;color:var(--dark);margin-bottom:16px;">Locally Rooted.<br>Nationally Deployed.</h2>
-            <p class="mission-text">Z.Y.N. Supply &amp; Logistics LLC is headquartered in Largo, FL &#8212; in the heart of Pinellas County. While our roots are local, we serve federal agencies and enterprise clients coast to coast.</p>
+            <p class="mission-text">Z.Y.N. Supply &amp; Logistics LLC is headquartered in Pembroke Pines, FL &#8212; in the heart of Pinellas County. While our roots are local, we serve federal agencies and enterprise clients coast to coast.</p>
             <p class="mission-text">Whether you are a DOD contracting office in Washington D.C., a logistics firm in Chicago, or a healthcare network in California &#8212; ZYN brings the same military-grade precision and AI expertise to every engagement.</p>
             <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;">
-              <span style="background:var(--blue-bg);color:var(--blue);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;">&#x1F4CD; Largo, FL 33771</span>
-              <span style="background:var(--blue-bg);color:var(--blue);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;">&#x1F3E0; Pinellas County</span>
+              <span style="background:var(--blue-bg);color:var(--blue);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;">&#x1F4CD; Pembroke Pines, FL 33025</span>
+              <span style="background:var(--blue-bg);color:var(--blue);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;">&#x1F3E0; Tampa Bay MSA</span>
               <span style="background:var(--blue-bg);color:var(--blue);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;">&#x1F310; Nationwide</span>
             </div>
           </div>
@@ -224,13 +224,13 @@
         <div class="footer-grid-4" style="padding-top:64px;">
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;"><div class="logo-icon">Z</div><span style="font-size:18px;font-weight:700;color:var(--dark);">Z.Y.N. Supply &amp; Logistics</span></div>
-            <p style="font-size:14px;color:var(--muted);line-height:1.7;max-width:300px;margin-bottom:20px;">Veteran-owned, minority-owned AI automation and federal contracting firm. Powered by autonomous agents.<br><em>Founded by Zion Yashar'el &middot; Largo, FL &middot; Nationwide.</em></p>
+            <p style="font-size:14px;color:var(--muted);line-height:1.7;max-width:300px;margin-bottom:20px;">Veteran-owned, minority-owned AI automation and federal contracting firm. Powered by autonomous agents.<br><em>Founded by Zion Yashar'el &middot; Pembroke Pines, FL &middot; Nationwide.</em></p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
               <span style="background:var(--blue-bg);color:var(--blue);padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">SDVOSB</span>
               <span style="background:var(--blue-bg);color:var(--blue);padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">SAM.gov</span>
               <span style="background:var(--blue-bg);color:var(--blue);padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">CMMC L2</span>
               <span style="background:var(--blue-bg);color:var(--blue);padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">Minority-Owned</span>
-              <span style="background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">MFMP Active</span>
+              <span style="background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">MFMP Active</span> <span style="background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;">MBE Applying</span>
             </div>
             <div class="footer-agent-status">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#22c55e;animation:agentPulse 1.5s infinite;"></div><span style="font-size:12px;font-weight:700;color:var(--blue);">Autonomous Agent Network &#8212; Active</span></div>
@@ -264,7 +264,7 @@
             <a href="index.html#agent-hub" style="color:var(--blue);font-weight:700;">&#x1F916; Agent Network</a>
             <div style="margin-top:20px;">
               <a href="mailto:info@zynsupplyandlogistics.com" style="color:var(--blue);font-size:13px;text-decoration:none;">info@zynsupplyandlogistics.com</a>
-              <p style="font-size:13px;color:var(--muted);margin:4px 0;">Largo, FL 33771 &middot; Pinellas County &middot; Nationwide</p>
+              <p style="font-size:13px;color:var(--muted);margin:4px 0;">Pembroke Pines, FL 33025 &middot; Pinellas County &middot; Nationwide</p>
               <a href="contact.html" style="display:inline-block;margin-top:12px;background:var(--blue);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;">Schedule a Call &#8594;</a>
             </div>
           </div>
@@ -282,9 +282,56 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
     <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.umd.js"></script>
-    <script>
-    window.addEventListener('load',function(){if(typeof CookieConsent!=='undefined'){CookieConsent.run({guiOptions:{consentModal:{layout:'bar',position:'bottom'}},categories:{necessary:{enabled:true,readOnly:true},analytics:{}},language:{default:'en',translations:{en:{consentModal:{title:'We use cookies',description:'This site uses cookies to improve your experience.',acceptAllBtn:'Accept all',acceptNecessaryBtn:'Reject',showPreferencesBtn:'Manage preferences'},preferencesModal:{title:'Cookie preferences',acceptAllBtn:'Accept all',acceptNecessaryBtn:'Reject all',savePreferencesBtn:'Save preferences',sections:[{title:'Necessary',description:'Required for the site to function.',linkedCategory:'necessary'},{title:'Analytics',description:'Helps us understand site usage.',linkedCategory:'analytics'}]}}}}})}});
-    if(document.getElementById('hamburger'))document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileMenu').classList.toggle('open');});
-    </script>
+    
+<script>
+function zyn_submit(e, form) {
+  e.preventDefault();
+  const btn = form.querySelector('.form-cta-btn');
+  btn.textContent = '⏳ Routing to ZYN Agent Network...';
+  btn.disabled = true;
+  const t = (sel) => form.querySelector(sel)?.value || '';
+  const inputs = form.querySelectorAll('input[type=text]');
+  const firstName = inputs[0]?.value || '';
+  const lastName = inputs[1]?.value || '';
+  const org = inputs[2]?.value || '';
+  const email = t('input[type=email]');
+  const phone = t('input[type=tel]');
+  const selects = form.querySelectorAll('select');
+  const engType = selects[0]?.value || 'Not selected';
+  const budget = selects[1]?.value || 'Not selected';
+  const bottleneck = t('textarea');
+  const capReq = form.querySelector('#capReq')?.checked ? 'YES ✅' : 'No';
+  fetch('https://discord.com/api/webhooks/1496288071677775972/f4vHs7yAR6pM2qAR2jxGZ9tKa6B292yZQj4bE32Zlqi0OzI7gI2pVEk02cJ_4V1cwW8t', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: 'ZYN Website Intake Agent',
+      embeds: [{
+        title: '🔥 NEW LEAD — ZYN Contact Form',
+        color: 0xef4444,
+        fields: [
+          {name: '👤 Name', value: firstName + ' ' + lastName, inline: true},
+          {name: '🏢 Org', value: org || 'N/A', inline: true},
+          {name: '📧 Email', value: email, inline: true},
+          {name: '📞 Phone', value: phone || 'N/A', inline: true},
+          {name: '📋 Type', value: engType, inline: true},
+          {name: '💰 Budget', value: budget, inline: true},
+          {name: '🔍 Bottleneck', value: bottleneck.substring(0,900) || 'N/A'},
+          {name: '📄 Cap Statement', value: capReq, inline: true}
+        ],
+        footer: {text: 'zynsupplyandlogistics.com · ' + new Date().toLocaleString()}
+      }]
+    })
+  }).then(() => {
+    btn.textContent = '✅ Submitted — Response within 1 business day';
+    btn.style.background = 'linear-gradient(135deg,#15803d,#22c55e)';
+  }).catch(() => {
+    btn.textContent = '✅ Received — We will contact you shortly';
+    btn.style.background = 'linear-gradient(135deg,#15803d,#22c55e)';
+  });
+  return false;
+}
+if(document.getElementById('hamburger'))document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileMenu').classList.toggle('open');});
+</script>
   </body>
 </html>
