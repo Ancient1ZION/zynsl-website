@@ -1,141 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Industries We Serve - Z.Y.N. Supply &amp; Logistics LLC</title>
-  <meta name="description" content="Z.Y.N. Supply & Logistics LLC serves federal defense, healthcare, logistics, construction, financial services, and non-profit sectors with AI automation solutions. Largo, FL.">
-  <link rel="stylesheet" href="styles.css">
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industries Served | Z.Y.N. Supply &amp; Logistics LLC | AI Automation Florida</title>
+  <meta name="description" content="ZYN Supply &amp; Logistics serves federal agencies, defense contractors, healthcare, construction, education, nonprofits, and local government with AI automation and supply chain intelligence." />
+  <meta name="keywords" content="AI automation industries Florida, defense contractor AI, healthcare supply chain AI, construction logistics automation, government contractor Florida, veteran owned AI firm" />
+  <meta property="og:title" content="Industries Served | Z.Y.N. Supply &amp; Logistics LLC" />
+  <meta property="og:description" content="AI automation and intelligent supply chain for federal, defense, healthcare, construction, education, nonprofit, and government sectors." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .industries-hero {
+      background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #0f2035 100%);
+      padding: 80px 40px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .industries-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 60%);
+    }
+    .industries-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .industries-hero h1 span { color: #00d4ff; }
+    .industries-hero p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 700px;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+    .hero-sectors {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+    }
+    .hero-sector-tag {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .industries-grid-section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .industries-grid-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 10px;
+    }
+    .industries-grid-section .section-sub {
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 1.05rem;
+    }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+    .industry-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border-top: 5px solid #0066cc;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .industry-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 100px; height: 100px;
+      background: radial-gradient(circle, rgba(0,102,204,0.05), transparent 70%);
+    }
+    .industry-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,102,204,0.15);
+    }
+    .industry-card.federal { border-top-color: #1a3a5c; }
+    .industry-card.defense { border-top-color: #2d4a22; }
+    .industry-card.healthcare { border-top-color: #4a1a22; }
+    .industry-card.construction { border-top-color: #4a3a1a; }
+    .industry-card.education { border-top-color: #1a4a3a; }
+    .industry-card.nonprofit { border-top-color: #3a1a4a; }
+    .industry-card.local-gov { border-top-color: #1a2a4a; }
+    .industry-card.logistics { border-top-color: #4a1a3a; }
+    .industry-card.tech { border-top-color: #004a4a; }
+    .industry-icon {
+      font-size: 2.8rem;
+      margin-bottom: 14px;
+    }
+    .industry-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 10px;
+    }
+    .industry-card p {
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .industry-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .industry-tag {
+      background: rgba(0,102,204,0.07);
+      color: #0066cc;
+      border: 1px solid rgba(0,102,204,0.15);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .agent-for-industry {
+      background: linear-gradient(135deg, #0a1628, #1a2d4a);
+      color: #fff;
+      padding: 60px 40px;
+    }
+    .agent-for-industry-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .agent-for-industry h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .agent-for-industry h2 span { color: #00d4ff; }
+    .agent-for-industry .section-sub {
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 40px;
+    }
+    .agent-industry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .agent-industry-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 14px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .agent-industry-num {
+      width: 44px;
+      height: 44px;
+      background: rgba(0,212,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #00d4ff;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .agent-industry-card h4 {
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .agent-industry-card p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .govcon-industry-section {
+      background: #f0f7ff;
+      padding: 60px 40px;
+    }
+    .govcon-industry-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .govcon-industry-inner h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 10px;
+    }
+    .govcon-industry-inner .section-sub {
+      color: #666;
+      margin-bottom: 36px;
+    }
+    .govcon-industry-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .govcon-ind-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+      border-bottom: 4px solid #0066cc;
+    }
+    .govcon-ind-icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    .govcon-ind-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0a1628;
+      margin-bottom: 6px;
+    }
+    .govcon-ind-card p {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.5;
+    }
+    .industries-cta {
+      background: linear-gradient(90deg, #0066cc, #0a1628);
+      padding: 60px 40px;
+      text-align: center;
+      color: #fff;
+    }
+    .industries-cta h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .industries-cta p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .agent-live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: agentPulse 2s infinite;
+      vertical-align: middle;
+    }
+    @media (max-width: 768px) {
+      .industries-grid { grid-template-columns: 1fr; }
+      .agent-industry-grid { grid-template-columns: 1fr; }
+      .govcon-industry-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
 <body>
-  <nav class="nav">
-      <div class="nav-inner">
-            <a href="index.html" class="nav-logo"><div class="logo-icon">Z</div><span><span class="blue">Z.Y.N.</span> Supply &amp; Logistics</span></a>
-          <div class="nav-links">
-                <a href="services.html">Services</a><a href="industries.html">Industries</a><a href="federal.html">Federal</a><a href="about.html">About</a><a href="insights.html">Insights</a>
-                <a href="contact.html" class="btn-nav">Get Started</a>
-          </div>
-          <button class="hamburger" id="hamburger">&#9776;</button>
-      </div>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="services.html">Services</a><a href="industries.html">Industries</a><a href="federal.html">Federal</a><a href="about.html">About</a><a href="insights.html">Insights</a><a href="contact.html" class="btn-nav">Get Started</a>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">Z</div>
+        <span><strong>Z.Y.N.</strong> Supply &amp; Logistics</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="industries.html" class="active">Industries</a></li>
+        <li><a href="federal.html">Federal</a></li>
+        <li><a href="federal.html#gov-bids">Gov Bids</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="insights.html">Insights</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Get Started</a>
     </div>
   </nav>
 
-
-
-
-<section class="page-hero">
-  <div class="container">
-      <div class="pill">Sectors We Serve</div>
-      <h1>Industries<br><span class="blue">We Serve</span></h1>
-      <p>Deep AI automation expertise across high-stakes sectors where precision, compliance, and speed are non-negotiable. Z.Y.N. knows your industry &mdash; and builds accordingly.</p>
-      <div class="btn-group" style="margin-top:2rem">
-            <a href="federal.html" class="btn-primary">Federal Capabilities</a>
-            <a href="contact.html" class="btn-outline">Talk to an Expert</a>
+  <!-- SEO Agent Banner -->
+  <div class="seo-agent-banner">
+    <div class="seo-banner-inner">
+      <div class="seo-banner-left">
+        <div class="seo-icon">&#128269;</div>
+        <div>
+          <div class="seo-banner-title">SEO Agent &#8212; Active &amp; Running</div>
+          <div class="seo-banner-sub">Autonomous keyword targeting, content indexing &amp; backlink monitoring &#8212; scheduled tasks active</div>
+        </div>
       </div>
+      <div class="seo-banner-metrics">
+        <div class="seo-metric"><span class="seo-metric-value">247</span><span class="seo-metric-label">Keywords Tracked</span></div>
+        <div class="seo-metric"><span class="seo-metric-value">94%</span><span class="seo-metric-label">Index Coverage</span></div>
+        <div class="seo-metric"><span class="seo-metric-value seo-live">Live</span><span class="seo-metric-label">Agent Status</span></div>
+      </div>
+      <a href="contact.html" class="seo-banner-cta">View Agent Dashboard &#8594;</a>
+    </div>
   </div>
-</section>
 
-
-
-
-<!-- INDUSTRIES HERO IMAGE -->
-<section style="background:var(--light);padding:0">
-  <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80" alt="Industries served by ZYN Supply and Logistics AI automation" style="width:100%;height:320px;object-fit:cover;object-position:center 60%" loading="lazy">
-</section>
-
-
-
-
-<section class="section bg-white">
-  <div class="container">
-      <div class="industries-grid">
-            <div class="industry-card">
-                    <h3>&#128737;&#65039; Federal / Defense</h3>
-                    <p>AI automation for DoD, DHS, and intelligence community workflows. CMMC-compliant architecture, clearance-friendly processes, and veteran-led execution from a certified SDVOSB.</p>
-                    <div class="industry-tags"><span>DOD</span><span>DHS</span><span>CMMC L2</span><span>SDVOSB</span></div>
-            </div>
-            <div class="industry-card">
-                    <h3>&#127973; Healthcare</h3>
-                    <p>AI systems for patient routing, clinical documentation, revenue cycle automation, and HIPAA-compliant data pipelines serving VA and private healthcare networks.</p>
-                    <div class="industry-tags"><span>VA</span><span>HHS</span><span>HIPAA</span><span>Revenue Cycle</span></div>
-            </div>
-            <div class="industry-card">
-                    <h3>&#128666; Logistics &amp; Supply Chain</h3>
-                    <p>AI-driven demand forecasting, inventory optimization, and last-mile intelligence for 3PL, freight, and supply chain operations of any scale.</p>
-                    <div class="industry-tags"><span>3PL</span><span>Last-Mile</span><span>Freight</span><span>Forecasting</span></div>
-            </div>
-            <div class="industry-card">
-                    <h3>&#127959;&#65039; Construction &amp; Engineering</h3>
-                    <p>Automated project tracking, bid management, compliance reporting, and subcontractor coordination systems for USACE and commercial construction firms.</p>
-                    <div class="industry-tags"><span>USACE</span><span>GSA</span><span>Bid Management</span></div>
-            </div>
-            <div class="industry-card">
-                    <h3>&#128176; Financial Services</h3>
-                    <p>Automated reporting, fraud detection pipelines, audit trail systems, and regulatory compliance automation for financial institutions and government financial agencies.</p>
-                    <div class="industry-tags"><span>SOC 2</span><span>AML</span><span>Audit</span><span>Compliance</span></div>
-            </div>
-            <div class="industry-card">
-                    <h3>&#128227; Non-Profit &amp; Civic</h3>
-                    <p>Grant management automation, donor engagement systems, and program delivery analytics for mission-driven organizations and civic institutions.</p>
-                    <div class="industry-tags"><span>Grants</span><span>501(c)3</span><span>Civic Tech</span></div>
-            </div>
-      </div>
-  </div>
-</section>
-
-
-
-
-<!-- WHY ZYN IMAGE SECTION -->
-<section class="mission-section" style="padding:72px 0">
-  <div class="container">
-      <div class="mission-inner">
-            <div>
-                      <div class="mission-label">Cross-Sector Expertise</div>
-                      <h2>One Team. Every Industry.</h2>
-                      <p class="mission-text">What makes Z.Y.N. different is not just our AI capability &mdash; it's our understanding of the operational realities, regulatory constraints, and mission pressures that each industry faces. Founded by a U.S. military veteran and minority business owner, we bring credibility and compliance to every sector we serve.</p>
-                      <p class="mission-text">Whether you operate in a highly regulated federal environment or a fast-moving commercial logistics network, ZYN deploys the same level of precision, accountability, and technical rigor to your engagement.</p>
-                      <a href="contact.html" class="btn-primary" style="margin-top:1.5rem">Start the Conversation</a>
-            </div>
-              <div class="mission-img">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="Professional cross-sector team collaboration" loading="lazy">
-              </div>
-      </div>
-  </div>
-</section>
-
-
-
-
-  <section class="cta-section">
-      <div class="container text-center">
-            <h2>Your Sector. Our Expertise.</h2>
-            <p>Every industry has its own constraints. We know yours &mdash; and we build accordingly.</p>
-            <a href="contact.html" class="btn-primary btn-lg">Start the Conversation</a>
-            <p class="small">info@zynsupplyandlogistics.com &middot; Largo, FL 33771 &middot; Pinellas County</p>
-      </div>
+  <!-- Hero -->
+  <section class="industries-hero">
+    <h1>Industries We <span>Power</span> with AI</h1>
+    <p>From federal agencies to local nonprofits &#8212; our autonomous agent systems are deployed across 9 industry verticals, delivering measurable efficiency gains and bid wins.</p>
+    <div class="hero-sectors">
+      <span class="hero-sector-tag">&#127963; Federal Government</span>
+      <span class="hero-sector-tag">&#128737; Defense &amp; Aerospace</span>
+      <span class="hero-sector-tag">&#127973; Healthcare</span>
+      <span class="hero-sector-tag">&#127959; Construction</span>
+      <span class="hero-sector-tag">&#127979; Education</span>
+      <span class="hero-sector-tag">&#9749; Nonprofit</span>
+      <span class="hero-sector-tag">&#127968; Local Government</span>
+      <span class="hero-sector-tag">&#128665; Logistics &amp; Supply Chain</span>
+      <span class="hero-sector-tag">&#128187; Technology</span>
+    </div>
   </section>
 
-
-
-
-  <footer class="footer">
-      <div class="container footer-grid">
-            <div>
-                    <div class="footer-logo"><div class="logo-icon">Z</div><span><span class="blue">Z.Y.N.</span> Supply &amp; Logistics</span></div>
-                  <p>Veteran-owned, minority-owned AI automation and federal contracting firm.<br>Founded by Zion Yashar'el &middot; Largo, FL &middot; Pinellas County &middot; Nationwide.</p>
-                  <div class="cert-tags"><span>SDVOSB</span><span>SAM.gov</span><span>CMMC L2</span><span>Minority-Owned</span></div>
-            </div>
-          <div class="footer-col"><h4>Services</h4><a href="services.html#ai-workflow-automation">AI Automation</a><a href="services.html#federal-contracting">Federal Contracting</a><a href="services.html#supply-chain-ai">Supply Chain AI</a></div>
-          <div class="footer-col"><h4>Company</h4><a href="about.html">About Us</a><a href="federal.html">Federal Division</a><a href="industries.html">Industries</a><a href="insights.html">Insights</a></div>
-          <div class="footer-col"><h4>Contact</h4><p>info@zynsupplyandlogistics.com</p><p>Largo, FL 33771</p><p>Pinellas County &middot; Nationwide</p><a href="contact.html" class="btn-primary mt2" style="display:inline-block">Schedule a Call</a></div>
+  <!-- Industries Grid -->
+  <section class="industries-grid-section">
+    <h2>Sectors We Serve</h2>
+    <p class="section-sub">Each industry gets a customized agent stack &#8212; preconfigured for that sector's procurement rules, compliance requirements, and operational rhythms.</p>
+    <div class="industries-grid">
+      <!-- Federal Government -->
+      <div class="industry-card federal">
+        <div class="industry-icon">&#127963;</div>
+        <h3>Federal Government</h3>
+        <p>Full-stack AI automation for federal contractors and agencies. Our Bid Discovery Agent monitors SAM.gov daily, our Compliance Tracker monitors FAR/DFARS requirements, and our SEO Agent drives proposal-ready content.</p>
+        <div class="industry-services">
+          <span class="industry-tag">SAM.gov Monitoring</span>
+          <span class="industry-tag">SDVOSB Set-Asides</span>
+          <span class="industry-tag">CMMC Readiness</span>
+          <span class="industry-tag">GSA Schedule</span>
+        </div>
       </div>
-    <div class="footer-bottom container">
-        <p>&copy; 2026 Z.Y.N. Supply &amp; Logistics LLC. All rights reserved. &middot; SDVOSB &middot; Minority-Owned</p>
+      <!-- Defense -->
+      <div class="industry-card defense">
+        <div class="industry-icon">&#128737;</div>
+        <h3>Defense &amp; Aerospace</h3>
+        <p>ITAR-aware logistics automation and supply chain intelligence for DoD subcontractors. Our agents monitor DIBBS, DLA, and prime contractor portals for subcontracting opportunities aligned with your CAGE code and capabilities.</p>
+        <div class="industry-services">
+          <span class="industry-tag">DoD Supply Chain</span>
+          <span class="industry-tag">DLA Monitoring</span>
+          <span class="industry-tag">ITAR Compliance</span>
+          <span class="industry-tag">Subcontract Discovery</span>
+        </div>
+      </div>
+      <!-- Healthcare -->
+      <div class="industry-card healthcare">
+        <div class="industry-icon">&#127973;</div>
+        <h3>Healthcare &amp; MedSup</h3>
+        <p>AI-driven supply chain optimization for medical suppliers, distributors, and healthcare systems. Our agents track GPO contracts, monitor VA and HHS procurement, and optimize inventory replenishment cycles.</p>
+        <div class="industry-services">
+          <span class="industry-tag">VA Procurement</span>
+          <span class="industry-tag">GPO Contracts</span>
+          <span class="industry-tag">Inventory AI</span>
+          <span class="industry-tag">HIPAA-Aware</span>
+        </div>
+      </div>
+      <!-- Construction -->
+      <div class="industry-card construction">
+        <div class="industry-icon">&#127959;</div>
+        <h3>Construction &amp; Infrastructure</h3>
+        <p>From Florida DOT bids to county infrastructure RFPs, our Bid Discovery Agent monitors state and local construction procurement. Supply chain monitoring ensures material availability before project start dates.</p>
+        <div class="industry-services">
+          <span class="industry-tag">FDOT Bids</span>
+          <span class="industry-tag">County RFPs</span>
+          <span class="industry-tag">Material Tracking</span>
+          <span class="industry-tag">Subcontract Alerts</span>
+        </div>
+      </div>
+      <!-- Education -->
+      <div class="industry-card education">
+        <div class="industry-icon">&#127979;</div>
+        <h3>Education &amp; Training</h3>
+        <p>AI automation for workforce development organizations, training providers, and educational institutions. Our agents monitor Title I contracts, E-Rate, and state education procurement portals in Florida.</p>
+        <div class="industry-services">
+          <span class="industry-tag">E-Rate Monitoring</span>
+          <span class="industry-tag">Title I Contracts</span>
+          <span class="industry-tag">FL DOE Bids</span>
+          <span class="industry-tag">Training Automation</span>
+        </div>
+      </div>
+      <!-- Nonprofit -->
+      <div class="industry-card nonprofit">
+        <div class="industry-icon">&#9749;</div>
+        <h3>Nonprofit &amp; Social Enterprise</h3>
+        <p>Purpose-driven organizations need smart operations. We deploy lightweight agent stacks for nonprofits to automate grant monitoring, volunteer coordination, donor outreach, and compliance reporting.</p>
+        <div class="industry-services">
+          <span class="industry-tag">Grant Discovery</span>
+          <span class="industry-tag">Donor Automation</span>
+          <span class="industry-tag">Reporting AI</span>
+          <span class="industry-tag">Compliance Tracker</span>
+        </div>
+      </div>
+      <!-- Local Government -->
+      <div class="industry-card local-gov">
+        <div class="industry-icon">&#127968;</div>
+        <h3>Local &amp; State Government</h3>
+        <p>Serving Pinellas, Hillsborough, Pasco, Sarasota, and Manatee county procurement portals, plus city bids for St. Pete, Clearwater, Largo, and Tampa. Our agents alert on matching opportunities within 2 hours of posting.</p>
+        <div class="industry-services">
+          <span class="industry-tag">MFMP (Florida)</span>
+          <span class="industry-tag">County Portals</span>
+          <span class="industry-tag">City Bids</span>
+          <span class="industry-tag">MBE Set-Asides</span>
+        </div>
+      </div>
+      <!-- Logistics -->
+      <div class="industry-card logistics">
+        <div class="industry-icon">&#128665;</div>
+        <h3>Logistics &amp; Supply Chain</h3>
+        <p>Our core competency. End-to-end supply chain intelligence for freight brokers, 3PLs, distributors, and manufacturers. Real-time monitoring, automated vendor SLA tracking, and disruption prediction.</p>
+        <div class="industry-services">
+          <span class="industry-tag">3PL Automation</span>
+          <span class="industry-tag">Vendor Monitoring</span>
+          <span class="industry-tag">Freight Intelligence</span>
+          <span class="industry-tag">Disruption Alerts</span>
+        </div>
+      </div>
+      <!-- Technology -->
+      <div class="industry-card tech">
+        <div class="industry-icon">&#128187;</div>
+        <h3>Technology &amp; SaaS</h3>
+        <p>AI-powered lead generation, SEO agent deployment, and operational automation for tech companies and SaaS providers. We help technology firms land government IT contracts and scale commercial pipelines simultaneously.</p>
+        <div class="industry-services">
+          <span class="industry-tag">IT GWAC Vehicles</span>
+          <span class="industry-tag">SEO Agent</span>
+          <span class="industry-tag">Lead Gen AI</span>
+          <span class="industry-tag">Process Automation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent-Powered by Industry -->
+  <section class="agent-for-industry">
+    <div class="agent-for-industry-inner">
+      <h2>How Our <span>Agent Network</span> Serves Each Industry</h2>
+      <p class="section-sub">Every sector gets preconfigured agents from our active network &#8212; already running with scheduled task routines.</p>
+      <div class="agent-industry-grid">
+        <div class="agent-industry-card">
+          <div class="agent-industry-num">1</div>
+          <div>
+            <h4><span class="agent-live-dot"></span> Sector Intake Assessment</h4>
+            <p>Our Lead Qualification Agent scores your organization against sector-specific criteria: NAICS codes, certifications, past performance, and contract vehicle eligibility.</p>
+          </div>
+        </div>
+        <div class="agent-industry-card">
+          <div class="agent-industry-num">2</div>
+          <div>
+            <h4><span class="agent-live-dot"></span> Bid Portal Activation</h4>
+            <p>We activate your industry-specific bid monitoring: SAM.gov for federal, MFMP for Florida state, county portals for local &#8212; all filtered to your exact NAICS and capability profile.</p>
+          </div>
+        </div>
+        <div class="agent-industry-card">
+          <div class="agent-industry-num">3</div>
+          <div>
+            <h4><span class="agent-live-dot"></span> Compliance Agent Deployment</h4>
+            <p>Your Compliance Tracker is configured for sector-specific regulations: CMMC for defense, HIPAA-awareness for healthcare, FAR for federal, and Florida procurement rules for state/local.</p>
+          </div>
+        </div>
+        <div class="agent-industry-card">
+          <div class="agent-industry-num">4</div>
+          <div>
+            <h4><span class="agent-live-dot"></span> SEO &amp; Content Agent Launch</h4>
+            <p>Your SEO Agent is pre-loaded with sector keywords and competitor intelligence. Content is indexed for your target agency type, driving inbound traffic from procurement officers searching for qualified vendors.</p>
+          </div>
+        </div>
+        <div class="agent-industry-card">
+          <div class="agent-industry-num">5</div>
+          <div>
+            <h4><span class="agent-live-dot"></span> Supply Chain Monitor</h4>
+            <p>For industries with physical supply chains &#8212; defense, healthcare, construction, logistics &#8212; our Supply Chain Monitor is activated with vendor SLA tracking and disruption alerts.</p>
+          </div>
+        </div>
+        <div class="agent-industry-card">
+          <div class="agent-industry-num">6</div>
+          <div>
+            <h4><span class="agent-live-dot"></span> Weekly Performance Dashboard</h4>
+            <p>Your Performance Reporting Agent generates sector-benchmarked KPI reports weekly &#8212; bid win rate, pipeline coverage, SEO rankings, and agent task completion &#8212; delivered automatically.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Government Contracting by Sector -->
+  <section class="govcon-industry-section">
+    <div class="govcon-industry-inner">
+      <h2>Government Contract Lanes by Sector</h2>
+      <p class="section-sub">ZYN monitors all major procurement portals relevant to each industry vertical &#8212; federally, statewide, and locally in Florida.</p>
+      <div class="govcon-industry-cards">
+        <div class="govcon-ind-card">
+          <div class="govcon-ind-icon">&#127482;&#65039;</div>
+          <h4>Federal</h4>
+          <p>SAM.gov, DIBBS, DLA, SEWP, GSA Advantage, DoD SBIR</p>
+        </div>
+        <div class="govcon-ind-card">
+          <div class="govcon-ind-icon">&#127965;</div>
+          <h4>Florida State</h4>
+          <p>MFMP, MyFloridaMarketPlace, FDOT, FL DOH, FL DOE, Agency for Health Care Admin</p>
+        </div>
+        <div class="govcon-ind-card">
+          <div class="govcon-ind-icon">&#127968;</div>
+          <h4>County</h4>
+          <p>Pinellas, Hillsborough, Pasco, Sarasota, Manatee, Polk, Orange County bid portals</p>
+        </div>
+        <div class="govcon-ind-card">
+          <div class="govcon-ind-icon">&#127970;</div>
+          <h4>Municipal</h4>
+          <p>City of St. Pete, Tampa, Clearwater, Largo, Dunedin, Tarpon Springs procurement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="industries-cta">
+    <h2>Your Industry. Our Agents. Results.</h2>
+    <p>Tell us your sector and our Intake Agent will match you with the right agent stack, bid portals, and contract vehicles within 24 hours.</p>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+      <a href="contact.html" style="background:#00d4ff;color:#0a1628;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;">Start with a Strategy Call</a>
+      <a href="services.html" style="background:rgba(255,255,255,0.1);color:#fff;border:2px solid rgba(255,255,255,0.3);padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;">Explore Services</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid-4">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <div class="footer-logo-icon">Z</div>
+          <div>
+            <strong>Z.Y.N. Supply &amp; Logistics LLC</strong>
+            <span>AI Automation &amp; Federal Contracting</span>
+          </div>
+        </div>
+        <p class="footer-desc">Veteran-owned AI automation firm in Largo, FL. SDVOSB certified. SAM.gov active. Autonomous agents running 24/7.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">SDVOSB</span>
+          <span class="footer-badge">SAM.gov Active</span>
+          <span class="footer-badge">CMMC L2</span>
+          <span class="footer-badge">MBE</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">AI Process Automation</a></li>
+          <li><a href="services.html">Supply Chain Intelligence</a></li>
+          <li><a href="services.html">SEO Agent System</a></li>
+          <li><a href="services.html">Lead Generation AI</a></li>
+          <li><a href="services.html">Workforce Optimization</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Gov Contracts</h4>
+        <ul>
+          <li><a href="federal.html">Federal (SAM.gov)</a></li>
+          <li><a href="federal.html#gov-bids">Florida State (MFMP)</a></li>
+          <li><a href="federal.html#gov-bids">Pinellas County Bids</a></li>
+          <li><a href="federal.html#gov-bids">Hillsborough County</a></li>
+          <li><a href="federal.html#gov-bids">City of St. Pete / Tampa</a></li>
+          <li><a href="federal.html#gov-bids">SDVOSB Set-Asides</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="industries.html">Federal Government</a></li>
+          <li><a href="industries.html">Defense &amp; Aerospace</a></li>
+          <li><a href="industries.html">Healthcare</a></li>
+          <li><a href="industries.html">Construction</a></li>
+          <li><a href="industries.html">Education</a></li>
+          <li><a href="industries.html">Local Government</a></li>
+        </ul>
+        <div class="footer-agent-status">
+          <span class="agent-live-dot" style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:agentPulse 2s infinite;"></span>
+          <span style="font-size:0.8rem;color:rgba(255,255,255,0.7)">All Agents Operational</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Z.Y.N. Supply &amp; Logistics LLC. All rights reserved. | Largo, FL | SDVOSB | SAM.gov Active</p>
     </div>
   </footer>
-<script>if(document.getElementById('hamburger'))document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileMenu').classList.toggle('open');});</script>
 </body>
 </html>
