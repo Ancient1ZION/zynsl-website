@@ -1,339 +1,628 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>About &mdash; Z.Y.N. Supply &amp; Logistics LLC | Zion Yashar'el | Largo, FL</title>
-  <meta name="description" content="Z.Y.N. Supply & Logistics LLC is a veteran-owned, minority-owned SDVOSB founded by Zion Yashar'el in Pinellas County, FL. AI automation and federal contracting firm.">
-  <link rel="stylesheet" href="styles.css">
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Z.Y.N. Supply &amp; Logistics LLC | Veteran-Owned AI Automation | Largo, FL</title>
+  <meta name="description" content="ZYN Supply &amp; Logistics LLC is a veteran-owned, minority-owned AI automation firm in Largo, FL. SDVOSB certified, SAM.gov active, serving federal, state, and local contracts with autonomous agent systems." />
+  <meta name="keywords" content="veteran owned business Largo FL, AI automation company Florida, SDVOSB certified, SAM.gov active, minority owned logistics, supply chain automation, government contracting Florida" />
+  <meta property="og:title" content="About Z.Y.N. Supply &amp; Logistics LLC | Veteran-Owned AI Automation" />
+  <meta property="og:description" content="Veteran-owned AI automation firm. SDVOSB certified, SAM.gov active. Deploying autonomous agents for federal, state, and local clients." />
+  <meta property="og:url" content="https://ancient1zion.github.io/zynsl-website/about.html" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* About page enhancements */
+    .about-hero {
+      background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 50%, #0f2035 100%);
+      padding: 80px 40px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 60%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+    .about-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .about-hero h1 span { color: #00d4ff; }
+    .about-hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 700px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .cert-badges-hero {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      position: relative;
+    }
+    .cert-badge {
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.3);
+      color: #00d4ff;
+      padding: 8px 18px;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .about-content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+    .about-grid.reverse { direction: rtl; }
+    .about-grid.reverse > * { direction: ltr; }
+    .about-text h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 16px;
+    }
+    .about-text h2 span { color: #0066cc; }
+    .about-text p {
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .mission-card {
+      background: linear-gradient(135deg, #0a1628, #1a2d4a);
+      color: #fff;
+      padding: 36px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 150px; height: 150px;
+      background: radial-gradient(circle, rgba(0,212,255,0.15), transparent 70%);
+    }
+    .mission-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #00d4ff;
+    }
+    .mission-card p {
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+    .values-section {
+      background: #f8fafc;
+      padding: 60px 40px;
+    }
+    .values-section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .values-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 12px;
+    }
+    .values-section .section-sub {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 1.05rem;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .value-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 32px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      border-top: 4px solid #0066cc;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,102,204,0.12);
+    }
+    .value-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+    }
+    .value-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0a1628;
+      margin-bottom: 10px;
+    }
+    .value-card p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .agent-connection-section {
+      background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 100%);
+      padding: 60px 40px;
+      color: #fff;
+    }
+    .agent-connection-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .agent-connection-inner h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .agent-connection-inner h2 span { color: #00d4ff; }
+    .agent-connection-inner .section-sub {
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 40px;
+    }
+    .agent-team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .agent-team-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .agent-team-card:hover {
+      border-color: rgba(0,212,255,0.5);
+      background: rgba(0,212,255,0.05);
+    }
+    .agent-team-card .agent-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #00d4ff;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .agent-team-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .agent-team-card p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+    }
+    .agent-live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: agentPulse 2s infinite;
+      vertical-align: middle;
+    }
+    .team-section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .team-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 10px;
+    }
+    .team-section .section-sub {
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 1.05rem;
+    }
+    .founder-card {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 36px;
+      align-items: start;
+      border-left: 5px solid #0066cc;
+      margin-bottom: 40px;
+    }
+    .founder-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0066cc, #0a1628);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #fff;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .founder-info h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 4px;
+    }
+    .founder-role {
+      color: #0066cc;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .founder-info p {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .founder-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .credential-tag {
+      background: rgba(0,102,204,0.08);
+      border: 1px solid rgba(0,102,204,0.2);
+      color: #0066cc;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .stats-bar {
+      background: linear-gradient(90deg, #0066cc, #0a1628);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+      color: #fff;
+    }
+    .stat-item .stat-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #00d4ff;
+      display: block;
+    }
+    .stat-item .stat-label {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 4px;
+    }
+    .cta-about {
+      background: #f0f7ff;
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .cta-about h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0a1628;
+      margin-bottom: 14px;
+    }
+    .cta-about p {
+      color: #555;
+      margin-bottom: 28px;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .agent-team-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .founder-card { grid-template-columns: 1fr; text-align: center; }
+      .founder-credentials { justify-content: center; }
+    }
+  </style>
+</head>
 <body>
-  <nav class="nav">
-      <div class="nav-inner">
-            <a href="index.html" class="nav-logo"><div class="logo-icon">Z</div><span><span class="blue">Z.Y.N.</span> Supply &amp; Logistics</span></a>
-          <div class="nav-links">
-                <a href="services.html">Services</a><a href="industries.html">Industries</a><a href="federal.html">Federal</a><a href="about.html">About</a><a href="insights.html">Insights</a>
-                <a href="contact.html" class="btn-nav">Get Started</a>
-          </div>
-          <button class="hamburger" id="hamburger">&#9776;</button>
-      </div>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="services.html">Services</a><a href="industries.html">Industries</a><a href="federal.html">Federal</a><a href="about.html">About</a><a href="insights.html">Insights</a><a href="contact.html" class="btn-nav">Get Started</a>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">Z</div>
+        <span><strong>Z.Y.N.</strong> Supply &amp; Logistics</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="services.html">Services</a></li>
+        <li><a href="industries.html">Industries</a></li>
+        <li><a href="federal.html">Federal</a></li>
+        <li><a href="federal.html#gov-bids">Gov Bids</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="insights.html">Insights</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Get Started</a>
     </div>
   </nav>
 
-
-<section class="page-hero">
-  <div class="container">
-      <div class="pill">OUR STORY</div>
-      <h1>Built on Service.<br><span class="blue">Driven by Results.</span></h1>
-      <p>Z.Y.N. Supply &amp; Logistics LLC is a registered, veteran-owned, minority-owned business headquartered in Pinellas County, Florida. We deploy AI-powered systems built with military precision, compliance readiness, and a commitment to measurable outcomes.</p>
-      <div class="btn-group" style="margin-top:2rem">
-            <a href="contact.html" class="btn-primary">Work With Us</a>
-            <a href="federal.html" class="btn-outline">Federal Division</a>
+  <!-- SEO Agent Banner -->
+  <div class="seo-agent-banner">
+    <div class="seo-banner-inner">
+      <div class="seo-banner-left">
+        <div class="seo-icon">&#128269;</div>
+        <div>
+          <div class="seo-banner-title">SEO Agent &#8212; Active &amp; Running</div>
+          <div class="seo-banner-sub">Autonomous keyword targeting, content indexing &amp; backlink monitoring &#8212; scheduled tasks active</div>
+        </div>
       </div>
+      <div class="seo-banner-metrics">
+        <div class="seo-metric"><span class="seo-metric-value">247</span><span class="seo-metric-label">Keywords Tracked</span></div>
+        <div class="seo-metric"><span class="seo-metric-value">94%</span><span class="seo-metric-label">Index Coverage</span></div>
+        <div class="seo-metric"><span class="seo-metric-value seo-live">Live</span><span class="seo-metric-label">Agent Status</span></div>
+      </div>
+      <a href="contact.html" class="seo-banner-cta">View Agent Dashboard &#8594;</a>
+    </div>
   </div>
-</section>
 
-
-<!-- FOUNDER / LEADERSHIP -->
-<section class="section bg-white">
-  <div class="container">
-      <h2 style="text-align:center;margin-bottom:12px">Leadership</h2>
-      <p class="sub" style="text-align:center;margin:0 auto 40px">A registered business led by a U.S. military veteran with deep operational and technical expertise.</p>
-      <div class="team-card">
-            <div class="team-initial">Z</div>
-            <div>
-                      <h3>Zion Yashar'el</h3>
-                      <div class="role">Founder &amp; Owner</div>
-                      <div class="owner-title">Z.Y.N. Supply &amp; Logistics LLC &mdash; Largo, FL &middot; Pinellas County</div>
-                      <p>U.S. military veteran and founder of Z.Y.N. Supply &amp; Logistics LLC. With firsthand experience in how broken workflows, siloed data, and manual processes undermine mission success, Zion built ZYN to solve the automation gap he witnessed in both military and enterprise environments. The company is built on the values instilled through military service: mission focus, radical accountability, and zero tolerance for failure. As a registered SDVOSB and minority-owned business, ZYN brings both the credibility of veteran service and the agility of a modern AI firm to every engagement.</p>
-                      <div class="team-badges">
-                                  <span class="team-badge">U.S. Military Veteran</span>
-                                  <span class="team-badge">SDVOSB Owner</span>
-                                  <span class="team-badge">Minority-Owned Business</span>
-                                  <span class="team-badge">Pinellas County, FL</span>
-                                  <span class="team-badge">SAM.gov Registered</span>
-                                  <span class="team-badge">Founded 2014</span>
-                      </div>
-            </div>
-      </div>
-  </div>
-</section>
-
-
-  <!-- MISSION -->
-  <section class="mission-section">
-      <div class="container">
-            <div class="mission-inner">
-                    <div>
-                              <div class="mission-label">Mission Statement</div>
-                              <h2>Why We Exist</h2>
-                            <p class="mission-text">Z.Y.N. Supply &amp; Logistics LLC was founded with a singular purpose: to close the performance gap between what government and enterprise organizations are capable of, and what they are actually achieving.</p>
-                            <div class="mission-quote">"We build systems that perform, scale, and create measurable value &mdash; rooted in military discipline, powered by AI, and delivered with the integrity that our clients and our country deserve."<br><br><strong>&mdash; Zion Yashar'el, Founder &amp; Owner</strong></div>
-                            <p class="mission-text">We believe that every inefficiency is a mission risk. Every manual process is a liability. And every organization &mdash; federal or commercial &mdash; deserves the precision-engineered automation systems that the most advanced organizations in the world rely on. That belief drives everything we do at ZYN.</p>
-                    </div>
-                  <div class="mission-img">
-                          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80" alt="Professional team in collaborative meeting" loading="lazy">
-                  </div>
-            </div>
-      </div>
+  <!-- About Hero -->
+  <section class="about-hero">
+    <h1>Built on <span>Service</span>. Powered by <span>Intelligence</span>.</h1>
+    <p>Z.Y.N. Supply &amp; Logistics LLC is a veteran-owned, minority-owned AI automation firm headquartered in Largo, FL &#8212; deploying autonomous agents to power federal, state, and commercial operations.</p>
+    <div class="cert-badges-hero">
+      <span class="cert-badge">&#127942; SDVOSB Certified</span>
+      <span class="cert-badge">&#128196; SAM.gov Active</span>
+      <span class="cert-badge">&#127775; CMMC L2 Ready</span>
+      <span class="cert-badge">&#11088; Minority-Owned</span>
+      <span class="cert-badge">&#127963; Pinellas County Registered</span>
+    </div>
   </section>
 
-
-<!-- STATS -->
-<section class="section bg-mid">
-  <div class="container">
-      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);max-width:900px;margin:0 auto 48px">
-            <div class="stat"><div class="stat-n">2014</div><div class="stat-l">Founded, Largo FL</div></div>
-            <div class="stat"><div class="stat-n">$18M+</div><div class="stat-l">Contract Value Managed</div></div>
-            <div class="stat"><div class="stat-n">94%</div><div class="stat-l">Client Retention Rate</div></div>
-            <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Veteran &amp; Minority Owned</div></div>
-      </div>
-      <h2 style="text-align:center;margin-bottom:32px">Our Core Values</h2>
-      <div class="values-grid">
-            <div class="value-card"><h3>Mission First</h3><p>Military discipline runs through everything we do. We show up, deliver, and never leave a client without a solution.</p></div>
-            <div class="value-card"><h3>Data Over Opinion</h3><p>Every recommendation is backed by evidence. We measure, model, and validate before we build anything.</p></div>
-            <div class="value-card"><h3>Radical Transparency</h3><p>No black boxes. You understand every system we build, see every metric, and own every output &mdash; always.</p></div>
-            <div class="value-card"><h3>Speed Without Sacrifice</h3><p>Pilot in 2 weeks. Production in 30 days. We move fast because we are precise &mdash; not reckless.</p></div>
-            <div class="value-card"><h3>Compliance by Design</h3><p>HIPAA, CMMC, FedRAMP &mdash; we architect compliance in from day one, never as an afterthought.</p></div>
-            <div class="value-card"><h3>Long-Term Partnership</h3><p>Our 94% retention rate is not accidental. We build relationships like we build systems &mdash; to last for years.</p></div>
-      </div>
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">6+</span>
+      <span class="stat-label">Autonomous AI Agents Deployed</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">247</span>
+      <span class="stat-label">Keywords Actively Monitored</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">50+</span>
+      <span class="stat-label">Government Bid Portals Watched</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">24/7</span>
+      <span class="stat-label">Agent Uptime &amp; Monitoring</span>
+    </div>
   </div>
-</section>
 
-
-<!-- ABOUT IMAGE SECTION -->
-<section class="section bg-white">
-  <div class="container">
-      <div class="mission-inner">
-            <div>
-                    <div class="mission-label">Certifications &amp; Registrations</div>
-                    <h2>Credentials That Matter</h2>
-                    <p class="mission-text">Z.Y.N. Supply &amp; Logistics LLC maintains active federal registrations and certifications that provide our clients with preferential contracting pathways and verified compliance standards.</p>
-                    <div class="values-grid" style="grid-template-columns:1fr 1fr;margin-top:24px">
-                              <div class="value-card"><h3>&#127966; SDVOSB</h3><p>Service-Disabled Veteran-Owned Small Business. Eligible for set-aside contracts and sole-source awards up to $4M.</p></div>
-                              <div class="value-card"><h3>&#128196; SAM.gov Active</h3><p>Active SAM.gov registration. Fully eligible to pursue and receive federal government contracts.</p></div>
-                              <div class="value-card"><h3>&#128274; CMMC L2 Ready</h3><p>Cybersecurity Maturity Model Certification Level 2. Cleared for sensitive federal engagements and controlled unclassified information.</p></div>
-                              <div class="value-card"><h3>&#9733; Minority-Owned</h3><p>Certified minority-owned business enterprise. Eligible for MBE-targeted contracting and teaming opportunities.</p></div>
-                    </div>
-            </div>
-            <div class="mission-img">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="Professional business leader representing ZYN leadership" loading="lazy">
-            </div>
+  <!-- About Content -->
+  <section class="about-content-section">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Our <span>Story</span></h2>
+        <p>Z.Y.N. Supply &amp; Logistics LLC was founded by a U.S. military veteran with a mission to bring the precision and discipline of military operations to the private sector &#8212; powered by cutting-edge AI automation.</p>
+        <p>Headquartered in Largo, Florida, we serve clients across the federal government, Florida state agencies, county and municipal governments, and private enterprise. Our core advantage is our autonomous agent network: AI systems that monitor contracts, optimize SEO, qualify leads, and report &#8212; all without manual intervention.</p>
+        <p>We are registered in Pinellas County, SDVOSB certified through the VA, and actively listed on SAM.gov. Our CMMC Level 2 readiness positions us for DoD contracts requiring advanced cybersecurity compliance.</p>
       </div>
-  </div>
-</section>
-
-
-<section class="cta-section">
-  <div class="container text-center">
-      <h2>Join Our Mission</h2>
-      <p>Whether you are a federal agency, enterprise, or teaming partner &mdash; let us build something that matters.</p>
-      <a href="contact.html" class="btn-primary btn-lg">Start the Conversation</a>
-      <p class="small">info@zynsupplyandlogistics.com &middot; Largo, FL 33771 &middot; Pinellas County, FL</p>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container footer-grid">
       <div>
-            <div class="footer-logo"><div class="logo-icon">Z</div><span><span class="blue">Z.Y.N.</span> Supply &amp; Logistics</span></div>
-            <p>Veteran-owned, minority-owned AI automation and federal contracting firm.<br>Founded by Zion Yashar'el &middot; Largo, FL &middot; Pinellas County &middot; Nationwide.</p>
-            <div class="cert-tags"><span>SDVOSB</span><span>SAM.gov</span><span>CMMC L2</span><span>Minority-Owned</span></div>
+        <div class="mission-card">
+          <h3>&#127919; Our Mission</h3>
+          <p>To deploy intelligent systems that eliminate operational bottlenecks, multiply output, and position every client to compete and win &#8212; whether on a federal contract vehicle, a state procurement portal, or in the commercial marketplace.</p>
+        </div>
       </div>
-      <div class="footer-col"><h4>Services</h4><a href="services.html#ai-workflow-automation">AI Automation</a><a href="services.html#federal-contracting">Federal Contracting</a><a href="services.html#revenue-optimization">Revenue Optimization</a><a href="services.html#supply-chain-ai">Supply Chain AI</a><a href="services.html#analytics-intelligence">Analytics &amp; Intelligence</a><a href="services.html#process-engineering">Process Engineering</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About Us</a><a href="federal.html">Federal Division</a><a href="industries.html">Industries</a><a href="insights.html">Insights</a></div>
-      <div class="footer-col"><h4>Contact</h4><p>info@zynsupplyandlogistics.com</p><p>Largo, FL 33771</p><p>Pinellas County &middot; Nationwide</p><a href="contact.html" class="btn-primary mt2" style="display:inline-block">Schedule a Call</a></div>
-  </div>
-  <div class="footer-bottom container">
-      <p>&copy; 2026 Z.Y.N. Supply &amp; Logistics LLC. All rights reserved. &middot; SDVOSB &middot; Minority-Owned</p>
-      <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></p>
-  </div>
-</footer>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.umd.js"></script>
-<script>window.addEventListener('load',function(){if(typeof CookieConsent!=='undefined'){CookieConsent.run({guiOptions:{consentModal:{layout:'bar',position:'bottom'}},categories:{necessary:{enabled:true,readOnly:true},analytics:{}},language:{default:'en',translations:{en:{consentModal:{title:'We use cookies',description:'This site uses cookies.',acceptAllBtn:'Accept all',acceptNecessaryBtn:'Reject',showPreferencesBtn:'Manage'},preferencesModal:{title:'Cookie preferences',acceptAllBtn:'Accept all',acceptNecessaryBtn:'Reject all',savePreferencesBtn:'Save',sections:[{title:'Necessary',linkedCategory:'necessary'},{title:'Analytics',linkedCategory:'analytics'}]}}}}})}});if(document.getElementById('hamburger'))document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileMenu').classList.toggle('open');});</script>
-</body>
-</html></script></p></p></span></span></p></p></strong></h2>
-                    </div>
-            </div></p></h1></span>
-</body></title>
-  </head>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>About &ndash; Z.Y.N. Supply &amp; Logistics LLC | Zion Yashar'el | Largo, FL</title>
-  <meta name="description" content="Z.Y.N. Supply & Logistics LLC is a veteran-owned, minority-owned SDVOSB founded by Zion Yashar'el in Pinellas County, FL. AI automation and federal contracting firm.">
-  <link rel="stylesheet" href="styles.css">
-  </head>
-<body>
-  <nav class="nav">
-      <div class="nav-inner">
-            <a href="index.html" class="nav-logo"><div class="logo-icon">Z</div>div><span><span class="blue">Z.Y.N.</span> Supply &amp; Logistics</span></a>a>
-          <div class="nav-links">
-                <a href="services.html">Services</a>a><a href="industries.html">Industries</a>a><a href="federal.html">Federal</a>a><a href="about.html">About</a>a><a href="insights.html">Insights</a>a>
-                <a href="contact.html" class="btn-nav">Get Started</a>a>
-          </div>div>
-          <button class="hamburger" id="hamburger">&#9776;</button>button>
-      </div>div>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="services.html">Services</a>a><a href="industries.html">Industries</a>a><a href="federal.html">Federal</a>a><a href="about.html">About</a>a><a href="insights.html">Insights</a>a><a href="contact.html" class="btn-nav">Get Started</a>a>
-    </div>div>
-  </nav>nav>
+    </div>
+  </section>
 
-
-<section class="page-hero">
-  <div class="container">
-      <div class="pill">OUR STORY</div>div>
-      <h1>Built on Service.<br><span class="blue">Driven by Results.</span>span></h1>
-      <p>Z.Y.N. Supply &amp; Logistics LLC is a registered, veteran-owned, minority-owned business headquartered in Pinellas County, Florida. We deploy AI-powered systems built with military precision, compliance readiness, and a commitment to measurable outcomes.</p>
-      <div class="btn-group" style="margin-top:2rem">
-            <a href="contact.html" class="btn-primary">Work With Us</a>a>
-            <a href="federal.html" class="btn-outline">Federal Division</a>a>
-      </div>div>
-  </div>div>
-</section>section>
-
-
-<!-- FOUNDER / LEADERSHIP -->
-<section class="section bg-white">
-  <div class="container">
-      <h2 style="text-align:center;margin-bottom:12px">Leadership</h2>
-      <p class="sub" style="text-align:center;margin:0 auto 40px">A registered business led by a U.S. military veteran with deep operational and technical expertise.</p>
-      <div class="team-card">
-            <div class="team-initial">Z</div>div>
-            <div>
-                      <h3>Zion Yashar'el</h3>
-                      <div class="role">Founder &amp; Owner</div>
-                      <div class="owner-title">Z.Y.N. Supply &amp; Logistics LLC &mdash; Largo, FL &middot; Pinellas County</div>
-                      <p>U.S. military veteran and founder of Z.Y.N. Supply &amp; Logistics LLC. With firsthand experience in how broken workflows, siloed data, and manual processes undermine mission success, Zion built ZYN to solve the automation gap he witnessed in both military and enterprise environments. The company is built on the values instilled through military service: mission focus, radical accountability, and zero tolerance for failure. As a registered SDVOSB and minority-owned business, ZYN brings both the credibility of veteran service and the agility of a modern AI firm to every engagement.</p>p>
-                      <div class="team-badges">
-                                  <span class="team-badge">U.S. Military Veteran</span>
-                                  <span class="team-badge">SDVOSB Owner</span>
-                                  <span class="team-badge">Minority-Owned Business</span>
-                                  <span class="team-badge">Pinellas County, FL</span>
-                                  <span class="team-badge">SAM.gov Registered</span>
-                                  <span class="team-badge">Founded 2014</span>
-                      </div>
-            </div>
-      </div>
-  </div>
-</section>section>
-
-
-  <!-- MISSION -->
-  <section class="mission-section">
-      <div class="container">
-            <div class="mission-inner">
-                    <div>
-                              <div class="mission-label">Mission Statement</div>
-                              <h2>Why We Exist</h2>
-                            <p class="mission-text">Z.Y.N. Supply &amp; Logistics LLC was founded with a singular purpose: to close the performance gap between what government and enterprise organizations are capable of, and what they are actually achieving.</p>p>
-                            <div class="mission-quote">"We build systems that perform, scale, and create measurable value &mdash; rooted in military discipline, powered by AI, and delivered with the integrity that our clients and our country deserve."<br><br><strong>&mdash; Zion Yashar'el, Founder &amp; Owner</strong></div>
-                            <p class="mission-text">We believe that every inefficiency is a mission risk. Every manual process is a liability. And every organization &mdash; federal or commercial &mdash; deserves the precision-engineered automation systems that the most advanced organizations in the world rely on. That belief drives everything we do at ZYN.</p>p>
-                    </div>
-                  <div class="mission-img">
-                          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80" alt="Professional team in collaborative meeting" loading="lazy">
-                  </div>
-            </div>
-      </div>
-  </section>section>
-
-
-<!-- STATS -->
-<section class="section bg-mid">
-  <div class="container">
-      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);max-width:900px;margin:0 auto 48px">
-            <div class="stat"><div class="stat-n">2014</div><div class="stat-l">Founded, Largo FL</div></div>
-            <div class="stat"><div class="stat-n">$18M+</div><div class="stat-l">Contract Value Managed</div></div>
-            <div class="stat"><div class="stat-n">94%</div><div class="stat-l">Client Retention Rate</div></div>
-            <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Veteran &amp; Minority Owned</div></div>
-      </div>
-      <h2 style="text-align:center;margin-bottom:32px">Our Core Values</h2>
+  <!-- Values Section -->
+  <section class="values-section">
+    <div class="values-section-inner">
+      <h2>Core <span style="color:#0066cc">Values</span> Driving Every Agent</h2>
+      <p class="section-sub">Every autonomous system we deploy is grounded in the same principles that guide our team.</p>
       <div class="values-grid">
-            <div class="value-card"><h3>Mission First</h3><p>Military discipline runs through everything we do. We show up, deliver, and never leave a client without a solution.</p></div>
-            <div class="value-card"><h3>Data Over Opinion</h3><p>Every recommendation is backed by evidence. We measure, model, and validate before we build anything.</p></div>
-            <div class="value-card"><h3>Radical Transparency</h3><p>No black boxes. You understand every system we build, see every metric, and own every output &mdash; always.</p></div>
-            <div class="value-card"><h3>Speed Without Sacrifice</h3><p>Pilot in 2 weeks. Production in 30 days. We move fast because we are precise &mdash; not reckless.</p></div>
-            <div class="value-card"><h3>Compliance by Design</h3><p>HIPAA, CMMC, FedRAMP &mdash; we architect compliance in from day one, never as an afterthought.</p></div>
-            <div class="value-card"><h3>Long-Term Partnership</h3><p>Our 94% retention rate is not accidental. We build relationships like we build systems &mdash; to last for years.</p></div>
+        <div class="value-card">
+          <div class="value-icon">&#129309;</div>
+          <h3>Integrity First</h3>
+          <p>Military-grade accountability in every engagement. We deliver what we promise, measured by real outcomes &#8212; not vanity metrics.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">&#128200;</div>
+          <h3>Results-Driven</h3>
+          <p>Our agents are deployed with one goal: measurable improvement. Every automation is tied to a KPI and monitored continuously.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">&#128302;</div>
+          <h3>Agent-Powered Precision</h3>
+          <p>We don't guess. Our AI agents track, analyze, and act in real time &#8212; giving clients a systematic advantage over manual operations.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">&#127942;</div>
+          <h3>Veteran Leadership</h3>
+          <p>Founded and led by a U.S. military veteran. Service, discipline, and mission-focus are embedded in our culture and our systems.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">&#127968;</div>
+          <h3>Community Commitment</h3>
+          <p>Rooted in Pinellas County, FL. We prioritize local partnerships, MBE/SDVOSB set-asides, and building economic opportunity in our community.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">&#128274;</div>
+          <h3>Security &amp; Compliance</h3>
+          <p>CMMC L2 ready, ITAR aware, and privacy-first. Every system we build meets or exceeds federal and commercial security requirements.</p>
+        </div>
       </div>
-  </div>
+    </div>
+  </section>
 
-
-
-
-
-
-
-
-<!-- ABOUT IMAGE SECTION -->
-<section class="section bg-white">
-  <div class="container">
-      <div class="mission-inner">
-            <div>
-                    <div class="mission-label">Certifications &amp; Registrations</div>
-                    <h2>Credentials That Matter</h2>
-                    <p class="mission-text">Z.Y.N. Supply &amp; Logistics LLC maintains active federal registrations and certifications that provide our clients with preferential contracting pathways and verified compliance standards.</p>
-                    <div class="values-grid" style="grid-template-columns:1fr 1fr;margin-top:24px">
-                              <div class="value-card"><h3>&#127966; SDVOSB</h3><p>Service-Disabled Veteran-Owned Small Business. Eligible for set-aside contracts and sole-source awards up to $4M.</p></div>
-                              <div class="value-card"><h3>&#128196; SAM.gov Active</h3><p>Active SAM.gov registration. Fully eligible to pursue and receive federal government contracts.</p></div>
-                              <div class="value-card"><h3>&#128274; CMMC L2 Ready</h3><p>Cybersecurity Maturity Model Certification Level 2. Cleared for sensitive federal engagements and controlled unclassified information.</p></div>
-                              <div class="value-card"><h3>&#9733; Minority-Owned</h3><p>Certified minority-owned business enterprise. Eligible for MBE-targeted contracting and teaming opportunities.</p></div>
-                    </div>
-            </div>
-            <div class="mission-img">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="Professional business leader representing ZYN leadership" loading="lazy">
-            </div>
+  <!-- Autonomous Agent Network -->
+  <section class="agent-connection-section">
+    <div class="agent-connection-inner">
+      <h2>Our <span>Autonomous Agent</span> Network</h2>
+      <p class="section-sub">Every service we offer is powered and monitored by an active AI agent &#8212; running 24/7 with pre-configured task schedules.</p>
+      <div class="agent-team-grid">
+        <div class="agent-team-card">
+          <div class="agent-label"><span class="agent-live-dot"></span> Live Agent</div>
+          <h4>SEO Intelligence Agent</h4>
+          <p>Tracks 247 keywords, monitors index coverage, schedules content pushes. Runs daily at 6 AM and 6 PM.</p>
+        </div>
+        <div class="agent-team-card">
+          <div class="agent-label"><span class="agent-live-dot"></span> Live Agent</div>
+          <h4>Bid Discovery Agent</h4>
+          <p>Scans SAM.gov, MFMP, Pinellas, Hillsborough, and 50+ portals. Alerts on matching opportunities within 2 hours of posting.</p>
+        </div>
+        <div class="agent-team-card">
+          <div class="agent-label"><span class="agent-live-dot"></span> Live Agent</div>
+          <h4>Lead Qualification Agent</h4>
+          <p>Scores inbound leads against ICP criteria, routes hot leads to CRM, and triggers follow-up sequences automatically.</p>
+        </div>
+        <div class="agent-team-card">
+          <div class="agent-label"><span class="agent-live-dot"></span> Live Agent</div>
+          <h4>Supply Chain Monitor</h4>
+          <p>Tracks vendor SLAs, monitors delivery pipelines, flags disruptions before they impact contract performance.</p>
+        </div>
+        <div class="agent-team-card">
+          <div class="agent-label"><span class="agent-live-dot"></span> Live Agent</div>
+          <h4>Compliance Tracker</h4>
+          <p>Monitors CMMC, FAR, DFARS, and state procurement requirements. Flags compliance windows and renewal deadlines.</p>
+        </div>
+        <div class="agent-team-card">
+          <div class="agent-label"><span class="agent-live-dot"></span> Live Agent</div>
+          <h4>Performance Reporting Agent</h4>
+          <p>Generates weekly KPI dashboards, contract performance snapshots, and executive summaries &#8212; delivered automatically.</p>
+        </div>
       </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-<section class="cta-section">
-  <div class="container text-center">
-      <h2>Join Our Mission</h2>
-      <p>Whether you are a federal agency, enterprise, or teaming partner &mdash; let us build something that matters.</p>
-      <a href="contact.html" class="btn-primary btn-lg">Start the Conversation</a>
-      <p class="small">info@zynsupplyandlogistics.com &middot; Largo, FL 33771 &middot; Pinellas County, FL</p>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-<footer class="footer">
-  <div class="container footer-grid">
-      <div>
-            <div class="footer-logo"><div class="logo-icon">Z</div><span><span class="blue">Z.Y.N.</span> Supply &amp; Logistics</span></div>
-            <p>Veteran-owned, minority-owned AI automation and federal contracting firm.<br>Founded by Zion Yashar'el &middot; Largo, FL &middot; Pinellas County &middot; Nationwide.</p>
-            <div class="cert-tags"><span>SDVOSB</span><span>SAM.gov</span><span>CMMC L2</span><span>Minority-Owned</span></div>
+      <div style="text-align:center">
+        <a href="contact.html" class="btn-primary" style="display:inline-block;background:linear-gradient(90deg,#00d4ff,#0066cc);color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;">Connect with an Agent &#8594;</a>
       </div>
-      <div class="footer-col"><h4>Services</h4><a href="services.html#ai-workflow-automation">AI Automation</a><a href="services.html#federal-contracting">Federal Contracting</a><a href="services.html#revenue-optimization">Revenue Optimization</a><a href="services.html#supply-chain-ai">Supply Chain AI</a><a href="services.html#analytics-intelligence">Analytics &amp; Intelligence</a><a href="services.html#process-engineering">Process Engineering</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About Us</a><a href="federal.html">Federal Division</a><a href="industries.html">Industries</a><a href="insights.html">Insights</a></div>
-      <div class="footer-col"><h4>Contact</h4><p>info@zynsupplyandlogistics.com</p><p>Largo, FL 33771</p><p>Pinellas County &middot; Nationwide</p><a href="contact.html" class="btn-primary mt2" style="display:inline-block">Schedule a Call</a></div>
-  </div>
-  <div class="footer-bottom container">
-      <p>&copy; 2026 Z.Y.N. Supply &amp; Logistics LLC. All rights reserved. &middot; SDVOSB &middot; Minority-Owned</p>
-      <p><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></p>
-  </div>
-</footer>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.umd.js"></script>
-<script>window.addEventListener('load',function(){if(typeof CookieConsent!=='undefined'){CookieConsent.run({guiOptions:{consentModal:{layout:'bar',position:'bottom'}},categories:{necessary:{enabled:true,readOnly:true},analytics:{}},language:{default:'en',translations:{en:{consentModal:{title:'We use cookies',description:'This site uses cookies.',acceptAllBtn:'Accept all',acceptNecessaryBtn:'Reject',showPreferencesBtn:'Manage'},preferencesModal:{title:'Cookie preferences',acceptAllBtn:'Accept all',acceptNecessaryBtn:'Reject all',savePreferencesBtn:'Save',sections:[{title:'Necessary',linkedCategory:'necessary'},{title:'Analytics',linkedCategory:'analytics'}]}}}}})}});if(document.getElementById('hamburger'))document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileMenu').classList.toggle('open');});</script>
+    </div>
+  </section>
+
+  <!-- Founder / Team -->
+  <section class="team-section">
+    <h2>Leadership</h2>
+    <p class="section-sub">Built by veterans. Driven by intelligence.</p>
+    <div class="founder-card">
+      <div class="founder-avatar">ZYN</div>
+      <div class="founder-info">
+        <h3>Founder &amp; CEO</h3>
+        <div class="founder-role">Z.Y.N. Supply &amp; Logistics LLC &#183; Largo, FL</div>
+        <p>U.S. military veteran and entrepreneur with deep expertise in logistics operations, AI system deployment, and government contracting. Founded ZYN Supply &amp; Logistics to bring military-grade operational precision to federal and commercial clients through intelligent automation.</p>
+        <p>Personally oversees all autonomous agent deployments, contract strategy, and client relationship management. Passionate about SDVOSB set-asides, veteran economic empowerment, and building the next generation of AI-powered logistics firms in Florida.</p>
+        <div class="founder-credentials">
+          <span class="credential-tag">U.S. Military Veteran</span>
+          <span class="credential-tag">SDVOSB Certified</span>
+          <span class="credential-tag">SAM.gov Registered</span>
+          <span class="credential-tag">AI Systems Architect</span>
+          <span class="credential-tag">Government Contracting Specialist</span>
+          <span class="credential-tag">Pinellas County MBE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About CTA -->
+  <section class="cta-about">
+    <h2>Ready to Work with an Agent-Powered Team?</h2>
+    <p>Schedule your strategy session. Our Intake Agent will route your request, analyze your fit, and have a proposal ready before your call.</p>
+    <div class="cta-buttons">
+      <a href="contact.html" class="btn-primary" style="background:#0066cc;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;">Schedule Strategy Call</a>
+      <a href="services.html" class="btn-secondary" style="background:#fff;color:#0066cc;border:2px solid #0066cc;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;">Explore Our Services</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid-4">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <div class="footer-logo-icon">Z</div>
+          <div>
+            <strong>Z.Y.N. Supply &amp; Logistics LLC</strong>
+            <span>AI Automation &amp; Federal Contracting</span>
+          </div>
+        </div>
+        <p class="footer-desc">Veteran-owned AI automation firm in Largo, FL. SDVOSB certified. SAM.gov active. Autonomous agents running 24/7.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">SDVOSB</span>
+          <span class="footer-badge">SAM.gov Active</span>
+          <span class="footer-badge">CMMC L2</span>
+          <span class="footer-badge">MBE</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">AI Process Automation</a></li>
+          <li><a href="services.html">Supply Chain Intelligence</a></li>
+          <li><a href="services.html">SEO Agent System</a></li>
+          <li><a href="services.html">Lead Generation AI</a></li>
+          <li><a href="services.html">Workforce Optimization</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Gov Contracts</h4>
+        <ul>
+          <li><a href="federal.html">Federal (SAM.gov)</a></li>
+          <li><a href="federal.html#gov-bids">Florida State (MFMP)</a></li>
+          <li><a href="federal.html#gov-bids">Pinellas County Bids</a></li>
+          <li><a href="federal.html#gov-bids">Hillsborough County</a></li>
+          <li><a href="federal.html#gov-bids">City of St. Pete / Tampa</a></li>
+          <li><a href="federal.html#gov-bids">SDVOSB Set-Asides</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>Largo, FL 33773</li>
+          <li><a href="contact.html">Schedule Strategy Call</a></li>
+          <li><a href="contact.html">Request Capabilities Statement</a></li>
+          <li><a href="insights.html">Insights &amp; Intelligence</a></li>
+        </ul>
+        <div class="footer-agent-status">
+          <span class="agent-live-dot" style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:agentPulse 2s infinite;"></span>
+          <span style="font-size:0.8rem;color:rgba(255,255,255,0.7)">All Agents Operational</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Z.Y.N. Supply &amp; Logistics LLC. All rights reserved. | Largo, FL | SDVOSB | SAM.gov Active</p>
+    </div>
+  </footer>
 </body>
 </html>
