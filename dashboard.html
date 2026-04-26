@@ -1593,7 +1593,28 @@ strong,b{color:#ffffff!important;}
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',injectBadge);}
   else{injectBadge();}
 })();
-</script></head>
+</script><script>
+/* ZYN_CONFIG — set GAS_PROXY_URL after deploying the Apps Script web app.
+   The proxy holds the real Discord webhook URLs server-side in Script Properties. */
+window.ZYN_CONFIG={
+  GAS_PROXY_URL: '', // <-- paste your https://script.google.com/macros/s/.../exec here
+  SHEET_ID: '1WHN438mjORT4HnGiXapWv78uomVy6KMhHsl0llxaeQk',
+  STOP_CELL: 'CONTROL!A1',
+  VERSION: 'v12.2-stable',
+  AUTO_DISMISS_TOAST_MS: 3000
+};
+window.zynNotify=function(agent,message,extra){
+  const u=window.ZYN_CONFIG.GAS_PROXY_URL;
+  if(!u){console.warn('[ZYN] GAS_PROXY_URL not set; skipping notify',agent,message);return Promise.resolve({skipped:true});}
+  return fetch(u,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'discord',agent:agent||'noah',message:message||'',extra:extra||{}})}).then(r=>r.json()).catch(e=>({error:String(e)}));
+};
+window.zynCheckStop=function(){
+  const u=window.ZYN_CONFIG.GAS_PROXY_URL;
+  if(!u)return Promise.resolve(false);
+  return fetch(u+'?action=stop_check',{method:'GET'}).then(r=>r.json()).then(j=>!!j.stop).catch(()=>false);
+};
+</script>
+</head>
 <body>
 <canvas id="stars" width="1404" height="911"></canvas>
 <div id="app"><!-- TOPBAR -->
@@ -2883,8 +2904,8 @@ strong,b{color:#ffffff!important;}
     <div class="script-hdr"><div><span style="font-size:13px;font-weight:700;color:#00ff88">Noah — Heartbeat Agent</span><br><span style="font-size:9px;color:#7eb8d4">Every 60 min · All webhooks pre-filled</span></div><button class="btn sm" onclick="copyScript('noah-s')" style="background: linear-gradient(90deg, rgb(0, 255, 136), rgb(0, 229, 255)); color: rgb(0, 0, 0); font-weight: 700; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; padding: 8px 16px; cursor: pointer;">Copy Script</button></div>
     <div class="script-body" id="noah-s">// NOAH HEARTBEAT — All webhooks pre-filled
 // Trigger: Every hour
-const EMPIRE='https://discord.com/api/webhooks/1496287866102354112/1At4pi-ef3vYgy6YpcLSPMpP8nfBLsau1beg8quxsfKvnvYoxUBlSSTfTdFFdWbBFmvt';
-const BRIEF='https://discord.com/api/webhooks/1496287983710507198/kDSRcdKAY0zGxCbPw974VYUvyb2Zihcf_7IDO0r1YAnRGH5GaUkVmzp6TonGBin46uV9';
+const EMPIRE='about:blank#webhook-rotated-use-zynNotify';
+const BRIEF='about:blank#webhook-rotated-use-zynNotify';
 const EMAIL='coachmarshall72@yahoo.com';
 function noahHeartbeat(){
   const n=new Date(),h=n.getHours(),t=n.toLocaleTimeString('en-US',{timeZone:'America/New_York'});
@@ -2897,7 +2918,7 @@ function noahHeartbeat(){
     <div class="script-hdr"><div><span style="font-size:13px;font-weight:700;color:#00ff88">Sara — Email Outreach Agent</span><br><span style="font-size:9px;color:#7eb8d4">M-F 9am · 100 emails/day · Webhook pre-filled</span></div><button class="btn sm" onclick="copyScript('sara-s')" style="background: linear-gradient(90deg, rgb(0, 229, 255), rgb(0, 255, 136)); color: rgb(0, 0, 0); font-weight: 700; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; padding: 8px 16px; cursor: pointer;">Copy Script</button></div>
     <div class="script-body" id="sara-s">// SARA OUTREACH — Webhook pre-filled, add SHEET_ID
 // Trigger: Mon-Fri 9am
-const SARA_WH='https://discord.com/api/webhooks/1496288922865504436/3SvWJpOSZpaDs7LjYB7Tc71Cc6-LME8WwvABmR5DREU1zvgaE0c2_LTPwun7lDE1I947';
+const SARA_WH='about:blank#webhook-rotated-use-zynNotify';
 const SHEET_ID='YOUR_LEADS_SHEET_ID'; // ← ONLY thing to fill in
 function saraOutreach(){
   const sheet=SpreadsheetApp.openById(SHEET_ID).getSheetByName('Leads');
@@ -2921,8 +2942,8 @@ Zion Yashar'el',{name:'Z.Y.N. Supply &amp; Logistics'});
     <div class="script-hdr"><div><span style="font-size:13px;font-weight:700;color:#ff4466">Juda — Security Monitor</span><br><span style="font-size:9px;color:#7eb8d4">Every 15 min · All webhooks pre-filled</span></div><button class="btn sm" onclick="copyScript('juda-s')" style="background: linear-gradient(90deg, rgb(0, 255, 136), rgb(0, 229, 255)); color: rgb(0, 0, 0); font-weight: 700; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; padding: 8px 16px; cursor: pointer;">Copy Script</button></div>
     <div class="script-body" id="juda-s">// JUDA SECURITY — All webhooks pre-filled
 // Trigger: Every 15 minutes
-const JUDA='https://discord.com/api/webhooks/1496290577640063138/kVtDWxjSaYdULSf0a3jMCkrjzz4L-04oRsN_qJ3TjEO0aSrAnAGhoolhd9z3k2ujPZMy';
-const ALERTS='https://discord.com/api/webhooks/1496288071677775972/f4vHs7yAR6pM2qAR2jxGZ9tKa6B292yZQj4bE32Zlqi0OzI7gI2pVEk02cJ_4V1cwW8t';
+const JUDA='about:blank#webhook-rotated-use-zynNotify';
+const ALERTS='about:blank#webhook-rotated-use-zynNotify';
 function judaSecurity(){
   const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/New_York'}),h=new Date().getHours();
   UrlFetchApp.fetch(JUDA,{method:'POST',contentType:'application/json',payload:JSON.stringify({content:'🛡️ **JUDA SCAN** — '+t+' | Threat: LOW | ElevenLabs: ACTIVE | Firecrawl: ACTIVE | FORTRESS ACTIVE'})});
@@ -2933,7 +2954,7 @@ function judaSecurity(){
     <div class="script-hdr"><div><span style="font-size:13px;font-weight:700;color:#7eb8d4">Adam — SAM.gov Scanner</span><br><span style="font-size:9px;color:#7eb8d4">Daily 7:30am · SAM API pre-filled: gca_EGKW9...</span></div><button class="btn sm" onclick="copyScript('adam-s')" style="background: linear-gradient(90deg, rgb(0, 229, 255), rgb(0, 255, 136)); color: rgb(0, 0, 0); font-weight: 700; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; padding: 8px 16px; cursor: pointer;">Copy Script</button></div>
     <div class="script-body" id="adam-s">// ADAM GOV SCOUT — SAM API pre-filled
 // Trigger: Daily 7:30am
-const ADAM_WH='https://discord.com/api/webhooks/1496289761713852498/4-WGJHExHJvil_X18xugwzLLQqbcsMjO3xwbOJ0BiB2uLGkmGfqLI78Lap6EyD9igsZ-';
+const ADAM_WH='about:blank#webhook-rotated-use-zynNotify';
 const SAM_KEY='gca_EGKW9Xy63A6sioXBiasItLwU7UO5YQrDhbNtoPXcBHI'; // Pre-filled!
 function adamGovScout(){
   const naics=['541512','541519','541611','541330','541715'];let results=[];
@@ -2954,7 +2975,7 @@ function getYesterday(){const d=new Date();d.setDate(d.getDate()-1);return(d.get
 // Trigger: Daily 9am
 const ELEVEN='sk_efc2a85a1f2b22a4a9ea7f8d965f722e6fb0b2c08481b3c2'; // Pre-filled!
 const VOICE_ID='21m00Tcm4TlvDq8ikWAM'; // Rachel voice
-const AGENT_WH='https://discord.com/api/webhooks/1496290890161983529/1apsvevdVqt2Or-EzGxxgi-NWoCtpP1rXXBh8AoRULvx8iFADsBGyPJeGBn_KaJAlxi7';
+const AGENT_WH='about:blank#webhook-rotated-use-zynNotify';
 function miroFishBriefing(){
   const text='Good morning. This is Miro Fish, ZYN Empire Voice AI. All 19 agents are active. Pipeline: $430K. Empire is fully operational.';
   UrlFetchApp.fetch('https://api.elevenlabs.io/v1/text-to-speech/'+VOICE_ID,{method:'POST',headers:{'xi-api-key':ELEVEN,'Content-Type':'application/json'},payload:JSON.stringify({text:text,model_id:'eleven_monolingual_v1',voice_settings:{stability:0.75,similarity_boost:0.85}}),muteHttpExceptions:true});
@@ -2970,7 +2991,7 @@ function miroFishSpeak(text){
     <div class="script-body" id="mariam-s">// MARIAM FIRECRAWL INTEL — key pre-filled
 // Trigger: Daily 8am
 const FC_KEY='fc-2a173ca207e24c5b9977806aae57d3bb'; // Pre-filled!
-const MARIAM_WH='https://discord.com/api/webhooks/1496290890161983529/1apsvevdVqt2Or-EzGxxgi-NWoCtpP1rXXBh8AoRULvx8iFADsBGyPJeGBn_KaJAlxi7';
+const MARIAM_WH='about:blank#webhook-rotated-use-zynNotify';
 function mariamFirecrawl(){
   const targets=['https://grants.gov/search-grants?query=AI+small+business'];let intel=[];
   targets.forEach(url=&gt;{
@@ -3007,8 +3028,8 @@ function mariamFirecrawl(){
 sudo apt-get install -y nodejs
 sudo npm install -g pm2</div></div></div><div class="vm-step"><div class="vm-num">3</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#e8f4f8;margin-bottom:4px">Create ZYN project</div><div class="vm-cmd">mkdir ~/zyn-empire &amp;&amp; cd ~/zyn-empire
 npm init -y &amp;&amp; npm install node-cron axios dotenv</div></div></div><div class="vm-step"><div class="vm-num">4</div><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#e8f4f8;margin-bottom:4px">Create .env — all keys pre-filled</div><div class="vm-cmd">cat &gt; .env &lt;&lt; 'EOF'
-DISCORD_EMPIRE=https://discord.com/api/webhooks/1496287866102354112/1At4pi-...
-DISCORD_JUDA=https://discord.com/api/webhooks/1496290577640063138/kVtDWxj...
+DISCORD_EMPIRE=about:blank#webhook-rotated-use-zynNotify...
+DISCORD_JUDA=about:blank#webhook-rotated-use-zynNotify...
 ELEVEN_API_KEY=sk_efc2a85a1f2b22a4a9ea7f8d965f722e6fb0b2c08481b3c2
 SAM_API_KEY=gca_EGKW9Xy63A6sioXBiasItLwU7UO5YQrDhbNtoPXcBHI
 FIRECRAWL_KEY=fc-2a173ca207e24c5b9977806aae57d3bb
@@ -3110,4 +3131,66 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
         <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
       </svg>
       <span style="vertical-align: middle;">Stop Claude</span>
-    </button></div><div id="zyn-autosave-badge" style="position: fixed; bottom: 12px; left: 160px; z-index: 99998; background: rgba(10, 8, 30, 0.92); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: &quot;Segoe UI&quot;, sans-serif; color: rgb(52, 211, 153); display: flex; align-items: center; gap: 6px; box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px; letter-spacing: 0.3px; transition: 0.3s;"><span id="zyn-as-dot" style="width: 7px; height: 7px; border-radius: 50%; background: rgb(245, 158, 11); flex-shrink: 0; animation: 0.8s ease 0s infinite normal none running zpulse;"></span><span id="zyn-as-msg">Saving...</span></div></body></html>
+    </button></div><div id="zyn-autosave-badge" style="position: fixed; bottom: 12px; left: 160px; z-index: 99998; background: rgba(10, 8, 30, 0.92); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: &quot;Segoe UI&quot;, sans-serif; color: rgb(52, 211, 153); display: flex; align-items: center; gap: 6px; box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px; letter-spacing: 0.3px; transition: 0.3s;"><span id="zyn-as-dot" style="width: 7px; height: 7px; border-radius: 50%; background: rgb(245, 158, 11); flex-shrink: 0; animation: 0.8s ease 0s infinite normal none running zpulse;"></span><span id="zyn-as-msg">Saving...</span></div><script>
+(function zynToastWatcher(){
+  const dismiss=()=>{document.querySelectorAll('*').forEach(el=>{
+    const txt=(el.textContent||'').trim();
+    if(/^Saving[…\.]+$/.test(txt)&&el.children.length===0){
+      const parent=el.closest('[class*=toast],[class*=Toast],[id*=toast],[id*=Toast]')||el;
+      parent.style.transition='opacity .4s';parent.style.opacity='0';
+      setTimeout(()=>{try{parent.remove();}catch(e){}},500);
+    }
+  });};
+  setInterval(dismiss,(window.ZYN_CONFIG&&window.ZYN_CONFIG.AUTO_DISMISS_TOAST_MS)||3000);
+})();
+</script>
+<script>
+(function zynSwitchTabGuard(){
+  const orig=window.switchTab;
+  if(typeof orig!=='function')return;
+  window.switchTab=function(name){
+    try{orig(name);}catch(e){console.error('[ZYN] switchTab error',e);}
+    const tabs=document.querySelectorAll('[id^=tab-]');
+    const anyVisible=[...tabs].some(el=>getComputedStyle(el).display!=='none');
+    if(!anyVisible){
+      const fallback=document.getElementById('tab-overview')||tabs[0];
+      if(fallback)fallback.style.display='block';
+      console.warn('[ZYN] switchTab guard restored',fallback&&fallback.id);
+    }
+  };
+  setTimeout(()=>{
+    if(window.zynCheckStop)window.zynCheckStop().then(stop=>{
+      if(!stop)return;
+      const banner=document.createElement('div');
+      banner.id='zyn-stop-banner';
+      banner.style.cssText='position:fixed;top:0;left:0;right:0;background:#ff4466;color:#fff;font-weight:800;padding:12px;text-align:center;z-index:99999;font-family:Segoe UI,sans-serif;box-shadow:0 4px 12px rgba(0,0,0,0.5);';
+      banner.textContent='🛑 EMPIRE PAUSED — CONTROL!A1 = STOP. All agent actions disabled. Set cell to RUN to resume.';
+      document.body.prepend(banner);
+      document.querySelectorAll('button').forEach(b=>{
+        const t=(b.textContent||'').toLowerCase();
+        if(t.includes('fire all')||t.includes('advance')||t.includes('test webhook')){b.disabled=true;b.style.opacity='0.4';b.title='Disabled — Empire paused';}
+      });
+    });
+  },1500);
+})();
+</script>
+<script>
+(function zynSidebarA11y(){
+  function upgrade(){
+    document.querySelectorAll('.sitem').forEach(el=>{
+      if(el.dataset.zynUpgraded)return;
+      el.dataset.zynUpgraded='1';
+      el.setAttribute('role','link');
+      el.setAttribute('tabindex','0');
+      const oc=el.getAttribute('onclick')||'';
+      const m=oc.match(/switchTab\(['"]([^'"]+)['"]\)/);
+      if(m)el.setAttribute('data-tab',m[1]);
+      el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
+      el.addEventListener('auxclick',function(e){if(e.button===1&&m){e.preventDefault();window.open(location.pathname+'#'+m[1],'_blank');}});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',upgrade);else upgrade();
+  if(location.hash){const t=location.hash.replace('#','');if(t&&typeof switchTab==='function')setTimeout(()=>switchTab(t),300);}
+})();
+</script>
+</body></html>
