@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ZYN — Zion's Den · v12.1 · LIVE</title><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#050d12;color:#e8f4f8;font-family:'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
@@ -1037,22 +1038,512 @@ strong,b{color:#ffffff!important;}
   0%,100%{ box-shadow:0 0 6px rgba(0,255,136,0.6) }
   50%{ box-shadow:0 0 14px rgba(0,255,136,1) }
 }
-</style></head>
+</style><style id="zyn-crm-v2-styles">
+/* ============ CRM ROOT ============ */
+#tab-crm { background: transparent; padding: 0; }
+#crm-v2 { font-family: 'Segoe UI', sans-serif; color: #e2e8f0; }
+
+/* ============ CRM HEADER ============ */
+.crm-header {
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  border: 1px solid rgba(139,92,246,0.4);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.crm-header-left h2 {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+}
+.crm-header-left p { margin: 0; font-size: 12px; color: #94a3b8; }
+.crm-header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.crm-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.crm-btn:hover { transform: translateY(-1px); filter: brightness(1.15); }
+.crm-btn-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; }
+.crm-btn-green  { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
+.crm-btn-blue   { background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; }
+.crm-btn-orange { background: linear-gradient(135deg, #d97706, #f59e0b); color: #fff; }
+.crm-btn-red    { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
+.crm-btn-gray   { background: rgba(255,255,255,0.08); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.12); }
+.crm-btn-sm { padding: 5px 10px; font-size: 11px; }
+
+/* ============ STATS ROW ============ */
+.crm-stats-row {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+@media (max-width: 1100px) { .crm-stats-row { grid-template-columns: repeat(4, 1fr); } }
+.crm-stat-card {
+  background: rgba(15,12,41,0.8);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.2s;
+  cursor: default;
+}
+.crm-stat-card:hover { border-color: rgba(139,92,246,0.4); transform: translateY(-2px); }
+.crm-stat-val {
+  font-size: 20px; font-weight: 800; margin-bottom: 4px;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.crm-stat-val.green  { background: linear-gradient(90deg, #34d399, #10b981); -webkit-background-clip: text; background-clip: text; }
+.crm-stat-val.orange { background: linear-gradient(90deg, #fb923c, #f59e0b); -webkit-background-clip: text; background-clip: text; }
+.crm-stat-val.red    { background: linear-gradient(90deg, #f87171, #ef4444); -webkit-background-clip: text; background-clip: text; }
+.crm-stat-val.cyan   { background: linear-gradient(90deg, #22d3ee, #60a5fa); -webkit-background-clip: text; background-clip: text; }
+.crm-stat-lbl { font-size: 10px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ============ FILTER BAR ============ */
+.crm-filter-bar {
+  background: rgba(15,12,41,0.6);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.crm-search {
+  flex: 1; min-width: 180px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 7px 12px;
+  color: #e2e8f0;
+  font-size: 13px;
+  outline: none;
+}
+.crm-search:focus { border-color: #7c3aed; }
+.crm-filter-select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: #e2e8f0;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+.crm-filter-select:focus { border-color: #7c3aed; }
+.crm-view-toggle { display: flex; gap: 4px; }
+.crm-view-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #94a3b8;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.crm-view-btn.active { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+
+/* ============ PIPELINE (KANBAN) ============ */
+.crm-pipeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+@media (max-width: 1100px) { .crm-pipeline { grid-template-columns: repeat(3,1fr); } }
+.pipeline-col {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.pipeline-col-header {
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pipeline-col-header .stage-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.3);
+}
+.col-new    .pipeline-col-header { background: linear-gradient(90deg,#4f46e5,#7c3aed); }
+.col-contacted .pipeline-col-header { background: linear-gradient(90deg,#0369a1,#0ea5e9); }
+.col-proposal .pipeline-col-header  { background: linear-gradient(90deg,#d97706,#f59e0b); color:#1e1e2e; }
+.col-negotiating .pipeline-col-header { background: linear-gradient(90deg,#7c2d12,#ea580c); }
+.col-won .pipeline-col-header       { background: linear-gradient(90deg,#065f46,#10b981); }
+.pipeline-col-body {
+  background: rgba(10,8,30,0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  min-height: 140px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pipeline-add-btn {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 7px;
+  color: #64748b;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.pipeline-add-btn:hover { background: rgba(124,58,237,0.15); border-color: #7c3aed; color: #a78bfa; }
+
+/* ============ LEAD CARDS ============ */
+.lead-card {
+  background: rgba(20,16,50,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 11px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.lead-card:hover { border-color: rgba(139,92,246,0.5); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124,58,237,0.15); }
+.lead-card-name { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 3px; }
+.lead-card-company { font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+.lead-card-meta { display: flex; justify-content: space-between; align-items: center; }
+.lead-card-value { font-size: 13px; font-weight: 800; color: #34d399; }
+.lead-card-agent { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+.agent-sara    { background: rgba(236,72,153,0.2); color: #f472b6; }
+.agent-malik   { background: rgba(245,158,11,0.2); color: #fbbf24; }
+.agent-lea     { background: rgba(16,185,129,0.2); color: #34d399; }
+.agent-ruth    { background: rgba(59,130,246,0.2); color: #60a5fa; }
+.agent-noah    { background: rgba(139,92,246,0.2); color: #a78bfa; }
+.agent-miro    { background: rgba(239,68,68,0.2); color: #f87171; }
+.agent-default { background: rgba(148,163,184,0.2); color: #94a3b8; }
+.lead-card-priority {
+  position: absolute;
+  top: 8px; right: 8px;
+  font-size: 10px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+}
+.priority-hot { background: #ef4444; color: #fff; }
+.priority-warm { background: #f59e0b; color: #fff; }
+.priority-cold { background: #3b82f6; color: #fff; }
+.lead-card-actions { display: flex; gap: 4px; margin-top: 7px; }
+.lead-card-actions button {
+  flex: 1;
+  padding: 3px 6px;
+  border-radius: 5px;
+  border: none;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lca-advance { background: rgba(16,185,129,0.2); color: #34d399; }
+.lca-advance:hover { background: rgba(16,185,129,0.4); }
+.lca-edit    { background: rgba(59,130,246,0.2); color: #60a5fa; }
+.lca-edit:hover { background: rgba(59,130,246,0.4); }
+.lca-delete  { background: rgba(239,68,68,0.15); color: #f87171; }
+.lca-delete:hover { background: rgba(239,68,68,0.3); }
+
+/* ============ TABLE VIEW ============ */
+#crm-table-view { overflow-x: auto; margin-bottom: 18px; }
+.crm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.crm-table th {
+  background: rgba(124,58,237,0.2);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: #a78bfa;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(124,58,237,0.3);
+  cursor: pointer;
+  user-select: none;
+}
+.crm-table th:hover { background: rgba(124,58,237,0.3); }
+.crm-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #cbd5e1;
+  vertical-align: middle;
+}
+.crm-table tr { transition: background 0.15s; }
+.crm-table tr:hover td { background: rgba(124,58,237,0.07); }
+.stage-pill {
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.stage-new        { background: rgba(99,102,241,0.2);  color: #818cf8; }
+.stage-contacted  { background: rgba(14,165,233,0.2);  color: #38bdf8; }
+.stage-proposal   { background: rgba(245,158,11,0.2);  color: #fbbf24; }
+.stage-negotiating{ background: rgba(234,88,12,0.2);   color: #fb923c; }
+.stage-won        { background: rgba(16,185,129,0.2);  color: #34d399; }
+.stage-lost       { background: rgba(239,68,68,0.15);  color: #f87171; }
+
+/* ============ ACTIVITY FEED ============ */
+.crm-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+@media (max-width: 900px) { .crm-bottom-row { grid-template-columns: 1fr; } }
+.crm-panel {
+  background: rgba(10,8,30,0.8);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.crm-panel-header {
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+  font-weight: 700;
+  color: #a78bfa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.crm-panel-body { padding: 12px 16px; max-height: 280px; overflow-y: auto; }
+.crm-panel-body::-webkit-scrollbar { width: 4px; }
+.crm-panel-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+.crm-panel-body::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 2px; }
+
+/* Activity Items */
+.activity-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: flex-start;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.act-add    { background: rgba(16,185,129,0.2); }
+.act-advance{ background: rgba(245,158,11,0.2); }
+.act-win    { background: rgba(16,185,129,0.3); }
+.act-delete { background: rgba(239,68,68,0.2); }
+.act-note   { background: rgba(59,130,246,0.2); }
+.act-edit   { background: rgba(139,92,246,0.2); }
+.activity-content { flex: 1; }
+.activity-text { font-size: 12px; color: #cbd5e1; margin-bottom: 2px; }
+.activity-time { font-size: 10px; color: #475569; }
+.no-data-msg { text-align: center; padding: 30px; color: #475569; font-size: 13px; }
+
+/* Revenue by Agent chart */
+.agent-rev-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.agent-rev-label { font-size: 12px; font-weight: 600; color: #94a3b8; width: 70px; flex-shrink: 0; }
+.agent-rev-bar-wrap { flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 8px; overflow: hidden; }
+.agent-rev-bar { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.agent-rev-val { font-size: 11px; font-weight: 700; color: #34d399; width: 60px; text-align: right; }
+
+/* ============ MODAL ============ */
+.crm-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  z-index: 50000;
+  align-items: center;
+  justify-content: center;
+}
+.crm-modal-overlay.open { display: flex; }
+.crm-modal {
+  background: linear-gradient(135deg, #0f0c29, #1e1b4b);
+  border: 1px solid rgba(139,92,246,0.4);
+  border-radius: 16px;
+  width: 560px;
+  max-width: 95vw;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.7), 0 0 60px rgba(124,58,237,0.15);
+}
+.crm-modal::-webkit-scrollbar { width: 4px; }
+.crm-modal::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius:2px; }
+.crm-modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.crm-modal-title {
+  font-size: 17px; font-weight: 800;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.crm-modal-close {
+  background: rgba(255,255,255,0.08);
+  border: none; border-radius: 8px;
+  color: #94a3b8; font-size: 18px;
+  width: 32px; height: 32px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.crm-modal-close:hover { background: rgba(239,68,68,0.2); color: #f87171; }
+.crm-modal-body { padding: 20px 24px; }
+.crm-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.crm-form-field { display: flex; flex-direction: column; gap: 5px; }
+.crm-form-field.full { grid-column: 1 / -1; }
+.crm-form-label {
+  font-size: 11px; font-weight: 700; color: #64748b;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.crm-form-input, .crm-form-select, .crm-form-textarea {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: #e2e8f0;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.crm-form-input:focus, .crm-form-select:focus, .crm-form-textarea:focus { border-color: #7c3aed; }
+.crm-form-textarea { resize: vertical; min-height: 80px; font-family: inherit; }
+.crm-modal-footer {
+  padding: 16px 24px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Priority selector */
+.priority-selector { display: flex; gap: 6px; }
+.priority-opt {
+  flex: 1;
+  padding: 7px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #94a3b8;
+  font-size: 11px; font-weight: 700;
+  cursor: pointer; text-align: center;
+  transition: all 0.2s;
+}
+.priority-opt:hover { border-color: rgba(255,255,255,0.3); }
+.priority-opt.sel-hot  { background: rgba(239,68,68,0.25); border-color: #ef4444; color: #fca5a5; }
+.priority-opt.sel-warm { background: rgba(245,158,11,0.25); border-color: #f59e0b; color: #fcd34d; }
+.priority-opt.sel-cold { background: rgba(59,130,246,0.25); border-color: #3b82f6; color: #93c5fd; }
+
+/* Pipeline value banner */
+.crm-pipeline-banner {
+  background: linear-gradient(90deg, rgba(124,58,237,0.15), rgba(16,185,129,0.1), rgba(245,158,11,0.1));
+  border: 1px solid rgba(124,58,237,0.25);
+  border-radius: 10px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+.crm-pipeline-banner span { color: #94a3b8; }
+.crm-pipeline-banner strong { color: #34d399; font-size: 15px; }
+
+/* Empty state */
+.crm-empty-col { text-align: center; padding: 14px 6px; color: #334155; font-size: 11px; }
+
+/* Toast */
+#crm-toast {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  z-index: 99999;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+#crm-toast.show { transform: translateY(0); opacity: 1; }
+.crm-toast-inner {
+  background: linear-gradient(135deg, #1e1b4b, #2d1b69);
+  border: 1px solid rgba(139,92,246,0.5);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  font-size: 13px; font-weight: 600;
+}
+.crm-toast-inner.success { border-color: rgba(16,185,129,0.5); }
+.crm-toast-inner.error   { border-color: rgba(239,68,68,0.5); }
+
+/* Sort indicator */
+.sort-asc::after  { content: ' ↑'; color: #a78bfa; }
+.sort-desc::after { content: ' ↓'; color: #a78bfa; }
+</style><style id="zyn-as-styles">@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }</style></head>
 <body>
-<canvas id="stars" width="1317" height="911"></canvas>
+<canvas id="stars" width="1404" height="911"></canvas>
 <div id="app"><!-- TOPBAR -->
 <div id="topbar">
   <div><div id="logo-txt">Z·Y·N EMPIRE</div><div id="logo-sub">ZION'S DEN · v12.1</div></div>
   <div id="livebadge">LIVE</div>
-  <div style="display:flex;flex-direction:column"><div id="clock">11 : 48 : 29</div><div id="clocksub"><span id="tb-day-label" style="color:#fff;font-weight:700;font-size:13px;letter-spacing:1px;">PM EST · SAT</span><span id="tb-date" style="color:#fff;font-weight:700;font-size:12px;display:block;">04/25/2026</span></div></div>
+  <div style="display:flex;flex-direction:column"><div id="clock">12 : 39 : 27</div><div id="clocksub"><span id="tb-day-label" style="color:#fff;font-weight:700;font-size:13px;letter-spacing:1px;">PM EST · SUN</span><span id="tb-date" style="color:#fff;font-weight:700;font-size:12px;display:block;">04/26/2026</span></div></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-left:8px">
     <a class="tbtn" href="https://discord.com/channels/1490888092708769995/1493995008129241209" target="_blank">● Discord</a>
     <a class="tbtn" target="_blank" style="cursor: pointer;" href="https://zynsupplyandlogistics.com">🌐 ZYN Site</a>
     <a class="tbtn" href="https://ancient1zion.github.io/zynsl-website/insights.html" target="_blank">📊 Insights</a>
     <a class="tbtn gold" href="https://dashboard.stripe.com/acct_1THqQFGzPhAVbugE/dashboard" target="_blank">💳 Stripe</a>
-    <a class="tbtn" onclick="switchTab('overview')" href="">Noah OS→</a>
-    <a class="tbtn" onclick="switchTab('caleb')" href="">📈 Caleb</a>
-    <a class="tbtn" onclick="switchTab('crm')" href="">📋 CRM</a>
+    <a class="tbtn" onclick="switchTab('overview')" href="javascript:void(0)">Noah OS→</a>
+    <a class="tbtn" onclick="switchTab('caleb')" href="javascript:void(0)">📈 Caleb</a>
+    <a class="tbtn active" onclick="switchTab('crm')" href="javascript:void(0)">📋 CRM</a>
     <button onclick="fireAllAgents()" style="background:rgba(245,166,35,0.1);border:1px solid #f5a623;color:#f5a623;font-size:10px;padding:4px 12px;border-radius:12px;cursor:pointer;font-weight:700">🔥 Fire All 19</button>
   </div>
 </div>
@@ -1063,12 +1554,12 @@ strong,b{color:#ffffff!important;}
   <div style="font-size:9px;color:#7eb8d4;padding:0 12px 6px;line-height:1.5">Z.Y.N. Supply &amp; Logistics LLC<br>Largo, Florida 33771 · Nationwide</div>
   <div class="sco">Navigation</div>
   <div class="sitem" onclick="switchTab('overview')"><span class="ico">📊</span>Overview</div>
-  <div class="sitem" onclick="switchTab('crm')"><span class="ico">📋</span>ZYN CRM<span class="sbadge green">●</span></div>
+  <div class="sitem active" onclick="switchTab('crm')"><span class="ico">📋</span>ZYN CRM<span class="sbadge green">●</span></div>
   <div class="sitem" onclick="switchTab('autosubmit')"><span class="ico">🚀</span>Auto-Submit<span class="sbadge">NEW</span></div>
   <div class="sitem" onclick="switchTab('tasks')"><span class="ico">⏰</span>Agent Tasks<span class="sbadge">19</span></div>
   <div class="sitem" onclick="switchTab('discord')"><span class="ico">●</span>Discord Hub</div>
   <div class="sitem" onclick="switchTab('caleb')"><span class="ico">📈</span>Caleb Trading<span class="sbadge green">LIVE</span></div>
-  <div class="sitem active" onclick="switchTab('agents')"><span class="ico">🧑</span>19 Agents</div>
+  <div class="sitem" onclick="switchTab('agents')"><span class="ico">🧑</span>19 Agents</div>
   <div class="sitem" onclick="switchTab('agentjobs')"><span class="ico">⚙</span>Agent Jobs<span class="sbadge green">NEW</span></div>
   <div class="sitem" onclick="switchTab('vault')"><span class="ico">🏛</span>Corp Vault<span class="sbadge">FILES</span></div>
   <div class="sitem" onclick="switchTab('scripts')"><span class="ico">⚡</span>Agent Scripts<span class="sbadge">NEW</span></div>
@@ -1081,19 +1572,19 @@ strong,b{color:#ffffff!important;}
   <a class="sitem" href="https://console.cloud.google.com" target="_blank"><span class="ico">☁</span>GCP Console</a>
   <a class="sitem" href="https://script.google.com" target="_blank"><span class="ico">⚡</span>Apps Script</a>
   <div class="sco">19 Agents</div>
-  <div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Noah · Architect</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Sara · Outreach</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Malik · Closer</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Elijah · Signals</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Adam · Gov Scout</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Caleb · Trading</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Ruth · CRM</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Lea · Client</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Zara · LinkedIn</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Ezekiel · APIs</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Samson · Backup</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Cyrus · Strategy</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Asher · Health</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Rebecka · Partners</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Zuri · Brand</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Mariam · Intel</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Enoch · Opp Hunt</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot"></div>Juda · Security</div><div class="sagent active" onclick="switchTab('agents')"><div class="dot yellow"></div>Miro Fish · Voice</div>
+  <div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Noah · Architect</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Sara · Outreach</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Malik · Closer</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Elijah · Signals</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Adam · Gov Scout</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Caleb · Trading</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Ruth · CRM</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Lea · Client</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Zara · LinkedIn</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Ezekiel · APIs</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Samson · Backup</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Cyrus · Strategy</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Asher · Health</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Rebecka · Partners</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Zuri · Brand</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Mariam · Intel</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Enoch · Opp Hunt</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Juda · Security</div><div class="sagent" onclick="switchTab('agents')"><div class="dot yellow"></div>Miro Fish · Voice</div>
 </div>
 
 <!-- MAIN -->
 <div id="main">
 <div id="tabbar" style="display: none !important; visibility: hidden !important; height: 0px !important; overflow: hidden !important;">
   <div class="tab" onclick="switchTab('overview')">📊 Overview</div>
-  <div class="tab" onclick="switchTab('crm')">📋 CRM<span class="tlive">LIVE</span></div>
+  <div class="tab active" onclick="switchTab('crm')">📋 CRM<span class="tlive">LIVE</span></div>
   <div class="tab" onclick="switchTab('autosubmit')">🚀 Auto-Submit</div>
   <div class="tab" onclick="switchTab('tasks')">⏰ Tasks<span class="tnew">19</span></div>
   <div class="tab" onclick="switchTab('discord')">● Discord</div>
   <div class="tab" onclick="switchTab('caleb')">📈 Caleb<span class="tlive">LIVE</span></div>
-  <div class="tab active" onclick="switchTab('agents')">🧑 19 Agents</div>
+  <div class="tab" onclick="switchTab('agents')">🧑 19 Agents</div>
   <div class="tab" onclick="switchTab('agentjobs')">⚙ Agent Jobs<span class="tnew">NEW</span></div>
   <div class="tab" onclick="switchTab('vault')">🏛 Corp Vault<span class="tnew">FILES</span></div>
   <div class="tab" onclick="switchTab('scripts')">⚡ Scripts</div>
@@ -1128,7 +1619,7 @@ strong,b{color:#ffffff!important;}
     <div class="con-card grant"><div class="type-badge">📄 SBIR GRANT</div><div class="con-title">Phase I — AI Automation R&amp;D</div><div class="con-sub">SBA / DoD SBIR · Mariam + Noah</div><div class="con-val">$0</div><div class="writing" style="margin-top:6px">WRITING</div><div style="font-size:9px;color:#2a6a4a;margin-top:4px">Jul 30, 2026</div></div>
     <div class="con-card retainer"><div class="type-badge">💼 CLIENT RETAINER</div><div class="con-title">Full Stack AI Setup + Retainer</div><div class="con-sub">HVAC/Roofing Co. · Malik</div><div class="con-val">$0</div><div class="template" style="margin-top:6px">TEMPLATE</div><div style="font-size:9px;color:#2a6a4a;margin-top:4px">Apr 25, 2026</div></div>
   </div>
-  <div style="text-align:right;margin-bottom:12px">Total Pipeline: <span style="color:#00ff88;font-weight:800;font-size:16px">$430K</span> <button class="btn sm" onclick="switchTab('crm')" style="margin-left:8px">+ Add Contract</button></div>
+  <div style="text-align:right;margin-bottom:12px">Total Pipeline: <span style="color:#00ff88;font-weight:800;font-size:16px">$430K</span> <button class="btn sm active" onclick="switchTab('crm')" style="margin-left:8px">+ Add Contract</button></div>
   <div class="card"><div class="card-title">🔗 Linked Systems</div>
     <div class="sys-grid">
       <a class="sys-card" href="https://zynsupplyandlogistics.com" target="_blank" title="Opens zynsupplyandlogistics.com in new tab (X-Frame-Options: SAMEORIGIN blocks embedding)"><div class="sys-ico">🌐</div><div class="sys-name">ZYN Website</div></a>
@@ -1733,7 +2224,7 @@ strong,b{color:#ffffff!important;}
   <div class="vault-bottom-card fast-money">
     <h4>⚡ Fast Money Deals</h4>
     <div class="vault-bottom-item"><a href="https://sam.gov" target="_blank">🏛 SAM.gov Micro-Purchase ($9,500)</a><span class="vault-bottom-tag">FAST</span></div>
-    <div class="vault-bottom-item"><a href="https://www.fbo.gov" target="_blank">📋 GSA Schedule Quote Templates</a><span class="vault-bottom-tag">GOV</span></div>
+    <div class="vault-bottom-item"><a href="https://www.gsaadvantage.gov" target="_blank">📋 GSA Schedule Quote Templates</a><span class="vault-bottom-tag">GOV</span></div>
     <div class="vault-bottom-item"><a href="https://dashboard.stripe.com/acct_1THqQFGzPhAVbugE" target="_blank">💳 Stripe Invoice Templates</a><span class="vault-bottom-tag">PAID</span></div>
     <div class="vault-bottom-item"><a href="https://www.fiverr.com" target="_blank">🎯 AI Sprint Packages ($500–$5K)</a><span class="vault-bottom-tag">FAST</span></div>
     <div class="vault-bottom-item"><a href="https://upwork.com" target="_blank">💼 Upwork API Build Listings</a><span class="vault-bottom-tag">FAST</span></div>
@@ -1761,7 +2252,7 @@ strong,b{color:#ffffff!important;}
   <div class="vault-bottom-card legal-os">
     <h4>⚖ Legal OS / System</h4>
     <div class="vault-bottom-item"><a href="https://secure.login.gov" target="_blank">🏛 Login.gov — Federal Identity</a><span class="vault-bottom-tag">GOV</span></div>
-    <div class="vault-bottom-item"><a href="https://sam.gov/profile/CAGE" target="_blank">📋 SAM.gov Profile — CAGE Active</a><span class="vault-bottom-tag">CAGE</span></div>
+    <div class="vault-bottom-item"><a href="https://sam.gov/entity-information/registration" target="_blank">📋 SAM.gov Profile — CAGE Active</a><span class="vault-bottom-tag">CAGE</span></div>
     <div class="vault-bottom-item"><a href="https://sam.gov" target="_blank">📜 Certifications: VET · MBE · SDB · SDVOSB</a><span class="vault-bottom-tag">CERT</span></div>
     <div class="vault-bottom-item"><a href="https://irs.gov" target="_blank">🧾 EIN / IRS Business Registration</a><span class="vault-bottom-tag">TAX</span></div>
     <div class="vault-bottom-item"><a href="https://sunbiz.org" target="_blank">🌴 FL Sunbiz — LLC Active · Largo FL 33771</a><span class="vault-bottom-tag">LLC</span></div>
@@ -1769,32 +2260,248 @@ strong,b{color:#ffffff!important;}
   </div>
 </div></div>
 <!-- CRM TAB -->
-<div id="tab-crm" class="panel" style="">
-  <h2 style="font-size: 24px; font-weight: 900; background: linear-gradient(90deg, rgb(255, 61, 113), rgb(255, 107, 53), rgb(255, 215, 0)) text; -webkit-text-fill-color: transparent; margin-bottom: 16px;">📋 ZYN Empire CRM</h2>
-  <div class="crm-header-bar" style="background: linear-gradient(90deg, rgba(255, 61, 113, 0.2), rgba(255, 107, 53, 0.2), rgba(255, 215, 0, 0.2)); border-radius: 10px; padding: 12px 20px; margin-bottom: 16px; border: 1px solid rgba(255, 107, 53, 0.3); display: flex; gap: 20px; flex-wrap: wrap;"><span style="color:#ff3d71;font-weight:700;">👥 LEADS PIPELINE</span> <span style="color:#ffd700;">·</span> <span style="color:#ff6b35;font-weight:600;">Sheet: ZYN Empire CRM &amp; Leads Master</span> <span style="color:#ffd700;">·</span> <span style="color:#00ff88;font-weight:600;">🟢 LIVE</span></div><p style="color:#7eb8d4;font-size:11px;margin-bottom:12px">Autonomous Pipeline · Sara sources · Malik qualifies · Lea closes · Ruth tracks</p>
-  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-    <button class="btn" onclick="openModal('leadModal')">+ Add Lead</button>
-    <button class="btn" id="kbBtn" onclick="toggleCRMView('kanban')">■ Kanban</button>
-    <button class="btn" id="tblBtn" onclick="toggleCRMView('table')">☰ Table</button>
-    <button class="btn gold" onclick="exportCRM()">↓ Export CSV</button>
+<div id="tab-crm" class="panel active" style="">
+<div id="crm-v2">
+
+  <!-- HEADER -->
+  <div class="crm-header">
+    <div class="crm-header-left">
+      <h2>📋 ZYN EMPIRE CRM</h2>
+      <p>Autonomous Pipeline · Sara sources · Malik qualifies · Lea closes · Ruth tracks · v2.0</p>
+    </div>
+    <div class="crm-header-actions">
+      <button class="crm-btn crm-btn-purple" onclick="crmOpenAdd()">➕ Add Lead</button>
+      <button class="crm-btn crm-btn-green" onclick="crmExportCSV()">⬇ Export CSV</button>
+      <button class="crm-btn crm-btn-orange" onclick="crmSeedDemo()">🎲 Demo Data</button>
+      <button class="crm-btn crm-btn-red" onclick="crmClearAll()">🗑 Clear All</button>
+    </div>
   </div>
-  <div class="crm-stats">
-    <div class="crm-stat"><div class="csv" id="crm-total">0</div><div class="csl">Total Leads</div></div>
-    <div class="crm-stat"><div class="csv" id="crm-hot">0</div><div class="csl">Hot Leads</div></div>
-    <div class="crm-stat"><div class="csv" id="crm-props">0</div><div class="csl">Proposals Out</div></div>
-    <div class="crm-stat"><div class="csv" id="crm-pipe">$0</div><div class="csl">Pipeline Value</div></div>
-    <div class="crm-stat"><div class="csv" id="crm-closing">0</div><div class="csl">Closing This Mo</div></div>
-    <div class="crm-stat"><div class="csv" id="crm-won">$0</div><div class="csl">Won Revenue</div></div>
+
+  <!-- STATS ROW -->
+  <div class="crm-stats-row">
+    <div class="crm-stat-card"><div class="crm-stat-val" id="cs-total">12</div><div class="crm-stat-lbl">Total Leads</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val orange" id="cs-hot">5</div><div class="crm-stat-lbl">🔥 Hot</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val cyan" id="cs-contacted">3</div><div class="crm-stat-lbl">Contacted</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val" id="cs-proposal">3</div><div class="crm-stat-lbl">Proposals</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val orange" id="cs-negotiating">1</div><div class="crm-stat-lbl">Negotiating</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-won">2</div><div class="crm-stat-lbl">✅ Won</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-pipeline">$531K</div><div class="crm-stat-lbl">Pipeline</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-revenue">$21K</div><div class="crm-stat-lbl">Won Revenue</div></div>
   </div>
-  <div id="crm-kanban" class="kanban">
-    <div class="kol"><div class="kol-hdr">NEW LEADS <span id="cnt-new">0</span></div><div id="col-new" class="kol-cnt"></div><button class="btn sm" onclick="openModal('leadModal')" style="margin-top:6px;width:100%;font-size:10px">+ Add</button></div>
-    <div class="kol"><div class="kol-hdr">CONTACTED <span id="cnt-contacted">0</span></div><div id="col-contacted" class="kol-cnt"></div><button class="btn sm" onclick="addLeadToStage('Contacted')" style="margin-top:6px;width:100%;font-size:10px">+ Add</button></div>
-    <div class="kol"><div class="kol-hdr">PROPOSAL <span id="cnt-proposal">0</span></div><div id="col-proposal" class="kol-cnt"></div><button class="btn sm" onclick="addLeadToStage('Proposal Sent')" style="margin-top:6px;width:100%;font-size:10px">+ Add</button></div>
-    <div class="kol"><div class="kol-hdr">NEGOTIATING <span id="cnt-negotiating">0</span></div><div id="col-negotiating" class="kol-cnt"></div><button class="btn sm" onclick="addLeadToStage('Negotiating')" style="margin-top:6px;width:100%;font-size:10px">+ Add</button></div>
-    <div class="kol"><div class="kol-hdr" style="color:#f5a623">CLOSED WON <span id="cnt-won">0</span></div><div id="col-won" class="kol-cnt"></div><button class="btn sm gold" onclick="addLeadToStage('Closed Won')" style="margin-top:6px;width:100%;font-size:10px">+ Add</button></div>
+
+  <!-- PIPELINE BANNER -->
+  <div class="crm-pipeline-banner">
+    <span>🎯 Close Rate:</span><strong id="cs-closerate">17%</strong>
+    <span>⏱ Avg Value:</span><strong id="cs-avgval">$46K</strong>
+    <span>📅 This Month:</span><strong id="cs-thismonth">12 deals</strong>
+    <span>🏆 Top Agent:</span><strong id="cs-topagent">Noah</strong>
+    <span>🔥 Hottest Lead:</span><strong id="cs-hotlead">DoD · $250K</strong>
   </div>
-  <div id="crm-table" style="display:none;overflow-x:auto"><table class="tbl"><thead><tr><th>Lead / Company</th><th>Contact</th><th>Value</th><th>Stage</th><th>Agent</th><th>Source</th><th>Date</th><th>Actions</th></tr></thead><tbody id="crm-tbody"><tr><td colspan="8" style="color:#2a6a4a;font-style:italic;text-align:center;padding:16px">No leads yet.</td></tr></tbody></table></div>
-  <div class="card" style="margin-top:12px"><div class="card-title">🕐 Activity Log</div><div class="activity-log" id="crm-activity"><div style="color:#2a6a4a;font-size:10px;font-style:italic">No activity yet.</div></div></div>
+
+  <!-- FILTER BAR -->
+  <div class="crm-filter-bar">
+    <input class="crm-search" type="text" id="crm-search" placeholder="🔍 Search leads, companies, agents..." oninput="crmRender()">
+    <select class="crm-filter-select" id="crm-f-stage" onchange="crmRender()">
+      <option value="">All Stages</option>
+      <option value="New Lead">New Lead</option>
+      <option value="Contacted">Contacted</option>
+      <option value="Proposal Sent">Proposal Sent</option>
+      <option value="Negotiating">Negotiating</option>
+      <option value="Closed Won">Closed Won</option>
+      <option value="Closed Lost">Closed Lost</option>
+    </select>
+    <select class="crm-filter-select" id="crm-f-agent" onchange="crmRender()">
+      <option value="">All Agents</option>
+      <option value="Sara">Sara</option>
+      <option value="Malik">Malik</option>
+      <option value="Lea">Lea</option>
+      <option value="Ruth">Ruth</option>
+      <option value="Noah">Noah</option>
+      <option value="Miro Fish">Miro Fish</option>
+    </select>
+    <select class="crm-filter-select" id="crm-f-priority" onchange="crmRender()">
+      <option value="">All Priorities</option>
+      <option value="Hot">🔥 Hot</option>
+      <option value="Warm">⚡ Warm</option>
+      <option value="Cold">❄ Cold</option>
+    </select>
+    <select class="crm-filter-select" id="crm-f-sort" onchange="crmRender()">
+      <option value="date-desc">Newest First</option>
+      <option value="date-asc">Oldest First</option>
+      <option value="value-desc">Highest Value</option>
+      <option value="value-asc">Lowest Value</option>
+      <option value="name-asc">Name A-Z</option>
+    </select>
+    <div class="crm-view-toggle">
+      <button class="crm-view-btn active" id="vbtn-kanban" onclick="crmSetView('kanban')">⬛ Kanban</button>
+      <button class="crm-view-btn" id="vbtn-table" onclick="crmSetView('table')">☰ Table</button>
+    </div>
+  </div>
+
+  <!-- KANBAN VIEW -->
+  <div id="crm-kanban-view" style="display: block;">
+    <div class="crm-pipeline">
+      <div class="pipeline-col col-new">
+        <div class="pipeline-col-header">🆕 New Leads<span class="stage-badge" id="cnt-new2">3</span></div>
+        <div class="pipeline-col-body" id="kcol-new"><div class="lead-card"><div class="lead-card-priority priority-hot">🔥</div><div class="lead-card-name">CBP Procurement</div><div class="lead-card-company">US Customs &amp; Border Protection · Gov Contract</div><div class="lead-card-meta"><span class="lead-card-value">$180K</span><span class="lead-card-agent agent-noah">Noah</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">SBIR Phase I. Letter of intent submitted.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_r5tne',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_r5tne',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_r5tne',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-warm">⚡</div><div class="lead-card-name">Derek Williams</div><div class="lead-card-company">Williams Auto Group · AI Consulting</div><div class="lead-card-meta"><span class="lead-card-value">$8K</span><span class="lead-card-agent agent-sara">Sara</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dealership CRM automation.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_o7av1',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_o7av1',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_o7av1',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-cold">❄</div><div class="lead-card-name">Michelle Park</div><div class="lead-card-company">Park &amp; Associates Law · AI Consulting</div><div class="lead-card-meta"><span class="lead-card-value">$15K</span><span class="lead-card-agent agent-ruth">Ruth</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Legal document AI. Early stage.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_qu8kx',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_qu8kx',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_qu8kx',event)">🗑</button></div></div></div>
+      </div>
+      <div class="pipeline-col col-contacted">
+        <div class="pipeline-col-header">📞 Contacted<span class="stage-badge" id="cnt-contacted2">3</span></div>
+        <div class="pipeline-col-body" id="kcol-contacted"><div class="lead-card"><div class="lead-card-priority priority-hot">🔥</div><div class="lead-card-name">Samuel Price</div><div class="lead-card-company">Price Capital Group · AI Systems Build</div><div class="lead-card-meta"><span class="lead-card-value">$35K</span><span class="lead-card-agent agent-malik">Malik</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Interested in full trading AI suite.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_6lakc',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_6lakc',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_6lakc',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-warm">⚡</div><div class="lead-card-name">Angela Rivera</div><div class="lead-card-company">Rivera Medical Supplies · Supply &amp; Logistics</div><div class="lead-card-meta"><span class="lead-card-value">$9K</span><span class="lead-card-agent agent-sara">Sara</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Supply chain optimization. Needs demo.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_gabo1',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_gabo1',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_gabo1',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-cold">❄</div><div class="lead-card-name">Tony Guzman</div><div class="lead-card-company">Guzman Electrical · AI Consulting</div><div class="lead-card-meta"><span class="lead-card-value">$4K</span><span class="lead-card-agent agent-miro">Miro Fish</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Field tech scheduling AI.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_0fst2',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_0fst2',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_0fst2',event)">🗑</button></div></div></div>
+      </div>
+      <div class="pipeline-col col-proposal">
+        <div class="pipeline-col-header">📄 Proposal Sent<span class="stage-badge" id="cnt-proposal2">3</span></div>
+        <div class="pipeline-col-body" id="kcol-proposal"><div class="lead-card"><div class="lead-card-priority priority-hot">🔥</div><div class="lead-card-name">DoD Division 7</div><div class="lead-card-company">Dept of Defense · Gov Contract</div><div class="lead-card-meta"><span class="lead-card-value">$250K</span><span class="lead-card-agent agent-noah">Noah</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">NAICS 541512 - AI Systems. Awaiting CO review.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_3ef5g',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_3ef5g',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_3ef5g',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-warm">⚡</div><div class="lead-card-name">Tamika Johnson</div><div class="lead-card-company">Johnson Roofing LLC · AI Consulting</div><div class="lead-card-meta"><span class="lead-card-value">$6K</span><span class="lead-card-agent agent-sara">Sara</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">AI scheduling + invoicing quote sent.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_q8boz',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_q8boz',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_q8boz',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-warm">⚡</div><div class="lead-card-name">SBA Grant Office</div><div class="lead-card-company">Small Business Administration · SBIR Grant</div><div class="lead-card-meta"><span class="lead-card-value">$0</span><span class="lead-card-agent agent-noah">Noah</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Phase I SBIR submitted.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_dke6n',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_dke6n',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_dke6n',event)">🗑</button></div></div></div>
+      </div>
+      <div class="pipeline-col col-negotiating">
+        <div class="pipeline-col-header">🤝 Negotiating<span class="stage-badge" id="cnt-negotiating2">1</span></div>
+        <div class="pipeline-col-body" id="kcol-negotiating"><div class="lead-card"><div class="lead-card-priority priority-hot">🔥</div><div class="lead-card-name">Robert Chen</div><div class="lead-card-company">Chen Tech Logistics · AI Systems Build</div><div class="lead-card-meta"><span class="lead-card-value">$25K</span><span class="lead-card-agent agent-malik">Malik</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">AI dispatch system. Final pricing round.</div><div class="lead-card-actions"><button class="lca-advance" onclick="crmAdvanceLead('lead_1777221053876_jxiai',event)">⬆ Advance</button><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_jxiai',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_jxiai',event)">🗑</button></div></div></div>
+      </div>
+      <div class="pipeline-col col-won">
+        <div class="pipeline-col-header">🏆 Closed Won<span class="stage-badge" id="cnt-won2">2</span></div>
+        <div class="pipeline-col-body" id="kcol-won"><div class="lead-card"><div class="lead-card-priority priority-hot">🔥</div><div class="lead-card-name">Marcus Thompson</div><div class="lead-card-company">Thompson Industries · AI Consulting</div><div class="lead-card-meta"><span class="lead-card-value">$13K</span><span class="lead-card-agent agent-malik">Malik</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Full retainer signed. Monthly automation system.</div><div class="lead-card-actions"><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_ziqkv',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_ziqkv',event)">🗑</button></div></div><div class="lead-card"><div class="lead-card-priority priority-warm">⚡</div><div class="lead-card-name">Jennifer Walsh</div><div class="lead-card-company">Walsh HVAC Solutions · Retainer</div><div class="lead-card-meta"><span class="lead-card-value">$8K</span><span class="lead-card-agent agent-lea">Lea</span></div><div style="font-size:10px;color:#475569;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">HVAC AI setup. 6-month retainer.</div><div class="lead-card-actions"><button class="lca-edit" onclick="crmOpenEdit('lead_1777221053876_z5lrr',event)">✏ Edit</button><button class="lca-delete" onclick="crmDeleteLead('lead_1777221053876_z5lrr',event)">🗑</button></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE VIEW -->
+  <div id="crm-table-view" style="display: none;">
+    <div style="overflow-x:auto; margin-bottom:18px;">
+      <table class="crm-table" id="crm-main-table">
+        <thead>
+          <tr>
+            <th onclick="crmSortBy('name')">Lead / Company</th>
+            <th onclick="crmSortBy('email')">Contact</th>
+            <th onclick="crmSortBy('value')">Value</th>
+            <th onclick="crmSortBy('stage')">Stage</th>
+            <th onclick="crmSortBy('priority')">Priority</th>
+            <th onclick="crmSortBy('agent')">Agent</th>
+            <th onclick="crmSortBy('source')">Source</th>
+            <th onclick="crmSortBy('date')">Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="crm-table-tbody"><tr><td><div style="font-weight:700;color:#e2e8f0;">Robert Chen</div><div style="font-size:11px;color:#64748b;">Chen Tech Logistics</div></td><td><div style="font-size:12px;">rchen@chentechlog.com</div><div style="font-size:11px;color:#64748b;">(813) 555-0234</div></td><td style="font-weight:800;color:#34d399;">$25K</td><td><span class="stage-pill stage-negotiating">Negotiating</span></td><td>🔥 Hot</td><td><span class="lead-card-agent agent-malik" style="padding:3px 7px;border-radius:5px;">Malik</span></td><td style="font-size:11px;color:#94a3b8;">LinkedIn</td><td style="font-size:11px;color:#64748b;">4/25/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_jxiai')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_jxiai')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_jxiai')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Marcus Thompson</div><div style="font-size:11px;color:#64748b;">Thompson Industries</div></td><td><div style="font-size:12px;">marcus@thompsonindustries.com</div><div style="font-size:11px;color:#64748b;">(813) 555-0101</div></td><td style="font-weight:800;color:#34d399;">$13K</td><td><span class="stage-pill stage-won">Closed Won</span></td><td>🔥 Hot</td><td><span class="lead-card-agent agent-malik" style="padding:3px 7px;border-radius:5px;">Malik</span></td><td style="font-size:11px;color:#94a3b8;">Referral</td><td style="font-size:11px;color:#64748b;">4/24/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_ziqkv')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_ziqkv')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">DoD Division 7</div><div style="font-size:11px;color:#64748b;">Dept of Defense</div></td><td><div style="font-size:12px;">contracts@dod.mil</div><div style="font-size:11px;color:#64748b;">(202) 555-0100</div></td><td style="font-weight:800;color:#34d399;">$250K</td><td><span class="stage-pill stage-proposal">Proposal Sent</span></td><td>🔥 Hot</td><td><span class="lead-card-agent agent-noah" style="padding:3px 7px;border-radius:5px;">Noah</span></td><td style="font-size:11px;color:#94a3b8;">SAM.gov</td><td style="font-size:11px;color:#64748b;">4/23/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_3ef5g')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_3ef5g')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_3ef5g')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Tamika Johnson</div><div style="font-size:11px;color:#64748b;">Johnson Roofing LLC</div></td><td><div style="font-size:12px;">tamika@johnsonroofing.com</div><div style="font-size:11px;color:#64748b;">(727) 555-0341</div></td><td style="font-weight:800;color:#34d399;">$6K</td><td><span class="stage-pill stage-proposal">Proposal Sent</span></td><td>⚡ Warm</td><td><span class="lead-card-agent agent-sara" style="padding:3px 7px;border-radius:5px;">Sara</span></td><td style="font-size:11px;color:#94a3b8;">Cold Email</td><td style="font-size:11px;color:#64748b;">4/22/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_q8boz')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_q8boz')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_q8boz')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Jennifer Walsh</div><div style="font-size:11px;color:#64748b;">Walsh HVAC Solutions</div></td><td><div style="font-size:12px;">jen@walshhvac.com</div><div style="font-size:11px;color:#64748b;">(727) 555-0182</div></td><td style="font-weight:800;color:#34d399;">$8K</td><td><span class="stage-pill stage-won">Closed Won</span></td><td>⚡ Warm</td><td><span class="lead-card-agent agent-lea" style="padding:3px 7px;border-radius:5px;">Lea</span></td><td style="font-size:11px;color:#94a3b8;">Sara Outreach</td><td style="font-size:11px;color:#64748b;">4/21/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_z5lrr')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_z5lrr')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Samuel Price</div><div style="font-size:11px;color:#64748b;">Price Capital Group</div></td><td><div style="font-size:12px;">sprice@pricecap.com</div><div style="font-size:11px;color:#64748b;">(813) 555-0450</div></td><td style="font-weight:800;color:#34d399;">$35K</td><td><span class="stage-pill stage-contacted">Contacted</span></td><td>🔥 Hot</td><td><span class="lead-card-agent agent-malik" style="padding:3px 7px;border-radius:5px;">Malik</span></td><td style="font-size:11px;color:#94a3b8;">Discord</td><td style="font-size:11px;color:#64748b;">4/20/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_6lakc')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_6lakc')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_6lakc')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Angela Rivera</div><div style="font-size:11px;color:#64748b;">Rivera Medical Supplies</div></td><td><div style="font-size:12px;">angela@riveramedical.com</div><div style="font-size:11px;color:#64748b;">(727) 555-0560</div></td><td style="font-weight:800;color:#34d399;">$9K</td><td><span class="stage-pill stage-contacted">Contacted</span></td><td>⚡ Warm</td><td><span class="lead-card-agent agent-sara" style="padding:3px 7px;border-radius:5px;">Sara</span></td><td style="font-size:11px;color:#94a3b8;">Sara Outreach</td><td style="font-size:11px;color:#64748b;">4/19/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_gabo1')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_gabo1')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_gabo1')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">CBP Procurement</div><div style="font-size:11px;color:#64748b;">US Customs &amp; Border Protection</div></td><td><div style="font-size:12px;">procurement@cbp.dhs.gov</div><div style="font-size:11px;color:#64748b;">(202) 555-0200</div></td><td style="font-weight:800;color:#34d399;">$180K</td><td><span class="stage-pill stage-new">New Lead</span></td><td>🔥 Hot</td><td><span class="lead-card-agent agent-noah" style="padding:3px 7px;border-radius:5px;">Noah</span></td><td style="font-size:11px;color:#94a3b8;">SAM.gov</td><td style="font-size:11px;color:#64748b;">4/18/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_r5tne')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_r5tne')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_r5tne')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Derek Williams</div><div style="font-size:11px;color:#64748b;">Williams Auto Group</div></td><td><div style="font-size:12px;">derek@williamsauto.com</div><div style="font-size:11px;color:#64748b;">(813) 555-0671</div></td><td style="font-weight:800;color:#34d399;">$8K</td><td><span class="stage-pill stage-new">New Lead</span></td><td>⚡ Warm</td><td><span class="lead-card-agent agent-sara" style="padding:3px 7px;border-radius:5px;">Sara</span></td><td style="font-size:11px;color:#94a3b8;">Sara Outreach</td><td style="font-size:11px;color:#64748b;">4/17/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_o7av1')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_o7av1')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_o7av1')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Michelle Park</div><div style="font-size:11px;color:#64748b;">Park &amp; Associates Law</div></td><td><div style="font-size:12px;">mpark@parklaw.com</div><div style="font-size:11px;color:#64748b;">(727) 555-0782</div></td><td style="font-weight:800;color:#34d399;">$15K</td><td><span class="stage-pill stage-new">New Lead</span></td><td>❄ Cold</td><td><span class="lead-card-agent agent-ruth" style="padding:3px 7px;border-radius:5px;">Ruth</span></td><td style="font-size:11px;color:#94a3b8;">LinkedIn</td><td style="font-size:11px;color:#64748b;">4/16/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_qu8kx')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_qu8kx')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_qu8kx')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">SBA Grant Office</div><div style="font-size:11px;color:#64748b;">Small Business Administration</div></td><td><div style="font-size:12px;">grants@sba.gov</div><div style="font-size:11px;color:#64748b;">(813) 555-0000</div></td><td style="font-weight:800;color:#34d399;">$0</td><td><span class="stage-pill stage-proposal">Proposal Sent</span></td><td>⚡ Warm</td><td><span class="lead-card-agent agent-noah" style="padding:3px 7px;border-radius:5px;">Noah</span></td><td style="font-size:11px;color:#94a3b8;">SAM.gov</td><td style="font-size:11px;color:#64748b;">4/15/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_dke6n')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_dke6n')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_dke6n')">🗑</button></div></td></tr><tr><td><div style="font-weight:700;color:#e2e8f0;">Tony Guzman</div><div style="font-size:11px;color:#64748b;">Guzman Electrical</div></td><td><div style="font-size:12px;">tony@guzmanelec.com</div><div style="font-size:11px;color:#64748b;">(813) 555-0893</div></td><td style="font-weight:800;color:#34d399;">$4K</td><td><span class="stage-pill stage-contacted">Contacted</span></td><td>❄ Cold</td><td><span class="lead-card-agent agent-miro" style="padding:3px 7px;border-radius:5px;">Miro Fish</span></td><td style="font-size:11px;color:#94a3b8;">Cold Email</td><td style="font-size:11px;color:#64748b;">4/14/26</td><td><div style="display:flex;gap:4px;"><button class="crm-btn crm-btn-green crm-btn-sm" onclick="crmAdvanceLead('lead_1777221053876_0fst2')">⬆</button><button class="crm-btn crm-btn-blue crm-btn-sm" onclick="crmOpenEdit('lead_1777221053876_0fst2')">✏</button><button class="crm-btn crm-btn-red crm-btn-sm" onclick="crmDeleteLead('lead_1777221053876_0fst2')">🗑</button></div></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW: ACTIVITY + AGENT BREAKDOWN -->
+  <div class="crm-bottom-row">
+    <div class="crm-panel">
+      <div class="crm-panel-header">
+        🕐 Activity Feed
+        <button class="crm-btn crm-btn-gray crm-btn-sm" onclick="crmClearActivity()">Clear</button>
+      </div>
+      <div class="crm-panel-body" id="crm-activity-feed"><div class="activity-item"><div class="activity-icon act-add">📥</div><div class="activity-content"><div class="activity-text">🎲 Demo data loaded · 12 leads · $551K+ pipeline</div><div class="activity-time">just now</div></div></div></div>
+    </div>
+    <div class="crm-panel">
+      <div class="crm-panel-header">📊 Agent Pipeline Breakdown</div>
+      <div class="crm-panel-body" id="crm-agent-breakdown"><div class="agent-rev-row"><div class="agent-rev-label">Sara</div><div class="agent-rev-bar-wrap"><div class="agent-rev-bar" style="width:5%;background:#f472b6;"></div></div><div class="agent-rev-val">$22K</div></div><div class="agent-rev-row"><div class="agent-rev-label">Malik</div><div class="agent-rev-bar-wrap"><div class="agent-rev-bar" style="width:17%;background:#fbbf24;"></div></div><div class="agent-rev-val">$73K</div></div><div class="agent-rev-row"><div class="agent-rev-label">Lea</div><div class="agent-rev-bar-wrap"><div class="agent-rev-bar" style="width:2%;background:#34d399;"></div></div><div class="agent-rev-val">$8K</div></div><div class="agent-rev-row"><div class="agent-rev-label">Ruth</div><div class="agent-rev-bar-wrap"><div class="agent-rev-bar" style="width:3%;background:#60a5fa;"></div></div><div class="agent-rev-val">$15K</div></div><div class="agent-rev-row"><div class="agent-rev-label">Noah</div><div class="agent-rev-bar-wrap"><div class="agent-rev-bar" style="width:100%;background:#a78bfa;"></div></div><div class="agent-rev-val">$430K</div></div><div class="agent-rev-row"><div class="agent-rev-label">Miro Fish</div><div class="agent-rev-bar-wrap"><div class="agent-rev-bar" style="width:1%;background:#f87171;"></div></div><div class="agent-rev-val">$4K</div></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ADD / EDIT LEAD MODAL -->
+<div class="crm-modal-overlay" id="crm-lead-modal">
+  <div class="crm-modal">
+    <div class="crm-modal-header">
+      <div class="crm-modal-title" id="crm-modal-title">➕ Add New Lead</div>
+      <button class="crm-modal-close" onclick="crmCloseModal()">✕</button>
+    </div>
+    <div class="crm-modal-body">
+      <div class="crm-form-grid">
+        <div class="crm-form-field">
+          <label class="crm-form-label">Contact Name *</label>
+          <input class="crm-form-input" id="cf-name" placeholder="John Smith" type="text">
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Company *</label>
+          <input class="crm-form-input" id="cf-company" placeholder="Acme Corp" type="text">
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Email</label>
+          <input class="crm-form-input" id="cf-email" placeholder="john@acme.com" type="email">
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Phone</label>
+          <input class="crm-form-input" id="cf-phone" placeholder="(555) 000-0000" type="text">
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Deal Value ($)</label>
+          <input class="crm-form-input" id="cf-value" placeholder="5000" type="number" min="0">
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Stage</label>
+          <select class="crm-form-select" id="cf-stage">
+            <option value="New Lead">New Lead</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Proposal Sent">Proposal Sent</option>
+            <option value="Negotiating">Negotiating</option>
+            <option value="Closed Won">Closed Won</option>
+            <option value="Closed Lost">Closed Lost</option>
+          </select>
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Assigned Agent</label>
+          <select class="crm-form-select" id="cf-agent">
+            <option value="Sara">Sara</option>
+            <option value="Malik">Malik</option>
+            <option value="Lea">Lea</option>
+            <option value="Ruth">Ruth</option>
+            <option value="Noah">Noah</option>
+            <option value="Miro Fish">Miro Fish</option>
+          </select>
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Lead Source</label>
+          <select class="crm-form-select" id="cf-source">
+            <option value="Sara Outreach">Sara Outreach</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Referral">Referral</option>
+            <option value="SAM.gov">SAM.gov</option>
+            <option value="Discord">Discord</option>
+            <option value="Cold Email">Cold Email</option>
+            <option value="Inbound">Inbound</option>
+          </select>
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Service Type</label>
+          <select class="crm-form-select" id="cf-service">
+            <option value="AI Consulting">AI Consulting</option>
+            <option value="AI Systems Build">AI Systems Build</option>
+            <option value="Gov Contract">Gov Contract</option>
+            <option value="Retainer">Retainer</option>
+            <option value="SBIR Grant">SBIR Grant</option>
+            <option value="Supply &amp; Logistics">Supply &amp; Logistics</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="crm-form-field">
+          <label class="crm-form-label">Priority</label>
+          <div class="priority-selector" id="cf-priority-sel">
+            <div class="priority-opt" data-val="Hot" onclick="crmSetPriority('Hot')">🔥 Hot</div>
+            <div class="priority-opt sel-warm" data-val="Warm" onclick="crmSetPriority('Warm')">⚡ Warm</div>
+            <div class="priority-opt" data-val="Cold" onclick="crmSetPriority('Cold')">❄ Cold</div>
+          </div>
+          <input type="hidden" id="cf-priority" value="Warm">
+        </div>
+        <div class="crm-form-field full">
+          <label class="crm-form-label">Notes</label>
+          <textarea class="crm-form-textarea" id="cf-notes" placeholder="Deal context, pain points, next steps..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="crm-modal-footer">
+      <button class="crm-btn crm-btn-gray" onclick="crmCloseModal()">Cancel</button>
+      <button class="crm-btn crm-btn-purple" onclick="crmSaveLead()" id="crm-save-btn">💾 Save Lead</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="crm-toast"><div class="crm-toast-inner" id="crm-toast-inner"></div></div>
 </div>
 
 <!-- AUTO-SUBMIT TAB -->
@@ -2082,7 +2789,7 @@ strong,b{color:#ffffff!important;}
 </div>
 
 <!-- 19 AGENTS TAB -->
-<div id="tab-agents" class="panel active" style="">
+<div id="tab-agents" class="panel" style="">
   <h2 style="background: linear-gradient(90deg, rgb(0, 229, 255), rgb(124, 77, 255), rgb(255, 77, 184)) text; -webkit-text-fill-color: transparent; font-size: 24px; font-weight: 900; margin-bottom: 16px;">🧑 All 19 Agents</h2>
   <p style="color:#7eb8d4;font-size:11px;margin-bottom:14px">Fully autonomous · 24/7/365 · GCP VM + Discord + ElevenLabs + Firecrawl + SAM.gov API</p>
   <div class="agent-grid" style="border-left: 4px solid rgb(24, 255, 255); box-shadow: rgba(24, 255, 255, 0.2) 0px 0px 10px;">
@@ -2333,9 +3040,9 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
         <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
       </svg>
       <span style="vertical-align: middle;">Stop Claude</span>
-    </button></div><a href="blob:https://zyn-empire-dashboard.netlify.app/e685a3c6-d356-4662-a11c-0066f5b8d7f7" download="index.html" id="zyn-download-btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; background: linear-gradient(135deg, rgb(0, 255, 136), rgb(0, 207, 255)); color: rgb(0, 0, 0); font-weight: 800; padding: 12px 20px; border-radius: 10px; font-size: 14px; text-decoration: none; font-family: &quot;Segoe UI&quot;, sans-serif; box-shadow: rgba(0, 255, 136, 0.4) 0px 4px 20px;">⬇ DOWNLOAD index.html</a><a href="blob:https://zyn-empire-dashboard.netlify.app/07534bcf-202b-4614-ad2f-185e41e2f4c6" download="index.html" id="zyn-dl-final" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; background: rgb(0, 255, 136); color: rgb(0, 0, 0); padding: 12px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px;">⬇ DOWNLOAD index.html</a><div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
+    </button></div><div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
       <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="margin-right: 12px; vertical-align: middle;">
         <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
       </svg>
       <span style="vertical-align: middle;">Stop Claude</span>
-    </button></div></body></html>
+    </button></div><div id="zyn-autosave-badge" data-nosave="1" style="position: fixed; bottom: 12px; left: 160px; z-index: 99998; background: rgba(10, 8, 30, 0.92); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: &quot;Segoe UI&quot;, sans-serif; color: rgb(52, 211, 153); display: flex; align-items: center; gap: 6px; box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px; letter-spacing: 0.3px; transition: 0.3s;"><span id="zyn-as-dot" style="width: 7px; height: 7px; border-radius: 50%; background: rgb(245, 158, 11); flex-shrink: 0; animation: 0.8s ease 0s infinite normal none running pulse;"></span><span id="zyn-as-msg">Saving...</span></div></body></html>
