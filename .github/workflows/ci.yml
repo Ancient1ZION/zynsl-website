@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  python:
+    name: Python lint + compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install ruff
+        run: pip install --quiet ruff
+      - name: ruff check
+        run: ruff check zyn-empire-agents zyn-ops --output-format github
+      - name: py_compile (smoke)
+        run: |
+          python -m py_compile $(git ls-files '*.py')
+
+  shell:
+    name: Shell lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq shellcheck
+          shellcheck zyn-ops/install.sh
+
+  config:
+    name: Config validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate agents_config.json
+        run: python -c "import json,sys; json.load(open('zyn-empire-agents/agents_config.json'))"
+      - name: Validate package.json-ish PM2 configs
+        run: |
+          node -e "require('./zyn-empire-agents/ecosystem.config.js')"
+          node -e "require('./zyn-ops/ecosystem.ops.config.js')"
