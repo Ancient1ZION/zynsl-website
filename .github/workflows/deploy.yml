@@ -1,0 +1,40 @@
+name: Deploy ZYN Empire to GCP VM
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'zyn-empire-agents/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            set -euo pipefail
+            REPO_DIR="$HOME/zyn"
+            if [ ! -d "$REPO_DIR" ]; then
+              git clone https://github.com/ancient1zion/zynsl-website.git "$REPO_DIR"
+            fi
+            cd "$REPO_DIR"
+            git fetch origin main
+            git reset --hard origin/main
+            cd zyn-empire-agents
+            if [ ! -f orchestrator.py ]; then
+              python3 bootstrap.py
+            fi
+            python3 -m pip install --user -r requirements.txt
+            if command -v pm2 >/dev/null; then
+              pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
+              pm2 save
+            else
+              echo "PM2 not installed — run: npm install -g pm2"
+            fi
+            echo "Deploy complete @ $(date -u +%FT%TZ)"
