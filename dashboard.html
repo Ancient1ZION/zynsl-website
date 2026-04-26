@@ -1528,14 +1528,79 @@ strong,b{color:#ffffff!important;}
 /* Sort indicator */
 .sort-asc::after  { content: ' ↑'; color: #a78bfa; }
 .sort-desc::after { content: ' ↓'; color: #a78bfa; }
-</style><style id="zyn-as-styles">@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }</style></head>
+</style><style id="zyn-as-styles">@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }</style><script id="zyn-autosave-engine">
+(function() {
+  var REPO = 'ancient1zion/zynsl-website';
+  var FILE = 'dashboard.html';
+  window.ZYN_AUTOSAVE = {
+    get token() { return localStorage.getItem('ZYN_GH_TOKEN') || ''; },
+    repo: REPO, file: FILE, sha: null, pending: false,
+    timer: null, lastPush: 0, MIN_INTERVAL: 8000
+  };
+  function injectBadge() {
+    if (document.getElementById('zyn-autosave-badge')) return;
+    var s = document.createElement('style');
+    s.textContent = '@keyframes zpulse{0%,100%{opacity:1}50%{opacity:0.3}}';
+    document.head.appendChild(s);
+    var b = document.createElement('div');
+    b.id = 'zyn-autosave-badge';
+    b.style.cssText = 'position:fixed;bottom:12px;left:160px;z-index:99998;background:rgba(10,8,30,0.92);border:1px solid rgba(16,185,129,0.4);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:700;font-family:Segoe UI,sans-serif;color:#34d399;display:flex;align-items:center;gap:6px;box-shadow:0 4px 20px rgba(0,0,0,0.5);letter-spacing:0.3px;transition:all 0.3s;';
+    b.innerHTML = '<span id="zyn-as-dot" style="width:7px;height:7px;border-radius:50%;background:#34d399;flex-shrink:0;"></span><span id="zyn-as-msg">Auto-Save LIVE</span>';
+    document.body.appendChild(b);
+  }
+  window._asSetStatus = function(state, msg) {
+    var dot=document.getElementById('zyn-as-dot'),txt=document.getElementById('zyn-as-msg'),badge=document.getElementById('zyn-autosave-badge');
+    if(!dot||!txt||!badge) return;
+    var c={live:'#34d399',saving:'#f59e0b',error:'#f87171',done:'#34d399'};
+    var bc={live:'rgba(16,185,129,0.4)',saving:'rgba(245,158,11,0.5)',error:'rgba(239,68,68,0.5)',done:'rgba(16,185,129,0.4)'};
+    dot.style.background=c[state]||'#34d399'; badge.style.borderColor=bc[state]||bc.live; txt.textContent=msg;
+    dot.style.animation=state==='saving'?'zpulse 0.8s infinite':'';
+  };
+  window.zynPushToGitHub = async function(msg) {
+    var AS=window.ZYN_AUTOSAVE;
+    var tok=AS.token;
+    if(!tok){_asSetStatus('error','No token');return;}
+    if(AS.pending) return;
+    var now=Date.now();
+    if(now-AS.lastPush<AS.MIN_INTERVAL){clearTimeout(AS.timer);AS.timer=setTimeout(function(){zynPushToGitHub(msg);},AS.MIN_INTERVAL-(now-AS.lastPush)+500);return;}
+    AS.pending=true; _asSetStatus('saving','Saving...');
+    try {
+      var ir=await fetch('https://api.github.com/repos/'+AS.repo+'/contents/'+AS.file,{headers:{Authorization:'token '+tok,Accept:'application/vnd.github.v3+json'}});
+      if(!ir.ok) throw new Error('SHA '+ir.status);
+      AS.sha=(await ir.json()).sha;
+      var html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+      var enc=btoa(unescape(encodeURIComponent(html)));
+      var pr=await fetch('https://api.github.com/repos/'+AS.repo+'/contents/'+AS.file,{
+        method:'PUT',
+        headers:{Authorization:'token '+tok,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
+        body:JSON.stringify({message:msg||'Auto-Save '+new Date().toLocaleTimeString(),content:enc,sha:AS.sha,branch:'main'})
+      });
+      if(!pr.ok){var e=await pr.json();throw new Error(e.message||pr.status);}
+      var res=await pr.json(); AS.lastPush=Date.now(); AS.pending=false;
+      var s7=res.commit&&res.commit.sha?res.commit.sha.substring(0,7):'ok';
+      _asSetStatus('done','Saved '+s7);
+      console.log('[ZYN AutoSave] Pushed:',s7);
+      setTimeout(function(){_asSetStatus('live','Auto-Save LIVE');},4000);
+    } catch(e) {
+      AS.pending=false; _asSetStatus('error',String(e.message).substring(0,28));
+      setTimeout(function(){_asSetStatus('live','Auto-Save LIVE');},6000);
+    }
+  };
+  window.zynAutoSaveTrigger = function(msg) {
+    clearTimeout(ZYN_AUTOSAVE.timer);
+    ZYN_AUTOSAVE.timer=setTimeout(function(){zynPushToGitHub(msg||'Auto-Save');},2500);
+  };
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',injectBadge);}
+  else{injectBadge();}
+})();
+</script></head>
 <body>
 <canvas id="stars" width="1404" height="911"></canvas>
 <div id="app"><!-- TOPBAR -->
 <div id="topbar">
   <div><div id="logo-txt">Z·Y·N EMPIRE</div><div id="logo-sub">ZION'S DEN · v12.1</div></div>
   <div id="livebadge">LIVE</div>
-  <div style="display:flex;flex-direction:column"><div id="clock">12 : 39 : 27</div><div id="clocksub"><span id="tb-day-label" style="color:#fff;font-weight:700;font-size:13px;letter-spacing:1px;">PM EST · SUN</span><span id="tb-date" style="color:#fff;font-weight:700;font-size:12px;display:block;">04/26/2026</span></div></div>
+  <div style="display:flex;flex-direction:column"><div id="clock">12 : 41 : 52</div><div id="clocksub"><span id="tb-day-label" style="color:#fff;font-weight:700;font-size:13px;letter-spacing:1px;">PM EST · SUN</span><span id="tb-date" style="color:#fff;font-weight:700;font-size:12px;display:block;">04/26/2026</span></div></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-left:8px">
     <a class="tbtn" href="https://discord.com/channels/1490888092708769995/1493995008129241209" target="_blank">● Discord</a>
     <a class="tbtn" target="_blank" style="cursor: pointer;" href="https://zynsupplyandlogistics.com">🌐 ZYN Site</a>
@@ -3045,4 +3110,9 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
         <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
       </svg>
       <span style="vertical-align: middle;">Stop Claude</span>
-    </button></div><div id="zyn-autosave-badge" data-nosave="1" style="position: fixed; bottom: 12px; left: 160px; z-index: 99998; background: rgba(10, 8, 30, 0.92); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: &quot;Segoe UI&quot;, sans-serif; color: rgb(52, 211, 153); display: flex; align-items: center; gap: 6px; box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px; letter-spacing: 0.3px; transition: 0.3s;"><span id="zyn-as-dot" style="width: 7px; height: 7px; border-radius: 50%; background: rgb(245, 158, 11); flex-shrink: 0; animation: 0.8s ease 0s infinite normal none running pulse;"></span><span id="zyn-as-msg">Saving...</span></div></body></html>
+    </button></div><div id="zyn-autosave-badge" style="position: fixed; bottom: 12px; left: 160px; z-index: 99998; background: rgba(10, 8, 30, 0.92); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: &quot;Segoe UI&quot;, sans-serif; color: rgb(52, 211, 153); display: flex; align-items: center; gap: 6px; box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px; letter-spacing: 0.3px; transition: 0.3s;"><span id="zyn-as-dot" style="width: 7px; height: 7px; border-radius: 50%; background: rgb(245, 158, 11); flex-shrink: 0; animation: 0.8s ease 0s infinite normal none running zpulse;"></span><span id="zyn-as-msg">Saving...</span></div><div id="claude-agent-glow-border" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483646; opacity: 1; transition: opacity 0.3s ease-in-out; animation: 2s ease-in-out 0s infinite normal none running claude-pulse; box-shadow: rgba(217, 119, 87, 0.5) 0px 0px 10px inset, rgba(217, 119, 87, 0.3) 0px 0px 20px inset, rgba(217, 119, 87, 0.1) 0px 0px 30px inset;"></div><div id="claude-agent-stop-container" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; justify-content: center; align-items: center; pointer-events: none; z-index: 2147483647;"><button id="claude-agent-stop-button" style="position: relative; transform: translateY(0px); padding: 12px 16px; background: rgb(250, 249, 245); color: rgb(20, 20, 19); border: 0.5px solid rgba(31, 30, 29, 0.4); border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: rgba(217, 119, 87, 0.24) 0px 40px 80px, rgba(217, 119, 87, 0.24) 0px 4px 14px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; user-select: none; pointer-events: auto; white-space: nowrap; margin: 0px auto;">
+      <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="margin-right: 12px; vertical-align: middle;">
+        <path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm40-112v56a12,12,0,0,1-12,12H100a12,12,0,0,1-12-12V100a12,12,0,0,1,12-12h56A12,12,0,0,1,168,100Z"></path>
+      </svg>
+      <span style="vertical-align: middle;">Stop Claude</span>
+    </button></div></body></html>
