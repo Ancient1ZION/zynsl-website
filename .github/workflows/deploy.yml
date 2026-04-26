@@ -1,40 +1,38 @@
-name: Deploy ZYN Empire to GCP VM
+name: Deploy Verifier
 on:
   push:
-    branches: [ main ]
-    paths:
-      - 'zyn-empire-agents/**'
-  workflow_dispatch:
+    branches: [main]
+  workflow_dispatch: {}
+
+# NOTE: This workflow used to SSH into the production VM and run pm2 reload.
+# That model required VM_HOST / VM_USER / SSH_PRIVATE_KEY / SSH_PORT secrets,
+# which is a large attack surface. We replaced it with a PULL model:
+#   - The VM runs zyn-ops/mission_control.py as a pm2 daemon.
+#   - mission_control.py polls origin/main every 30s, fast-forwards if clean,
+#     and triggers pm2 reload on the agent ecosystem only when it sees changes
+#     under zyn-empire-agents/.
+#   - GitHub never holds an SSH key for the VM. No outbound deploy traffic.
+# This workflow now just verifies the push is healthy.
 
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
-          script: |
-            set -euo pipefail
-            REPO_DIR="$HOME/zyn"
-            if [ ! -d "$REPO_DIR" ]; then
-              git clone https://github.com/ancient1zion/zynsl-website.git "$REPO_DIR"
-            fi
-            cd "$REPO_DIR"
-            git fetch origin main
-            git reset --hard origin/main
-            cd zyn-empire-agents
-            if [ ! -f orchestrator.py ]; then
-              python3 bootstrap.py
-            fi
-            python3 -m pip install --user -r requirements.txt
-            if command -v pm2 >/dev/null; then
-              pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
-              pm2 save
-            else
-              echo "PM2 not installed — run: npm install -g pm2"
-            fi
-            echo "Deploy complete @ $(date -u +%FT%TZ)"
+      - uses: actions/checkout@v4
+      - name: Confirm zyn-empire-agents/ is intact
+        run: |
+          test -f zyn-empire-agents/orchestrator.py
+          test -f zyn-empire-agents/agents_config.json
+          test -f zyn-empire-agents/ecosystem.config.js
+          python3 -c "import json; json.load(open('zyn-empire-agents/agents_config.json'))"
+      - name: Confirm zyn-ops/ is intact
+        run: |
+          test -f zyn-ops/mission_control.py
+          test -f zyn-ops/health_audit.py
+          test -f zyn-ops/drift_detector.py
+          test -f zyn-ops/ecosystem.ops.config.js
+      - name: Confirm dashboard.html present
+        run: test -f dashboard.html
+      - name: Summary
+        run: |
+          echo "::notice::main is healthy. mission_control.py on the VM will pull this commit on its next 30s tick."
