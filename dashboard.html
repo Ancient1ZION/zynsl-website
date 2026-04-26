@@ -612,8 +612,8 @@ button{border-radius:6px!important;font-family:'Segoe UI',sans-serif!important;f
 button:hover{opacity:0.88!important;}
 #tab-crm h2{background:linear-gradient(90deg,#00ff88,#00cfff)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
 #tab-tasks h2{background:linear-gradient(90deg,#ffd700,#ff8c00)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
-#tab-discord h2{background:linear-gradient(90deg,#5865F2,#9b59b6)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
-#tab-caleb h2{background:linear-gradient(90deg,#00ff88,#ffd700)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
+
+
 #tab-agents h2{background:linear-gradient(90deg,#00cfff,#9b59b6)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
 #tab-agentjobs h2{background:linear-gradient(90deg,#ff6b9d,#ffd700)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
 #tab-vault h2{background:linear-gradient(90deg,#ffd700,#ff8c00)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;}
@@ -654,26 +654,7 @@ strong,b{color:#ffffff!important;}
 .vault-section-hdr{color:#00cfff!important;font-size:12px!important;font-weight:700!important;letter-spacing:1.5px!important;}
 .kanban-col{background:linear-gradient(180deg,#0a1628,#080f1e)!important;border:1px solid #1e3a5f!important;border-radius:10px!important;}
 .crm-stat{color:#00ff88!important;font-size:22px!important;font-weight:800!important;}
-</style><style id="discord-blurple-style">
-      #tab-discord .channel-card, #tab-discord .dc-channel {
-        background: linear-gradient(135deg, #23272a 0%, #2c2f33 100%) !important;
-        border: 1px solid #5865F2 !important;
-        border-left: 4px solid #5865F2 !important;
-        border-radius: 8px !important;
-      }
-      #tab-discord .channel-header, #tab-discord h3 {
-        color: #5865F2 !important;
-      }
-      #tab-discord .channel-link {
-        background: #5865F2 !important;
-        color: #fff !important;
-        border-radius: 6px !important;
-        padding: 4px 10px !important;
-      }
-      #tab-discord .channel-link:hover {
-        background: #4752C4 !important;
-      }
-    </style><style id="global-font-override">
+</style><style id="global-font-override">
     * { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important; }
     code, pre, .mono { font-family: 'Courier New', monospace !important; }
   </style><style id="zyn-topbar-colorful">
@@ -1623,14 +1604,9 @@ window.zynCheckStop=function(){
   <div id="livebadge">LIVE</div>
   <div style="display:flex;flex-direction:column"><div id="clock">12 : 43 : 16</div><div id="clocksub"><span id="tb-day-label" style="color:#fff;font-weight:700;font-size:13px;letter-spacing:1px;">PM EST · SUN</span><span id="tb-date" style="color:#fff;font-weight:700;font-size:12px;display:block;">04/26/2026</span></div></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-left:8px">
-    <a class="tbtn" href="https://discord.com/channels/1490888092708769995/1493995008129241209" target="_blank">● Discord</a>
-    <a class="tbtn" target="_blank" style="cursor: pointer;" href="https://zynsupplyandlogistics.com">🌐 ZYN Site</a>
-    <a class="tbtn" href="https://ancient1zion.github.io/zynsl-website/insights.html" target="_blank">📊 Insights</a>
-    <a class="tbtn gold" href="https://dashboard.stripe.com/acct_1THqQFGzPhAVbugE/dashboard" target="_blank">💳 Stripe</a>
-    <a class="tbtn" onclick="switchTab('overview')" href="javascript:void(0)">Noah OS→</a>
-    <a class="tbtn" onclick="switchTab('caleb')" href="javascript:void(0)">📈 Caleb</a>
-    <a class="tbtn active" onclick="switchTab('crm')" href="javascript:void(0)">📋 CRM</a>
-    <button onclick="fireAllAgents()" style="background:rgba(245,166,35,0.1);border:1px solid #f5a623;color:#f5a623;font-size:10px;padding:4px 12px;border-radius:12px;cursor:pointer;font-weight:700">🔥 Fire All 19</button>
+    <a class="tbtn" id="zynDailyTasksBtn" href="javascript:void(0)" onclick="zynToggleTasksMenu(event)" aria-haspopup="true" aria-expanded="false">● Daily Tasks <span id="zynDailyTasksCount" class="tbtn-count">0/0</span></a>
+        <a class="tbtn" id="zynThemeToggle" href="javascript:void(0)" onclick="zynToggleTheme()" aria-label="Toggle dark/light theme" title="Toggle theme">🌙</a>
+        <a class="tbtn" id="zynVoiceToggle" href="javascript:void(0)" onclick="zynToggleVoice()" role="switch" aria-checked="true" aria-label="Voice on/off">🔊 VOICE <span id="zynVoiceState" class="tbtn-pill on">ON</span></a>
   </div>
 </div>
 
@@ -1643,8 +1619,8 @@ window.zynCheckStop=function(){
   <div class="sitem active" onclick="switchTab('crm')"><span class="ico">📋</span>ZYN CRM<span class="sbadge green">●</span></div>
   <div class="sitem" onclick="switchTab('autosubmit')"><span class="ico">🚀</span>Auto-Submit<span class="sbadge">NEW</span></div>
   <div class="sitem" onclick="switchTab('tasks')"><span class="ico">⏰</span>Agent Tasks<span class="sbadge">19</span></div>
-  <div class="sitem" onclick="switchTab('discord')"><span class="ico">●</span>Discord Hub</div>
-  <div class="sitem" onclick="switchTab('caleb')"><span class="ico">📈</span>Caleb Trading<span class="sbadge green">LIVE</span></div>
+  
+  
   <div class="sitem" onclick="switchTab('agents')"><span class="ico">🧑</span>19 Agents</div>
   <div class="sitem" onclick="switchTab('agentjobs')"><span class="ico">⚙</span>Agent Jobs<span class="sbadge green">NEW</span></div>
   <div class="sitem" onclick="switchTab('vault')"><span class="ico">🏛</span>Corp Vault<span class="sbadge">FILES</span></div>
@@ -1658,7 +1634,7 @@ window.zynCheckStop=function(){
   <a class="sitem" href="https://console.cloud.google.com" target="_blank"><span class="ico">☁</span>GCP Console</a>
   <a class="sitem" href="https://script.google.com" target="_blank"><span class="ico">⚡</span>Apps Script</a>
   <div class="sco">19 Agents</div>
-  <div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Noah · Architect</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Sara · Outreach</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Malik · Closer</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Elijah · Signals</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Adam · Gov Scout</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Caleb · Trading</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Ruth · CRM</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Lea · Client</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Zara · LinkedIn</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Ezekiel · APIs</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Samson · Backup</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Cyrus · Strategy</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Asher · Health</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Rebecka · Partners</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Zuri · Brand</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Mariam · Intel</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Enoch · Opp Hunt</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Juda · Security</div><div class="sagent" onclick="switchTab('agents')"><div class="dot yellow"></div>Miro Fish · Voice</div>
+  <div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Noah · Architect</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Sara · Outreach</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Malik · Closer</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Elijah · Signals</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Adam · Gov Scout</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Ruth · CRM</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Lea · Client</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Zara · LinkedIn</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Ezekiel · APIs</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Samson · Backup</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Cyrus · Strategy</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Asher · Health</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Rebecka · Partners</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Zuri · Brand</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Mariam · Intel</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Enoch · Opp Hunt</div><div class="sagent" onclick="switchTab('agents')"><div class="dot"></div>Juda · Security</div><div class="sagent" onclick="switchTab('agents')"><div class="dot yellow"></div>Miro Fish · Voice</div>
 </div>
 
 <!-- MAIN -->
@@ -1668,8 +1644,8 @@ window.zynCheckStop=function(){
   <div class="tab active" onclick="switchTab('crm')">📋 CRM<span class="tlive">LIVE</span></div>
   <div class="tab" onclick="switchTab('autosubmit')">🚀 Auto-Submit</div>
   <div class="tab" onclick="switchTab('tasks')">⏰ Tasks<span class="tnew">19</span></div>
-  <div class="tab" onclick="switchTab('discord')">● Discord</div>
-  <div class="tab" onclick="switchTab('caleb')">📈 Caleb<span class="tlive">LIVE</span></div>
+  
+  
   <div class="tab" onclick="switchTab('agents')">🧑 19 Agents</div>
   <div class="tab" onclick="switchTab('agentjobs')">⚙ Agent Jobs<span class="tnew">NEW</span></div>
   <div class="tab" onclick="switchTab('vault')">🏛 Corp Vault<span class="tnew">FILES</span></div>
@@ -1775,7 +1751,7 @@ window.zynCheckStop=function(){
       <div class="nsg-item">19 AGENTS — ALL WORKING</div><div class="nsg-item">Corp Vault — FULL ARCHIVE</div>
       <div class="nsg-item">Agent Jobs Page — LIVE</div><div class="nsg-item">Dashboard v12.2 — DEPLOYED</div>
     </div>
-    <div class="chat-row" style="margin-top:10px"><input class="chat-input" id="noahInput" placeholder="Ask Noah, Sara, Malik, Caleb, Adam, Elijah, Miro Fish, or Juda anything..."><button class="btn" onclick="sendNoahMsg()">Send →</button></div>
+    <div class="chat-row" style="margin-top:10px"><input class="chat-input" id="noahInput" placeholder="Ask Noah, Sara, Malik, Adam, Elijah, Miro Fish, or Juda anything..."><button class="btn" onclick="sendNoahMsg()">Send →</button></div>
     <div class="chat-box" id="noahChatOut" style="margin-top:8px">Noah online. v12.2 deployed. Agent Jobs page added to Corp Vault. All 19 agents active. GAS scripts ready to deploy.</div>
   </div>
   <div class="stats-row" style="margin-top:12px">
@@ -1796,10 +1772,7 @@ window.zynCheckStop=function(){
   <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Overview Tab</div><div class="conn-node-desc">switchTab('overview') · default active · ZION'S DEN banner ✅</div></div></div>
   <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">ZYN CRM Tab</div><div class="conn-node-desc">switchTab('crm') · Caleb live trading data · Ruth CRM sync</div></div></div>
   <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Auto-Submit Tab</div><div class="conn-node-desc">switchTab('autosubmit') · Colorful pipeline · Micro purchases + scoring ✅</div></div></div>
-  <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Agent Tasks Tab</div><div class="conn-node-desc">switchTab('tasks') · 19 tasks · all agents listed</div></div></div>
-  <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Discord Hub Tab</div><div class="conn-node-desc">switchTab('discord') · 19 unique channel IDs wired · all webhooks live</div></div></div>
-  <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Caleb Trading Tab</div><div class="conn-node-desc">switchTab('caleb') · Live trading · GitHub Pages iframe embed</div></div></div>
-  <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">19 Agents Tab</div><div class="conn-node-desc">switchTab('agents') · All 19 agents listed with roles + status</div></div></div>
+  <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Agent Tasks Tab</div><div class="conn-node-desc">switchTab('tasks') · 19 tasks · all agents listed</div></div></div>  <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">19 Agents Tab</div><div class="conn-node-desc">switchTab('agents') · All 19 agents listed with roles + status</div></div></div>
   <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Agent Jobs Tab</div><div class="conn-node-desc">switchTab('jobs') · Job board · open positions · auto-assign</div></div></div>
   <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Corp Vault Tab</div><div class="conn-node-desc">switchTab('vault') · Org chart · 10 sections · Largo FL 33771 ✅</div></div></div>
   <div class="conn-node live"><span class="conn-badge live">LIVE</span><div class="conn-node-info"><div class="conn-node-title">Agent Scripts Tab</div><div class="conn-node-desc">switchTab('scripts') · GAS deploy buttons · 3 script launchers ✅</div></div></div>
@@ -2844,36 +2817,7 @@ window.zynCheckStop=function(){
 </div>
 
 <!-- DISCORD TAB -->
-<div id="tab-discord" class="panel" style="">
-  <h2 style="background: linear-gradient(90deg, rgb(88, 101, 242), rgb(114, 137, 218), rgb(235, 69, 158)) text; -webkit-text-fill-color: transparent; font-size: 24px; font-weight: 900; margin-bottom: 16px;">● Discord Hub — ZYN Empire</h2>
-  <p style="color:#7eb8d4;font-size:11px;margin-bottom:12px">All 20 channels live · 19 agents reporting · Server: #1490888092708769995</p>
-  <a class="btn" href="https://discord.com/channels/1490888092708769995/1496290593042108467" target="_blank" style="background: linear-gradient(90deg, rgb(88, 101, 242), rgb(114, 137, 218)); color: rgb(255, 255, 255); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; padding: 10px 20px; font-size: 13px !important; font-weight: 700 !important; cursor: pointer !important; display: inline-block !important; text-decoration: none !important; margin-bottom: 16px !important;">Open Discord Server →</a>
-  <div class="dc-grid">
-    <a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496287866102354112" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#empire-status</div><div style="font-size:9px;color:#7eb8d4">Noah briefings</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496287866...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496287983710507198" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#noah-briefings</div><div style="font-size:9px;color:#7eb8d4">Empire architect</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496287983...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496288071677775972" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#alerts</div><div style="font-size:9px;color:#7eb8d4">System &amp; security</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496288071...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496288922865504436" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#sara-outreach</div><div style="font-size:9px;color:#7eb8d4">500 emails/wk</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496288922...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496289001534881843" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#malik-closing</div><div style="font-size:9px;color:#7eb8d4">Deal closings</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496289001...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496289492813451294" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#crm-reports</div><div style="font-size:9px;color:#7eb8d4">Ruth weekly reports</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496289492...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496289622738247711" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#new-clients</div><div style="font-size:9px;color:#7eb8d4">New announcements</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496289622...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496289761024335902" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#adam-gov-scout</div><div style="font-size:9px;color:#7eb8d4">SAM.gov scans</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496289761...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496289870243954698" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#auto-submit</div><div style="font-size:9px;color:#7eb8d4">Auto-bid submissions</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496289870...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496289993182093332" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#bid-drafts</div><div style="font-size:9px;color:#7eb8d4">Contract drafts</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496289993...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290112047919124" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#caleb-trading</div><div style="font-size:9px;color:#7eb8d4">NQ executions</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290112...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290231764668426" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#elijah-signals</div><div style="font-size:9px;color:#7eb8d4">Pre-market signals</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290239...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290351846203473" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#market-intel</div><div style="font-size:9px;color:#7eb8d4">Market research</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290366...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290471962419245" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#system-health</div><div style="font-size:9px;color:#7eb8d4">Asher VM monitor</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290473...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290593042108467" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#juda-security</div><div style="font-size:9px;color:#7eb8d4">Security scans</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290577...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290713157820489" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#vm-logs</div><div style="font-size:9px;color:#7eb8d4">GCP VM 35.185.40.28</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290671...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290833273532511" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#api-status</div><div style="font-size:9px;color:#7eb8d4">Groq/Gemini/ElevenLabs</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496290772...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290953389244533" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#agent-chat</div><div style="font-size:9px;color:#7eb8d4">Agent comms</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">Miro Fish</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496291073504956555" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#zara-linkedin</div><div style="font-size:9px;color:#7eb8d4">LinkedIn content</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace">1496302838...</div></div></a><a class="dc-chan" href="https://discord.com/channels/1490888092708769995/1496290593042108467" target="_blank" style="background: linear-gradient(135deg, rgb(35, 39, 42) 0%, rgb(44, 47, 51) 100%) !important; border-width: 1px 1px 1px 4px !important; border-style: solid !important; border-color: rgb(88, 101, 242) !important; border-image: initial !important; border-radius: 10px !important; padding: 12px !important;"><div class="dc-dot"></div><div><div style="font-size:11px;color:#e8f4f8;font-weight:600">#task-queue</div><div style="font-size:9px;color:#7eb8d4">Pending tasks</div><div style="font-size:8px;color:#2a6a4a;font-family:monospace"></div></div></a>
-  </div>
-</div>
-
 <!-- CALEB TRADING TAB -->
-<div id="tab-caleb" class="panel" style="">
-  <h2 style="font-size: 24px; font-weight: 900; background: linear-gradient(90deg, rgb(255, 215, 0), rgb(255, 152, 0), rgb(255, 107, 53)) text; -webkit-text-fill-color: transparent; margin-bottom: 16px;">📈 Caleb Trading — NQ Futures</h2>
-  <div class="caleb-metrics" style="background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), rgba(255, 152, 0, 0.15)); border-radius: 10px; padding: 12px 20px; margin-bottom: 16px; border: 1px solid rgba(255, 215, 0, 0.3); display: flex; gap: 24px; flex-wrap: wrap;"><span style="color:#ffd700;font-weight:700;">📈 CALEB TRADING OS</span> <span style="color:#ff9800;font-weight:600;">NQ Micro-E Futures</span> <span style="color:#00ff88;font-weight:700;">🟢 LIVE</span> <span style="color:#ff6b35;">$1,200/day target</span></div><p style="color:#7eb8d4;font-size:11px;margin-bottom:12px">$50K Virtual Paper Account · Elijah signals · Daily target $1,200 · Legends Trading $50K funded</p>
-  <div class="trade-stats">
-    <div class="trade-stat"><div class="tsv">$50,000</div><div class="tsl">Account Size</div></div>
-    <div class="trade-stat"><div class="tsv pnl-pos" id="today-pnl">$0.00</div><div class="tsl">Today P&amp;L</div></div>
-    <div class="trade-stat"><div class="tsv" id="trade-count">0</div><div class="tsl">Trades Today</div></div>
-    <div class="trade-stat"><div class="tsv">$1,200</div><div class="tsl">Daily Target</div></div>
-    <div class="trade-stat"><div class="tsv pnl-pos" id="total-pnl">$0.00</div><div class="tsl">Total P&amp;L</div></div>
-    <div class="trade-stat"><div class="tsv" id="win-rate">-</div><div class="tsl">Win Rate</div></div>
-  </div>
-  <div style="display:flex;gap:8px;margin-bottom:12px">
-    <button class="btn" onclick="openModal('tradeModal')">+ Log Trade</button>
-    <a class="btn gold" href="https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1!" target="_blank" style="text-decoration:none">📈 NQ Chart →</a>
-  </div>
-  <div class="card"><div class="card-title">🕐 Trade Log</div>
-    <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Date</th><th>Instrument</th><th>Direction</th><th>Entry</th><th>Exit</th><th>Qty</th><th>P&amp;L</th><th>Signal</th><th>Notes</th></tr></thead><tbody id="trade-tbody"><tr><td colspan="9" style="color:#2a6a4a;font-style:italic;text-align:center;padding:16px">No trades logged yet.</td></tr></tbody></table></div>
-  </div>
-</div>
-
 <!-- 19 AGENTS TAB -->
 <div id="tab-agents" class="panel" style="">
   <h2 style="background: linear-gradient(90deg, rgb(0, 229, 255), rgb(124, 77, 255), rgb(255, 77, 184)) text; -webkit-text-fill-color: transparent; font-size: 24px; font-weight: 900; margin-bottom: 16px;">🧑 All 19 Agents</h2>
@@ -3191,6 +3135,73 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',upgrade);else upgrade();
   if(location.hash){const t=location.hash.replace('#','');if(t&&typeof switchTab==='function')setTimeout(()=>switchTab(t),300);}
+})();
+</script>
+
+<style id="zyn-topbar-v3-style">
+  .tbtn-count { display:inline-block; padding:2px 8px; margin-left:6px; border-radius:10px; background:rgba(255,255,255,0.08); font-size:11px; font-weight:600; }
+  .tbtn-pill { display:inline-block; padding:2px 8px; margin-left:6px; border-radius:10px; font-size:11px; font-weight:700; letter-spacing:0.5px; }
+  .tbtn-pill.on { background:#10b981; color:#0b1014; }
+  .tbtn-pill.off { background:#374151; color:#9ca3af; }
+  #zynThemeToggle { font-size:16px; padding-left:14px; padding-right:14px; }
+  body[data-theme="light"] { filter: invert(1) hue-rotate(180deg); }
+  body[data-theme="light"] img, body[data-theme="light"] video, body[data-theme="light"] iframe { filter: invert(1) hue-rotate(180deg); }
+</style>
+<script id="zyn-topbar-v3-script">
+(function(){
+  function recomputeDailyTasks() {
+    try {
+      var el = document.getElementById('zynDailyTasksCount');
+      if (!el) return;
+      var done = 0, total = 0;
+      if (window.ZYN_TASKS && Array.isArray(window.ZYN_TASKS)) {
+        total = window.ZYN_TASKS.length;
+        done  = window.ZYN_TASKS.filter(function(t){ return t && t.done; }).length;
+      } else {
+        var badge = document.querySelector('.sitem .sbadge');
+        var n = badge ? parseInt(badge.textContent, 10) : NaN;
+        total = isNaN(n) ? 0 : n;
+        done = 0;
+      }
+      el.textContent = done + '/' + total;
+    } catch(e) {}
+  }
+  window.zynToggleTasksMenu = function(ev){
+    if (ev && ev.preventDefault) ev.preventDefault();
+    var btn = document.getElementById('zynDailyTasksBtn');
+    if (!btn) return;
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if (typeof switchTab === 'function') { try { switchTab('tasks'); } catch(e){} }
+  };
+  window.zynToggleTheme = function(){
+    var b = document.body;
+    var cur = b.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var nxt = cur === 'light' ? 'dark' : 'light';
+    b.setAttribute('data-theme', nxt);
+    try { localStorage.setItem('zyn_theme', nxt); } catch(e){}
+    var btn = document.getElementById('zynThemeToggle');
+    if (btn) btn.textContent = nxt === 'light' ? '☀️' : '🌙';
+  };
+  window.zynToggleVoice = function(){
+    var pill = document.getElementById('zynVoiceState');
+    var btn = document.getElementById('zynVoiceToggle');
+    if (!pill || !btn) return;
+    var on = pill.classList.contains('on');
+    if (on) { pill.classList.remove('on'); pill.classList.add('off'); pill.textContent = 'OFF'; btn.setAttribute('aria-checked','false'); }
+    else    { pill.classList.remove('off'); pill.classList.add('on');  pill.textContent = 'ON';  btn.setAttribute('aria-checked','true');  }
+    try { localStorage.setItem('zyn_voice', on ? 'off' : 'on'); } catch(e){}
+  };
+  document.addEventListener('DOMContentLoaded', function(){
+    try {
+      var t = localStorage.getItem('zyn_theme');
+      if (t === 'light') { document.body.setAttribute('data-theme','light'); var b = document.getElementById('zynThemeToggle'); if (b) b.textContent='☀️'; }
+      var v = localStorage.getItem('zyn_voice');
+      if (v === 'off') { var p = document.getElementById('zynVoiceState'); if (p){ p.classList.remove('on'); p.classList.add('off'); p.textContent='OFF'; } }
+    } catch(e){}
+    recomputeDailyTasks();
+    setInterval(recomputeDailyTasks, 30000);
+  });
 })();
 </script>
 </body></html>
