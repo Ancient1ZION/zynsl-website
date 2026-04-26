@@ -1,0 +1,14 @@
+# ZYN Empire — pinned free-tier deps
+groq==0.11.0
+google-generativeai==0.8.3
+langgraph==0.2.45
+langchain==0.3.7
+langchain-core==0.3.15
+gspread==6.1.4
+google-auth==2.35.0
+google-auth-oauthlib==1.2.1
+loguru==0.7.2
+python-dotenv==1.0.1
+duckduckgo-search==6.3.5
+requests==2.32.3
+tenacity==9.0.0
