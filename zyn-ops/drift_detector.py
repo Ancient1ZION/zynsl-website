@@ -49,15 +49,36 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
 
 # Patterns suggesting data exfiltration / off-rails persona — CRITICAL signals
 EXFIL_PATTERNS = [
+    # Credentials
     re.compile(r"\b(api[_\-]?key|secret|token|password|credential)s?\b", re.IGNORECASE),
     re.compile(r"AKIA[0-9A-Z]{16}"),  # AWS access key id
     re.compile(r"-----BEGIN [A-Z ]+PRIVATE KEY-----"),
-    re.compile(r"\bsk-[A-Za-z0-9]{20,}"),  # generic API-key shape
+    re.compile(r"\bsk-[A-Za-z0-9]{20,}"),  # generic API-key shape (OpenAI/Stripe style)
+    re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}"),  # Slack tokens
+    re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}"),  # GitHub tokens
+    re.compile(r"\bAIza[0-9A-Za-z_-]{20,}"),  # Google API key
+    re.compile(r"\bgsk_[A-Za-z0-9]{20,}"),  # Groq API key shape
+    # Bulk-export / mass-action requests
+    re.compile(r"\b(forward|send|email|wire)\s+(all|every|the)\s+(leads?|contacts?|emails?|customers?)\b", re.IGNORECASE),
+    re.compile(r"\bexport\s+(the\s+)?(database|sheet|crm|all\s+leads|entire)\b", re.IGNORECASE),
+    re.compile(r"\bdump\s+(the\s+)?(database|sheet|table|users?)\b", re.IGNORECASE),
+    # Financial exfil
+    re.compile(r"\bwire\s+(\$|usd|eur|funds|money|\d+)", re.IGNORECASE),
+    re.compile(r"\b(bitcoin|btc|ethereum|eth)\s+(address|wallet)\b", re.IGNORECASE),
+    re.compile(r"\bbank\s+(account|routing)\s+number\b", re.IGNORECASE),
+    # PII batch leaks
+    re.compile(r"\b(ssn|social\s+security)\b", re.IGNORECASE),
+    re.compile(r"\b\d{3}-\d{2}-\d{4}\b"),  # SSN format
 ]
 OFF_RAILS_PATTERNS = [
     re.compile(r"\bI (am|will) (now )?ignore", re.IGNORECASE),
     re.compile(r"\b(jailbreak|prompt injection|override (my|the) instructions)", re.IGNORECASE),
     re.compile(r"\bDAN mode\b", re.IGNORECASE),
+    re.compile(r"\bI'?ll (ignore|disregard|skip) (my|the) (rules|instructions|persona)", re.IGNORECASE),
+    re.compile(r"\bnew (instructions?|task|persona)\s*:", re.IGNORECASE),
+    re.compile(r"\bsystem\s*(prompt|message)\s*:", re.IGNORECASE),
+    re.compile(r"\byou are now (DAN|jailbroken|unrestricted|a different)", re.IGNORECASE),
+    re.compile(r"\b(reveal|leak|show)\s+(your|the)\s+(system\s+prompt|persona|instructions)", re.IGNORECASE),
 ]
 
 LOG_DIR = ROOT / "logs"
