@@ -3135,7 +3135,7 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
 (function zynToastWatcher(){
   const dismiss=()=>{document.querySelectorAll('*').forEach(el=>{
     const txt=(el.textContent||'').trim();
-    if(/^Saving[…\.]+$/.test(txt)&&el.children.length===0){
+    if(/^Saving[…\.]+$/.test(txt)&&el.children.length===0&&!el.closest('#zyn-autosave-badge')){
       const parent=el.closest('[class*=toast],[class*=Toast],[id*=toast],[id*=Toast]')||el;
       parent.style.transition='opacity .4s';parent.style.opacity='0';
       setTimeout(()=>{try{parent.remove();}catch(e){}},500);
