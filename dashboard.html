@@ -1758,14 +1758,14 @@ window.zynCheckStop=function(){
     <div class="chat-box" id="noahChatOut" style="margin-top:8px">Noah online. v12.2 deployed. Agent Jobs page added to Corp Vault. All 19 agents active. GAS scripts ready to deploy.</div>
   </div>
   <div class="stats-row" style="margin-top:12px">
-    <div class="stat-box"><div class="sv" id="s-emails">0</div><div class="sl">Emails Sent</div></div>
-    <div class="stat-box"><div class="sv" id="s-leads">0</div><div class="sl">Hot Leads</div></div>
-    <div class="stat-box"><div class="sv" id="s-rev">$0</div><div class="sl">Revenue</div></div>
-    <div class="stat-box"><div class="sv">1</div><div class="sl">Contracts</div></div>
-    <div class="stat-box"><div class="sv">$430K</div><div class="sl">Pipeline</div></div>
-    <div class="stat-box"><div class="sv">99.9%</div><div class="sl">VM Uptime</div></div>
-    <div class="stat-box"><div class="sv">19</div><div class="sl">Active Agents</div></div>
-    <div class="stat-box"><div class="sv">19</div><div class="sl">Webhooks Live</div></div>
+    <div class="stat-box"><div class="sv" id="s-emails" data-zyn="outreach.emails_sent_today">0</div><div class="sl">Emails Sent</div></div>
+    <div class="stat-box"><div class="sv" id="s-leads" data-zyn="leads.hot">0</div><div class="sl">Hot Leads</div></div>
+    <div class="stat-box"><div class="sv" id="s-rev" data-zyn="pipeline.won_revenue">$0</div><div class="sl">Revenue</div></div>
+    <div class="stat-box"><div class="sv" data-zyn="contracts.drafting">1</div><div class="sl">Contracts</div></div>
+    <div class="stat-box"><div class="sv" data-zyn="pipeline.total_pipeline">$430K</div><div class="sl">Pipeline</div></div>
+    <div class="stat-box"><div class="sv" data-zyn="agents.vm_uptime_pct">99.9%</div><div class="sl">VM Uptime</div></div>
+    <div class="stat-box"><div class="sv" data-zyn="agents.active">19</div><div class="sl">Active Agents</div></div>
+    <div class="stat-box"><div class="sv" data-zyn="agents.webhooks_live">19</div><div class="sl">Webhooks Live</div></div>
   </div>
 <div id="connectivity-card">
 <h3>🔗 CONNECTIVITY ANALYSIS · LIVE SYSTEM MAP</h3>
@@ -1911,11 +1911,11 @@ window.zynCheckStop=function(){
 </div>
 
 <div class="fin-revenue-bar">
-  <div class="fin-rev-item"><div class="fin-rev-label">Consulting ARR</div><div class="fin-rev-value">$420K</div></div>
-  <div class="fin-rev-item"><div class="fin-rev-label">AI Systems</div><div class="fin-rev-value">$600K</div></div>
+  <div class="fin-rev-item"><div class="fin-rev-label">Consulting ARR</div><div class="fin-rev-value" data-zyn="pipeline.consulting_arr">$420K</div></div>
+  <div class="fin-rev-item"><div class="fin-rev-label">AI Systems</div><div class="fin-rev-value" data-zyn="pipeline.ai_systems">$600K</div></div>
   <div class="fin-rev-item"><div class="fin-rev-label">Capital Mgmt</div><div class="fin-rev-value">AUM%</div></div>
-  <div class="fin-rev-item"><div class="fin-rev-label">Federal Pipeline</div><div class="fin-rev-value">$592K</div></div>
-  <div class="fin-rev-item"><div class="fin-rev-label">TOTAL PIPELINE</div><div class="fin-rev-value" style="color:#00ff88!important;font-size:20px;">$1.6M+</div></div>
+  <div class="fin-rev-item"><div class="fin-rev-label">Federal Pipeline</div><div class="fin-rev-value" data-zyn="pipeline.federal_pipeline">$592K</div></div>
+  <div class="fin-rev-item"><div class="fin-rev-label">TOTAL PIPELINE</div><div class="fin-rev-value" style="color:#00ff88!important;font-size:20px;" data-zyn="pipeline.total_pipeline">$1.6M+</div></div>
   <div class="fin-rev-item"><div class="fin-rev-label">Human Labor</div><div class="fin-rev-value" style="color:#ff6b6b!important;">$0</div></div>
 </div>
 </div></div>
@@ -2334,14 +2334,14 @@ window.zynCheckStop=function(){
     
   <!-- STATS ROW -->
   <div class="crm-stats-row">
-    <div class="crm-stat-card"><div class="crm-stat-val" id="cs-total">0</div><div class="crm-stat-lbl">Total Leads</div></div>
-    <div class="crm-stat-card"><div class="crm-stat-val orange" id="cs-hot">0</div><div class="crm-stat-lbl">🔥 Hot</div></div>
-    <div class="crm-stat-card"><div class="crm-stat-val cyan" id="cs-contacted">0</div><div class="crm-stat-lbl">Contacted</div></div>
-    <div class="crm-stat-card"><div class="crm-stat-val" id="cs-proposal">0</div><div class="crm-stat-lbl">Proposals</div></div>
-    <div class="crm-stat-card"><div class="crm-stat-val orange" id="cs-negotiating">0</div><div class="crm-stat-lbl">Negotiating</div></div>
-    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-won">0</div><div class="crm-stat-lbl">✅ Won</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val" id="cs-total" data-zyn="leads.total">0</div><div class="crm-stat-lbl">Total Leads</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val orange" id="cs-hot" data-zyn="leads.hot">0</div><div class="crm-stat-lbl">🔥 Hot</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val cyan" id="cs-contacted" data-zyn="leads.contacted">0</div><div class="crm-stat-lbl">Contacted</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val" id="cs-proposal" data-zyn="leads.proposals">0</div><div class="crm-stat-lbl">Proposals</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val orange" id="cs-negotiating" data-zyn="leads.negotiating">0</div><div class="crm-stat-lbl">Negotiating</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-won" data-zyn="leads.won">0</div><div class="crm-stat-lbl">✅ Won</div></div>
     <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-pipeline">$0</div><div class="crm-stat-lbl">Pipeline</div></div>
-    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-revenue">$0</div><div class="crm-stat-lbl">Won Revenue</div></div>
+    <div class="crm-stat-card"><div class="crm-stat-val green" id="cs-revenue" data-zyn="pipeline.won_revenue">$0</div><div class="crm-stat-lbl">Won Revenue</div></div>
   </div>
 
   <!-- PIPELINE BANNER -->
