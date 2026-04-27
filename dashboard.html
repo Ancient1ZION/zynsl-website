@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ZYN — Zion's Den · v12.2 · LIVE</title><style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0"><title>ZYN — Zion's Den · v12.2 · LIVE</title><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#050d12;color:#e8f4f8;font-family:'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
 canvas#stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
@@ -3195,6 +3198,82 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
     recomputeDailyTasks();
     setInterval(recomputeDailyTasks, 30000);
   });
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  const CURRENT_VERSION  = 'v12.2';
+  const VERSION_INTERVAL = 60 * 1000;
+  const STATS_INTERVAL   = 30 * 1000;
+  const VERSION_URL      = 'version.json';
+  const STATS_URL        = 'stats.json';
+  async function checkVersion() {
+    try {
+      const res = await fetch(VERSION_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.version && data.version !== CURRENT_VERSION) {
+        console.log('[ZYN] New dashboard version', data.version, '— reloading in 2s');
+        setTimeout(() => location.reload(), 2000);
+      }
+    } catch (e) {}
+  }
+  async function refreshStats() {
+    try {
+      const res = await fetch(STATS_URL + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return;
+      const s = await res.json();
+      const setVal = (selector, value) => {
+        document.querySelectorAll('[data-zyn="' + selector + '"]').forEach(el => {
+          el.textContent = value;
+        });
+      };
+      if (s.pipeline) {
+        setVal('pipeline.consulting_arr',  '$' + (s.pipeline.consulting_arr / 1000).toFixed(0) + 'K');
+        setVal('pipeline.ai_systems',      '$' + (s.pipeline.ai_systems / 1000).toFixed(0) + 'K');
+        setVal('pipeline.federal_pipeline','$' + (s.pipeline.federal_pipeline / 1000).toFixed(0) + 'K');
+        setVal('pipeline.total_pipeline',  '$' + (s.pipeline.total_pipeline / 1000000).toFixed(2) + 'M');
+        setVal('pipeline.won_revenue',     '$' + s.pipeline.won_revenue.toLocaleString());
+      }
+      if (s.leads) {
+        setVal('leads.total',       s.leads.total);
+        setVal('leads.hot',         s.leads.hot);
+        setVal('leads.contacted',   s.leads.contacted);
+        setVal('leads.proposals',   s.leads.proposals);
+        setVal('leads.negotiating', s.leads.negotiating);
+        setVal('leads.won',         s.leads.won);
+      }
+      if (s.agents) {
+        setVal('agents.active',         s.agents.active);
+        setVal('agents.webhooks_live',  s.agents.webhooks_live);
+        setVal('agents.vm_uptime_pct',  s.agents.vm_uptime_pct + '%');
+      }
+      if (s.outreach) {
+        setVal('outreach.emails_sent_today', s.outreach.emails_sent_today);
+        setVal('outreach.emails_sent_total', s.outreach.emails_sent_total);
+      }
+      if (s.trading) {
+        setVal('trading.caleb_pnl_today', '$' + s.trading.caleb_pnl_today.toLocaleString());
+        setVal('trading.caleb_pnl_total', '$' + s.trading.caleb_pnl_total.toLocaleString());
+        setVal('trading.trades_today',    s.trading.trades_today);
+      }
+      if (s.updated_at) {
+        const d = new Date(s.updated_at);
+        setVal('updated_at', d.toLocaleTimeString('en-US', { timeZone: 'America/New_York' }) + ' EST');
+      }
+      window.dispatchEvent(new CustomEvent('zyn:stats', { detail: s }));
+    } catch (e) {}
+  }
+  checkVersion();
+  refreshStats();
+  setInterval(checkVersion, VERSION_INTERVAL);
+  setInterval(refreshStats, STATS_INTERVAL);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) { checkVersion(); refreshStats(); }
+  });
+  console.log('[ZYN] Auto-update active · version', CURRENT_VERSION, '· version-poll 60s · stats-poll 30s');
 })();
 </script>
 </body></html>
