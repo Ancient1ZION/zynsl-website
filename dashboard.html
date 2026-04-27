@@ -3204,11 +3204,11 @@ window.addEventListener('load',function(){renderCRM();renderTrades();const d=doc
 <script>
 (function () {
   'use strict';
-  const CURRENT_VERSION  = 'v12.2';
+  const CURRENT_VERSION  = 'v12.3';
   const VERSION_INTERVAL = 60 * 1000;
   const STATS_INTERVAL   = 30 * 1000;
   const VERSION_URL      = 'version.json';
-  const STATS_URL        = 'stats.json';
+  const STATS_URL        = 'https://script.google.com/macros/s/AKfycbwDDC1Of6v1CVmE8lY21e0SbEDSqMTITLfLXOReoIsZ4JaqRB-MmJwEO1pm0PAi4Wcf8w/exec';
   async function checkVersion() {
     try {
       const res = await fetch(VERSION_URL + '?t=' + Date.now(), { cache: 'no-store' });
