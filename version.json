@@ -1,0 +1,5 @@
+{
+    "version": "v12.2",
+    "deployed_at": "2026-04-27T00:00:00Z",
+    "notes": "Bump version field on every dashboard change to force all agent browsers to auto-reload within 60 seconds."
+}
