@@ -1,0 +1,37 @@
+{
+    "updated_at": "2026-04-27T00:00:00Z",
+    "pipeline": {
+          "consulting_arr": 420000,
+          "ai_systems": 600000,
+          "federal_pipeline": 592000,
+          "total_pipeline": 1612000,
+          "won_revenue": 0
+    },
+    "leads": {
+          "total": 0,
+          "hot": 0,
+          "contacted": 0,
+          "proposals": 0,
+          "negotiating": 0,
+          "won": 0
+    },
+    "agents": {
+          "active": 19,
+          "webhooks_live": 19,
+          "vm_uptime_pct": 99.9
+    },
+    "outreach": {
+          "emails_sent_today": 0,
+          "emails_sent_total": 0
+    },
+    "trading": {
+          "caleb_pnl_today": 0,
+          "caleb_pnl_total": 0,
+          "trades_today": 0
+    },
+    "contracts": {
+          "drafting": 1,
+          "submitted": 0,
+          "won": 0
+    }
+}
