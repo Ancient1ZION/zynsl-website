@@ -1,0 +1,3 @@
+# Cloudflare Pages redirect rules
+# Send the bare domain to the dashboard.
+/  /dashboard.html  302
