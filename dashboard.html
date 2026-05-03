@@ -2254,7 +2254,7 @@ function noahAppendMessage(sender, text) {
   const isUser = sender === 'user';
   const div = document.createElement('div');
   div.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'}; max-width:85%; padding:8px 12px; border-radius:12px; background:${isUser ? 'var(--c-blue-soft)' : 'var(--bg-elevated)'}; color:var(--text-primary); font-size:13px; line-height:1.5; border:1px solid var(--border-soft);`;
-  div.innerHTML = `<div style="font-weight:600; font-size:11px; color:var(--text-secondary); margin-bottom:3px;">${isUser ? 'You' : '🦅 Noah'}</div>${text.replace(/<\/g,'&lt;').replace(/
+  div.innerHTML = `<div style="font-weight:600; font-size:11px; color:var(--text-secondary); margin-bottom:3px;">${isUser ? 'You' : '🦅 Noah'}</div>${text.split('<').join('&lt;').replace(/
 /g,'<br>')}`;
   log.appendChild(div); log.scrollTop = log.scrollHeight;
 }
@@ -2281,7 +2281,7 @@ function noahLoadSuggestion() {
     .then(data => {
       const s = (data && data.suggestion) || 'No suggestion available.';
       const ts = new Date().toLocaleTimeString();
-      log.innerHTML = `<div style="padding:10px 12px; background:var(--c-orange-soft); border-left:3px solid var(--c-orange); border-radius:6px; font-size:13px; line-height:1.5; color:var(--text-primary);"><div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">${ts}</div>${s.replace(/<\/g,'&lt;')}</div>` + log.innerHTML;
+      log.innerHTML = `<div style="padding:10px 12px; background:var(--c-orange-soft); border-left:3px solid var(--c-orange); border-radius:6px; font-size:13px; line-height:1.5; color:var(--text-primary);"><div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">${ts}</div>${s.split('<').join('&lt;')}</div>` + log.innerHTML;
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -2311,7 +2311,7 @@ function refreshActivityFeed() {
         const cat = String(ev.category || 'event');
         const iconClass = cat === 'email_sent' ? 'send' : cat === 'reply_classified' ? 'reply' : cat === 'noah_chat' ? 'lead' : 'send';
         const icon = cat === 'email_sent' ? '📧' : cat === 'reply_classified' ? '↩️' : cat === 'noah_chat' ? '💬' : '⚡';
-        row.innerHTML = `<div class="feed-time">${time}</div><div class="feed-icon ${iconClass}">${icon}</div><div class="feed-detail">${(ev.agent || '')} · ${(ev.message || '').replace(/<\/g,'&lt;')}</div><div class="feed-tag">${cat.replace('_',' ')}</div>`;
+        row.innerHTML = `<div class="feed-time">${time}</div><div class="feed-icon ${iconClass}">${icon}</div><div class="feed-detail">${(ev.agent || '')} · ${(ev.message || '').split('<').join('&lt;')}</div><div class="feed-tag">${cat.replace('_',' ')}</div>`;
         feed.insertBefore(row, feed.firstChild);
       });
       while (feed.children.length > 30) feed.removeChild(feed.lastChild);
