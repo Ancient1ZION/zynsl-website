@@ -1733,7 +1733,7 @@ function tickClock() {
   const tzShort = inferEastShort(now);
 
   document.getElementById('clockDay').textContent  = dayStr;
-  document.getElementById('clockTime').innerHTML   = timeStr + ' <span class="tz-badge">' + tzShort + '</span>';
+  document.getElementById('clockTime').innerHTML   = timeStr + ' <span class="tz-badge">' + tzShort + '\u003C/span>';
   document.getElementById('clockDate').textContent = dateStr;
 }
 tickClock(); setInterval(tickClock, 1000);
@@ -1842,17 +1842,17 @@ function renderDivisionCards(d) {
     grid.innerHTML += `
       <div class="division-card ${m.cls}">
         <div class="div-header">
-          <span class="div-emoji">${m.emoji}</span>
-          <span class="div-name">${m.name}</span>
-          <span class="div-status-dot ${isParked ? 'parked' : ''}"></span>
-        </div>
+          <span class="div-emoji">${m.emoji}\u003C/span>
+          <span class="div-name">${m.name}\u003C/span>
+          <span class="div-status-dot ${isParked ? 'parked' : ''}">\u003C/span>
+        \u003C/div>
         <div class="div-metric-grid">
-          <div class="div-metric"><div class="label">Sends Today</div><div class="value ${div.sends_today ? '' : 'muted'}">${div.sends_today || 0}</div></div>
-          <div class="div-metric"><div class="label">Hot Leads</div><div class="value ${div.leads_hot ? 'alert' : 'muted'}">${div.leads_hot || 0}</div></div>
-          <div class="div-metric"><div class="label">Total Leads</div><div class="value ${div.leads_total ? '' : 'muted'}">${div.leads_total || 0}</div></div>
-          <div class="div-metric"><div class="label">Pipeline $</div><div class="value ${div.pipeline_value ? 'success' : 'muted'}">$${(div.pipeline_value||0).toLocaleString()}</div></div>
-        </div>
-      </div>`;
+          <div class="div-metric"><div class="label">Sends Today\u003C/div><div class="value ${div.sends_today ? '' : 'muted'}">${div.sends_today || 0}\u003C/div>\u003C/div>
+          <div class="div-metric"><div class="label">Hot Leads\u003C/div><div class="value ${div.leads_hot ? 'alert' : 'muted'}">${div.leads_hot || 0}\u003C/div>\u003C/div>
+          <div class="div-metric"><div class="label">Total Leads\u003C/div><div class="value ${div.leads_total ? '' : 'muted'}">${div.leads_total || 0}\u003C/div>\u003C/div>
+          <div class="div-metric"><div class="label">Pipeline $\u003C/div><div class="value ${div.pipeline_value ? 'success' : 'muted'}">$${(div.pipeline_value||0).toLocaleString()}\u003C/div>\u003C/div>
+        \u003C/div>
+      \u003C/div>`;
   }
 }
 
@@ -1863,21 +1863,21 @@ function renderDivisionMetrics(d, key) {
   const isParked = key === 'capital';
   target.innerHTML = `
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">📤</span><span class="div-name">Sends</span></div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.sends_today || 0}</div><div class="label">Today · ${div.sends_week || 0} this week</div></div></div>
-    </div>
+      <div class="div-header"><span class="div-emoji">📤\u003C/span><span class="div-name">Sends\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.sends_today || 0}\u003C/div><div class="label">Today · ${div.sends_week || 0} this week\u003C/div>\u003C/div>\u003C/div>
+    \u003C/div>
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">🎯</span><span class="div-name">Pipeline</span></div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.leads_total || 0}</div><div class="label">${div.leads_new || 0} new · ${div.leads_contacted || 0} contacted · ${div.leads_hot || 0} hot</div></div></div>
-    </div>
+      <div class="div-header"><span class="div-emoji">🎯\u003C/span><span class="div-name">Pipeline\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.leads_total || 0}\u003C/div><div class="label">${div.leads_new || 0} new · ${div.leads_contacted || 0} contacted · ${div.leads_hot || 0} hot\u003C/div>\u003C/div>\u003C/div>
+    \u003C/div>
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">💰</span><span class="div-name">Revenue</span></div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value success">$${(div.pipeline_value||0).toLocaleString()}</div><div class="label">$${(div.paid_value||0).toLocaleString()} collected</div></div></div>
-    </div>
+      <div class="div-header"><span class="div-emoji">💰\u003C/span><span class="div-name">Revenue\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value success">$${(div.pipeline_value||0).toLocaleString()}\u003C/div><div class="label">$${(div.paid_value||0).toLocaleString()} collected\u003C/div>\u003C/div>\u003C/div>
+    \u003C/div>
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">📊</span><span class="div-name">Status</span></div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value ${isParked ? 'muted' : 'success'}">${div.status || 'ACTIVE'}</div><div class="label">${div.crm_active || 0} active · ${div.crm_paid || 0} paid</div></div></div>
-    </div>`;
+      <div class="div-header"><span class="div-emoji">📊\u003C/span><span class="div-name">Status\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value ${isParked ? 'muted' : 'success'}">${div.status || 'ACTIVE'}\u003C/div><div class="label">${div.crm_active || 0} active · ${div.crm_paid || 0} paid\u003C/div>\u003C/div>\u003C/div>
+    \u003C/div>`;
 }
 
 function renderKanban(d) {
@@ -1898,10 +1898,10 @@ function renderKanban(d) {
     const v = p[st.key] || 0;
     const pct = max ? Math.max(8, Math.round((v / max) * 100)) : 0;
     html += `<div class="kanban-col ${st.class}">
-      <div class="kanban-label">${st.label}</div>
-      <div class="kanban-count">${v}</div>
-      <div class="kanban-bar"><div class="kanban-bar-fill" style="width:${pct}%"></div></div>
-    </div>`;
+      <div class="kanban-label">${st.label}\u003C/div>
+      <div class="kanban-count">${v}\u003C/div>
+      <div class="kanban-bar"><div class="kanban-bar-fill" style="width:${pct}%">\u003C/div>\u003C/div>
+    \u003C/div>`;
   }
   document.getElementById('kanban').innerHTML = html;
   document.getElementById('pipelineSub').textContent = total + ' total leads tracked';
@@ -1919,21 +1919,21 @@ function renderActivityFeed(d) {
     const replyCount = filtered.filter(i => i.type === 'reply').length;
     statsEl.innerHTML = `
       <div class="division-card federal">
-        <div class="div-header"><span class="div-emoji">📤</span><span class="div-name">Sends (24h)</span></div>
-        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${sendCount}</div><div class="label">Cold outreach + briefs</div></div></div>
-      </div>
+        <div class="div-header"><span class="div-emoji">📤\u003C/span><span class="div-name">Sends (24h)\u003C/span>\u003C/div>
+        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${sendCount}\u003C/div><div class="label">Cold outreach + briefs\u003C/div>\u003C/div>\u003C/div>
+      \u003C/div>
       <div class="division-card autonomous">
-        <div class="div-header"><span class="div-emoji">🎯</span><span class="div-name">Leads added (24h)</span></div>
-        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${leadCount}</div><div class="label">Scrapers + manual</div></div></div>
-      </div>
+        <div class="div-header"><span class="div-emoji">🎯\u003C/span><span class="div-name">Leads added (24h)\u003C/span>\u003C/div>
+        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${leadCount}\u003C/div><div class="label">Scrapers + manual\u003C/div>\u003C/div>\u003C/div>
+      \u003C/div>
       <div class="division-card consulting">
-        <div class="div-header"><span class="div-emoji">💬</span><span class="div-name">Replies (24h)</span></div>
-        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${replyCount}</div><div class="label">Inbox manager classified</div></div></div>
-      </div>
+        <div class="div-header"><span class="div-emoji">💬\u003C/span><span class="div-name">Replies (24h)\u003C/span>\u003C/div>
+        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${replyCount}\u003C/div><div class="label">Inbox manager classified\u003C/div>\u003C/div>\u003C/div>
+      \u003C/div>
       <div class="division-card capital">
-        <div class="div-header"><span class="div-emoji">📊</span><span class="div-name">Total events</span></div>
-        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${filtered.length}</div><div class="label">${activeFilter === 'all' ? 'all divisions' : activeFilter + ' only'}</div></div></div>
-      </div>`;
+        <div class="div-header"><span class="div-emoji">📊\u003C/span><span class="div-name">Total events\u003C/span>\u003C/div>
+        <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${filtered.length}\u003C/div><div class="label">${activeFilter === 'all' ? 'all divisions' : activeFilter + ' only'}\u003C/div>\u003C/div>\u003C/div>
+      \u003C/div>`;
   }
 
   const countSub = document.getElementById('activityCountSub');
@@ -1947,12 +1947,12 @@ function renderActivityFeed(d) {
       ? t.toLocaleString('en-US', Object.assign({ month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }, tzOpts))
       : t.toLocaleTimeString('en-US', Object.assign({ hour: '2-digit', minute: '2-digit', hour12: false }, tzOpts));
     return `<div class="feed-row">
-      <div class="feed-time">${tStr}</div>
-      <div class="feed-icon ${it.type}">${iconFor(it.type)}</div>
-      <div class="feed-detail">${escapeHtml(it.detail || '')}</div>
-      <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}</div>
-    </div>`;
-  }).join('') || '<div class="empty-state"><div class="empty-state-icon">📭</div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No recent activity</div><div>Agent runs from the last 24 hours appear here. Sara fires daily at 9am ET.</div></div>';
+      <div class="feed-time">${tStr}\u003C/div>
+      <div class="feed-icon ${it.type}">${iconFor(it.type)}\u003C/div>
+      <div class="feed-detail">${escapeHtml(it.detail || '')}\u003C/div>
+      <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}\u003C/div>
+    \u003C/div>`;
+  }).join('') || '<div class="empty-state"><div class="empty-state-icon">📭\u003C/div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No recent activity\u003C/div><div>Agent runs from the last 24 hours appear here. Sara fires daily at 9am ET.\u003C/div>\u003C/div>';
   document.getElementById('commandFeed').innerHTML  = renderItems(filtered.slice(0, 25), false);
   document.getElementById('activityFeed').innerHTML = renderItems(filtered, true);
 }
@@ -1960,7 +1960,7 @@ function renderActivityFeed(d) {
 function renderAgents(d) {
   const agents = d.agents || [];
   const grid = document.getElementById('agentGrid');
-  if (!agents.length) { grid.innerHTML = '<div class="empty-state">No agents data</div>'; return; }
+  if (!agents.length) { grid.innerHTML = '<div class="empty-state">No agents data\u003C/div>'; return; }
   grid.innerHTML = agents.map(a => {
     const dot = a.enabled ? '' : 'disabled';
     const initials = a.name.substring(0, 2);
@@ -1971,13 +1971,13 @@ function renderAgents(d) {
     const skillCount = (a.skills && a.skills.length) || 0;
     const jobs = (a.current_jobs && a.current_jobs.length) ? a.current_jobs[0] : (a.has_trigger ? 'scheduled' : 'on-demand');
     return `<div class="agent-card" data-agent-id="${a.id || a.name}" style="cursor:pointer;">
-      <div class="agent-avatar" style="font-size:20px; background:var(--bg-elevated);">${emoji}</div>
+      <div class="agent-avatar" style="font-size:20px; background:var(--bg-elevated);">${emoji}\u003C/div>
       <div class="agent-info">
-        <div class="agent-name"><span class="agent-status-dot ${dot}"></span>${a.name}</div>
-        <div class="agent-meta" style="font-size:11px; color:var(--text-secondary); margin-top:1px; font-weight:500;">${title}</div>
-        <div class="agent-meta">${division ? division + ' · ' : ''}${jobs}${skillCount > 0 ? ' · ' + skillCount + ' skill' + (skillCount === 1 ? '' : 's') : ''}</div>
-      </div>
-    </div>`;
+        <div class="agent-name"><span class="agent-status-dot ${dot}">\u003C/span>${a.name}\u003C/div>
+        <div class="agent-meta" style="font-size:11px; color:var(--text-secondary); margin-top:1px; font-weight:500;">${title}\u003C/div>
+        <div class="agent-meta">${division ? division + ' · ' : ''}${jobs}${skillCount > 0 ? ' · ' + skillCount + ' skill' + (skillCount === 1 ? '' : 's') : ''}\u003C/div>
+      \u003C/div>
+    \u003C/div>`;
   }).join('');
   document.querySelectorAll('.agent-card[data-agent-id]').forEach(card => {
     card.addEventListener('click', () => {
@@ -1994,8 +1994,8 @@ function loadAgentDetail(agentId) {
       const profile = data.profile || {};
       const skills = data.skills || [];
       const jobs = data.current_jobs || [];
-      const skillsHtml = skills.length ? skills.map(s => `<div style="padding:8px 12px; background:var(--bg-elevated); border-radius:8px; margin-bottom:6px;"><div style="font-weight:600; font-size:13px; color:var(--text-primary);">${s.name}</div><div style="font-size:11.5px; color:var(--text-secondary); margin-top:2px;">${s.description || ''}</div></div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">No skills yet.</div>';
-      const jobsHtml = jobs.length ? jobs.map(j => `<li style="padding:4px 0; font-size:12.5px;">${j}</li>`).join('') : '<li style="color:var(--text-muted);">Idle</li>';
+      const skillsHtml = skills.length ? skills.map(s => `<div style="padding:8px 12px; background:var(--bg-elevated); border-radius:8px; margin-bottom:6px;"><div style="font-weight:600; font-size:13px; color:var(--text-primary);">${s.name}\u003C/div><div style="font-size:11.5px; color:var(--text-secondary); margin-top:2px;">${s.description || ''}\u003C/div>\u003C/div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">No skills yet.\u003C/div>';
+      const jobsHtml = jobs.length ? jobs.map(j => `<li style="padding:4px 0; font-size:12.5px;">${j}\u003C/li>`).join('') : '<li style="color:var(--text-muted);">Idle\u003C/li>';
       alert(`${profile.avatar_emoji || '🤖'} ${profile.business_title || agentId}
 
 Division: ${profile.division || 'n/a'}
@@ -2015,37 +2015,37 @@ function renderHealth(d) {
   const trigPct = s.triggers_max ? Math.round((s.triggers / s.triggers_max) * 100) : 0;
   grid.innerHTML = `
     <div class="health-card brevo">
-      <div class="health-label">📧 Brevo Daily Cap</div>
-      <div class="health-value">${s.brevo_used_today || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.brevo_cap || 280}</span></div>
-      <div class="health-progress"><div class="health-progress-fill" style="width:${brevoPct}%"></div></div>
-      <div class="health-sub">${brevoPct}% used today</div>
-    </div>
+      <div class="health-label">📧 Brevo Daily Cap\u003C/div>
+      <div class="health-value">${s.brevo_used_today || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.brevo_cap || 280}\u003C/span>\u003C/div>
+      <div class="health-progress"><div class="health-progress-fill" style="width:${brevoPct}%">\u003C/div>\u003C/div>
+      <div class="health-sub">${brevoPct}% used today\u003C/div>
+    \u003C/div>
     <div class="health-card triggers">
-      <div class="health-label">⏰ Triggers</div>
-      <div class="health-value">${s.triggers || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.triggers_max || 20}</span></div>
-      <div class="health-progress"><div class="health-progress-fill" style="width:${trigPct}%; background: linear-gradient(90deg, var(--c-purple), var(--c-blue));"></div></div>
-      <div class="health-sub">${s.triggers_max - s.triggers > 0 ? (s.triggers_max - s.triggers) + ' free slots' : 'At capacity'}</div>
-    </div>
+      <div class="health-label">⏰ Triggers\u003C/div>
+      <div class="health-value">${s.triggers || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.triggers_max || 20}\u003C/span>\u003C/div>
+      <div class="health-progress"><div class="health-progress-fill" style="width:${trigPct}%; background: linear-gradient(90deg, var(--c-purple), var(--c-blue));">\u003C/div>\u003C/div>
+      <div class="health-sub">${s.triggers_max - s.triggers > 0 ? (s.triggers_max - s.triggers) + ' free slots' : 'At capacity'}\u003C/div>
+    \u003C/div>
     <div class="health-card props">
-      <div class="health-label">🔑 Properties</div>
-      <div class="health-value">${s.properties || 0}</div>
-      <div class="health-sub">API keys + webhooks + config</div>
-    </div>
+      <div class="health-label">🔑 Properties\u003C/div>
+      <div class="health-value">${s.properties || 0}\u003C/div>
+      <div class="health-sub">API keys + webhooks + config\u003C/div>
+    \u003C/div>
     <div class="health-card sends">
-      <div class="health-label">📈 Sends Today</div>
-      <div class="health-value">${d.sent_today || 0}</div>
-      <div class="health-sub">All entities combined</div>
-    </div>
+      <div class="health-label">📈 Sends Today\u003C/div>
+      <div class="health-value">${d.sent_today || 0}\u003C/div>
+      <div class="health-sub">All entities combined\u003C/div>
+    \u003C/div>
     <div class="health-card bounces">
-      <div class="health-label">🛡️ Bounces (24h)</div>
-      <div class="health-value" style="color: ${(s.bounces_24h||0) > 0 ? 'var(--c-red)' : 'var(--c-green)'};">${s.bounces_24h || 0}</div>
-      <div class="health-sub">Hard bounces detected</div>
-    </div>
+      <div class="health-label">🛡️ Bounces (24h)\u003C/div>
+      <div class="health-value" style="color: ${(s.bounces_24h||0) > 0 ? 'var(--c-red)' : 'var(--c-green)'};">${s.bounces_24h || 0}\u003C/div>
+      <div class="health-sub">Hard bounces detected\u003C/div>
+    \u003C/div>
     <div class="health-card errors">
-      <div class="health-label">⚠️ Errors (24h)</div>
-      <div class="health-value" style="color: ${(s.errors_24h||0) > 0 ? 'var(--c-red)' : 'var(--c-green)'};">${s.errors_24h || 0}</div>
-      <div class="health-sub">${s.last_error || 'No errors'}</div>
-    </div>`;
+      <div class="health-label">⚠️ Errors (24h)\u003C/div>
+      <div class="health-value" style="color: ${(s.errors_24h||0) > 0 ? 'var(--c-red)' : 'var(--c-green)'};">${s.errors_24h || 0}\u003C/div>
+      <div class="health-sub">${s.last_error || 'No errors'}\u003C/div>
+    \u003C/div>`;
 }
 
 function renderApprovalQueue(d) {
@@ -2055,17 +2055,17 @@ function renderApprovalQueue(d) {
   if (subEl) subEl.textContent = q.length + (q.length === 1 ? ' item waiting' : ' items waiting');
   if (!el) return;
   if (!q.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅</div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No pending approvals</div><div>When Malik or Levi draft contract/proposal language, they'll appear here for your review.</div></div>`;
+    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅\u003C/div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No pending approvals\u003C/div><div>When Malik or Levi draft contract/proposal language, they'll appear here for your review.\u003C/div>\u003C/div>`;
     return;
   }
   el.innerHTML = q.map(it => {
     const t = it.time ? new Date(it.time).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' }) : '';
     return `<div class="approval-row">
-      <div class="feed-time">${t}</div>
-      <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}</div>
-      <div><strong>${escapeHtml(it.agent)}</strong> → ${escapeHtml(it.recipient)}<br><span style="color: var(--text-muted); font-size: 12px;">${escapeHtml(it.subject || '')}</span></div>
-      <div class="badge" style="background: var(--c-orange-soft); color: var(--c-orange);">${it.decision}</div>
-    </div>`;
+      <div class="feed-time">${t}\u003C/div>
+      <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}\u003C/div>
+      <div><strong>${escapeHtml(it.agent)}\u003C/strong> → ${escapeHtml(it.recipient)}<br><span style="color: var(--text-muted); font-size: 12px;">${escapeHtml(it.subject || '')}\u003C/span>\u003C/div>
+      <div class="badge" style="background: var(--c-orange-soft); color: var(--c-orange);">${it.decision}\u003C/div>
+    \u003C/div>`;
   }).join('');
 }
 
@@ -2085,21 +2085,21 @@ function renderTableShared(tableId, columns, rows, sortField, sortDir, onSort) {
   columns.forEach(c => {
     const sorted = c.field === sortField ? 'sorted' : '';
     const arrow = c.field === sortField ? (sortDir === 'asc' ? '▲' : '▼') : '↕';
-    h += `<th class="${sorted}" data-field="${c.field}">${c.label}<span class="sort-icon">${arrow}</span></th>`;
+    h += `<th class="${sorted}" data-field="${c.field}">${c.label}<span class="sort-icon">${arrow}\u003C/span>\u003C/th>`;
   });
-  h += '</tr></thead><tbody>';
+  h += '\u003C/tr>\u003C/thead><tbody>';
   if (!rows || !rows.length) {
-    h += `<tr><td colspan="${columns.length}" class="empty-state" style="padding:30px;">No records.</td></tr>`;
+    h += `<tr><td colspan="${columns.length}" class="empty-state" style="padding:30px;">No records.\u003C/td>\u003C/tr>`;
   } else {
     rows.forEach(r => {
       h += '<tr>';
       columns.forEach(c => {
-        h += '<td>' + (c.render ? c.render(r) : escapeHtml(r[c.field] != null ? String(r[c.field]) : '')) + '</td>';
+        h += '<td>' + (c.render ? c.render(r) : escapeHtml(r[c.field] != null ? String(r[c.field]) : '')) + '\u003C/td>';
       });
-      h += '</tr>';
+      h += '\u003C/tr>';
     });
   }
-  h += '</tbody>';
+  h += '\u003C/tbody>';
   t.innerHTML = h;
   t.querySelectorAll('th').forEach(th => {
     th.onclick = () => onSort(th.dataset.field);
@@ -2115,14 +2115,14 @@ function renderPagination(elId, data, key) {
   const start = (page - 1) * (data.rows_per_page || 25) + 1;
   const end = Math.min(start + (data.rows || []).length - 1, total);
   el.innerHTML = `
-    <div class="page-info">${total > 0 ? start + '–' + end + ' of ' + total : '0 records'}</div>
+    <div class="page-info">${total > 0 ? start + '–' + end + ' of ' + total : '0 records'}\u003C/div>
     <div class="page-controls">
-      <button class="page-btn" data-action="first" ${page <= 1 ? 'disabled' : ''}>« First</button>
-      <button class="page-btn" data-action="prev"  ${page <= 1 ? 'disabled' : ''}>‹ Prev</button>
-      <span class="page-btn" style="cursor:default;">Page ${page} of ${tp}</span>
-      <button class="page-btn primary" data-action="next" ${page >= tp ? 'disabled' : ''}>Next ›</button>
-      <button class="page-btn" data-action="last" ${page >= tp ? 'disabled' : ''}>Last »</button>
-    </div>`;
+      <button class="page-btn" data-action="first" ${page <= 1 ? 'disabled' : ''}>« First\u003C/button>
+      <button class="page-btn" data-action="prev"  ${page <= 1 ? 'disabled' : ''}>‹ Prev\u003C/button>
+      <span class="page-btn" style="cursor:default;">Page ${page} of ${tp}\u003C/span>
+      <button class="page-btn primary" data-action="next" ${page >= tp ? 'disabled' : ''}>Next ›\u003C/button>
+      <button class="page-btn" data-action="last" ${page >= tp ? 'disabled' : ''}>Last »\u003C/button>
+    \u003C/div>`;
   el.querySelectorAll('button').forEach(btn => {
     btn.onclick = () => {
       const a = btn.dataset.action;
@@ -2142,14 +2142,14 @@ function renderPagination(elId, data, key) {
 function renderLeadsTable(d) {
   const cols = [
     { field: 'timestamp', label: 'Added',    render: r => formatDate(r.timestamp) },
-    { field: 'name',      label: 'Name',     render: r => `<strong>${escapeHtml(r.name)}</strong>` },
+    { field: 'name',      label: 'Name',     render: r => `<strong>${escapeHtml(r.name)}\u003C/strong>` },
     { field: 'company',   label: 'Company' },
-    { field: 'email',     label: 'Email',    render: r => `<span style="font-family:'JetBrains Mono',monospace; font-size:12px;">${escapeHtml(r.email)}</span>` },
+    { field: 'email',     label: 'Email',    render: r => `<span style="font-family:'JetBrains Mono',monospace; font-size:12px;">${escapeHtml(r.email)}\u003C/span>` },
     { field: 'industry',  label: 'Industry' },
-    { field: 'status',    label: 'Status',   render: r => `<span class="badge badge-${(r.status||'new').toLowerCase().replace(/\s+/g,'_')}">${r.status||'new'}</span>` },
+    { field: 'status',    label: 'Status',   render: r => `<span class="badge badge-${(r.status||'new').toLowerCase().replace(/\s+/g,'_')}">${r.status||'new'}\u003C/span>` },
     { field: 'agent',     label: 'Agent' },
     { field: 'value',     label: 'Value',    render: r => r.value ? '$' + r.value.toLocaleString() : '—' },
-    { field: 'entity',    label: 'Division', render: r => `<span class="feed-tag ${r.entity||'parent'}">${(r.entity||'parent').toUpperCase()}</span>` }
+    { field: 'entity',    label: 'Division', render: r => `<span class="feed-tag ${r.entity||'parent'}">${(r.entity||'parent').toUpperCase()}\u003C/span>` }
   ];
   const s = tableState.leads;
   renderTableShared('leadsTable', cols, d.rows, s.sort, s.dir, field => {
@@ -2166,13 +2166,13 @@ function renderLeadsTable(d) {
 function renderOppsTable(d) {
   const cols = [
     { field: 'found_at',  label: 'Found',  render: r => formatDate(r.found_at) },
-    { field: 'title',     label: 'Title',  render: r => `<strong>${escapeHtml(r.title)}</strong>` },
+    { field: 'title',     label: 'Title',  render: r => `<strong>${escapeHtml(r.title)}\u003C/strong>` },
     { field: 'agency',    label: 'Agency' },
     { field: 'naics',     label: 'NAICS' },
     { field: 'value',     label: 'Value',  render: r => r.value ? '$' + r.value.toLocaleString() : '—' },
     { field: 'due_date',  label: 'Due',    render: r => formatDate(r.due_date) },
-    { field: 'status',    label: 'Status', render: r => `<span class="badge badge-${(r.status||'NEW').toLowerCase()}">${r.status||'NEW'}</span>` },
-    { field: 'entity',    label: 'Division', render: r => `<span class="feed-tag ${r.entity||'federal'}">${(r.entity||'federal').toUpperCase()}</span>` }
+    { field: 'status',    label: 'Status', render: r => `<span class="badge badge-${(r.status||'NEW').toLowerCase()}">${r.status||'NEW'}\u003C/span>` },
+    { field: 'entity',    label: 'Division', render: r => `<span class="feed-tag ${r.entity||'federal'}">${(r.entity||'federal').toUpperCase()}\u003C/span>` }
   ];
   const s = tableState.opps;
   renderTableShared('oppsTable', cols, d.rows, s.sort, s.dir, field => {
@@ -2189,13 +2189,13 @@ function renderOppsTable(d) {
 function renderCrmTable(d) {
   const cols = [
     { field: 'timestamp',     label: 'Added',     render: r => formatDate(r.timestamp) },
-    { field: 'client_name',   label: 'Client',    render: r => `<strong>${escapeHtml(r.client_name)}</strong>` },
+    { field: 'client_name',   label: 'Client',    render: r => `<strong>${escapeHtml(r.client_name)}\u003C/strong>` },
     { field: 'company',       label: 'Company' },
-    { field: 'pipeline_stage',label: 'Stage',     render: r => `<span class="badge badge-${(r.pipeline_stage||'').toLowerCase().replace(/\s+/g,'_') || 'default'}">${r.pipeline_stage||'—'}</span>` },
+    { field: 'pipeline_stage',label: 'Stage',     render: r => `<span class="badge badge-${(r.pipeline_stage||'').toLowerCase().replace(/\s+/g,'_') || 'default'}">${r.pipeline_stage||'—'}\u003C/span>` },
     { field: 'deal_value',    label: 'Deal $',    render: r => r.deal_value ? '$' + r.deal_value.toLocaleString() : '—' },
     { field: 'monthly_value', label: 'MRR',       render: r => r.monthly_value ? '$' + r.monthly_value.toLocaleString() + '/mo' : '—' },
-    { field: 'payment_status',label: 'Payment',   render: r => `<span class="badge badge-${(r.payment_status||'').toLowerCase() || 'default'}">${r.payment_status||'—'}</span>` },
-    { field: 'entity',        label: 'Division',  render: r => `<span class="feed-tag ${r.entity||'parent'}">${(r.entity||'parent').toUpperCase()}</span>` }
+    { field: 'payment_status',label: 'Payment',   render: r => `<span class="badge badge-${(r.payment_status||'').toLowerCase() || 'default'}">${r.payment_status||'—'}\u003C/span>` },
+    { field: 'entity',        label: 'Division',  render: r => `<span class="feed-tag ${r.entity||'parent'}">${(r.entity||'parent').toUpperCase()}\u003C/span>` }
   ];
   const s = tableState.crm;
   renderTableShared('crmTable', cols, d.rows, s.sort, s.dir, field => {
@@ -2212,11 +2212,11 @@ function renderCrmTable(d) {
 function renderDivisionTable(entity, d) {
   const cols = [
     { field: 'timestamp', label: 'Added',    render: r => formatDate(r.timestamp) },
-    { field: 'name',      label: 'Name',     render: r => `<strong>${escapeHtml(r.name)}</strong>` },
+    { field: 'name',      label: 'Name',     render: r => `<strong>${escapeHtml(r.name)}\u003C/strong>` },
     { field: 'company',   label: 'Company' },
-    { field: 'email',     label: 'Email',    render: r => `<span style="font-family:'JetBrains Mono',monospace; font-size:12px;">${escapeHtml(r.email)}</span>` },
+    { field: 'email',     label: 'Email',    render: r => `<span style="font-family:'JetBrains Mono',monospace; font-size:12px;">${escapeHtml(r.email)}\u003C/span>` },
     { field: 'industry',  label: 'Industry' },
-    { field: 'status',    label: 'Status',   render: r => `<span class="badge badge-${(r.status||'new').toLowerCase().replace(/\s+/g,'_')}">${r.status||'new'}</span>` },
+    { field: 'status',    label: 'Status',   render: r => `<span class="badge badge-${(r.status||'new').toLowerCase().replace(/\s+/g,'_')}">${r.status||'new'}\u003C/span>` },
     { field: 'agent',     label: 'Agent' },
     { field: 'value',     label: 'Value',    render: r => r.value ? '$' + r.value.toLocaleString() : '—' }
   ];
@@ -2254,7 +2254,7 @@ function noahAppendMessage(sender, text) {
   const isUser = sender === 'user';
   const div = document.createElement('div');
   div.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'}; max-width:85%; padding:8px 12px; border-radius:12px; background:${isUser ? 'var(--c-blue-soft)' : 'var(--bg-elevated)'}; color:var(--text-primary); font-size:13px; line-height:1.5; border:1px solid var(--border-soft);`;
-  div.innerHTML = `<div style="font-weight:600; font-size:11px; color:var(--text-secondary); margin-bottom:3px;">${isUser ? 'You' : '🦅 Noah'}</div>${text.split('<').join('&lt;').replace(/
+  div.innerHTML = `<div style="font-weight:600; font-size:11px; color:var(--text-secondary); margin-bottom:3px;">${isUser ? 'You' : '🦅 Noah'}\u003C/div>${text.split('<').join('&lt;').replace(/
 /g,'<br>')}`;
   log.appendChild(div); log.scrollTop = log.scrollHeight;
 }
@@ -2275,13 +2275,13 @@ function noahSendMessage() {
 }
 function noahLoadSuggestion() {
   const log = document.getElementById('noahSuggestionLog'); if (!log) return;
-  log.innerHTML = '<div style="color:var(--text-muted);">Analyzing recent activity...</div>';
+  log.innerHTML = '<div style="color:var(--text-muted);">Analyzing recent activity...\u003C/div>';
   fetch(buildUrl({ view: 'noah', action: 'suggest' }))
     .then(r => r.json())
     .then(data => {
       const s = (data && data.suggestion) || 'No suggestion available.';
       const ts = new Date().toLocaleTimeString();
-      log.innerHTML = `<div style="padding:10px 12px; background:var(--c-orange-soft); border-left:3px solid var(--c-orange); border-radius:6px; font-size:13px; line-height:1.5; color:var(--text-primary);"><div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">${ts}</div>${s.split('<').join('&lt;')}</div>` + log.innerHTML;
+      log.innerHTML = `<div style="padding:10px 12px; background:var(--c-orange-soft); border-left:3px solid var(--c-orange); border-radius:6px; font-size:13px; line-height:1.5; color:var(--text-primary);"><div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">${ts}\u003C/div>${s.split('<').join('&lt;')}\u003C/div>` + log.innerHTML;
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -2311,7 +2311,7 @@ function refreshActivityFeed() {
         const cat = String(ev.category || 'event');
         const iconClass = cat === 'email_sent' ? 'send' : cat === 'reply_classified' ? 'reply' : cat === 'noah_chat' ? 'lead' : 'send';
         const icon = cat === 'email_sent' ? '📧' : cat === 'reply_classified' ? '↩️' : cat === 'noah_chat' ? '💬' : '⚡';
-        row.innerHTML = `<div class="feed-time">${time}</div><div class="feed-icon ${iconClass}">${icon}</div><div class="feed-detail">${(ev.agent || '')} · ${(ev.message || '').split('<').join('&lt;')}</div><div class="feed-tag">${cat.replace('_',' ')}</div>`;
+        row.innerHTML = `<div class="feed-time">${time}\u003C/div><div class="feed-icon ${iconClass}">${icon}\u003C/div><div class="feed-detail">${(ev.agent || '')} · ${(ev.message || '').split('<').join('&lt;')}\u003C/div><div class="feed-tag">${cat.replace('_',' ')}\u003C/div>`;
         feed.insertBefore(row, feed.firstChild);
       });
       while (feed.children.length > 30) feed.removeChild(feed.lastChild);
