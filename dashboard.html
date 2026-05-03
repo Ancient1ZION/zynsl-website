@@ -1960,30 +1960,27 @@ function renderActivityFeed(d) {
 function renderAgents(d) {
   const agents = d.agents || [];
   const grid = document.getElementById('agentGrid');
-  if (!agents.length) { grid.innerHTML = '<div class="empty-state">No agents data\u003C/div>'; return; }
-  grid.innerHTML = agents.map(a => {
-    const dot = a.enabled ? '' : 'disabled';
-    const initials = a.name.substring(0, 2);
-    const profile = (a.profile || {});
-    const emoji = profile.avatar_emoji || '🤖';
+  if (!agents.length) { grid.innerHTML = ''; const e = document.createElement('div'); e.className = 'empty-state'; e.textContent = 'No agents data'; grid.appendChild(e); return; }
+  grid.innerHTML = '';
+  agents.forEach(a => {
+    const profile = a.profile || {};
+    const emoji = profile.avatar_emoji || '\u{1F916}';
     const title = profile.business_title || a.role || 'agent';
     const division = profile.division || '';
     const skillCount = (a.skills && a.skills.length) || 0;
     const jobs = (a.current_jobs && a.current_jobs.length) ? a.current_jobs[0] : (a.has_trigger ? 'scheduled' : 'on-demand');
-    return `<div class="agent-card" data-agent-id="${a.id || a.name}" style="cursor:pointer;">
-      <div class="agent-avatar" style="font-size:20px; background:var(--bg-elevated);">${emoji}\u003C/div>
-      <div class="agent-info">
-        <div class="agent-name"><span class="agent-status-dot ${dot}">\u003C/span>${a.name}\u003C/div>
-        <div class="agent-meta" style="font-size:11px; color:var(--text-secondary); margin-top:1px; font-weight:500;">${title}\u003C/div>
-        <div class="agent-meta">${division ? division + ' · ' : ''}${jobs}${skillCount > 0 ? ' · ' + skillCount + ' skill' + (skillCount === 1 ? '' : 's') : ''}\u003C/div>
-      \u003C/div>
-    \u003C/div>`;
-  }).join('');
-  document.querySelectorAll('.agent-card[data-agent-id]').forEach(card => {
-    card.addEventListener('click', () => {
-      const id = card.getAttribute('data-agent-id');
-      loadAgentDetail(id);
-    });
+    const card = document.createElement('div'); card.className = 'agent-card'; card.setAttribute('data-agent-id', a.id || a.name); card.style.cursor = 'pointer';
+    const av = document.createElement('div'); av.className = 'agent-avatar'; av.style.fontSize = '20px'; av.style.background = 'var(--bg-elevated)'; av.textContent = emoji;
+    const inf = document.createElement('div'); inf.className = 'agent-info';
+    const nr = document.createElement('div'); nr.className = 'agent-name';
+    const dot = document.createElement('span'); dot.className = 'agent-status-dot' + (a.enabled ? '' : ' disabled');
+    nr.appendChild(dot); nr.appendChild(document.createTextNode(a.name));
+    const tr = document.createElement('div'); tr.className = 'agent-meta'; tr.style.cssText = 'font-size:11px;color:var(--text-secondary);font-weight:500;'; tr.textContent = title;
+    const mr = document.createElement('div'); mr.className = 'agent-meta'; mr.textContent = (division ? division + ' \u00b7 ' : '') + jobs + (skillCount > 0 ? ' \u00b7 ' + skillCount + ' skill' + (skillCount === 1 ? '' : 's') : '');
+    inf.appendChild(nr); inf.appendChild(tr); inf.appendChild(mr);
+    card.appendChild(av); card.appendChild(inf);
+    card.addEventListener('click', () => loadAgentDetail(a.id || a.name));
+    grid.appendChild(card);
   });
 }
 
@@ -1994,16 +1991,7 @@ function loadAgentDetail(agentId) {
       const profile = data.profile || {};
       const skills = data.skills || [];
       const jobs = data.current_jobs || [];
-      const skillsHtml = skills.length ? skills.map(s => `<div style="padding:8px 12px; background:var(--bg-elevated); border-radius:8px; margin-bottom:6px;"><div style="font-weight:600; font-size:13px; color:var(--text-primary);">${s.name}\u003C/div><div style="font-size:11.5px; color:var(--text-secondary); margin-top:2px;">${s.description || ''}\u003C/div>\u003C/div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">No skills yet.\u003C/div>';
-      const jobsHtml = jobs.length ? jobs.map(j => `<li style="padding:4px 0; font-size:12.5px;">${j}\u003C/li>`).join('') : '<li style="color:var(--text-muted);">Idle\u003C/li>';
-      alert(`${profile.avatar_emoji || '🤖'} ${profile.business_title || agentId}
-
-Division: ${profile.division || 'n/a'}
-
-${profile.description || ''}
-
-Skills: ${skills.length}
-Current jobs: ${jobs.length}`);
+      alert((profile.avatar_emoji || '\u{1F916}') + ' ' + (profile.business_title || agentId) + '\n\nDivision: ' + (profile.division || 'n/a') + '\n\n' + (profile.description || '') + '\n\nSkills: ' + skills.length + '\nCurrent jobs: ' + jobs.length);
     })
     .catch(e => console.error('Agent detail load failed:', e));
 }
@@ -2252,11 +2240,18 @@ let noahLastChatTs = '';
 function noahAppendMessage(sender, text) {
   const log = document.getElementById('noahChatLog'); if (!log) return;
   const isUser = sender === 'user';
-  const div = document.createElement('div');
-  div.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'}; max-width:85%; padding:8px 12px; border-radius:12px; background:${isUser ? 'var(--c-blue-soft)' : 'var(--bg-elevated)'}; color:var(--text-primary); font-size:13px; line-height:1.5; border:1px solid var(--border-soft);`;
-  div.innerHTML = `<div style="font-weight:600; font-size:11px; color:var(--text-secondary); margin-bottom:3px;">${isUser ? 'You' : '🦅 Noah'}\u003C/div>${text.split('<').join('&lt;').replace(/
-/g,'<br>')}`;
-  log.appendChild(div); log.scrollTop = log.scrollHeight;
+  const wrap = document.createElement('div');
+  wrap.style.alignSelf = isUser ? 'flex-end' : 'flex-start';
+  wrap.style.maxWidth = '85%'; wrap.style.padding = '8px 12px'; wrap.style.borderRadius = '12px';
+  wrap.style.background = isUser ? 'var(--c-blue-soft)' : 'var(--bg-elevated)';
+  wrap.style.color = 'var(--text-primary)'; wrap.style.fontSize = '13px'; wrap.style.lineHeight = '1.5';
+  wrap.style.border = '1px solid var(--border-soft)';
+  const lbl = document.createElement('div');
+  lbl.style.cssText = 'font-weight:600;font-size:11px;color:var(--text-secondary);margin-bottom:3px;';
+  lbl.textContent = isUser ? 'You' : '\u{1F985} Noah';
+  const bd = document.createElement('div');
+  bd.innerHTML = text.split('&').join('&amp;').split('<').join('&lt;').split('\n').join('<br>');
+  wrap.appendChild(lbl); wrap.appendChild(bd); log.appendChild(wrap); log.scrollTop = log.scrollHeight;
 }
 function noahSendMessage() {
   const input = document.getElementById('noahChatInput'); if (!input) return;
@@ -2275,13 +2270,20 @@ function noahSendMessage() {
 }
 function noahLoadSuggestion() {
   const log = document.getElementById('noahSuggestionLog'); if (!log) return;
-  log.innerHTML = '<div style="color:var(--text-muted);">Analyzing recent activity...\u003C/div>';
+  log.textContent = '';
+  const tmp = document.createElement('div'); tmp.style.color = 'var(--text-muted)'; tmp.textContent = 'Analyzing recent activity...';
+  log.appendChild(tmp);
   fetch(buildUrl({ view: 'noah', action: 'suggest' }))
     .then(r => r.json())
     .then(data => {
       const s = (data && data.suggestion) || 'No suggestion available.';
       const ts = new Date().toLocaleTimeString();
-      log.innerHTML = `<div style="padding:10px 12px; background:var(--c-orange-soft); border-left:3px solid var(--c-orange); border-radius:6px; font-size:13px; line-height:1.5; color:var(--text-primary);"><div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">${ts}\u003C/div>${s.split('<').join('&lt;')}\u003C/div>` + log.innerHTML;
+      const entry = document.createElement('div');
+      entry.style.cssText = 'padding:10px 12px;background:var(--c-orange-soft);border-left:3px solid var(--c-orange);border-radius:6px;font-size:13px;line-height:1.5;color:var(--text-primary);margin-bottom:8px;';
+      const te = document.createElement('div'); te.style.cssText = 'font-size:11px;color:var(--text-secondary);margin-bottom:4px;'; te.textContent = ts;
+      const se = document.createElement('div'); se.textContent = s;
+      entry.appendChild(te); entry.appendChild(se);
+      log.textContent = ''; log.appendChild(entry);
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -2305,13 +2307,14 @@ function refreshActivityFeed() {
       if (!events.length) return;
       activityLastTs = data.latest_timestamp || activityLastTs;
       events.reverse().forEach(ev => {
-        const row = document.createElement('div');
-        row.className = 'feed-row';
-        const time = String(ev.timestamp || '').substring(11, 16);
+        const row = document.createElement('div'); row.className = 'feed-row';
         const cat = String(ev.category || 'event');
-        const iconClass = cat === 'email_sent' ? 'send' : cat === 'reply_classified' ? 'reply' : cat === 'noah_chat' ? 'lead' : 'send';
-        const icon = cat === 'email_sent' ? '📧' : cat === 'reply_classified' ? '↩️' : cat === 'noah_chat' ? '💬' : '⚡';
-        row.innerHTML = `<div class="feed-time">${time}\u003C/div><div class="feed-icon ${iconClass}">${icon}\u003C/div><div class="feed-detail">${(ev.agent || '')} · ${(ev.message || '').split('<').join('&lt;')}\u003C/div><div class="feed-tag">${cat.replace('_',' ')}\u003C/div>`;
+        const tEl = document.createElement('div'); tEl.className = 'feed-time'; tEl.textContent = String(ev.timestamp || '').substring(11, 16);
+        const iEl = document.createElement('div'); iEl.className = 'feed-icon ' + (cat === 'email_sent' ? 'send' : cat === 'reply_classified' ? 'reply' : cat === 'noah_chat' ? 'lead' : 'send');
+        iEl.textContent = cat === 'email_sent' ? '\u{1F4E7}' : cat === 'reply_classified' ? '\u21A9\uFE0F' : cat === 'noah_chat' ? '\u{1F4AC}' : '\u26A1';
+        const dEl = document.createElement('div'); dEl.className = 'feed-detail'; dEl.textContent = (ev.agent || '') + ' \u00b7 ' + (ev.message || '');
+        const gEl = document.createElement('div'); gEl.className = 'feed-tag'; gEl.textContent = cat.replace('_', ' ');
+        row.appendChild(tEl); row.appendChild(iEl); row.appendChild(dEl); row.appendChild(gEl);
         feed.insertBefore(row, feed.firstChild);
       });
       while (feed.children.length > 30) feed.removeChild(feed.lastChild);
