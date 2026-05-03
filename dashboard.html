@@ -16,72 +16,77 @@
      DUAL THEME SYSTEM — Twilight (default) + Daylight (toggle)
      ============================================================ */
 
-  /* TWILIGHT (default) — dramatic deep purple → magenta → navy */
+  /* TWILIGHT (default) v3 — realistic blue hour, masculine palette */
   :root {
-    /* Surfaces */
-    --bg-app:        #0a0a23;
-    --bg-panel:      rgba(28, 22, 65, 0.55);
-    --bg-sidebar:    rgba(20, 16, 50, 0.65);
-    --bg-topbar:     rgba(28, 22, 65, 0.75);
-    --bg-elevated:   rgba(40, 32, 85, 0.45);
-    --bg-hover:      rgba(60, 48, 110, 0.55);
-    --bg-active:     rgba(80, 60, 150, 0.6);
+    /* Surfaces — deeper navy + warm undertone */
+    --bg-app:        #060b18;
+    --bg-panel:      rgba(20, 28, 56, 0.78);
+    --bg-sidebar:    rgba(11, 18, 38, 0.94);
+    --bg-topbar:     rgba(15, 23, 48, 0.85);
+    --bg-elevated:   rgba(28, 38, 72, 0.62);
+    --bg-hover:      rgba(36, 50, 90, 0.72);
+    --bg-active:     rgba(48, 66, 110, 0.82);
 
     /* Borders + glass */
-    --border-soft:   rgba(255, 255, 255, 0.08);
-    --border-medium: rgba(255, 255, 255, 0.16);
-    --border-glow:   rgba(170, 130, 255, 0.35);
+    --border-soft:   rgba(140, 165, 220, 0.14);
+    --border-medium: rgba(140, 165, 220, 0.22);
+    --border-glow:   rgba(190, 145, 95, 0.28);
 
-    /* Text */
-    --text-primary:  #f5f3ff;
-    --text-secondary:#c0b8e5;
-    --text-muted:    #8079b3;
+    /* Text — warm off-white, dusky secondary */
+    --text-primary:  #e8ecf5;
+    --text-secondary:#aab4c8;
+    --text-muted:    #6a7588;
     --text-on-color: #ffffff;
 
-    /* Vibrant accents — saturated for visibility on dark */
-    --c-blue:        #4f8dff;
-    --c-blue-soft:   rgba(79, 141, 255, 0.18);
-    --c-green:       #3deca8;
-    --c-green-soft:  rgba(61, 236, 168, 0.18);
-    --c-orange:      #ff9a3c;
-    --c-orange-soft: rgba(255, 154, 60, 0.18);
-    --c-red:         #ff5470;
-    --c-red-soft:    rgba(255, 84, 112, 0.20);
-    --c-purple:      #b07eff;
-    --c-purple-soft: rgba(176, 126, 255, 0.22);
-    --c-yellow:      #ffd84d;
-    --c-yellow-soft: rgba(255, 216, 77, 0.22);
-    --c-cyan:        #34e0e7;
-    --c-cyan-soft:   rgba(52, 224, 231, 0.18);
-    --c-pink:        #ff5fa8;
-    --c-pink-soft:   rgba(255, 95, 168, 0.20);
-    --c-teal:        #2dd4bf;
-    --c-teal-soft:   rgba(45, 212, 191, 0.18);
+    /* Accents — UI variables preserved for downstream compatibility, retuned for masculine palette */
+    --c-blue:        #5b8fd9;
+    --c-blue-soft:   rgba(91, 143, 217, 0.18);
+    --c-green:       #7eb88a;
+    --c-green-soft:  rgba(126, 184, 138, 0.18);
+    --c-orange:      #d4a574;
+    --c-orange-soft: rgba(212, 165, 116, 0.20);
+    --c-red:         #c47873;
+    --c-red-soft:    rgba(196, 120, 115, 0.20);
+    --c-purple:      #8b7fc4;
+    --c-purple-soft: rgba(139, 127, 196, 0.22);
+    --c-yellow:      #d4a574;
+    --c-yellow-soft: rgba(212, 165, 116, 0.22);
+    --c-cyan:        #6db8c4;
+    --c-cyan-soft:   rgba(109, 184, 196, 0.18);
+    --c-pink:        #b88a8e;
+    --c-pink-soft:   rgba(184, 138, 142, 0.18);
+    --c-teal:        #6db8a8;
+    --c-teal-soft:   rgba(109, 184, 168, 0.18);
 
-    --c-brand:       #b07eff;
-    --c-brand-2:     #ff5fa8;
+    --c-brand:       #d4a574;
+    --c-brand-2:     #8db4d8;
 
-    /* Aurora gradients used in cards */
-    --grad-aurora:    linear-gradient(135deg, #ff5fa8 0%, #b07eff 35%, #4f8dff 70%, #34e0e7 100%);
-    --grad-card-edge: linear-gradient(135deg, rgba(255,95,168,0.45) 0%, rgba(176,126,255,0.45) 50%, rgba(79,141,255,0.45) 100%);
-    --grad-text:      linear-gradient(135deg, #ff5fa8 0%, #b07eff 50%, #4f8dff 100%);
+    /* Aurora gradients — toned down to bronze/blue, no pink */
+    --grad-aurora:    linear-gradient(135deg, #d4a574 0%, #8b7fc4 35%, #5b8fd9 70%, #6db8c4 100%);
+    --grad-card-edge: linear-gradient(135deg, rgba(212,165,116,0.40) 0%, rgba(139,127,196,0.40) 50%, rgba(91,143,217,0.40) 100%);
+    --grad-text:      linear-gradient(135deg, #d4a574 0%, #8db4d8 50%, #5b8fd9 100%);
 
-    /* Sky background gradient — realistic twilight sunset to night */
-    --sky-gradient: linear-gradient(180deg,
-      #050822 0%, #0a1135 8%, #131a45 16%, #1a2155 24%,
-      #2a2868 34%, #45316f 44%, #6e3e6c 53%, #a04e54 61%,
-      #c87446 68%, #d99560 74%, #b18062 81%,
-      #5a5e85 89%, #1a1d3e 96%, #0a0c1f 100%);
-    --cloud-color:  rgba(255, 200, 230, 0.32);
-    --bird-color:   rgba(50, 35, 60, 0.7);
+    /* Sky background — v3 realistic blue hour, deep navy → indigo → bronze ember horizon */
+    --sky-gradient:
+      radial-gradient(ellipse 1200px 500px at 50% 100%,
+        rgba(190, 110, 50, 0.22) 0%,
+        rgba(110, 65, 95, 0.28) 18%,
+        rgba(55, 60, 110, 0.55) 38%,
+        rgba(18, 28, 65, 0.88) 65%,
+        rgba(8, 13, 35, 1) 100%
+      ),
+      linear-gradient(180deg,
+        #060b18 0%, #0c1530 22%, #182650 50%, #2e3265 78%, #423558 100%);
+    --cloud-color:  rgba(220, 215, 230, 0.28);
+    --bird-color:   rgba(50, 60, 90, 0.65);
     --star-opacity: 1;
 
-    /* Shadows — deeper for depth on dark */
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.30), 0 0 0 1px rgba(255,255,255,0.04);
-    --shadow-md: 0 8px 24px rgba(0,0,0,0.40), 0 0 0 1px rgba(255,255,255,0.06);
-    --shadow-lg: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
-    --glow-purple: 0 0 24px rgba(176,126,255,0.45);
-    --glow-pink:   0 0 24px rgba(255,95,168,0.40);
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.04);
+    --shadow-md: 0 4px 18px rgba(0,0,0,0.50), 0 0 0 1px rgba(255,255,255,0.06);
+    --shadow-lg: 0 24px 60px rgba(0,0,0,0.60), 0 0 0 1px rgba(255,255,255,0.08);
+    --glow-purple: 0 0 24px rgba(139,127,196,0.32);
+    --glow-pink:   0 0 24px rgba(184,138,142,0.28);
 
     --radius-sm: 6px;
     --radius-md: 12px;
@@ -90,67 +95,71 @@
     --topbar-h:  66px;
   }
 
-  /* DAYLIGHT theme — saturated daytime blue, glassmorphism on light */
+  /* DAYLIGHT theme v3 — late golden morning, sun-lit cerulean + warm sand */
   :root[data-theme="day"] {
-    --bg-app:        #dceaff;
-    --bg-panel:      rgba(255, 255, 255, 0.78);
-    --bg-sidebar:    rgba(255, 255, 255, 0.72);
-    --bg-topbar:     rgba(255, 255, 255, 0.82);
-    --bg-elevated:   rgba(245, 250, 255, 0.85);
-    --bg-hover:      rgba(220, 235, 255, 0.85);
-    --bg-active:     rgba(195, 220, 255, 0.95);
+    --bg-app:        #b0d6e8;
+    --bg-panel:      rgba(252, 244, 224, 0.94);
+    --bg-sidebar:    rgba(248, 240, 222, 0.96);
+    --bg-topbar:     rgba(252, 244, 224, 0.92);
+    --bg-elevated:   rgba(255, 248, 232, 0.88);
+    --bg-hover:      rgba(255, 250, 235, 0.92);
+    --bg-active:     rgba(255, 252, 240, 0.98);
 
-    --border-soft:   rgba(35, 90, 200, 0.12);
-    --border-medium: rgba(35, 90, 200, 0.22);
-    --border-glow:   rgba(80, 130, 255, 0.40);
+    --border-soft:   rgba(75, 95, 110, 0.16);
+    --border-medium: rgba(75, 95, 110, 0.26);
+    --border-glow:   rgba(180, 130, 70, 0.32);
 
-    --text-primary:  #0a1838;
-    --text-secondary:#2d4673;
-    --text-muted:    #6680a8;
+    --text-primary:  #1a2840;
+    --text-secondary:#4a5a72;
+    --text-muted:    #7a8598;
     --text-on-color: #ffffff;
 
-    /* Vibrant saturated accents for day */
-    --c-blue:        #0066ff;
-    --c-blue-soft:   rgba(0, 102, 255, 0.14);
-    --c-green:       #00b86b;
-    --c-green-soft:  rgba(0, 184, 107, 0.16);
-    --c-orange:      #ff7a1a;
-    --c-orange-soft: rgba(255, 122, 26, 0.18);
-    --c-red:         #ee2a4d;
-    --c-red-soft:    rgba(238, 42, 77, 0.16);
-    --c-purple:      #8a2be2;
-    --c-purple-soft: rgba(138, 43, 226, 0.16);
-    --c-yellow:      #f5a623;
-    --c-yellow-soft: rgba(245, 166, 35, 0.20);
-    --c-cyan:        #00b8d4;
-    --c-cyan-soft:   rgba(0, 184, 212, 0.16);
-    --c-pink:        #e91e63;
-    --c-pink-soft:   rgba(233, 30, 99, 0.16);
-    --c-teal:        #009688;
-    --c-teal-soft:   rgba(0, 150, 136, 0.16);
+    /* Daytime accents — vivid but classy, no pink dominance */
+    --c-blue:        #2c6a8a;
+    --c-blue-soft:   rgba(44, 106, 138, 0.14);
+    --c-green:       #3a7d44;
+    --c-green-soft:  rgba(58, 125, 68, 0.16);
+    --c-orange:      #b8722d;
+    --c-orange-soft: rgba(184, 114, 45, 0.18);
+    --c-red:         #a8443a;
+    --c-red-soft:    rgba(168, 68, 58, 0.16);
+    --c-purple:      #6a4a8a;
+    --c-purple-soft: rgba(106, 74, 138, 0.16);
+    --c-yellow:      #c89126;
+    --c-yellow-soft: rgba(200, 145, 38, 0.20);
+    --c-cyan:        #2c7a94;
+    --c-cyan-soft:   rgba(44, 122, 148, 0.16);
+    --c-pink:        #a85565;
+    --c-pink-soft:   rgba(168, 85, 101, 0.14);
+    --c-teal:        #2d8074;
+    --c-teal-soft:   rgba(45, 128, 116, 0.16);
 
-    --c-brand:       #0066ff;
-    --c-brand-2:     #8a2be2;
+    --c-brand:       #b8722d;
+    --c-brand-2:     #2c6a8a;
 
-    --grad-aurora:    linear-gradient(135deg, #ff7a1a 0%, #ee2a4d 30%, #8a2be2 60%, #0066ff 100%);
-    --grad-card-edge: linear-gradient(135deg, rgba(0,102,255,0.40) 0%, rgba(138,43,226,0.40) 50%, rgba(233,30,99,0.40) 100%);
-    --grad-text:      linear-gradient(135deg, #0066ff 0%, #8a2be2 50%, #e91e63 100%);
+    --grad-aurora:    linear-gradient(135deg, #b8722d 0%, #c89126 30%, #2c6a8a 70%, #2d8074 100%);
+    --grad-card-edge: linear-gradient(135deg, rgba(184,114,45,0.40) 0%, rgba(44,106,138,0.40) 50%, rgba(45,128,116,0.40) 100%);
+    --grad-text:      linear-gradient(135deg, #b8722d 0%, #2c6a8a 50%, #2d8074 100%);
 
-    --sky-gradient: linear-gradient(180deg,
-      #5b9fdc 0%, #74b6e6 8%, #91c8ed 18%, #b1d8f3 28%,
-      #d4e9f8 36%, #e8f1fa 41%,
-      #1f5780 47%, #1e6492 52%, #237ab0 58%,
-      #2a8fc7 64%, #3aa4d4 70%, #5cb8de 75%,
-      #f4d8a0 81%, #e8c479 89%, #c89b4a 100%);
+    /* Sky background — v3 sun-lit cerulean with warm sun glow upper-left */
+    --sky-gradient:
+      radial-gradient(ellipse 600px 400px at 18% -5%,
+        rgba(255, 240, 200, 0.55) 0%,
+        rgba(255, 235, 190, 0.25) 20%,
+        transparent 50%
+      ),
+      linear-gradient(180deg,
+        #5fa8d8 0%, #7ebde0 18%, #b0d6e8 42%, #dfeef2 54%,
+        #5fb0c8 56%, #3a8aa6 75%, #246685 100%);
     --cloud-color:  rgba(255, 255, 255, 0.92);
     --bird-color:   rgba(40, 55, 90, 0.65);
     --star-opacity: 0;
 
-    --shadow-sm: 0 1px 2px rgba(15,32,72,0.06), 0 1px 4px rgba(15,32,72,0.08);
-    --shadow-md: 0 6px 18px rgba(15,32,72,0.10), 0 2px 6px rgba(15,32,72,0.06);
-    --shadow-lg: 0 18px 44px rgba(15,32,72,0.16);
-    --glow-purple: 0 0 22px rgba(138,43,226,0.30);
-    --glow-pink:   0 0 22px rgba(233,30,99,0.28);
+    --shadow-sm: 0 1px 2px rgba(15,32,72,0.08), 0 1px 4px rgba(15,32,72,0.10);
+    --shadow-md: 0 6px 20px rgba(35,60,90,0.22), 0 2px 4px rgba(35,60,90,0.14);
+    --shadow-lg: 0 18px 44px rgba(35,60,90,0.28);
+    --glow-purple: 0 0 22px rgba(106,74,138,0.28);
+    --glow-pink:   0 0 22px rgba(184,114,45,0.28);
   }
 
   /* Smooth theme transition */
@@ -341,6 +350,78 @@
   .cloud.high .puff {
     background: radial-gradient(ellipse, rgba(180,170,210,0.45) 0%, rgba(180,170,210,0.20) 50%, transparent 75%);
   }
+  /* ============ V3 THEME OVERLAYS — hero stars, lighthouse, sun glow, floating clouds ============ */
+  .tw-star-hero-1, .tw-star-hero-2, .tw-star-hero-3, .tw-lighthouse,
+  .dt-sun, .dt-cloud-1, .dt-cloud-2, .dt-cloud-3 {
+    position: fixed; pointer-events: none;
+  }
+  .tw-star-hero-1 {
+    top: 14vh; left: 32%; width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255, 255, 255, 1); z-index: 1;
+    box-shadow: 0 0 4px 1px rgba(255,255,255,0.9), 0 0 12px 4px rgba(200,220,255,0.5), 0 0 28px 10px rgba(150,180,255,0.18);
+    animation: heroStar 4.5s ease-in-out infinite alternate;
+  }
+  .tw-star-hero-2 {
+    top: 22vh; left: 76%; width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255, 255, 255, 1); z-index: 1;
+    box-shadow: 0 0 4px 1px rgba(255,255,255,0.9), 0 0 12px 4px rgba(200,220,255,0.5), 0 0 28px 10px rgba(150,180,255,0.18);
+    animation: heroStar 4.5s ease-in-out infinite alternate; animation-delay: -1.5s;
+  }
+  .tw-star-hero-3 {
+    top: 8vh; left: 58%; width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255, 250, 240, 1); z-index: 1;
+    box-shadow: 0 0 5px 1px rgba(255,250,240,0.95), 0 0 14px 5px rgba(255,220,180,0.5), 0 0 32px 12px rgba(255,200,130,0.15);
+    animation: heroStar 5s ease-in-out infinite alternate; animation-delay: -2.5s;
+  }
+  .tw-lighthouse {
+    bottom: 20vh; right: 8%; width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255, 200, 130, 1); z-index: 1;
+    box-shadow: 0 0 10px 3px rgba(255,200,130,0.7), 0 0 30px 10px rgba(255,200,130,0.35), 0 0 70px 24px rgba(255,200,130,0.12);
+    animation: pulseLight 6s ease-in-out infinite;
+  }
+  .dt-sun {
+    top: -8vh; left: 12%; width: 180px; height: 180px; border-radius: 50%; z-index: 1;
+    background: radial-gradient(circle, rgba(255,248,220,0.95) 0%, rgba(255,240,195,0.5) 25%, rgba(255,230,170,0.2) 55%, transparent 80%);
+  }
+  .dt-cloud-1 {
+    top: 12vh; left: -25%; width: 240px; height: 70px; z-index: 1;
+    background:
+      radial-gradient(ellipse 120px 35px at 40% 60%, rgba(255,255,255,0.85), rgba(255,255,255,0.3) 70%, transparent 100%),
+      radial-gradient(ellipse 90px 28px at 70% 50%, rgba(255,255,255,0.75), transparent 80%),
+      radial-gradient(ellipse 70px 22px at 25% 65%, rgba(255,255,255,0.7), transparent 80%);
+    animation: cloudDrift1 70s linear infinite;
+  }
+  .dt-cloud-2 {
+    top: 22vh; left: -25%; width: 180px; height: 55px; z-index: 1;
+    background:
+      radial-gradient(ellipse 90px 28px at 50% 60%, rgba(255,255,255,0.8), rgba(255,255,255,0.25) 70%, transparent 100%),
+      radial-gradient(ellipse 65px 20px at 30% 50%, rgba(255,255,255,0.7), transparent 80%);
+    animation: cloudDrift2 95s linear infinite; animation-delay: -25s;
+  }
+  .dt-cloud-3 {
+    top: 32vh; left: -30%; width: 320px; height: 90px; z-index: 1;
+    background:
+      radial-gradient(ellipse 160px 45px at 50% 60%, rgba(255,255,255,0.75), rgba(255,255,255,0.25) 70%, transparent 100%),
+      radial-gradient(ellipse 110px 32px at 75% 50%, rgba(255,255,255,0.65), transparent 80%),
+      radial-gradient(ellipse 90px 28px at 25% 70%, rgba(255,255,255,0.7), transparent 80%);
+    animation: cloudDrift3 110s linear infinite; animation-delay: -55s;
+  }
+  /* Theme-conditional visibility */
+  :root[data-theme="day"] .tw-star-hero-1,
+  :root[data-theme="day"] .tw-star-hero-2,
+  :root[data-theme="day"] .tw-star-hero-3,
+  :root[data-theme="day"] .tw-lighthouse { display: none; }
+  :root:not([data-theme="day"]) .dt-sun,
+  :root:not([data-theme="day"]) .dt-cloud-1,
+  :root:not([data-theme="day"]) .dt-cloud-2,
+  :root:not([data-theme="day"]) .dt-cloud-3 { display: none; }
+  @keyframes heroStar { 0% { opacity: 0.85; transform: scale(1); } 100% { opacity: 1; transform: scale(1.15); } }
+  @keyframes pulseLight { 0%, 100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
+  @keyframes cloudDrift1 { 0% { transform: translateX(0); } 100% { transform: translateX(150vw); } }
+  @keyframes cloudDrift2 { 0% { transform: translateX(0); } 100% { transform: translateX(160vw); } }
+  @keyframes cloudDrift3 { 0% { transform: translateX(0); } 100% { transform: translateX(140vw); } }
+  /* ============ END V3 THEME OVERLAYS ============ */
+
   :root[data-theme="day"] .cloud.high .puff {
     background: radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 45%, transparent 75%);
     filter: blur(3px);
@@ -1066,6 +1147,15 @@
 </style>
 </head>
 <body>
+<!-- V3 theme overlays — hero stars + lighthouse (twilight) | sun + clouds (daytime) -->
+<div class="tw-star-hero-1"></div>
+<div class="tw-star-hero-2"></div>
+<div class="tw-star-hero-3"></div>
+<div class="tw-lighthouse"></div>
+<div class="dt-sun"></div>
+<div class="dt-cloud-1"></div>
+<div class="dt-cloud-2"></div>
+<div class="dt-cloud-3"></div>
 
 <div class="sky-bg"></div>
 
@@ -1164,6 +1254,7 @@
       <div class="nav-item" data-page="approvals" data-color="orange"><span class="nav-icon">📋</span><span>Approvals</span><span class="nav-badge alert" id="badgeApprovals">0</span></div>
       <div class="nav-item" data-page="agents" data-color="purple"><span class="nav-icon">🤖</span><span>Agents</span><span class="nav-badge" id="badgeAgents">17</span></div>
       <div class="nav-item" data-page="system" data-color="teal"><span class="nav-icon">⚙️</span><span>System</span></div>
+      <div class="nav-item" data-page="noah" data-color="orange"><span class="nav-icon">🦅</span><span>Noah</span></div>
 
       <div class="sidebar-section">Divisions</div>
       <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">🏛️</span><span>Federal</span></div>
@@ -1294,6 +1385,41 @@
           </div>
         </div>
         <div class="health-grid" id="healthGrid"></div>
+      </section>
+
+      <section class="page" data-page="noah">
+        <div class="page-header">
+          <div>
+            <div class="page-title"><div class="page-title-icon orange">🦅</div>Noah — Chief Intelligence Officer</div>
+            <div class="page-sub">Conversational empire interface · proposes improvements · tracks agent skills</div>
+          </div>
+          <div>
+            <button id="noahSuggestBtn" class="btn btn-primary" style="padding:8px 14px; border-radius:8px; background:var(--c-orange-soft); color:var(--c-orange); border:1px solid var(--c-orange-soft); cursor:pointer; font-size:13px; font-weight:600;">💡 Suggest improvement</button>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:18px;">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">💬 Chat with Noah</div>
+              <div class="panel-sub" id="noahStatus">ready</div>
+            </div>
+            <div class="panel-body" style="display:flex; flex-direction:column; height:480px;">
+              <div id="noahChatLog" style="flex:1; overflow-y:auto; padding:8px; display:flex; flex-direction:column; gap:10px;"></div>
+              <div style="display:flex; gap:8px; padding-top:12px; border-top:1px solid var(--border-soft);">
+                <input id="noahChatInput" type="text" placeholder="Ask Noah about the empire, agents, signals…" style="flex:1; background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:8px; padding:10px 12px; font-size:13.5px; outline:none;" />
+                <button id="noahSendBtn" style="padding:8px 18px; border-radius:8px; background:var(--c-orange); color:white; border:none; cursor:pointer; font-size:13px; font-weight:600;">Send</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">🧠 Recent suggestions</div>
+            </div>
+            <div class="panel-body" id="noahSuggestionLog" style="font-size:13px; color:var(--text-secondary); min-height:200px;">
+              <div style="color:var(--text-muted); font-style:italic;">Click "Suggest improvement" above to get Noah's analysis of recent activity.</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="page" data-page="federal">
@@ -1838,14 +1964,48 @@ function renderAgents(d) {
   grid.innerHTML = agents.map(a => {
     const dot = a.enabled ? '' : 'disabled';
     const initials = a.name.substring(0, 2);
-    return `<div class="agent-card">
-      <div class="agent-avatar">${initials}</div>
+    const profile = (a.profile || {});
+    const emoji = profile.avatar_emoji || '🤖';
+    const title = profile.business_title || a.role || 'agent';
+    const division = profile.division || '';
+    const skillCount = (a.skills && a.skills.length) || 0;
+    const jobs = (a.current_jobs && a.current_jobs.length) ? a.current_jobs[0] : (a.has_trigger ? 'scheduled' : 'on-demand');
+    return `<div class="agent-card" data-agent-id="${a.id || a.name}" style="cursor:pointer;">
+      <div class="agent-avatar" style="font-size:20px; background:var(--bg-elevated);">${emoji}</div>
       <div class="agent-info">
         <div class="agent-name"><span class="agent-status-dot ${dot}"></span>${a.name}</div>
-        <div class="agent-meta">${a.role || 'agent'} · ${a.has_trigger ? 'scheduled' : 'on-demand'}</div>
+        <div class="agent-meta" style="font-size:11px; color:var(--text-secondary); margin-top:1px; font-weight:500;">${title}</div>
+        <div class="agent-meta">${division ? division + ' · ' : ''}${jobs}${skillCount > 0 ? ' · ' + skillCount + ' skill' + (skillCount === 1 ? '' : 's') : ''}</div>
       </div>
     </div>`;
   }).join('');
+  document.querySelectorAll('.agent-card[data-agent-id]').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.getAttribute('data-agent-id');
+      loadAgentDetail(id);
+    });
+  });
+}
+
+function loadAgentDetail(agentId) {
+  fetch(buildUrl({ view: 'agent', id: agentId }))
+    .then(r => r.json())
+    .then(data => {
+      const profile = data.profile || {};
+      const skills = data.skills || [];
+      const jobs = data.current_jobs || [];
+      const skillsHtml = skills.length ? skills.map(s => `<div style="padding:8px 12px; background:var(--bg-elevated); border-radius:8px; margin-bottom:6px;"><div style="font-weight:600; font-size:13px; color:var(--text-primary);">${s.name}</div><div style="font-size:11.5px; color:var(--text-secondary); margin-top:2px;">${s.description || ''}</div></div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">No skills yet.</div>';
+      const jobsHtml = jobs.length ? jobs.map(j => `<li style="padding:4px 0; font-size:12.5px;">${j}</li>`).join('') : '<li style="color:var(--text-muted);">Idle</li>';
+      alert(`${profile.avatar_emoji || '🤖'} ${profile.business_title || agentId}
+
+Division: ${profile.division || 'n/a'}
+
+${profile.description || ''}
+
+Skills: ${skills.length}
+Current jobs: ${jobs.length}`);
+    })
+    .catch(e => console.error('Agent detail load failed:', e));
 }
 
 function renderHealth(d) {
@@ -2086,6 +2246,80 @@ function escapeHtml(s) {
 
 fetchOverview();
 setInterval(fetchOverview, REFRESH_MS);
+
+// ========== NOAH CHAT ==========
+let noahLastChatTs = '';
+function noahAppendMessage(sender, text) {
+  const log = document.getElementById('noahChatLog'); if (!log) return;
+  const isUser = sender === 'user';
+  const div = document.createElement('div');
+  div.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'}; max-width:85%; padding:8px 12px; border-radius:12px; background:${isUser ? 'var(--c-blue-soft)' : 'var(--bg-elevated)'}; color:var(--text-primary); font-size:13px; line-height:1.5; border:1px solid var(--border-soft);`;
+  div.innerHTML = `<div style="font-weight:600; font-size:11px; color:var(--text-secondary); margin-bottom:3px;">${isUser ? 'You' : '🦅 Noah'}</div>${text.replace(/</g,'&lt;').replace(/
+/g,'<br>')}`;
+  log.appendChild(div); log.scrollTop = log.scrollHeight;
+}
+function noahSendMessage() {
+  const input = document.getElementById('noahChatInput'); if (!input) return;
+  const msg = (input.value || '').trim(); if (!msg) return;
+  input.value = '';
+  noahAppendMessage('user', msg);
+  const status = document.getElementById('noahStatus'); if (status) status.textContent = 'thinking...';
+  fetch(buildUrl({ view: 'noah', action: 'chat', msg: msg }))
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.response) noahAppendMessage('noah', data.response);
+      else noahAppendMessage('noah', 'I had trouble responding. Try again.');
+      if (status) status.textContent = 'ready';
+    })
+    .catch(e => { noahAppendMessage('noah', 'Connection error.'); if (status) status.textContent = 'error'; });
+}
+function noahLoadSuggestion() {
+  const log = document.getElementById('noahSuggestionLog'); if (!log) return;
+  log.innerHTML = '<div style="color:var(--text-muted);">Analyzing recent activity...</div>';
+  fetch(buildUrl({ view: 'noah', action: 'suggest' }))
+    .then(r => r.json())
+    .then(data => {
+      const s = (data && data.suggestion) || 'No suggestion available.';
+      const ts = new Date().toLocaleTimeString();
+      log.innerHTML = `<div style="padding:10px 12px; background:var(--c-orange-soft); border-left:3px solid var(--c-orange); border-radius:6px; font-size:13px; line-height:1.5; color:var(--text-primary);"><div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">${ts}</div>${s.replace(/</g,'&lt;')}</div>` + log.innerHTML;
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const sendBtn = document.getElementById('noahSendBtn');
+  const input = document.getElementById('noahChatInput');
+  const suggestBtn = document.getElementById('noahSuggestBtn');
+  if (sendBtn) sendBtn.addEventListener('click', noahSendMessage);
+  if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') noahSendMessage(); });
+  if (suggestBtn) suggestBtn.addEventListener('click', noahLoadSuggestion);
+});
+
+// ========== ACTIVITY FEED LIVE POLLING ==========
+let activityLastTs = '';
+function refreshActivityFeed() {
+  const feed = document.getElementById('commandFeed');
+  if (!feed) return;
+  fetch(buildUrl({ view: 'event', limit: 20, since: activityLastTs }))
+    .then(r => r.json())
+    .then(data => {
+      const events = (data && data.events) || [];
+      if (!events.length) return;
+      activityLastTs = data.latest_timestamp || activityLastTs;
+      events.reverse().forEach(ev => {
+        const row = document.createElement('div');
+        row.className = 'feed-row';
+        const time = String(ev.timestamp || '').substring(11, 16);
+        const cat = String(ev.category || 'event');
+        const iconClass = cat === 'email_sent' ? 'send' : cat === 'reply_classified' ? 'reply' : cat === 'noah_chat' ? 'lead' : 'send';
+        const icon = cat === 'email_sent' ? '📧' : cat === 'reply_classified' ? '↩️' : cat === 'noah_chat' ? '💬' : '⚡';
+        row.innerHTML = `<div class="feed-time">${time}</div><div class="feed-icon ${iconClass}">${icon}</div><div class="feed-detail">${(ev.agent || '')} · ${(ev.message || '').replace(/</g,'&lt;')}</div><div class="feed-tag">${cat.replace('_',' ')}</div>`;
+        feed.insertBefore(row, feed.firstChild);
+      });
+      while (feed.children.length > 30) feed.removeChild(feed.lastChild);
+    })
+    .catch(e => console.warn('Activity feed refresh failed:', e));
+}
+refreshActivityFeed();
+setInterval(refreshActivityFeed, 5000);
 </script>
 </body>
 </html>
