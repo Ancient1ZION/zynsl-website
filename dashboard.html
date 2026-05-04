@@ -2493,7 +2493,7 @@ function initMonacoEditor() {
 
 function switchMonacoFile(filename) {
   if (!monacoEditorInst) return;
-  var url = buildUrl("?view=build&action=readFile&file=" + encodeURIComponent(filename));
+  var url = buildUrl({view: 'build', action: 'readFile', file: filename});
   fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(d) {
