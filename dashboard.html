@@ -2467,8 +2467,8 @@ function loadMonacoOnce() {
 }
 
 function getMonacoTheme() {
-  var isDark = document.body.classList.contains("twilight") || !document.body.classList.contains("daytime");
-  return isDark ? "vs-dark" : "vs";
+  var theme = document.documentElement.getAttribute("data-theme");
+  return (theme === "day") ? "vs" : "vs-dark";
 }
 
 function initMonacoEditor() {
@@ -2523,7 +2523,7 @@ function observeThemeForMonaco() {
       monaco.editor.setTheme(getMonacoTheme());
     }
   });
-  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
