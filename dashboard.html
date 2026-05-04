@@ -1163,7 +1163,16 @@
 .build-smoke-runner { margin:0 8px 8px; background:#12121e; border:1px solid #2a2a40; border-radius:6px; overflow:hidden; flex-shrink:0; }
 .page.active[data-page="build"] { display:flex; flex-direction:column; height:100%; overflow:hidden; }
 @media (max-width:900px) { .build-panes { grid-template-columns:1fr; } }
+.build-editor-status { position:absolute; bottom:4px; right:8px; font-size:10px; color:#555; pointer-events:none; z-index:1; }
 </style>
+<script>
+window.MonacoEnvironment = { getWorkerUrl: function() {
+  return "data:text/javascript;charset=utf-8," + encodeURIComponent(
+    "self.MonacoEnvironment = { baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/' };" +
+    "importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/base/worker/workerMain.min.js');"
+  );
+} };
+</script>
 </head>
 <body>
 <!-- V3 theme overlays — hero stars + lighthouse (twilight) | sun + clouds (daytime) -->
@@ -1323,7 +1332,7 @@
     </div>
     <div class="build-actions">
       <button class="build-btn active" data-action="chat">Chat</button>
-      <button class="build-btn" data-action="edit">Edit</button>
+      <button class="build-btn" id="buildBtnEdit" data-action="edit">Edit</button>
       <button class="build-btn" data-action="diff">Diff</button>
       <button class="build-btn" data-action="rollback">Rollback</button>
       <button class="build-btn" data-action="commit">Commit</button>
@@ -1343,9 +1352,11 @@
     </div>
     <div class="build-editor-panel">
       <div class="build-panel-header">Editor</div>
-      <div class="build-panel-body" id="buildEditorBody">
-        <div class="build-placeholder">Monaco loads in 6.9</div>
-      </div>
+      <div class="build-panel-body" id="buildEditorBody" style="padding:0;position:relative;">
+      <div id="buildEditorContainer" style="width:100%;height:100%;min-height:300px;"></div>
+      <div id="buildEditorPlaceholder" class="build-placeholder">Loading Monaco...</div>
+      <div id="buildEditorStatus" class="build-editor-status">editing Code.gs (read-only)</div>
+    </div>
     </div>
     <div class="build-diff-panel">
       <div class="build-panel-header">Diff</div>
@@ -2424,6 +2435,122 @@ document.addEventListener("DOMContentLoaded", function() {
       btn.classList.add("active");
     });
   });
+});
+// Monaco Editor -- 6.9
+var monacoLoaded = false;
+var monacoLoadPending = false;
+var monacoEditorInst = null;
+var monacoEditMode = false;
+
+function loadMonacoOnce() {
+  if (monacoLoaded || monacoLoadPending) return;
+  monacoLoadPending = true;
+  var container = document.getElementById("buildEditorContainer");
+  var placeholder = document.getElementById("buildEditorPlaceholder");
+  if (placeholder) placeholder.style.display = "block";
+  var loaderScript = document.createElement("script");
+  loaderScript.src = "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js";
+  loaderScript.onload = function() {
+    require.config({ paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs" } });
+    require(["vs/editor/editor.main"], function() {
+      monacoLoaded = true;
+      monacoLoadPending = false;
+      if (placeholder) placeholder.style.display = "none";
+      initMonacoEditor();
+    });
+  };
+  loaderScript.onerror = function() {
+    monacoLoadPending = false;
+    if (placeholder) placeholder.textContent = "Monaco failed to load.";
+  };
+  document.head.appendChild(loaderScript);
+}
+
+function getMonacoTheme() {
+  var isDark = document.body.classList.contains("twilight") || !document.body.classList.contains("daytime");
+  return isDark ? "vs-dark" : "vs";
+}
+
+function initMonacoEditor() {
+  var container = document.getElementById("buildEditorContainer");
+  if (!container || !window.monaco) return;
+  if (monacoEditorInst) return;
+  monacoEditorInst = monaco.editor.create(container, {
+    value: "// Loading Code.gs...",
+    language: "javascript",
+    theme: getMonacoTheme(),
+    readOnly: true,
+    minimap: { enabled: false },
+    fontSize: 12,
+    lineNumbers: "on",
+    scrollBeyondLastLine: false,
+    automaticLayout: true,
+    wordWrap: "off"
+  });
+  observeThemeForMonaco();
+  switchMonacoFile("Code.gs");
+}
+
+function switchMonacoFile(filename) {
+  if (!monacoEditorInst) return;
+  var url = buildUrl("?view=build&action=readFile&file=" + encodeURIComponent(filename));
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var src = (d && d.content) ? d.content : ("// " + filename + " (not available)");
+      monacoEditorInst.setValue(src);
+      var el = document.getElementById("buildFile");
+      if (el) el.textContent = filename;
+    })
+    .catch(function(e) {
+      monacoEditorInst.setValue("// fetch error: " + e.message);
+    });
+}
+
+function setMonacoEditMode(editable) {
+  monacoEditMode = editable;
+  if (monacoEditorInst) monacoEditorInst.updateOptions({ readOnly: !editable });
+  var btn = document.getElementById("buildBtnEdit");
+  var status = document.getElementById("buildEditorStatus");
+  var file = (document.getElementById("buildFile") || {}).textContent || "Code.gs";
+  if (btn) btn.textContent = editable ? "Lock" : "Edit";
+  if (status) status.textContent = "editing " + file + (editable ? " (writable)" : " (read-only)");
+}
+
+function observeThemeForMonaco() {
+  var observer = new MutationObserver(function() {
+    if (monacoEditorInst) {
+      monaco.editor.setTheme(getMonacoTheme());
+    }
+  });
+  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".nav-item").forEach(function(item) {
+    item.addEventListener("click", function() {
+      if (item.getAttribute("data-page") === "build") {
+        setTimeout(function() {
+          initBuildModeOnce();
+          loadMonacoOnce();
+        }, 100);
+      }
+    });
+  });
+  var editBtn = document.getElementById("buildBtnEdit");
+  if (editBtn) {
+    editBtn.addEventListener("click", function() {
+      setMonacoEditMode(!monacoEditMode);
+      document.querySelectorAll(".build-btn").forEach(function(b) {
+        b.classList.remove("active");
+      });
+      if (!monacoEditMode) {
+        editBtn.classList.remove("active");
+      } else {
+        editBtn.classList.add("active");
+      }
+    });
+  }
 });
 </script>
 </body>
