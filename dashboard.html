@@ -2313,6 +2313,9 @@ function escapeHtml(s) {
 
 fetchOverview();
 setInterval(fetchOverview, REFRESH_MS);
+        loadDivisionTable('federal');
+        loadDivisionTable('consulting');
+        loadDivisionTable('autonomous');
 
 // ========== NOAH CHAT ==========
 let noahLastChatTs = '';
