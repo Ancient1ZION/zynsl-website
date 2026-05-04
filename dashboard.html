@@ -2580,8 +2580,9 @@ hist.push({role:"user",content:msg});
 try{localStorage.setItem(CK,JSON.stringify(hist));}catch(e){}
 renderMsg(log,"user",msg);
 var tk=renderThink(log);log.scrollTop=log.scrollHeight;
-var url=buildUrl({view:"build",action:"ai_chat"});
-fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:hist.map(function(m){return{role:m.role,content:m.content};})})})
+var _msgs=hist.map(function(m){return{role:m.role,content:m.content};});
+var url=buildUrl({view:"build",action:"ai_chat",messages:encodeURIComponent(JSON.stringify(_msgs))});
+fetch(url)
 .then(function(r){return r.json();})
 .then(function(d){
 if(tk&&tk.parentNode)tk.parentNode.removeChild(tk);
