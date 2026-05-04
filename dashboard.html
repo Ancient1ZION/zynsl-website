@@ -1173,6 +1173,7 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
   );
 } };
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
 </head>
 <body>
 <!-- V3 theme overlays — hero stars + lighthouse (twilight) | sun + clouds (daytime) -->
@@ -2622,6 +2623,35 @@ initChat();
 });
 })();
 // === END 6.10 ===
+
+// === 6.11 DIFF VIEWER ===
+(function(){
+function showProposalDiff(pid){
+var body=document.getElementById("buildDiffBody");if(!body)return;
+body.innerHTML='<div style="padding:12px;color:#aaa">Loading diff...</div>';
+var url=buildUrl({view:"build",action:"get_proposal",proposal_id:pid});
+fetch(url).then(function(r){return r.json();}).then(function(d){
+if(!d||!d.ok){body.innerHTML='<div style="padding:12px;color:#f66">No proposal: '+pid+'</div>';return;}
+var oldContent=d.proposal&&d.proposal.old_content||"";
+var newContent=d.proposal&&d.proposal.new_content||"";
+var path=d.proposal&&d.proposal.path||"file";
+var diff=createUnifiedDiff(path,oldContent,newContent);
+if(typeof Diff2Html!=="undefined"){body.innerHTML=Diff2Html.html(diff,{drawFileList:false,matching:"lines",outputFormat:"side-by-side"});}
+else{body.innerHTML='<pre style="padding:8px;font-size:12px;overflow:auto;color:#ccc">'+escHtml(diff)+'</pre>';}
+var actRow=document.createElement("div");actRow.style.cssText="display:flex;gap:8px;padding:8px;";
+var appBtn=document.createElement("button");appBtn.textContent="Approve";appBtn.style.cssText="padding:6px 16px;background:#2d5a2e;color:#fff;border:1px solid #3a7a3b;border-radius:4px;cursor:pointer;";appBtn.onclick=function(){approveProposal(pid);};
+var rejBtn=document.createElement("button");rejBtn.textContent="Reject";rejBtn.style.cssText="padding:6px 16px;background:#5a2d2d;color:#fff;border:1px solid #7a3a3a;border-radius:4px;cursor:pointer;";rejBtn.onclick=function(){rejectProposal(pid);};
+actRow.appendChild(appBtn);actRow.appendChild(rejBtn);body.appendChild(actRow);
+}).catch(function(e){body.innerHTML='<div style="padding:12px;color:#f66">Error: '+e.message+'</div>';});
+}
+function approveProposal(pid){var url=buildUrl({view:"build",action:"apply_proposal",proposal_id:pid});fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({proposal_id:pid})}).then(function(r){return r.json();}).then(function(d){alert(d.ok?"Approved!":"Error: "+(d.error||"unknown"));}).catch(function(e){alert("Error: "+e.message);});}
+function rejectProposal(pid){var url=buildUrl({view:"build",action:"reject_proposal",proposal_id:pid});fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({proposal_id:pid,reason:"Rejected via dashboard"})}).then(function(r){return r.json();}).then(function(d){alert(d.ok?"Rejected.":"Error: "+(d.error||"unknown"));}).catch(function(e){alert("Error: "+e.message);});}
+function createUnifiedDiff(path,oldStr,newStr){var oldLines=oldStr.split("\n");var newLines=newStr.split("\n");var out="--- a/"+path+"\n+++ b/"+path+"\n@@ -1,"+oldLines.length+" +1,"+newLines.length+" @@\n";oldLines.forEach(function(l){out+="-"+l+"\n";});newLines.forEach(function(l){out+="+"+l+"\n";});return out;}
+function escHtml(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function initDiffViewer(){if(document.getElementById("diffViewerReady"))return;var marker=document.createElement("span");marker.id="diffViewerReady";document.body.appendChild(marker);var diffBtn=document.querySelector('[data-action="diff"]');if(diffBtn){diffBtn.addEventListener("click",function(){var pid=prompt("Enter proposal ID:");if(pid){if(typeof Diff2Html==="undefined"){var s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js";s.onload=function(){showProposalDiff(pid.trim());};document.head.appendChild(s);}else{showProposalDiff(pid.trim());}}});}}
+document.addEventListener("DOMContentLoaded",function(){var t=document.querySelector("[data-tab='build']");if(t)t.addEventListener("click",function(){setTimeout(initDiffViewer,200);});initDiffViewer();});
+})();
+// === END 6.11 ===
 </script>
 </body>
 </html>
