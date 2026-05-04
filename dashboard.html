@@ -1144,6 +1144,25 @@
     .health-grid { grid-template-columns: 1fr; }
     .top-center { display: none; }
   }
+/* Build mode -- 6.8 scaffold */
+.build-header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#1a1a2e; border-bottom:1px solid #333; flex-shrink:0; }
+.build-title { display:flex; gap:16px; font-size:12px; color:#aaa; }
+.build-title span span { color:#e0e0e0; font-weight:600; }
+.build-actions { display:flex; gap:6px; }
+.build-btn { padding:5px 12px; border:1px solid #444; background:#252540; color:#ccc; border-radius:4px; cursor:pointer; font-size:12px; transition:all .15s; }
+.build-btn:hover { background:#333360; border-color:#7070cc; color:#fff; }
+.build-btn.active { background:#4444aa; border-color:#7777dd; color:#fff; }
+.build-panes { display:grid; grid-template-columns:1fr 2fr 1fr; gap:8px; padding:8px; flex:1; min-height:0; overflow:hidden; }
+.build-chat-panel,.build-editor-panel,.build-diff-panel { display:flex; flex-direction:column; background:#12121e; border:1px solid #2a2a40; border-radius:6px; overflow:hidden; }
+.build-panel-header { padding:6px 12px; background:#1e1e35; font-size:11px; color:#888; text-transform:uppercase; letter-spacing:.05em; flex-shrink:0; border-bottom:1px solid #2a2a40; }
+.build-panel-body { flex:1; overflow-y:auto; padding:12px; }
+.build-placeholder { color:#555; font-size:12px; font-style:italic; text-align:center; margin-top:20px; }
+.build-chat-input-row { display:flex; gap:6px; padding:8px; border-top:1px solid #2a2a40; flex-shrink:0; }
+.build-chat-input-row input { flex:1; background:#1a1a2e; border:1px solid #333; color:#ccc; border-radius:4px; padding:6px 10px; font-size:12px; }
+.build-chat-input-row button { padding:6px 14px; background:#333360; border:1px solid #555; color:#ccc; border-radius:4px; cursor:pointer; font-size:12px; }
+.build-smoke-runner { margin:0 8px 8px; background:#12121e; border:1px solid #2a2a40; border-radius:6px; overflow:hidden; flex-shrink:0; }
+section[data-page="build"] { display:flex; flex-direction:column; height:100%; overflow:hidden; }
+@media (max-width:900px) { .build-panes { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -1255,6 +1274,7 @@
       <div class="nav-item" data-page="agents" data-color="purple"><span class="nav-icon">🤖</span><span>Agents</span><span class="nav-badge" id="badgeAgents">17</span></div>
       <div class="nav-item" data-page="system" data-color="teal"><span class="nav-icon">⚙️</span><span>System</span></div>
       <div class="nav-item" data-page="noah" data-color="orange"><span class="nav-icon">🦅</span><span>Noah</span></div>
+          <div class="nav-item" data-page="build" data-color="cyan"><span class="nav-icon">[B]</span><span>Build</span></div>
 
       <div class="sidebar-section">Divisions</div>
       <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">🏛️</span><span>Federal</span></div>
@@ -1294,6 +1314,53 @@
           <div class="panel-body flush"><div class="feed" id="commandFeed"></div></div>
         </div>
       </section>
+<section class="page" data-page="build">
+  <div class="build-header">
+    <div class="build-title">
+      <span class="build-file-label">File: <span id="buildFile">Code.gs</span></span>
+      <span class="build-branch-label">Branch: <span id="buildBranch">main</span></span>
+      <span class="build-last-label">Last: <span id="buildLast">--</span></span>
+    </div>
+    <div class="build-actions">
+      <button class="build-btn active" data-action="chat">Chat</button>
+      <button class="build-btn" data-action="edit">Edit</button>
+      <button class="build-btn" data-action="diff">Diff</button>
+      <button class="build-btn" data-action="rollback">Rollback</button>
+      <button class="build-btn" data-action="commit">Commit</button>
+      <button class="build-btn" data-action="deploy">Deploy</button>
+    </div>
+  </div>
+  <div class="build-panes">
+    <div class="build-chat-panel">
+      <div class="build-panel-header">Chat</div>
+      <div class="build-panel-body" id="buildChatBody">
+        <div class="build-placeholder">Build chat wires in 6.10</div>
+      </div>
+      <div class="build-chat-input-row">
+        <input type="text" id="buildChatInput" placeholder="Describe a change..." disabled />
+        <button id="buildChatSend" disabled>Send</button>
+      </div>
+    </div>
+    <div class="build-editor-panel">
+      <div class="build-panel-header">Editor</div>
+      <div class="build-panel-body" id="buildEditorBody">
+        <div class="build-placeholder">Monaco loads in 6.9</div>
+      </div>
+    </div>
+    <div class="build-diff-panel">
+      <div class="build-panel-header">Diff</div>
+      <div class="build-panel-body" id="buildDiffBody">
+        <div class="build-placeholder">Diff viewer wires in 6.11</div>
+      </div>
+    </div>
+  </div>
+  <div class="build-smoke-runner">
+    <div class="build-panel-header">Smoke Test Runner</div>
+    <div class="build-panel-body" id="buildSmokeBody">
+      <div class="build-placeholder">Run tests before committing changes</div>
+    </div>
+  </div>
+</section>
 
       <section class="page" data-page="activity">
         <div class="page-header">
@@ -2323,6 +2390,41 @@ function refreshActivityFeed() {
 }
 refreshActivityFeed();
 setInterval(refreshActivityFeed, 5000);
+// Build mode init -- 6.8 scaffold
+var buildModeInited = false;
+function initBuildModeOnce() {
+  if (buildModeInited) return;
+  buildModeInited = true;
+  refreshBuildIndicators();
+}
+function refreshBuildIndicators() {
+  var url = buildUrl("?view=capital&action=status");
+  try {
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        var sha = d && d.last_commit ? d.last_commit.substring(0,7) : "--";
+        var date = d && d.activated_at ? d.activated_at : "--";
+        var el = document.getElementById("buildLast");
+        if (el) el.textContent = sha + " " + date;
+      })
+      .catch(function(e) { console.warn("buildIndicators fetch failed:", e); });
+  } catch(e) { console.warn("buildIndicators error:", e); }
+}
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".nav-item").forEach(function(item) {
+    item.addEventListener("click", function() {
+      var page = item.getAttribute("data-page");
+      if (page === "build") { setTimeout(initBuildModeOnce, 100); }
+    });
+  });
+  document.querySelectorAll(".build-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      document.querySelectorAll(".build-btn").forEach(function(b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+    });
+  });
+});
 </script>
 </body>
 </html>
