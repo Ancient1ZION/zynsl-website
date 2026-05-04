@@ -2656,6 +2656,17 @@ function escHtml(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(
 function initDiffViewer(){if(document.getElementById("diffViewerReady"))return;var marker=document.createElement("span");marker.id="diffViewerReady";document.body.appendChild(marker);var diffBtn=document.querySelector('[data-action="diff"]');if(diffBtn){diffBtn.addEventListener("click",function(){var pid=prompt("Enter proposal ID:");if(pid){if(typeof Diff2Html==="undefined"){var s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/diff2html/bundles/js/diff2html-ui.min.js";s.onload=function(){showProposalDiff(pid.trim());};document.head.appendChild(s);}else{showProposalDiff(pid.trim());}}});}}
 document.addEventListener("DOMContentLoaded",function(){var t=document.querySelector("[data-tab='build']");if(t)t.addEventListener("click",function(){setTimeout(initDiffViewer,200);});initDiffViewer();});
 })();
+
+// === DEEP-LINK HANDLER (?page=X) ===
+document.addEventListener("DOMContentLoaded", function() {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var targetPage = params.get("page");
+    if (!targetPage) return;
+    var navItem = document.querySelector('.nav-item[data-page="' + targetPage + '"]');
+    if (navItem) setTimeout(function() { navItem.click(); }, 50);
+  } catch (e) { console.warn("deep-link handler:", e); }
+});
 // === END 6.11 ===
 </script>
 </body>
