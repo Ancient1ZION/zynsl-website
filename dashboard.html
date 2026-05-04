@@ -2581,7 +2581,7 @@ try{localStorage.setItem(CK,JSON.stringify(hist));}catch(e){}
 renderMsg(log,"user",msg);
 var tk=renderThink(log);log.scrollTop=log.scrollHeight;
 var _msgs=hist.map(function(m){return{role:m.role,content:m.content};});
-var url=buildUrl({view:"build",action:"ai_chat",messages:encodeURIComponent(JSON.stringify(_msgs))});
+var url=buildUrl({view:"build",action:"ai_chat",messages:JSON.stringify(_msgs)});
 fetch(url)
 .then(function(r){return r.json();})
 .then(function(d){
