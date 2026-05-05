@@ -1174,8 +1174,7 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
 } };
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
-<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
-  </head>
+</head>
 <body>
 <!-- V3 theme overlays — hero stars + lighthouse (twilight) | sun + clouds (daytime) -->
 <div class="tw-star-hero-1"></div>
@@ -1291,7 +1290,7 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
       <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">🏛️</span><span>Federal</span></div>
       <div class="nav-item" data-page="consulting" data-color="purple"><span class="nav-icon">💼</span><span>Consulting</span></div>
       <div class="nav-item" data-page="autonomous" data-color="cyan"><span class="nav-icon">🤖</span><span>Autonomous</span></div>
-      <div class="nav-item" data-page="capital" data-color="orange"><span class="nav-icon">💹</span><span>Capital</span><span class="nav-badge" id="badgeCapitalHalt" style="display:none; background:#dc2626; color:#fff;">HALT</span></div>
+      <div class="nav-item" data-page="capital" data-color="orange"><span class="nav-icon">💹</span><span>Capital</span></div>
 
       <div class="sidebar-section">Pipeline</div>
       <div class="nav-item" data-page="leads" data-color="green"><span class="nav-icon">🎯</span><span>Leads</span><span class="nav-badge" id="badgeLeads">0</span></div>
@@ -1572,40 +1571,66 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
         <div class="page-header">
           <div>
             <div class="page-title"><div class="page-title-icon orange">💹</div>ZYN Capital Management</div>
-            <div class="page-sub">Tradovate paper · Futures (ES/NQ/CL/GC) · Pending CEO approval to go live</div>
-          </div>
-          <div style="display:flex; gap:8px; align-items:center;">
-            <div id="capitalSignalVolume" style="font-size:12px; color:#9aa3b8;">Signals today: <span id="capitalSignalCount">—</span></div>
-            <button id="capitalHaltBtn" class="btn-danger" style="padding:8px 16px; background:#dc2626; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600;">⛔ HALT</button>
-            <button id="capitalResumeBtn" class="btn-success" style="display:none; padding:8px 16px; background:#16a34a; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600;">▶ RESUME</button>
+            <div class="page-sub">Trading &amp; investment systems · Status: Parked · Activation pending CEO approval</div>
           </div>
         </div>
+        <div class="division-grid" id="capitalMetrics" style="grid-template-columns: repeat(4, 1fr);"></div>
 
-        <div class="division-grid" id="capitalLiveMetrics" style="grid-template-columns: repeat(5, 1fr);"></div>
-
-        <div class="panel" style="margin-top:16px;">
-          <div class="panel-header"><div class="panel-title">🛠️ Tool Stack Status</div><div class="panel-sub" id="capitalToolStackSub">Local Python heartbeats (refresh 10s)</div></div>
-          <div class="panel-body" id="capitalToolStack" style="padding:12px;"></div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">💤 Division Status</div>
+            <div class="panel-sub">Current state &amp; activation criteria</div>
+          </div>
+          <div class="panel-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+              <div class="division-card capital">
+                <div class="div-header"><span class="div-emoji">📅</span><span class="div-name">Activation Date</span></div>
+                <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">TBD</div><div class="label">Awaiting CEO trigger</div></div></div>
+              </div>
+              <div class="division-card capital">
+                <div class="div-header"><span class="div-emoji">💰</span><span class="div-name">Capital Required</span></div>
+                <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">$10K</div><div class="label">Minimum trading float</div></div></div>
+              </div>
+              <div class="division-card capital">
+                <div class="div-header"><span class="div-emoji">🤖</span><span class="div-name">Agents Planned</span></div>
+                <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">3</div><div class="label">MiroFish, Watcher, Hedger</div></div></div>
+              </div>
+              <div class="division-card capital">
+                <div class="div-header"><span class="div-emoji">📈</span><span class="div-name">Target Strategy</span></div>
+                <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">Long</div><div class="label">SPY · QQQ · sector ETFs</div></div></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="panel" style="margin-top:16px;">
-          <div class="panel-header"><div class="panel-title">⚙️ Trading Parameters</div><div class="panel-sub">Read-only · Configured by Anthropic build agent</div></div>
-          <div class="panel-body" id="capitalParameters" style="padding:12px;"></div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">🗺️ Activation Roadmap</div>
+            <div class="panel-sub">Steps to bring Capital Management online</div>
+          </div>
+          <div class="panel-body" style="padding: 0;">
+            <div class="feed">
+              <div class="feed-row"><div class="feed-time">Step 1</div><div class="feed-icon send">✓</div><div class="feed-detail">Empire revenue clears $5K/month sustained for 30 days</div><div class="feed-tag capital">PRECONDITION</div></div>
+              <div class="feed-row"><div class="feed-time">Step 2</div><div class="feed-icon lead">·</div><div class="feed-detail">Allocate $10K trading float from operating reserves</div><div class="feed-tag capital">FUNDING</div></div>
+              <div class="feed-row"><div class="feed-time">Step 3</div><div class="feed-icon lead">·</div><div class="feed-detail">Connect Alpaca Markets API (paper trading first, then live)</div><div class="feed-tag capital">INTEGRATION</div></div>
+              <div class="feed-row"><div class="feed-time">Step 4</div><div class="feed-icon lead">·</div><div class="feed-detail">Deploy MiroFish prediction engine — 30 day backtest required</div><div class="feed-tag capital">AGENT</div></div>
+              <div class="feed-row"><div class="feed-time">Step 5</div><div class="feed-icon lead">·</div><div class="feed-detail">Set risk circuit breakers — max 3% drawdown / day, kill switch via Discord</div><div class="feed-tag capital">RISK</div></div>
+              <div class="feed-row"><div class="feed-time">Step 6</div><div class="feed-icon payment">$</div><div class="feed-detail">Activate live trading with 1% position sizing — scale only on positive Sharpe</div><div class="feed-tag capital">LIVE</div></div>
+            </div>
+          </div>
         </div>
 
-        <div class="panel" style="margin-top:16px;">
-          <div class="panel-header"><div class="panel-title">📡 Recent Signals</div><div class="panel-sub" id="capitalSignalsSub">Last 50 · Confidence ≥ committee threshold</div></div>
-          <div class="panel-body" id="capitalSignalsList" style="padding:12px;"></div>
-        </div>
-
-        <div class="panel" style="margin-top:16px;">
-          <div class="panel-header"><div class="panel-title">💱 Recent Trades</div><div class="panel-sub">Tradovate execution log · Last 50</div></div>
-          <div class="panel-body" id="capitalTradesList" style="padding:12px;"></div>
-        </div>
-
-        <div class="panel" style="margin-top:16px;">
-          <div class="panel-header"><div class="panel-title">📈 Performance</div><div class="panel-sub">30-day equity curve · Cumulative PnL</div></div>
-          <div class="panel-body" style="padding:12px;"><canvas id="capitalPerfChart" style="max-height:300px;"></canvas></div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">⚠️ Why It's Parked</div>
+          </div>
+          <div class="panel-body">
+            <div style="display: flex; flex-direction: column; gap: 10px; color: var(--text-secondary); font-size: 13.5px; line-height: 1.6;">
+              <div><strong style="color: var(--text-primary);">Discipline.</strong> Capital management without revenue is gambling. Empire must produce real cash flow first — Federal/Consulting/Autonomous closing deals — before risking capital on markets.</div>
+              <div><strong style="color: var(--text-primary);">Focus.</strong> Running 3 outbound divisions + 1 trading division simultaneously dilutes attention. Trading division activates only when outbound is mature enough to run on autopilot.</div>
+              <div><strong style="color: var(--text-primary);">Edge.</strong> MiroFish prediction engine needs 30+ days of backtest data on real market conditions before any live capital exposure. Until then, it's research-only.</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -2642,367 +2667,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (navItem) setTimeout(function() { navItem.click(); }, 50);
   } catch (e) { console.warn("deep-link handler:", e); }
 });
-// === CAPITAL C.1b HANDLERS ===
-(function() {
-  if (window.__capitalC1bLoaded) return;
-  window.__capitalC1bLoaded = true;
-  window.capitalPollers = window.capitalPollers || [];
-  let capitalChart = null;
-
-  function capitalApiUrl(action, extra) {
-    var base = (typeof buildUrl === 'function')
-      ? buildUrl({ endpoint: 'capital', action: action })
-      : ('/?endpoint=capital&action=' + encodeURIComponent(action));
-    if (extra) {
-      for (var k in extra) {
-        if (Object.prototype.hasOwnProperty.call(extra, k)) {
-          base += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(extra[k]);
-        }
-      }
-    }
-    return base;
-  }
-
-  function freshClass(f) {
-    if (f === 'live') return '#16a34a';
-    if (f === 'recent') return '#eab308';
-    if (f === 'stale') return '#f97316';
-    if (f === 'down') return '#dc2626';
-    return '#6b7280';
-  }
-
-  function el(tag, props, children) {
-    var e = document.createElement(tag);
-    if (props) {
-      for (var k in props) {
-        if (k === 'style' && typeof props[k] === 'object') {
-          for (var s in props[k]) e.style[s] = props[k][s];
-        } else if (k === 'className') {
-          e.className = props[k];
-        } else if (k === 'text') {
-          e.textContent = props[k];
-        } else if (k.indexOf('on') === 0 && typeof props[k] === 'function') {
-          e.addEventListener(k.substring(2).toLowerCase(), props[k]);
-        } else {
-          e.setAttribute(k, props[k]);
-        }
-      }
-    }
-    if (children) {
-      for (var i = 0; i < children.length; i++) {
-        var ch = children[i];
-        if (ch == null) continue;
-        e.appendChild(typeof ch === 'string' ? document.createTextNode(ch) : ch);
-      }
-    }
-    return e;
-  }
-
-  function clearChildren(node) {
-    while (node && node.firstChild) node.removeChild(node.firstChild);
-  }
-
-  async function fetchJson(url) {
-    try {
-      var r = await fetch(url);
-      return await r.json();
-    } catch (e) {
-      console.warn('Capital fetch error:', e);
-      return null;
-    }
-  }
-
-  async function loadCapitalToolStack() {
-    var host = document.getElementById('capitalToolStack');
-    if (!host) return;
-    var data = await fetchJson(capitalApiUrl('heartbeats'));
-    clearChildren(host);
-    if (!data || !data.ok) {
-      host.appendChild(el('div', { text: 'Failed to load heartbeats', style: { color: '#dc2626' } }));
-      return;
-    }
-    var grid = el('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '8px' } });
-    var hbs = data.heartbeats || [];
-    for (var i = 0; i < hbs.length; i++) {
-      var hb = hbs[i];
-      var card = el('div', { style: { padding: '10px', border: '1px solid #2a2a40', borderRadius: '6px', background: '#0f0f1a' } });
-      var dot = el('span', { style: { display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: freshClass(hb.freshness), marginRight: '8px' } });
-      var name = el('span', { text: hb.tool || '—', style: { fontWeight: '600', color: '#e6e6f0' } });
-      var line1 = el('div', null, [dot, name]);
-      var stat = el('div', { text: (hb.freshness || 'unknown') + (hb.age_seconds != null ? ' · ' + hb.age_seconds + 's ago' : ''), style: { fontSize: '11px', color: '#9aa3b8', marginTop: '4px' } });
-      var meta = el('div', { text: hb.host ? (hb.host + (hb.version ? ' · v' + hb.version : '')) : '—', style: { fontSize: '11px', color: '#6b7280', marginTop: '2px' } });
-      card.appendChild(line1);
-      card.appendChild(stat);
-      card.appendChild(meta);
-      grid.appendChild(card);
-    }
-    host.appendChild(grid);
-  }
-
-  async function loadCapitalParameters() {
-    var host = document.getElementById('capitalParameters');
-    if (!host) return;
-    var data = await fetchJson(capitalApiUrl('parameters'));
-    clearChildren(host);
-    if (!data || !data.ok) {
-      host.appendChild(el('div', { text: 'Failed to load parameters', style: { color: '#dc2626' } }));
-      return;
-    }
-    var p = data.parameters || {};
-    var rows = [
-      ['Broker', String(p.broker || '—')],
-      ['Account Type', String(p.account_type || '—')],
-      ['Instrument Type', String(p.instrument_type || '—')],
-      ['Active Contracts', Array.isArray(p.active_contracts) ? p.active_contracts.join(', ') : '—'],
-      ['Tick Values', p.tick_values ? Object.keys(p.tick_values).map(function(k) { return k + '=
-</script>
-</body>
-</html>
- + p.tick_values[k]; }).join(' · ') : '—'],
-      ['Max Contracts/Position', String(p.max_contracts_per_position != null ? p.max_contracts_per_position : '—')],
-      ['Max Concurrent Positions', String(p.max_concurrent_positions != null ? p.max_concurrent_positions : '—')],
-      ['Daily Loss Limit', '
-</script>
-</body>
-</html>
- + String(p.daily_loss_limit_dollars != null ? p.daily_loss_limit_dollars : '—')],
-      ['Signal Volume Target', String(p.signal_volume_target || '—')],
-      ['Expected Trades/Day', String(p.expected_trades_per_day || '—')],
-      ['Committee Threshold', String(p.committee_threshold != null ? p.committee_threshold : '—')],
-      ['TradingView Account', String(p.tradingview_account || '—')],
-      ['Halt Active', p.halt_active ? 'YES' : 'no'],
-      ['Halt Reason', String(p.halt_reason || '—')],
-      ['Halt At', String(p.halt_at || '—')]
-    ];
-    var grid = el('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '6px 16px' } });
-    for (var i = 0; i < rows.length; i++) {
-      var k = el('span', { text: rows[i][0], style: { color: '#9aa3b8', fontSize: '12px' } });
-      var s = el('span', { text: ' : ', style: { color: '#6b7280' } });
-      var val = el('span', { text: rows[i][1], style: { color: rows[i][0] === 'Halt Active' && p.halt_active ? '#dc2626' : '#e6e6f0', fontFamily: 'monospace' } });
-      var line = el('div', { style: { padding: '4px 0', borderBottom: '1px dashed #2a2a40' } }, [k, s, val]);
-      grid.appendChild(line);
-    }
-    host.appendChild(grid);
-
-    // Also reflect halt state in nav badge + buttons
-    var badge = document.getElementById('badgeCapitalHalt');
-    var haltBtn = document.getElementById('capitalHaltBtn');
-    var resumeBtn = document.getElementById('capitalResumeBtn');
-    if (badge) badge.style.display = p.halt_active ? '' : 'none';
-    if (haltBtn) haltBtn.style.display = p.halt_active ? 'none' : '';
-    if (resumeBtn) resumeBtn.style.display = p.halt_active ? '' : 'none';
-  }
-
-  async function loadCapitalLiveMetrics() {
-    var host = document.getElementById('capitalLiveMetrics');
-    if (!host) return;
-    var posData = await fetchJson(capitalApiUrl('positions'));
-    var perfData = await fetchJson(capitalApiUrl('perf', { limit: 1 }));
-    clearChildren(host);
-    var positions = (posData && posData.positions) || (posData && posData.rows) || [];
-    var perf = (perfData && perfData.rows && perfData.rows[0]) || (perfData && perfData.perf && perfData.perf[0]) || {};
-    var openCount = positions.length;
-    var marketValue = 0;
-    var todayPnl = 0;
-    for (var i = 0; i < positions.length; i++) {
-      var p = positions[i];
-      if (p && p.market_value != null) marketValue += Number(p.market_value) || 0;
-      if (p && p.unrealized_pnl != null) todayPnl += Number(p.unrealized_pnl) || 0;
-    }
-    var cumPnl = perf && perf.cumulative_pnl != null ? Number(perf.cumulative_pnl) : 0;
-    var maxDd = perf && perf.max_drawdown != null ? Number(perf.max_drawdown) : 0;
-
-    function metric(label, value, color) {
-      var card = el('div', { className: 'division-card', style: { padding: '14px', border: '1px solid #2a2a40', borderRadius: '8px', background: '#0f0f1a' } });
-      card.appendChild(el('div', { text: label, style: { color: '#9aa3b8', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' } }));
-      card.appendChild(el('div', { text: value, style: { color: color || '#e6e6f0', fontSize: '22px', fontWeight: '700', marginTop: '6px', fontFamily: 'monospace' } }));
-      return card;
-    }
-    function fmt(n) { return (n >= 0 ? '
-</script>
-</body>
-</html>
- : '-
-</script>
-</body>
-</html>
-) + Math.abs(n).toFixed(2); }
-    host.appendChild(metric("Today's PnL", fmt(todayPnl), todayPnl >= 0 ? '#16a34a' : '#dc2626'));
-    host.appendChild(metric('Open Positions', String(openCount), '#e6e6f0'));
-    host.appendChild(metric('Market Value', fmt(marketValue), '#e6e6f0'));
-    host.appendChild(metric('Cumulative PnL', fmt(cumPnl), cumPnl >= 0 ? '#16a34a' : '#dc2626'));
-    host.appendChild(metric('Max Drawdown', fmt(maxDd), '#dc2626'));
-  }
-
-  async function loadCapitalSignals() {
-    var host = document.getElementById('capitalSignalsList');
-    var sub = document.getElementById('capitalSignalsSub');
-    var counter = document.getElementById('capitalSignalCount');
-    if (!host) return;
-    var data = await fetchJson(capitalApiUrl('signals', { limit: 50 }));
-    clearChildren(host);
-    var rows = (data && data.signals) || (data && data.rows) || [];
-    if (counter) counter.textContent = String(rows.length);
-    if (!rows.length) {
-      host.appendChild(el('div', { text: 'No signals yet.', style: { color: '#9aa3b8', fontStyle: 'italic' } }));
-      return;
-    }
-    var table = el('table', { style: { width: '100%', borderCollapse: 'collapse', fontSize: '12px' } });
-    var thead = el('thead');
-    var trH = el('tr', { style: { borderBottom: '1px solid #2a2a40' } });
-    ['Time','ID','Symbol','Side','Confidence','Source'].forEach(function(h) {
-      trH.appendChild(el('th', { text: h, style: { padding: '6px 8px', textAlign: 'left', color: '#9aa3b8', fontWeight: '600' } }));
-    });
-    thead.appendChild(trH);
-    table.appendChild(thead);
-    var tbody = el('tbody');
-    for (var i = 0; i < rows.length; i++) {
-      var r = rows[i];
-      var tr = el('tr', { style: { borderBottom: '1px dashed #1a1a30' } });
-      var conf = Number(r.confidence || r.committee_score || 0);
-      var confColor = conf >= 0.8 ? '#16a34a' : (conf >= 0.7 ? '#eab308' : '#9aa3b8');
-      tr.appendChild(el('td', { text: String(r.timestamp || r.created_at || '—').substring(0, 19), style: { padding: '5px 8px', color: '#9aa3b8', fontFamily: 'monospace' } }));
-      tr.appendChild(el('td', { text: String(r.signal_id || r.id || '—'), style: { padding: '5px 8px', fontFamily: 'monospace', color: '#e6e6f0' } }));
-      tr.appendChild(el('td', { text: String(r.symbol || '—'), style: { padding: '5px 8px', fontWeight: '600', color: '#e6e6f0' } }));
-      tr.appendChild(el('td', { text: String(r.side || r.direction || '—'), style: { padding: '5px 8px', color: (String(r.side || r.direction || '').toLowerCase() === 'long' ? '#16a34a' : '#dc2626') } }));
-      tr.appendChild(el('td', { text: conf.toFixed(2), style: { padding: '5px 8px', color: confColor, fontFamily: 'monospace' } }));
-      tr.appendChild(el('td', { text: String(r.source || '—'), style: { padding: '5px 8px', color: '#9aa3b8' } }));
-      tbody.appendChild(tr);
-    }
-    table.appendChild(tbody);
-    host.appendChild(table);
-  }
-
-  async function loadCapitalTrades() {
-    var host = document.getElementById('capitalTradesList');
-    if (!host) return;
-    var data = await fetchJson(capitalApiUrl('trades', { limit: 50 }));
-    clearChildren(host);
-    var rows = (data && data.trades) || (data && data.rows) || [];
-    if (!rows.length) {
-      host.appendChild(el('div', { text: 'No trades yet.', style: { color: '#9aa3b8', fontStyle: 'italic' } }));
-      return;
-    }
-    var table = el('table', { style: { width: '100%', borderCollapse: 'collapse', fontSize: '12px' } });
-    var thead = el('thead');
-    var trH = el('tr', { style: { borderBottom: '1px solid #2a2a40' } });
-    ['Time','ID','Symbol','Side','Qty','Price','PnL','Status'].forEach(function(h) {
-      trH.appendChild(el('th', { text: h, style: { padding: '6px 8px', textAlign: 'left', color: '#9aa3b8', fontWeight: '600' } }));
-    });
-    thead.appendChild(trH);
-    table.appendChild(thead);
-    var tbody = el('tbody');
-    for (var i = 0; i < rows.length; i++) {
-      var r = rows[i];
-      var tr = el('tr', { style: { borderBottom: '1px dashed #1a1a30' } });
-      var pnl = Number(r.pnl || 0);
-      var pnlColor = pnl > 0 ? '#16a34a' : (pnl < 0 ? '#dc2626' : '#9aa3b8');
-      tr.appendChild(el('td', { text: String(r.timestamp || r.executed_at || '—').substring(0, 19), style: { padding: '5px 8px', color: '#9aa3b8', fontFamily: 'monospace' } }));
-      tr.appendChild(el('td', { text: String(r.trade_id || r.id || '—'), style: { padding: '5px 8px', fontFamily: 'monospace', color: '#e6e6f0' } }));
-      tr.appendChild(el('td', { text: String(r.symbol || '—'), style: { padding: '5px 8px', fontWeight: '600' } }));
-      tr.appendChild(el('td', { text: String(r.side || '—'), style: { padding: '5px 8px', color: (String(r.side || '').toLowerCase() === 'buy' ? '#16a34a' : '#dc2626') } }));
-      tr.appendChild(el('td', { text: String(r.quantity || r.qty || '—'), style: { padding: '5px 8px', fontFamily: 'monospace' } }));
-      tr.appendChild(el('td', { text: String(r.price != null ? Number(r.price).toFixed(2) : '—'), style: { padding: '5px 8px', fontFamily: 'monospace' } }));
-      tr.appendChild(el('td', { text: pnl.toFixed(2), style: { padding: '5px 8px', fontFamily: 'monospace', color: pnlColor } }));
-      tr.appendChild(el('td', { text: String(r.status || '—'), style: { padding: '5px 8px', color: '#9aa3b8' } }));
-      tbody.appendChild(tr);
-    }
-    table.appendChild(tbody);
-    host.appendChild(table);
-  }
-
-  async function loadCapitalPerfChart() {
-    var canvas = document.getElementById('capitalPerfChart');
-    if (!canvas || typeof Chart === 'undefined') return;
-    var data = await fetchJson(capitalApiUrl('perf', { limit: 30 }));
-    var rows = (data && data.rows) || (data && data.perf) || [];
-    rows = rows.slice().reverse();
-    var labels = rows.map(function(r) { return String(r.date || r.timestamp || '').substring(0, 10); });
-    var equity = rows.map(function(r) { return Number(r.cumulative_pnl || r.equity || 0); });
-    if (capitalChart) { capitalChart.destroy(); capitalChart = null; }
-    capitalChart = new Chart(canvas.getContext('2d'), {
-      type: 'line',
-      data: { labels: labels, datasets: [{ label: 'Cumulative PnL', data: equity, borderColor: '#f97316', backgroundColor: 'rgba(249,115,22,0.15)', fill: true, tension: 0.2 }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#9aa3b8' } } }, scales: { x: { ticks: { color: '#9aa3b8' }, grid: { color: '#2a2a40' } }, y: { ticks: { color: '#9aa3b8' }, grid: { color: '#2a2a40' } } } }
-    });
-  }
-
-  async function handleCapitalHalt() {
-    var reason = window.prompt('Reason for halt? (logged to audit + Discord)', 'manual halt');
-    if (reason == null) return;
-    if (!window.confirm('Halt all capital trading?\n\nReason: ' + reason)) return;
-    try {
-      var url = capitalApiUrl('halt', { reason: reason });
-      var r = await fetch(url);
-      var j = await r.json();
-      if (j && j.ok) {
-        await loadCapitalParameters();
-      } else {
-        window.alert('Halt failed: ' + (j && j.error ? j.error : 'unknown'));
-      }
-    } catch (e) {
-      window.alert('Halt error: ' + e.message);
-    }
-  }
-
-  async function handleCapitalResume() {
-    if (!window.confirm('Resume capital trading?')) return;
-    try {
-      var r = await fetch(capitalApiUrl('resume'));
-      var j = await r.json();
-      if (j && j.ok) {
-        await loadCapitalParameters();
-      } else {
-        window.alert('Resume failed: ' + (j && j.error ? j.error : 'unknown'));
-      }
-    } catch (e) {
-      window.alert('Resume error: ' + e.message);
-    }
-  }
-
-  function stopCapitalPolling() {
-    if (window.capitalPollers) {
-      for (var i = 0; i < window.capitalPollers.length; i++) clearInterval(window.capitalPollers[i]);
-    }
-    window.capitalPollers = [];
-  }
-
-  async function initCapitalPage() {
-    stopCapitalPolling();
-    var haltBtn = document.getElementById('capitalHaltBtn');
-    var resumeBtn = document.getElementById('capitalResumeBtn');
-    if (haltBtn && !haltBtn.dataset.bound) { haltBtn.addEventListener('click', handleCapitalHalt); haltBtn.dataset.bound = '1'; }
-    if (resumeBtn && !resumeBtn.dataset.bound) { resumeBtn.addEventListener('click', handleCapitalResume); resumeBtn.dataset.bound = '1'; }
-    await Promise.all([
-      loadCapitalToolStack(),
-      loadCapitalParameters(),
-      loadCapitalLiveMetrics(),
-      loadCapitalSignals(),
-      loadCapitalTrades(),
-      loadCapitalPerfChart()
-    ]);
-    window.capitalPollers.push(setInterval(loadCapitalToolStack, 10000));
-    window.capitalPollers.push(setInterval(loadCapitalLiveMetrics, 15000));
-    window.capitalPollers.push(setInterval(loadCapitalSignals, 30000));
-    window.capitalPollers.push(setInterval(loadCapitalTrades, 30000));
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var navItems = document.querySelectorAll('.nav-item[data-page="capital"]');
-    navItems.forEach(function(it) {
-      it.addEventListener('click', function() { setTimeout(initCapitalPage, 60); });
-    });
-    document.querySelectorAll('.nav-item').forEach(function(it) {
-      if (it.getAttribute('data-page') !== 'capital') {
-        it.addEventListener('click', stopCapitalPolling);
-      }
-    });
-  });
-
-  window.initCapitalPage = initCapitalPage;
-  window.stopCapitalPolling = stopCapitalPolling;
-})();
-// === END CAPITAL C.1b HANDLERS ===
 // === END 6.11 ===
 </script>
 </body>
