@@ -2497,7 +2497,7 @@ function initMonacoEditor() {
 
 function switchMonacoFile(filename) {
   if (!monacoEditorInst) return;
-  var url = buildUrl({view: 'build', action: 'readFile', file: filename, include_content: 'true'});
+  var url = buildUrl({view: 'build', action: 'read_file', file: filename, include_content: 'true'});
   fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(d) {
