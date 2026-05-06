@@ -2131,8 +2131,7 @@ function renderApprovalQueue(d) {
       <div class="feed-time">${t}\u003C/div>
       <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}\u003C/div>
       <div><strong>${escapeHtml(it.agent)}\u003C/strong> → ${escapeHtml(it.recipient)}<br><span style="color: var(--text-muted); font-size: 12px;">${escapeHtml(it.subject || '')}\u003C/span>\u003C/div>
-      <div class="badge" style="background: var(--c-orange-soft); color: var(--c-orange);">${it.decision}\u003C/div>
-    \u003C/div>`;
+      ${it.decision === 'PENDING' ? `<div style="display:flex; gap:6px;"><button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" style="background: var(--c-green-soft); color: var(--c-green); border:1px solid var(--c-green); padding:4px 10px; border-radius:4px; cursor:pointer; font-size:11px; font-weight:600;">APPROVE</button><button class="zyn-reject-btn" data-time="${escapeHtml(it.time)}" style="background: var(--c-red-soft); color: var(--c-red); border:1px solid var(--c-red); padding:4px 10px; border-radius:4px; cursor:pointer; font-size:11px; font-weight:600;">REJECT</button></div>` : `<div class="badge" style="background: var(--c-orange-soft); color: var(--c-orange);">${it.decision}</div>`}`;
   }).join('');
 }
 
