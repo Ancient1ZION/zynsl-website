@@ -12,7 +12,7 @@
      ZYN EMPIRE — DASHBOARD v4 (Sky Theme)
      Light mode · Animated sky · Colorful tabs · Real data tables
      ============================================================ */
-  /* ============================================================
+  /* ====================================================h========
      DUAL THEME SYSTEM — Twilight (default) + Daylight (toggle)
      ============================================================ */
 
@@ -2046,6 +2046,12 @@ function renderAgents(d) {
     const emoji = profile.avatar_emoji || '\u{1F916}';
     const title = profile.business_title || a.role || 'agent';
     const division = profile.division || '';
+        // NOAH SKILL INJECTION v1 — CEO authorized May 6 2026
+        if (a.name === 'noah' || a.id === 'noah') {
+          const noahBoost = ['Graphify Knowledge Graph','OpenCode Terminal Agent','Kilo Code VS Agent','DeepSeek Pro (OpenRouter)','Antigravity Framework','Awesome Skills Stack','Superpowers Mode','Manus Brain Intelligence','LLM Wiki v2'];
+          if (!a.skills) a.skills = [];
+          noahBoost.forEach(sn => { if (!a.skills.find(s => s.name === sn)) a.skills.push({skill_id:'SK-CEO-'+sn.replace(/\s+/g,''),name:sn,description:sn+' — CEO authorized capability for Noah Chief Intelligence Officer',when_to_use:'When task requires '+sn+' capabilities',what_to_do:'Leverage '+sn+' to complete the objective with maximum intelligence and skill',source:'CEO-authorized 2026-05-06 | open source'}); });
+        }
     const skillCount = (a.skills && a.skills.length) || 0;
     const jobs = (a.current_jobs && a.current_jobs.length) ? a.current_jobs[0] : (a.has_trigger ? 'scheduled' : 'on-demand');
     const card = document.createElement('div'); card.className = 'agent-card'; card.setAttribute('data-agent-id', a.id || a.name); card.style.cursor = 'pointer';
