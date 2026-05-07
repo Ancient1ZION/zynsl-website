@@ -2135,6 +2135,129 @@ function renderApprovalQueue(d) {
   }).join('');
 }
 
+// ============= ZYN v17: Approve/Reject + Build Chat + Terminal wiring =============
+(function(){
+  const API_BASE = window.ZYN_API || ('https://script.google.com/macros/s/AKfycbzorSGdcjUiEy_yGtFvDhfWEVCuS3k2vcibdV5T8gVeC_YAT2dZ9XAuDEPS_4AIzqj7/exec');
+  const API_KEY = window.ZYN_KEY || '56Yd1ZCIYNUW5OwXyTWH06YfevcRrW1p';
+
+  async function callBuild(action, params) {
+    const fd = new URLSearchParams();
+    Object.keys(params || {}).forEach(k => fd.set(k, params[k]));
+    const url = API_BASE + '?view=build&action=' + encodeURIComponent(action) + '&key=' + encodeURIComponent(API_KEY);
+    const r = await fetch(url, { method: 'POST', body: fd });
+    return await r.json();
+  }
+  window.zynCallBuild = callBuild;
+
+  // --- Approve / Reject delegation ---
+  document.addEventListener('click', async function(e) {
+    const t = e.target;
+    if (!t || !t.dataset) return;
+    const isApprove = t.classList && t.classList.contains('zyn-approve-btn');
+    const isReject  = t.classList && t.classList.contains('zyn-reject-btn');
+    if (!isApprove && !isReject) return;
+    const time = t.dataset.time;
+    if (!time) return;
+    const action = isApprove ? 'approve_decision' : 'reject_decision';
+    const verb   = isApprove ? 'APPROVING' : 'REJECTING';
+    t.disabled = true;
+    const orig = t.textContent;
+    t.textContent = verb + '...';
+    try {
+      const res = await callBuild(action, { time: time });
+      if (res && res.ok) {
+        t.textContent = isApprove ? 'APPROVED ✓' : 'REJECTED ✓';
+        t.style.opacity = '0.6';
+        const sib = t.parentElement && t.parentElement.querySelectorAll ? t.parentElement.querySelectorAll('button') : [];
+        sib.forEach(b => { if (b !== t) { b.disabled = true; b.style.opacity = '0.3'; } });
+      } else {
+        t.disabled = false;
+        t.textContent = orig;
+        alert('Failed: ' + (res && res.error || 'unknown error'));
+      }
+    } catch (err) {
+      t.disabled = false;
+      t.textContent = orig;
+      alert('Network error: ' + err);
+    }
+  });
+
+  // --- Build chat send ---
+  function appendBuildMsg(role, text) {
+    const body = document.getElementById('buildChatBody');
+    if (!body) return;
+    if (body.querySelector('.build-placeholder')) body.innerHTML = '';
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-bottom:10px;';
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size:10px; text-transform:uppercase; color:#888; margin-bottom:2px; letter-spacing:.05em;';
+    label.textContent = role;
+    const msg = document.createElement('div');
+    msg.style.cssText = 'background:' + (role==='YOU'?'#1e3a5f':'#1a1a2e') + '; padding:8px 12px; border-radius:6px; font-size:13px; line-height:1.5; white-space:pre-wrap; word-break:break-word; color:#ddd;';
+    msg.textContent = text;
+    wrap.appendChild(label); wrap.appendChild(msg);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  async function handleBuildSend() {
+    const inp = document.getElementById('buildChatInput');
+    const btn = document.getElementById('buildChatSend');
+    if (!inp || !inp.value.trim()) return;
+    const text = inp.value.trim();
+    inp.value = '';
+    appendBuildMsg('YOU', text);
+    btn.disabled = true; inp.disabled = true;
+    try {
+      let res;
+      if (text.startsWith('/')) {
+        // Terminal command
+        const cmd = text.substring(1);
+        appendBuildMsg('TERMINAL', '$ ' + cmd);
+        res = await callBuild('terminal_run', { cmd: cmd });
+        appendBuildMsg(res.ok ? 'OUTPUT' : 'ERROR', res.output || res.error || JSON.stringify(res));
+      } else {
+        // AI chat
+        const messages = JSON.stringify([{ role: 'user', content: text }]);
+        res = await callBuild('ai_chat', { messages: messages });
+        appendBuildMsg('NOAH', res.reply || res.output || res.text || res.error || JSON.stringify(res));
+      }
+    } catch (err) {
+      appendBuildMsg('ERROR', String(err));
+    } finally {
+      btn.disabled = false; inp.disabled = false;
+      inp.focus();
+    }
+  }
+
+  function wireBuildChat() {
+    const inp = document.getElementById('buildChatInput');
+    const btn = document.getElementById('buildChatSend');
+    if (!inp || !btn || inp.dataset.zynWired) return;
+    inp.dataset.zynWired = '1';
+    btn.addEventListener('click', handleBuildSend);
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleBuildSend(); }
+    });
+    // Replace placeholder with welcome
+    const body = document.getElementById('buildChatBody');
+    if (body) {
+      body.innerHTML = '<div style="color:#888; font-size:12px; padding:8px;">Build chat ready. Type a request, or prefix with <b>/</b> for a terminal command (e.g. <code>/help</code>, <code>/triggers</code>, <code>/health</code>).</div>';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireBuildChat);
+  } else {
+    wireBuildChat();
+  }
+  setTimeout(wireBuildChat, 1000);
+  setTimeout(wireBuildChat, 3000);
+})();
+// ============= /ZYN v17 =============
+
+
+
 function renderBadges(d) {
   document.getElementById('badgeAgents').textContent = d.agents_total || 17;
   document.getElementById('badgeApprovals').textContent = (d.approval_queue || []).length;
