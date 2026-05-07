@@ -2745,7 +2745,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setStatus('Saving …');
     $id('noahCodeSave').disabled = true;
     try {
-      const res = await callBuild('write_file', { path: currentPath, content: newContent, summary: summary });
+      const res = await (window.zynCallBuild || callBuild)('write_file', { path: currentPath, content: newContent, summary: summary });
       if (!res || !res.ok) {
         setStatus('Save failed: ' + (res && res.error || 'unknown'), '#ef4444');
         $id('noahCodeSave').disabled = false;
