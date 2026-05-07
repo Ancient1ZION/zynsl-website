@@ -2136,19 +2136,63 @@ function renderApprovalQueue(d) {
   const q = d.approval_queue || [];
   const el = document.getElementById('approvalQueue');
   const subEl = document.getElementById('approvalCountSub');
-  if (subEl) subEl.textContent = q.length + (q.length === 1 ? ' item waiting' : ' items waiting');
+  if (subEl) subEl.textContent = q.length + (q.length === 1 ? ' item in queue' : ' items in queue');
   if (!el) return;
   if (!q.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅\u003C/div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No pending approvals\u003C/div><div>When Malik or Levi draft contract/proposal language, they'll appear here for your review.\u003C/div>\u003C/div>`;
+    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅</div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No items in approval queue</div><div style="font-size:13px; color:var(--text-muted);">All decisions processed.</div></div>`;
     return;
   }
+  const fmtTime = (t) => {
+    if (!t) return '';
+    const d = new Date(t);
+    const now = new Date();
+    const sameDay = d.toDateString() === now.toDateString();
+    if (sameDay) return d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit', timeZone:'America/New_York' });
+    return d.toLocaleDateString('en-US', { month:'short', day:'numeric', timeZone:'America/New_York' }) + ' ' + d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit', timeZone:'America/New_York' });
+  };
+  const parseRecipient = (r) => {
+    const m = String(r||'').match(/^(.*?)\s*<([^>]+)>\s*$/);
+    if (m) return { name: m[1].trim() || m[2].trim(), email: m[2].trim() };
+    return { name: String(r||''), email: '' };
+  };
   el.innerHTML = q.map(it => {
-    const t = it.time ? new Date(it.time).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' }) : '';
-    return `<div class="approval-row">
-      <div class="feed-time">${t}\u003C/div>
-      <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}\u003C/div>
-      <div><strong>${escapeHtml(it.agent)}\u003C/strong> → ${escapeHtml(it.recipient)}<br><span style="color: var(--text-muted); font-size: 12px;">${escapeHtml(it.subject || '')}\u003C/span>\u003C/div>
-      ${it.decision === 'PENDING' ? `<div style="display:flex; gap:6px;"><button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" style="background: var(--c-green-soft); color: var(--c-green); border:1px solid var(--c-green); padding:4px 10px; border-radius:4px; cursor:pointer; font-size:11px; font-weight:600;">APPROVE</button><button class="zyn-reject-btn" data-time="${escapeHtml(it.time)}" style="background: var(--c-red-soft); color: var(--c-red); border:1px solid var(--c-red); padding:4px 10px; border-radius:4px; cursor:pointer; font-size:11px; font-weight:600;">REJECT</button></div>` : `<div class="badge" style="background: var(--c-orange-soft); color: var(--c-orange);">${it.decision}</div>`}`;
+    const t = fmtTime(it.time);
+    const dec = String(it.decision || 'PENDING').toUpperCase();
+    const r = parseRecipient(it.recipient);
+    const stateMap = {
+      'PENDING': { label:'Pending Review', bg:'rgba(247,147,30,0.15)', fg:'var(--c-orange)', dot:'var(--c-orange)' },
+      'APPROVE': { label:'Approved · Awaiting Send', bg:'rgba(56,189,248,0.15)', fg:'var(--c-blue, #38bdf8)', dot:'var(--c-blue, #38bdf8)' },
+      'REJECT':  { label:'Rejected', bg:'rgba(148,163,184,0.18)', fg:'var(--text-muted)', dot:'var(--text-muted)' },
+      'CLEANUP-ALREADY-SENT': { label:'Sent', bg:'rgba(34,197,94,0.15)', fg:'var(--c-green)', dot:'var(--c-green)' }
+    };
+    const st = stateMap[dec] || stateMap['PENDING'];
+    const entityTag = (it.entity || 'parent').toUpperCase();
+    const time64 = encodeURIComponent(it.time);
+    const buttons = (dec === 'PENDING')
+      ? `<button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" title="Approve and queue for send">✅ Approve</button>
+         <button class="zyn-reject-btn"  data-time="${escapeHtml(it.time)}" title="Reject this draft">✖ Reject</button>`
+      : (dec === 'APPROVE')
+      ? `<button class="zyn-force-btn"   data-time="${escapeHtml(it.time)}" title="Force send now">⚡ Force Send</button>
+         <button class="zyn-reject-btn"  data-time="${escapeHtml(it.time)}" title="Cancel this approval">✖ Cancel</button>`
+      : `<button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" title="Re-approve">↻ Re-Approve</button>`;
+    return `<div class="approval-card" data-time="${escapeHtml(it.time)}">
+      <div class="approval-card-head">
+        <div class="approval-card-meta">
+          <span class="approval-state-pill" style="background:${st.bg}; color:${st.fg};"><span class="approval-state-dot" style="background:${st.dot};"></span>${st.label}</span>
+          <span class="approval-entity-tag entity-${(it.entity||'parent').toLowerCase()}">${entityTag}</span>
+          <span class="approval-time">${t}</span>
+        </div>
+        <div class="approval-card-actions">${buttons}</div>
+      </div>
+      <div class="approval-card-body">
+        <div class="approval-from-to">
+          <span class="approval-agent">${escapeHtml(it.agent || 'agent')}</span>
+          <span class="approval-arrow">→</span>
+          <span class="approval-recipient">${escapeHtml(r.name)}${r.email ? ` <span class="approval-email">&lt;${escapeHtml(r.email)}&gt;</span>` : ''}</span>
+        </div>
+        <div class="approval-subject">${escapeHtml(it.subject || '(no subject)')}</div>
+      </div>
+    </div>`;
   }).join('');
 }
 
