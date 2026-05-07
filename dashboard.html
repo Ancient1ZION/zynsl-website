@@ -2270,6 +2270,67 @@ function renderApprovalQueue(d) {
   }
   setTimeout(wireBuildChat, 1000);
   setTimeout(wireBuildChat, 3000);
+
+  // --- Noah Build/Terminal panel ---
+  function appendNoahLog(role, text) {
+    const log = document.getElementById('noahBuildLog');
+    if (!log) return;
+    if (log.querySelector('div[style*="italic"]')) log.innerHTML = '';
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-bottom:8px;';
+    const color = role==='YOU' ? '#7ad' : role==='ERROR' ? '#f66' : role==='OUTPUT' ? '#9f9' : role==='TERMINAL' ? '#fa6' : '#ddd';
+    const prefix = role==='YOU' ? '> ' : role==='TERMINAL' ? '$ ' : role==='OUTPUT' ? '' : role==='ERROR' ? '! ' : '• ';
+    wrap.innerHTML = '<span style="color:#666; font-size:10px; text-transform:uppercase; letter-spacing:.05em;">[' + role + ']</span><div style="color:' + color + '; white-space:pre-wrap; word-break:break-word; padding-left:4px;">' + prefix + (text||'').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + '</div>';
+    log.appendChild(wrap);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  async function handleNoahSend() {
+    const inp = document.getElementById('noahBuildInput');
+    const btn = document.getElementById('noahBuildSend');
+    if (!inp || !inp.value.trim()) return;
+    const text = inp.value.trim();
+    inp.value = '';
+    appendNoahLog('YOU', text);
+    btn.disabled = true; inp.disabled = true;
+    try {
+      let res;
+      if (text.startsWith('/')) {
+        const cmd = text.substring(1);
+        appendNoahLog('TERMINAL', cmd);
+        res = await callBuild('terminal_run', { cmd: cmd });
+        appendNoahLog(res.ok ? 'OUTPUT' : 'ERROR', res.output || res.error || JSON.stringify(res));
+      } else {
+        const messages = JSON.stringify([{ role: 'user', content: text }]);
+        res = await callBuild('ai_chat', { messages: messages });
+        appendNoahLog('NOAH', res.reply || res.output || res.text || res.error || JSON.stringify(res));
+      }
+    } catch (err) {
+      appendNoahLog('ERROR', String(err));
+    } finally {
+      btn.disabled = false; inp.disabled = false;
+      inp.focus();
+    }
+  }
+
+  function wireNoahBuild() {
+    const inp = document.getElementById('noahBuildInput');
+    const btn = document.getElementById('noahBuildSend');
+    if (!inp || !btn || inp.dataset.zynWired) return;
+    inp.dataset.zynWired = '1';
+    btn.addEventListener('click', handleNoahSend);
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleNoahSend(); }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireNoahBuild);
+  } else {
+    wireNoahBuild();
+  }
+  setTimeout(wireNoahBuild, 1000);
+  setTimeout(wireNoahBuild, 3000);
 })();
 // ============= /ZYN v17 =============
 
