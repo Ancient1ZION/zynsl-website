@@ -2719,7 +2719,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!path) { setStatus('Pick a file or type a path first', 'var(--c-orange)'); return; }
     setStatus('Loading ' + path + '…');
     try {
-      const res = await callBuild('read_file', { path: path });
+      const res = await (window.zynCallBuild || callBuild)('read_file', { path: path, include_content: 'true' });
       if (!res || !res.ok) { setStatus('Load failed: ' + (res && res.error || 'unknown'), '#ef4444'); return; }
       // Server may return base64 in res.content (GitHub Contents API style) or raw text
       let content = res.content || '';
