@@ -1547,6 +1547,38 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
           </div>
         </div>
 
+      <!-- ZYN v19: Noah Code Editor -->
+        <div class="panel" style="margin-top:18px;">
+          <div class="panel-header">
+            <div class="panel-title">📝 Noah — Code Editor</div>
+            <div class="panel-sub" id="noahCodeStatus">Read &amp; write any file in the GitHub repo</div>
+          </div>
+          <div class="panel-body" style="padding:14px;">
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
+              <label style="font-size:12px; color:var(--text-muted); font-weight:600;">FILE</label>
+              <select id="noahCodeFilePicker" style="background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:6px; padding:6px 10px; font-size:13px; min-width:200px;">
+                <option value="">— quick pick —</option>
+                <option value="dashboard.html">dashboard.html</option>
+                <option value="index.html">index.html</option>
+                <option value="README.md">README.md</option>
+                <option value="capabilities.html">capabilities.html</option>
+                <option value="solutions.html">solutions.html</option>
+                <option value="contact.html">contact.html</option>
+                <option value="about.html">about.html</option>
+              </select>
+              <input id="noahCodePath" type="text" placeholder="or type any path (e.g. dashboard.html)" style="flex:1; min-width:240px; background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:6px; padding:6px 10px; font-size:13px; font-family:'SF Mono',Menlo,monospace;">
+              <button id="noahCodeLoad" style="padding:7px 16px; background:var(--c-blue,#38bdf8); color:#000; border:none; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600;">📥 Load</button>
+              <button id="noahCodeSave" style="padding:7px 16px; background:var(--c-orange); color:#000; border:none; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600;" disabled>💾 Save</button>
+              <button id="noahCodeRevert" style="padding:7px 14px; background:var(--bg-elevated); color:var(--text-secondary); border:1px solid var(--border-soft); border-radius:6px; cursor:pointer; font-size:13px;">↺ Revert</button>
+            </div>
+            <textarea id="noahCodeArea" spellcheck="false" placeholder="Click Load to fetch a file from GitHub, or pick one from the dropdown..." style="width:100%; height:480px; background:#0d0d18; color:#cfd; border:1px solid var(--border-soft); border-radius:6px; padding:12px; font-family:'SF Mono','Consolas',monospace; font-size:12px; line-height:1.5; resize:vertical; box-sizing:border-box; tab-size:2;"></textarea>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px; color:var(--text-muted); font-family:'SF Mono',Menlo,monospace;">
+              <span id="noahCodeMeta">No file loaded</span>
+              <span id="noahCodeDirty"></span>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <section class="page" data-page="federal">
