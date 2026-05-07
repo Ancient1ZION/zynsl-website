@@ -2241,27 +2241,40 @@ function renderApprovalQueue(d) {
   }
   window.zynCallBuild = callBuild;
 
-  // --- Approve / Reject delegation ---
+  // --- Approve / Reject / Force Send delegation ---
   document.addEventListener('click', async function(e) {
     const t = e.target;
     if (!t || !t.dataset) return;
     const isApprove = t.classList && t.classList.contains('zyn-approve-btn');
     const isReject  = t.classList && t.classList.contains('zyn-reject-btn');
-    if (!isApprove && !isReject) return;
+    const isForce   = t.classList && t.classList.contains('zyn-force-btn');
+    if (!isApprove && !isReject && !isForce) return;
     const time = t.dataset.time;
     if (!time) return;
-    const action = isApprove ? 'approve_decision' : 'reject_decision';
-    const verb   = isApprove ? 'APPROVING' : 'REJECTING';
+    const action = isApprove ? 'approve_decision' : (isReject ? 'reject_decision' : 'force_send_decision');
+    const verb   = isApprove ? 'APPROVING' : (isReject ? 'REJECTING' : 'SENDING');
+    const successLabel = isApprove ? 'APPROVED ✓' : (isReject ? 'REJECTED ✓' : 'SENT ✓');
+    if (isReject || isForce) {
+      const confirmMsg = isReject
+        ? 'Reject this draft? It will not be sent.'
+        : 'Force send this email NOW? This bypasses the queue and sends immediately.';
+      if (!confirm(confirmMsg)) return;
+    }
     t.disabled = true;
     const orig = t.textContent;
-    t.textContent = verb + '...';
+    t.textContent = verb + '…';
     try {
       const res = await callBuild(action, { time: time });
       if (res && res.ok) {
-        t.textContent = isApprove ? 'APPROVED ✓' : 'REJECTED ✓';
+        t.textContent = successLabel;
         t.style.opacity = '0.6';
-        const sib = t.parentElement && t.parentElement.querySelectorAll ? t.parentElement.querySelectorAll('button') : [];
-        sib.forEach(b => { if (b !== t) { b.disabled = true; b.style.opacity = '0.3'; } });
+        const card = t.closest && t.closest('.approval-card');
+        if (card) {
+          const sib = card.querySelectorAll('button');
+          sib.forEach(b => { if (b !== t) { b.disabled = true; b.style.opacity = '0.3'; } });
+        }
+        // Refresh dashboard data after 1s so the row state updates from server
+        setTimeout(function(){ if (typeof loadDashboard === 'function') loadDashboard(); }, 1200);
       } else {
         t.disabled = false;
         t.textContent = orig;
