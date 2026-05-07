@@ -2108,7 +2108,7 @@ function renderHealth(d) {
       <div class="health-label">⏰ Triggers\u003C/div>
       <div class="health-value">${s.triggers || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.triggers_max || 20}\u003C/span>\u003C/div>
       <div class="health-progress"><div class="health-progress-fill" style="width:${trigPct}%; background: linear-gradient(90deg, var(--c-purple), var(--c-blue));">\u003C/div>\u003C/div>
-      <div class="health-sub">${s.triggers_max - s.triggers > 0 ? (s.triggers_max - s.triggers) + ' free slots' : 'At capacity'}\u003C/div>
+      <div class="health-sub">${s.triggers_max - s.triggers > 0 ? (s.triggers_max - s.triggers) + ' free slots' : 'Operational (full capacity)'}\u003C/div>
     \u003C/div>
     <div class="health-card props">
       <div class="health-label">🔑 Properties\u003C/div>
