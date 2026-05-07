@@ -2697,6 +2697,119 @@ document.addEventListener('DOMContentLoaded', () => {
   if (suggestBtn) suggestBtn.addEventListener('click', noahLoadSuggestion);
 });
 
+// ========== ZYN v19: Noah Code Editor wiring ==========
+(function(){
+  function $id(x){ return document.getElementById(x); }
+  function setStatus(msg, color){
+    const s = $id('noahCodeStatus');
+    if (s) { s.textContent = msg; if (color) s.style.color = color; else s.style.color = ''; }
+  }
+  function setMeta(msg){ const m = $id('noahCodeMeta'); if (m) m.textContent = msg; }
+  function setDirty(d){
+    const x = $id('noahCodeDirty');
+    if (!x) return;
+    x.textContent = d ? '• unsaved changes' : '✓ saved';
+    x.style.color = d ? 'var(--c-orange)' : 'var(--c-green)';
+  }
+  let originalContent = '';
+  let currentPath = '';
+  async function loadFile(){
+    const picker = $id('noahCodeFilePicker');
+    const path = $id('noahCodePath').value.trim() || (picker ? picker.value : '') || '';
+    if (!path) { setStatus('Pick a file or type a path first', 'var(--c-orange)'); return; }
+    setStatus('Loading ' + path + '…');
+    try {
+      const res = await callBuild('read_file', { path: path });
+      if (!res || !res.ok) { setStatus('Load failed: ' + (res && res.error || 'unknown'), '#ef4444'); return; }
+      // Server may return base64 in res.content (GitHub Contents API style) or raw text
+      let content = res.content || '';
+      if (content && /^[A-Za-z0-9+\/=\s]+$/.test(content) && content.length > 200) {
+        try { content = atob(content.replace(/\s/g, '')); } catch(e) { /* keep as-is */ }
+      }
+      $id('noahCodeArea').value = content;
+      $id('noahCodePath').value = res.path || path;
+      originalContent = content;
+      currentPath = res.path || path;
+      $id('noahCodeSave').disabled = false;
+      setStatus('Loaded ' + currentPath + ' — ' + (res.size || content.length) + ' bytes — sha ' + (res.sha || '').slice(0,8), 'var(--c-green)');
+      setMeta('path: ' + currentPath + ' · ' + content.length.toLocaleString() + ' chars · ' + content.split('\n').length + ' lines');
+      setDirty(false);
+    } catch (err) { setStatus('Network error: ' + err, '#ef4444'); }
+  }
+  async function saveFile(){
+    if (!currentPath) { setStatus('Load a file first', 'var(--c-orange)'); return; }
+    const newContent = $id('noahCodeArea').value;
+    if (newContent === originalContent) { setStatus('No changes to save', 'var(--text-muted)'); return; }
+    if (!confirm('Save ' + currentPath + ' to GitHub main? This will commit ' + newContent.length + ' chars.')) return;
+    const summary = prompt('Commit message:', 'Edit ' + currentPath + ' via Noah Code Editor') || ('Edit ' + currentPath);
+    setStatus('Saving …');
+    $id('noahCodeSave').disabled = true;
+    try {
+      const res = await callBuild('write_file', { path: currentPath, content: newContent, summary: summary });
+      if (!res || !res.ok) {
+        setStatus('Save failed: ' + (res && res.error || 'unknown'), '#ef4444');
+        $id('noahCodeSave').disabled = false;
+        return;
+      }
+      originalContent = newContent;
+      setDirty(false);
+      setStatus('Saved — commit ' + (res.commit_sha || '').slice(0,8) + ' — ' + (res.bytes || newContent.length) + ' bytes', 'var(--c-green)');
+      $id('noahCodeSave').disabled = false;
+    } catch (err) {
+      setStatus('Network error: ' + err, '#ef4444');
+      $id('noahCodeSave').disabled = false;
+    }
+  }
+  function revertFile(){
+    if (!currentPath) { setStatus('Nothing to revert', 'var(--text-muted)'); return; }
+    if (!confirm('Discard local changes and revert to last loaded version?')) return;
+    $id('noahCodeArea').value = originalContent;
+    setDirty(false);
+    setStatus('Reverted to last load', 'var(--text-muted)');
+  }
+  function wireCodeEditor(){
+    const loadBtn = $id('noahCodeLoad');
+    const saveBtn = $id('noahCodeSave');
+    const revBtn  = $id('noahCodeRevert');
+    const area    = $id('noahCodeArea');
+    const picker  = $id('noahCodeFilePicker');
+    const path    = $id('noahCodePath');
+    if (!loadBtn || !area || loadBtn.dataset.zynWired) return;
+    loadBtn.dataset.zynWired = '1';
+    loadBtn.addEventListener('click', loadFile);
+    if (saveBtn) saveBtn.addEventListener('click', saveFile);
+    if (revBtn) revBtn.addEventListener('click', revertFile);
+    if (picker) picker.addEventListener('change', function(){
+      if (picker.value) { path.value = picker.value; loadFile(); }
+    });
+    if (path) path.addEventListener('keydown', function(e){
+      if (e.key === 'Enter') { e.preventDefault(); loadFile(); }
+    });
+    area.addEventListener('input', function(){
+      setDirty(area.value !== originalContent);
+    });
+    // Tab key inserts 2 spaces instead of changing focus
+    area.addEventListener('keydown', function(e){
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = area.selectionStart, end = area.selectionEnd;
+        area.value = area.value.slice(0, start) + '  ' + area.value.slice(end);
+        area.selectionStart = area.selectionEnd = start + 2;
+        setDirty(true);
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); saveFile(); }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireCodeEditor);
+  } else {
+    wireCodeEditor();
+  }
+  setTimeout(wireCodeEditor, 1000);
+  setTimeout(wireCodeEditor, 3000);
+})();
+// ========== end ZYN v19 Noah Code Editor ==========
+
 // ========== ACTIVITY FEED LIVE POLLING ==========
 let activityLastTs = '';
 function refreshActivityFeed() {
