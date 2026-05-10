@@ -2076,9 +2076,31 @@ function renderActivityFeed(d) {
   document.getElementById('activityFeed').innerHTML = renderItems(filtered, true);
 }
 
-function renderAgents(d) {
-  const agents = d.agents || [];
-  const grid = document.getElementById('agentGrid');
+    let __agentsConfigCache = null;
+    function __ensureAgentsConfig() {
+      if (__agentsConfigCache !== null) return Promise.resolve(__agentsConfigCache);
+      return fetch('zyn-empire-agents/agents_config.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : { agents: [] })
+        .then(cfg => {
+          const list = (cfg && cfg.agents) || [];
+          const map = {};
+          list.forEach(a => { map[a.id || a.agent_id || a.name] = a; });
+          __agentsConfigCache = map;
+          return map;
+        })
+        .catch(() => { __agentsConfigCache = {}; return {}; });
+    }
+    function renderAgents(d) {
+      const rawAgents = d.agents || [];
+      __ensureAgentsConfig().then(cfgMap => {
+        const agents = rawAgents.map(a => {
+          const c = cfgMap[a.name] || cfgMap[(a.profile && a.profile.agent_id)] || {};
+          return Object.assign({}, a, c.schedule ? { schedule: c.schedule } : {});
+        });
+        __renderAgentsBody(agents);
+      });
+    }
+    function __renderAgentsBody(agents) {  const grid = document.getElementById('agentGrid');
   if (!agents.length) { grid.innerHTML = ''; const e = document.createElement('div'); e.className = 'empty-state'; e.textContent = 'No agents data'; grid.appendChild(e); return; }
   grid.innerHTML = '';
   agents.forEach(a => {
