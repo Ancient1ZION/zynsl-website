@@ -2848,6 +2848,7 @@ document.addEventListener('DOMContentLoaded', () => {
       catch(e) { console.warn('[Monaco] CDN unreachable, keeping plain textarea', e); return; }
     }
     window.require.config({ paths: { vs: MONACO_CDN + '/vs' } });
+    window.MonacoEnvironment = { getWorkerUrl: function(){ const code = "self.MonacoEnvironment={baseUrl:\"" + MONACO_CDN + "/\"};importScripts(\"" + MONACO_CDN + "/vs/base/worker/workerMain.js\");"; return "data:text/javascript;charset=utf-8," + encodeURIComponent(code); } };    
 
     const style = document.createElement('style');
     style.textContent = '#noahCodeArea{position:absolute!important;left:-99999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}#noahMonacoHost{width:100%;height:480px;border:1px solid var(--border-soft,#2a3450);border-radius:6px;overflow:hidden;background:#1e1e1e}';
