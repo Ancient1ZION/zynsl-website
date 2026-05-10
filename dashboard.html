@@ -1315,7 +1315,6 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
       <div class="nav-item" data-page="agents" data-color="purple"><span class="nav-icon">🤖</span><span>Agents</span><span class="nav-badge" id="badgeAgents">17</span></div>
       <div class="nav-item" data-page="system" data-color="teal"><span class="nav-icon">⚙️</span><span>System</span></div>
       <div class="nav-item" data-page="noah" data-color="orange"><span class="nav-icon">🦅</span><span>Noah</span></div>
-          <div class="nav-item" data-page="build" data-color="cyan"><span class="nav-icon">[B]</span><span>Build</span></div>
 
       <div class="sidebar-section">Divisions</div>
       <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">🏛️</span><span>Federal</span></div>
@@ -1355,56 +1354,6 @@ window.MonacoEnvironment = { getWorkerUrl: function() {
           <div class="panel-body flush"><div class="feed" id="commandFeed"></div></div>
         </div>
       </section>
-<section class="page" data-page="build">
-  <div class="build-header">
-    <div class="build-title">
-      <span class="build-file-label">File: <span id="buildFile">Code.gs</span></span>
-      <span class="build-branch-label">Branch: <span id="buildBranch">main</span></span>
-      <span class="build-last-label">Last: <span id="buildLast">--</span></span>
-    </div>
-    <div class="build-actions">
-      <button class="build-btn active" data-action="chat">Chat</button>
-      <button class="build-btn" id="buildBtnEdit" data-action="edit">Edit</button>
-      <button class="build-btn" data-action="diff">Diff</button>
-      <button class="build-btn" data-action="rollback">Rollback</button>
-      <button class="build-btn" data-action="commit">Commit</button>
-      <button class="build-btn" data-action="deploy">Deploy</button>
-    </div>
-  </div>
-  <div class="build-panes">
-    <div class="build-chat-panel">
-      <div class="build-panel-header">Chat</div>
-      <div class="build-panel-body" id="buildChatBody">
-        <div class="build-placeholder">Build chat wires in 6.10</div>
-      </div>
-      <div class="build-chat-input-row">
-        <input type="text" id="buildChatInput" placeholder="Ask Noah to build, code, run terminal commands, diagnose..." />
-        <button id="buildChatSend">Send</button>
-      </div>
-    </div>
-    <div class="build-editor-panel">
-      <div class="build-panel-header">Editor</div>
-      <div class="build-panel-body" id="buildEditorBody" style="padding:0;position:relative;">
-      <div id="buildEditorContainer" style="width:100%;height:100%;min-height:300px;"></div>
-      <div id="buildEditorPlaceholder" class="build-placeholder">Loading Monaco...</div>
-      <div id="buildEditorStatus" class="build-editor-status">editing Code.gs (read-only)</div>
-    </div>
-    </div>
-    <div class="build-diff-panel">
-      <div class="build-panel-header">Diff</div>
-      <div class="build-panel-body" id="buildDiffBody">
-        <div class="build-placeholder">Diff viewer wires in 6.11</div>
-      </div>
-    </div>
-  </div>
-  <div class="build-smoke-runner">
-    <div class="build-panel-header">Smoke Test Runner</div>
-    <div class="build-panel-body" id="buildSmokeBody">
-      <div class="build-placeholder">Run tests before committing changes</div>
-    </div>
-  </div>
-</section>
-
       <section class="page" data-page="activity">
         <div class="page-header">
           <div>
