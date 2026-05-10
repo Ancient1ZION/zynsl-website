@@ -2076,7 +2076,7 @@ function renderAgents(d) {
     const title = profile.business_title || a.role || 'agent';
     const division = profile.division || '';
     const skillCount = (a.skills && a.skills.length) || 0;
-    const jobs = (a.current_jobs && a.current_jobs.length) ? a.current_jobs[0] : (a.has_trigger ? 'scheduled' : 'on-demand');
+    const jobs = (a.current_jobs && a.current_jobs.length) ? a.current_jobs[0] : (a.schedule || (a.has_trigger ? 'scheduled' : 'on-demand'));
     const card = document.createElement('div'); card.className = 'agent-card'; card.setAttribute('data-agent-id', a.id || a.name); card.style.cursor = 'pointer';
     const av = document.createElement('div'); av.className = 'agent-avatar'; av.style.fontSize = '20px'; av.style.background = 'var(--bg-elevated)'; av.textContent = emoji;
     const inf = document.createElement('div'); inf.className = 'agent-info';
