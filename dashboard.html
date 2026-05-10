@@ -1988,33 +1988,44 @@ function renderDivisionMetrics(d, key) {
     \u003C/div>`;
 }
 
-function renderKanban(d) {
-  const p = d.pipeline || {};
-  const stages = [
-    { key: 'new',          label: 'New',         class: 'new' },
-    { key: 'contacted',    label: 'Contacted',   class: 'contacted' },
-    { key: 'hot',          label: 'Hot',         class: 'hot' },
-    { key: 'replied',      label: 'Replied',     class: 'replied' },
-    { key: 'proposal_sent',label: 'Proposal',    class: 'proposal' },
-    { key: 'signed',       label: 'Signed',      class: 'signed' },
-    { key: 'won',          label: 'Won',         class: 'won' }
-  ];
-  const total = stages.reduce((s, st) => s + (p[st.key] || 0), 0);
-  const max = Math.max(1, ...stages.map(st => p[st.key] || 0));
-  let html = '';
-  for (const st of stages) {
-    const v = p[st.key] || 0;
-    const pct = max ? Math.max(8, Math.round((v / max) * 100)) : 0;
-    html += `<div class="kanban-col ${st.class}">
-      <div class="kanban-label">${st.label}\u003C/div>
-      <div class="kanban-count">${v}\u003C/div>
-      <div class="kanban-bar"><div class="kanban-bar-fill" style="width:${pct}%">\u003C/div>\u003C/div>
-    \u003C/div>`;
-  }
-  document.getElementById('kanban').innerHTML = html;
-  document.getElementById('pipelineSub').textContent = total + ' total leads tracked';
-}
-
+    function renderKanban(d) {
+      const p = d.pipeline || {};
+      const stages = [
+        { key: 'new',           label: 'New',          class: 'new' },
+        { key: 'contacted',     label: 'Contacted',    class: 'contacted' },
+        { key: 'replied',       label: 'Replied',      class: 'replied' },
+        { key: 'warm',          label: 'Warm',         class: 'warm' },
+        { key: 'hot',           label: 'Hot',          class: 'hot' },
+        { key: 'proposal_sent', label: 'Proposal',     class: 'proposal' },
+        { key: 'signed',        label: 'Signed',       class: 'signed' },
+        { key: 'won',           label: 'Won',          class: 'won' },
+        { key: 'lost',          label: 'Lost',         class: 'lost' },
+        { key: 'unsubscribed',  label: 'Unsub',        class: 'unsub' },
+        { key: 'bad_email',     label: 'Bad Email',    class: 'bademail' },
+        { key: 'dup_skip',      label: 'Duplicate',    class: 'dup' }
+      ];
+      const stageTotal = stages.reduce((s, st) => s + (p[st.key] || 0), 0);
+      const leadsAll = (typeof d.leads === 'number') ? d.leads : stageTotal;
+      const other = Math.max(0, leadsAll - stageTotal);
+      if (other > 0) {
+        stages.push({ key: '__other__', label: 'Other', class: 'other' });
+        p.__other__ = other;
+      }
+      const total = leadsAll;
+      const max = Math.max(1, ...stages.map(st => p[st.key] || 0));
+      let html = '';
+      for (const st of stages) {
+        const v = p[st.key] || 0;
+        const pct = max ? Math.max(8, Math.round((v / max) * 100)) : 0;
+        html += `<div class="kanban-col ${st.class}">
+          <div class="kanban-label">${st.label}</div>
+          <div class="kanban-count">${v}</div>
+          <div class="kanban-bar"><div class="kanban-bar-fill" style="width:${pct}%"></div></div>
+        </div>`;
+      }
+      document.getElementById('kanban').innerHTML = html;
+      document.getElementById('pipelineSub').textContent = total + ' total leads tracked';
+    }
 function renderActivityFeed(d) {
   const items = d.activity_feed || [];
   const filtered = activeFilter === 'all' ? items : items.filter(i => (i.entity || '').toLowerCase() === activeFilter);
