@@ -2808,6 +2808,131 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(wireCodeEditor, 1000);
   setTimeout(wireCodeEditor, 3000);
 })();
+// ========== MONACO EDITOR UPGRADE (Microsoft Monaco — same engine as VS Code, MIT-licensed, free forever) ==========
+(function(){
+  const MONACO_VER = '0.52.0';
+  const MONACO_CDN = 'https://cdn.jsdelivr.net/npm/monaco-editor@' + MONACO_VER + '/min';
+
+  function loadScript(src) {
+    return new Promise(function(resolve, reject){
+      const s = document.createElement('script');
+      s.src = src; s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function detectLanguage(path) {
+    if (!path) return 'plaintext';
+    const ext = path.split('.').pop().toLowerCase();
+    const map = {
+      py:'python', js:'javascript', ts:'typescript',
+      html:'html', htm:'html', css:'css',
+      json:'json', md:'markdown', yml:'yaml', yaml:'yaml',
+      sh:'shell', bash:'shell', xml:'xml',
+      sql:'sql', toml:'ini', ini:'ini', cfg:'ini',
+      txt:'plaintext', log:'plaintext'
+    };
+    return map[ext] || 'plaintext';
+  }
+
+  let editor = null, area = null, pathInput = null, syncing = false;
+
+  async function initMonaco() {
+    area = document.getElementById('noahCodeArea');
+    pathInput = document.getElementById('noahCodePath');
+    if (!area || area.dataset.monacoInit === '1') return;
+    area.dataset.monacoInit = '1';
+
+    if (!window.require || !window.require.config) {
+      try { await loadScript(MONACO_CDN + '/vs/loader.js'); }
+      catch(e) { console.warn('[Monaco] CDN unreachable, keeping plain textarea', e); return; }
+    }
+    window.require.config({ paths: { vs: MONACO_CDN + '/vs' } });
+
+    const style = document.createElement('style');
+    style.textContent = '#noahCodeArea{position:absolute!important;left:-99999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}#noahMonacoHost{width:100%;height:480px;border:1px solid var(--border-soft,#2a3450);border-radius:6px;overflow:hidden;background:#1e1e1e}';
+    document.head.appendChild(style);
+
+    const host = document.createElement('div');
+    host.id = 'noahMonacoHost';
+    area.parentNode.insertBefore(host, area);
+
+    window.require(['vs/editor/editor.main'], function(){
+      editor = monaco.editor.create(host, {
+        value: area.value || '',
+        language: detectLanguage(pathInput ? pathInput.value : ''),
+        theme: 'vs-dark',
+        fontSize: 13,
+        fontFamily: 'SF Mono, Consolas, Menlo, monospace',
+        lineNumbers: 'on',
+        minimap: { enabled: true },
+        scrollBeyondLastLine: false,
+        automaticLayout: true,
+        tabSize: 2,
+        insertSpaces: true,
+        wordWrap: 'on',
+        renderWhitespace: 'selection',
+        bracketPairColorization: { enabled: true }
+      });
+
+      // Sync Monaco -> textarea (so existing saveFile() reads the latest content)
+      editor.onDidChangeModelContent(function(){
+        if (syncing) return;
+        syncing = true;
+        try {
+          const v = editor.getValue();
+          const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+          setter.call(area, v);
+          area.dispatchEvent(new Event('input', { bubbles: true }));
+        } finally { syncing = false; }
+      });
+
+      // Sync textarea -> Monaco when external code sets area.value (Load/Revert)
+      const origDesc = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+      Object.defineProperty(area, 'value', {
+        configurable: true,
+        get: function(){ return origDesc.get.call(this); },
+        set: function(v){
+          origDesc.set.call(this, v);
+          if (editor && !syncing) {
+            syncing = true;
+            try {
+              editor.setValue(v == null ? '' : String(v));
+              const lang = detectLanguage(pathInput ? pathInput.value : '');
+              const model = editor.getModel();
+              if (model) monaco.editor.setModelLanguage(model, lang);
+            } finally { syncing = false; }
+          }
+        }
+      });
+
+      // Update language on path change
+      if (pathInput) {
+        pathInput.addEventListener('change', function(){
+          const lang = detectLanguage(pathInput.value);
+          const model = editor.getModel();
+          if (model) monaco.editor.setModelLanguage(model, lang);
+        });
+      }
+
+      // Ctrl+S inside Monaco triggers Save
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, function(){
+        const btn = document.getElementById('noahCodeSave');
+        if (btn) btn.click();
+      });
+
+      console.log('[Monaco] Noah Code Editor upgraded to Monaco ' + MONACO_VER);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMonaco);
+  } else {
+    initMonaco();
+  }
+  setTimeout(initMonaco, 1500);
+  setTimeout(initMonaco, 3500);
+})();
 // ========== end ZYN v19 Noah Code Editor ==========
 
 // ========== ACTIVITY FEED LIVE POLLING ==========
