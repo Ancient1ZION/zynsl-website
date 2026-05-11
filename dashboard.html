@@ -10,7 +10,7 @@
 <style>
   /* ============================================================
      ZYN EMPIRE  &mdash;  DASHBOARD v4 (Sky Theme)
-     Light mode ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ· Animated sky ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ· Colorful tabs ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ· Real data tables
+     Light mode ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ· Animated sky ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ· Colorful tabs ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ· Real data tables
      ============================================================ */
   /* ============================================================
      DUAL THEME SYSTEM  &mdash;  Twilight (default) + Daylight (toggle)
@@ -66,7 +66,7 @@
     --grad-card-edge: linear-gradient(135deg, rgba(212,165,116,0.40) 0%, rgba(139,127,196,0.40) 50%, rgba(91,143,217,0.40) 100%);
     --grad-text:      linear-gradient(135deg, #d4a574 0%, #8db4d8 50%, #5b8fd9 100%);
 
-    /* Sky background  &mdash;  v3 realistic blue hour, deep navy ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ indigo ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ bronze ember horizon */
+    /* Sky background  &mdash;  v3 realistic blue hour, deep navy ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ indigo ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ bronze ember horizon */
     --sky-gradient:
       radial-gradient(ellipse 1200px 500px at 50% 100%,
         rgba(190, 110, 50, 0.22) 0%,
@@ -996,7 +996,7 @@
   .search-box { flex: 1; min-width: 240px; position: relative; }
   .search-box input { width: 100%; padding: 8px 12px 8px 36px; border: 1px solid var(--border-soft); border-radius: 8px; font-size: 13px; background: white; transition: border 0.15s, box-shadow 0.15s; font-family: 'Inter', sans-serif; }
   .search-box input:focus { outline: none; border-color: var(--c-blue); box-shadow: 0 0 0 3px rgba(35,103,209,0.12); }
-  .search-box::before { content: 'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.5; }
+  .search-box::before { content: 'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.5; }
   .table-info { font-size: 12px; color: var(--text-muted); }
 
   .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -1782,12 +1782,14 @@ function handleWriteLead_(e) {
           </div>
         </section>
 
+      
+      
       <section class="dashboard-section">
         <div class="section-header">
-          <h3 class="section-title">&#x1F4C8; TradingView Paper Trading &#x2014; ANCIENTWON</h3>
-          <span class="section-badge" style="background:var(--accent-green);color:#000;padding:2px 8px;border-radius:10px;font-size:11px;">FUTURES / PAPER MODE</span>
+          <h3 class="section-title">TradingView Futures Paper Trading &mdash; ANCIENTWON</h3>
+          <span style="background:var(--accent-green);color:#000;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;">FUTURES / PAPER MODE</span>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
           <div style="background:var(--bg-secondary);border-radius:8px;padding:12px;text-align:center;">
             <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">ACCOUNT</div>
             <div style="font-size:16px;font-weight:700;color:var(--accent-orange);">ANCIENTWON</div>
@@ -1804,99 +1806,333 @@ function handleWriteLead_(e) {
             <div style="font-size:10px;color:var(--text-muted);">Multi-LLM AI</div>
           </div>
         </div>
-                <!-- TradingView Widget -->
-        <div style="background:var(--bg-secondary);border-radius:8px;overflow:hidden;margin-bottom:16px;">
-          <!-- Futures Ticker Bar -->
-          <div class="tradingview-widget-container" style="margin-bottom:8px;">
+        <div style="background:var(--bg-secondary);border-radius:8px;overflow:hidden;margin-bottom:8px;">
+          <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-            {
-              "symbols": [
-                {"proName":"TVC:SPX","title":"S&P 500"},
-                {"proName":"TVC:NDX","title":"Nasdaq 100"},
-                {"proName":"OANDA:XAUUSD","title":"Gold"},
-                {"proName":"OANDA:XTIUSD","title":"Crude Oil"},
-                {"proName":"TVC:US10Y","title":"10Y Bond Yield"},
-                {"proName":"BITSTAMP:BTCUSD","title":"BTC / USD"}
-              ],
-              "showSymbolLogo":true,
-              "colorTheme":"dark",
-              "isTransparent":true,
-              "displayMode":"adaptive",
-              "locale":"en"
-            }
+            {"symbols":[{"proName":"TVC:SPX","title":"S&P 500"},{"proName":"TVC:NDX","title":"Nasdaq 100"},{"proName":"OANDA:XAUUSD","title":"Gold"},{"proName":"OANDA:XTIUSD","title":"Crude Oil"},{"proName":"TVC:US10Y","title":"10Y Bond Yield"},{"proName":"BITSTAMP:BTCUSD","title":"BTC / USD"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":true,"displayMode":"adaptive","locale":"en"}
             </script>
           </div>
-          <!-- Main Futures Chart -->
-          <div class="tradingview-widget-container" style="height:420px;">
-            <div id="tradingview_ancientwon" style="width:100%;height:400px;"></div>
+        </div>
+        <div style="background:var(--bg-secondary);border-radius:8px;overflow:hidden;">
+          <div class="tradingview-widget-container" style="height:380px;">
+            <div id="tradingview_ancientwon" style="width:100%;height:360px;"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
             <script type="text/javascript">
-            (function(){
-              if(typeof TradingView === "undefined") return;
-              new TradingView.widget({
-                "width": "100%",
-                "height": 400,
-                "symbol": "NASDAQ:QQQ",
-                "interval": "D",
-                "timezone": "America/New_York",
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#1a1a2e",
-                "enable_publishing": false,
-                "allow_symbol_change": true,
-                "watchlist": ["AMEX:SPY","NASDAQ:QQQ","NASDAQ:SQQQ","AMEX:GLD","NASDAQ:TQQQ","BITSTAMP:BTCUSD"],
-                "details": true,
-                "hotlist": true,
-                "calendar": false,
-                "container_id": "tradingview_ancientwon"
-              });
+            (function(){if(typeof TradingView==="undefined")return;new TradingView.widget({"width":"100%","height":360,"symbol":"NASDAQ:QQQ","interval":"D","timezone":"America/New_York","theme":"dark","style":"1","locale":"en","toolbar_bg":"#1a1a2e","enable_publishing":false,"allow_symbol_change":true,"watchlist":["AMEX:SPY","NASDAQ:QQQ","AMEX:GLD","NASDAQ:TQQQ","BITSTAMP:BTCUSD"],"details":true,"container_id":"tradingview_ancientwon"});
             })();
             </script>
           </div>
         </div>
-        <!-- TradingAgents AI Pipeline -->
-        <div style="background:var(--bg-secondary);border-radius:8px;padding:16px;margin-bottom:12px;">
-          <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">AI Agent Pipeline</div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-            <div style="background:var(--bg-tertiary);border-radius:6px;padding:8px;text-align:center;">
-              <div style="font-size:18px;">&#x1F402;</div>
-              <div style="font-size:11px;font-weight:600;">Bull Analyst</div>
-              <div style="font-size:10px;color:var(--accent-green);">READY</div>
-            </div>
-            <div style="background:var(--bg-tertiary);border-radius:6px;padding:8px;text-align:center;">
-              <div style="font-size:18px;">&#x1F43B;</div>
-              <div style="font-size:11px;font-weight:600;">Bear Analyst</div>
-              <div style="font-size:10px;color:var(--accent-red);">READY</div>
-            </div>
-            <div style="background:var(--bg-tertiary);border-radius:6px;padding:8px;text-align:center;">
-              <div style="font-size:18px;">&#x1F4CA;</div>
-              <div style="font-size:11px;font-weight:600;">Market Analyst</div>
-              <div style="font-size:10px;color:var(--accent-blue);">READY</div>
-            </div>
-            <div style="background:var(--bg-tertiary);border-radius:6px;padding:8px;text-align:center;">
-              <div style="font-size:18px;">&#x1F4F0;</div>
-              <div style="font-size:11px;font-weight:600;">News Analyst</div>
-              <div style="font-size:10px;color:var(--accent-orange);">READY</div>
-            </div>
-            <div style="background:var(--bg-tertiary);border-radius:6px;padding:8px;text-align:center;">
-              <div style="font-size:18px;">&#x1F9E0;</div>
-              <div style="font-size:11px;font-weight:600;">Research Mgr</div>
-              <div style="font-size:10px;color:var(--accent-purple);">READY</div>
-            </div>
-            <div style="background:var(--bg-tertiary);border-radius:6px;padding:8px;text-align:center;">
-              <div style="font-size:18px;">&#x1F4B0;</div>
-              <div style="font-size:11px;font-weight:600;">Fund Manager</div>
-              <div style="font-size:10px;color:var(--accent-green);">READY</div>
-            </div>
+      </section>
+<section class="dashboard-section" id="ta-control-panel">
+        <div class="section-header">
+          <h3 class="section-title">TradingAgents Multi-Agent Analysis Engine</h3>
+          <span id="ta-status-badge" style="background:#333;color:#aaa;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;">IDLE</span>
+        </div>
+
+        <!-- How It Works -->
+        <div style="background:linear-gradient(135deg,#1a1a3e,#0d1117);border:1px solid #30363d;border-radius:8px;padding:14px;margin-bottom:14px;font-size:12px;line-height:1.7;color:#8b949e;">
+          <strong style="color:#e6edf3;font-size:13px;">How TradingAgents Works</strong><br>
+          TradingAgents (<a href="https://github.com/TauricResearch/TradingAgents" target="_blank" style="color:#58a6ff;">TauricResearch</a>) is a multi-agent LLM framework that mimics a real trading firm.
+          You input a <strong style="color:#e6edf3;">ticker + analysis date</strong>, and a team of 6 specialized AI agents debate the trade:
+          <strong style="color:#3fb950;">Bull Analyst</strong> (bullish thesis) vs <strong style="color:#f85149;">Bear Analyst</strong> (bearish thesis),
+          <strong style="color:#58a6ff;">Market Analyst</strong> (technicals), <strong style="color:#d29922;">News Analyst</strong> (sentiment),
+          then <strong style="color:#bc8cff;">Research Manager</strong> synthesizes debates, and
+          <strong style="color:#ffa657;">Fund Manager</strong> makes the final BUY / SELL / HOLD decision.
+          Noah runs this full pipeline and returns each agent's reasoning + final trade signal.
+        </div>
+
+        <!-- Control Row -->
+        <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:120px;">
+            <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Ticker</label>
+            <input id="ta-ticker" type="text" value="NVDA" placeholder="e.g. NVDA, AAPL, QQQ"
+              style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 12px;color:var(--text-primary);font-size:14px;font-weight:700;text-transform:uppercase;box-sizing:border-box;">
+          </div>
+          <div style="flex:1;min-width:140px;">
+            <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Analysis Date</label>
+            <input id="ta-date" type="date" value="2026-05-11"
+              style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 12px;color:var(--text-primary);font-size:13px;box-sizing:border-box;">
+          </div>
+          <div style="flex:1;min-width:120px;">
+            <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Debate Rounds</label>
+            <select id="ta-rounds" style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 12px;color:var(--text-primary);font-size:13px;box-sizing:border-box;">
+              <option value="1">1 Round (Fast)</option>
+              <option value="2" selected>2 Rounds (Default)</option>
+              <option value="3">3 Rounds (Deep)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;color:transparent;display:block;margin-bottom:4px;">Run</label>
+            <button id="ta-run-btn" onclick="window.runTradingAgents()"
+              style="background:linear-gradient(135deg,#238636,#2ea043);color:#fff;border:none;border-radius:6px;padding:9px 24px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity 0.2s;">
+              Run Analysis
+            </button>
+          </div>
+          <div>
+            <label style="font-size:11px;color:transparent;display:block;margin-bottom:4px;">Clear</label>
+            <button onclick="window.clearTAResults()"
+              style="background:var(--bg-tertiary);color:var(--text-muted);border:1px solid var(--border-subtle);border-radius:6px;padding:9px 16px;font-size:13px;cursor:pointer;">
+              Clear
+            </button>
           </div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <a href="https://www.tradingview.com/paper-trading/" target="_blank" style="background:var(--accent-blue);color:#fff;border:none;border-radius:6px;padding:8px 16px;cursor:pointer;font-size:13px;text-decoration:none;display:inline-block;">&#x1F4C8; Open TradingView</a>
-          <a href="https://github.com/TauricResearch/TradingAgents" target="_blank" style="background:var(--bg-tertiary);color:var(--text-primary);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 16px;cursor:pointer;font-size:13px;text-decoration:none;display:inline-block;">&#x1F916; TradingAgents Repo</a>
-          <button onclick="if(window.sendNoahMessage)window.sendNoahMessage('Analyze my TradingView paper trading account ANCIENTWON and suggest trades using TradingAgents multi-agent framework');else document.querySelector('[data-page=noah]').click();" style="background:var(--bg-tertiary);color:var(--text-primary);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 16px;cursor:pointer;font-size:13px;">&#x1F9E0; Ask Noah</button>
+
+        <!-- Agent Cards -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;" id="ta-agents-grid">
+          <div class="ta-agent-card" id="ta-agent-bull" style="background:var(--bg-secondary);border:1px solid #30363d;border-radius:8px;padding:12px;transition:border-color 0.3s;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:#3fb950;">Bull Analyst</span>
+              <span class="ta-agent-status" style="font-size:10px;background:#161b22;padding:2px 8px;border-radius:8px;color:#8b949e;">IDLE</span>
+            </div>
+            <div class="ta-agent-output" style="font-size:11px;color:#8b949e;min-height:40px;line-height:1.5;">Awaiting analysis...</div>
+          </div>
+          <div class="ta-agent-card" id="ta-agent-bear" style="background:var(--bg-secondary);border:1px solid #30363d;border-radius:8px;padding:12px;transition:border-color 0.3s;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:#f85149;">Bear Analyst</span>
+              <span class="ta-agent-status" style="font-size:10px;background:#161b22;padding:2px 8px;border-radius:8px;color:#8b949e;">IDLE</span>
+            </div>
+            <div class="ta-agent-output" style="font-size:11px;color:#8b949e;min-height:40px;line-height:1.5;">Awaiting analysis...</div>
+          </div>
+          <div class="ta-agent-card" id="ta-agent-market" style="background:var(--bg-secondary);border:1px solid #30363d;border-radius:8px;padding:12px;transition:border-color 0.3s;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:#58a6ff;">Market Analyst</span>
+              <span class="ta-agent-status" style="font-size:10px;background:#161b22;padding:2px 8px;border-radius:8px;color:#8b949e;">IDLE</span>
+            </div>
+            <div class="ta-agent-output" style="font-size:11px;color:#8b949e;min-height:40px;line-height:1.5;">Awaiting analysis...</div>
+          </div>
+          <div class="ta-agent-card" id="ta-agent-news" style="background:var(--bg-secondary);border:1px solid #30363d;border-radius:8px;padding:12px;transition:border-color 0.3s;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:#d29922;">News Analyst</span>
+              <span class="ta-agent-status" style="font-size:10px;background:#161b22;padding:2px 8px;border-radius:8px;color:#8b949e;">IDLE</span>
+            </div>
+            <div class="ta-agent-output" style="font-size:11px;color:#8b949e;min-height:40px;line-height:1.5;">Awaiting analysis...</div>
+          </div>
+          <div class="ta-agent-card" id="ta-agent-research" style="background:var(--bg-secondary);border:1px solid #30363d;border-radius:8px;padding:12px;transition:border-color 0.3s;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:#bc8cff;">Research Manager</span>
+              <span class="ta-agent-status" style="font-size:10px;background:#161b22;padding:2px 8px;border-radius:8px;color:#8b949e;">IDLE</span>
+            </div>
+            <div class="ta-agent-output" style="font-size:11px;color:#8b949e;min-height:40px;line-height:1.5;">Awaiting analysis...</div>
+          </div>
+          <div class="ta-agent-card" id="ta-agent-fund" style="background:var(--bg-secondary);border:1px solid #30363d;border-radius:8px;padding:12px;transition:border-color 0.3s;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-size:12px;font-weight:700;color:#ffa657;">Fund Manager</span>
+              <span class="ta-agent-status" style="font-size:10px;background:#161b22;padding:2px 8px;border-radius:8px;color:#8b949e;">IDLE</span>
+            </div>
+            <div class="ta-agent-output" style="font-size:11px;color:#8b949e;min-height:40px;line-height:1.5;">Awaiting analysis...</div>
+          </div>
         </div>
+
+        <!-- Final Decision Banner -->
+        <div id="ta-decision" style="display:none;border-radius:8px;padding:16px;margin-bottom:14px;text-align:center;">
+          <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Fund Manager Final Decision</div>
+          <div id="ta-decision-action" style="font-size:32px;font-weight:900;letter-spacing:2px;margin-bottom:6px;"></div>
+          <div id="ta-decision-ticker" style="font-size:14px;color:var(--text-muted);margin-bottom:8px;"></div>
+          <div id="ta-decision-summary" style="font-size:12px;color:var(--text-primary);max-width:600px;margin:0 auto;line-height:1.6;"></div>
+          <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+            <button id="ta-log-trade-btn" onclick="window.logPaperTrade()" style="background:#238636;color:#fff;border:none;border-radius:6px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;">Log Paper Trade (ANCIENTWON)</button>
+            <button onclick="window.clearTAResults()" style="background:var(--bg-tertiary);color:var(--text-muted);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 16px;font-size:13px;cursor:pointer;">New Analysis</button>
+          </div>
+        </div>
+
+        <!-- Paper Trade Log -->
+        <div style="background:var(--bg-secondary);border-radius:8px;padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">ANCIENTWON Paper Trade Log</div>
+            <span style="font-size:11px;color:var(--text-muted);">Account: ANCIENTWON | Mode: Paper</span>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:12px;" id="ta-trade-log">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border-subtle);">
+                <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600;">Date</th>
+                <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600;">Ticker</th>
+                <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600;">Action</th>
+                <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600;">Rounds</th>
+                <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600;">Signal</th>
+                <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600;">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="ta-trade-log-body">
+              <tr><td colspan="6" style="padding:20px;text-align:center;color:var(--text-muted);">No trades logged yet. Run an analysis and click "Log Paper Trade" to record.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- JS Engine -->
+        <script>
+        (function(){
+          window.runTradingAgents = async function() {
+            const ticker = (document.getElementById('ta-ticker').value || 'NVDA').toUpperCase().trim();
+            const date = document.getElementById('ta-date').value || '2026-05-11';
+            const rounds = document.getElementById('ta-rounds').value || '2';
+            const btn = document.getElementById('ta-run-btn');
+            const badge = document.getElementById('ta-status-badge');
+
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            badge.style.background = '#d29922';
+            badge.style.color = '#000';
+            badge.textContent = 'RUNNING';
+            document.getElementById('ta-decision').style.display = 'none';
+
+            const agents = ['bull','bear','market','news','research','fund'];
+            const agentLabels = {bull:'Bull Analyst',bear:'Bear Analyst',market:'Market Analyst',news:'News Analyst',research:'Research Manager',fund:'Fund Manager'};
+            const agentColors = {bull:'#3fb950',bear:'#f85149',market:'#58a6ff',news:'#d29922',research:'#bc8cff',fund:'#ffa657'};
+
+            // Reset all cards
+            agents.forEach(a => {
+              const card = document.getElementById('ta-agent-' + a);
+              if (!card) return;
+              card.querySelector('.ta-agent-status').textContent = 'IDLE';
+              card.querySelector('.ta-agent-status').style.color = '#8b949e';
+              card.querySelector('.ta-agent-output').textContent = 'Awaiting analysis...';
+              card.querySelector('.ta-agent-output').style.color = '#8b949e';
+              card.style.borderColor = '#30363d';
+            });
+
+            // Build prompt for Noah to run full TradingAgents pipeline
+            const msg = 'Run TradingAgents multi-agent analysis on ticker ' + ticker + ' for date ' + date + ' with ' + rounds + ' debate rounds. Act as the full TradingAgents framework (TauricResearch/TradingAgents). Simulate all 6 agents: 1) Bull Analyst: give bullish thesis with specific reasons (price targets, catalysts, technicals), 2) Bear Analyst: give bearish thesis with specific risks and downside targets, 3) Market Analyst: technical analysis (moving averages, RSI, MACD, support/resistance levels for ' + ticker + '), 4) News Analyst: recent news sentiment and macro factors affecting ' + ticker + ', 5) Research Manager: synthesize the bull/bear debate into key decision factors, 6) Fund Manager: final BUY/SELL/HOLD decision with confidence level and position size recommendation. Format your response with clear sections for each agent labeled exactly as BULL_ANALYST:, BEAR_ANALYST:, MARKET_ANALYST:, NEWS_ANALYST:, RESEARCH_MANAGER:, FUND_MANAGER: followed by their analysis. End with DECISION: BUY/SELL/HOLD | CONFIDENCE: X% | POSITION: X% of portfolio.';
+
+            // Show agents running sequentially with slight delays
+            const agentOrder = ['bull','bear','market','news','research','fund'];
+            let agentTimer = 0;
+            agentOrder.forEach((a, i) => {
+              setTimeout(() => {
+                const card = document.getElementById('ta-agent-' + a);
+                if (!card) return;
+                const statusEl = card.querySelector('.ta-agent-status');
+                statusEl.textContent = 'ANALYZING';
+                statusEl.style.color = '#d29922';
+                card.style.borderColor = agentColors[a];
+              }, agentTimer);
+              agentTimer += (i < 4 ? 1200 : 2000);
+            });
+
+            try {
+              const url = window.buildUrl({view:'noah', action:'chat', msg: msg});
+              const resp = await fetch(url);
+              const data = await resp.json();
+              const reply = data.reply || (data.response ? JSON.parse(data.response).reply || data.response : JSON.stringify(data));
+
+              // Parse agent sections from reply
+              const sections = {
+                bull: extractSection(reply, 'BULL_ANALYST'),
+                bear: extractSection(reply, 'BEAR_ANALYST'),
+                market: extractSection(reply, 'MARKET_ANALYST'),
+                news: extractSection(reply, 'NEWS_ANALYST'),
+                research: extractSection(reply, 'RESEARCH_MANAGER'),
+                fund: extractSection(reply, 'FUND_MANAGER')
+              };
+
+              // Update agent cards with results
+              agents.forEach(a => {
+                const card = document.getElementById('ta-agent-' + a);
+                if (!card) return;
+                const statusEl = card.querySelector('.ta-agent-status');
+                const outputEl = card.querySelector('.ta-agent-output');
+                statusEl.textContent = 'DONE';
+                statusEl.style.color = '#3fb950';
+                card.style.borderColor = agentColors[a];
+                outputEl.style.color = '#e6edf3';
+                outputEl.textContent = sections[a] || 'Analysis complete.';
+              });
+
+              // Extract final decision
+              const decisionMatch = reply.match(/DECISION:s*(BUY|SELL|HOLD)/i);
+              const confidenceMatch = reply.match(/CONFIDENCE:s*(d+%)/i);
+              const positionMatch = reply.match(/POSITION:s*([^
+|]+)/i);
+              const decision = decisionMatch ? decisionMatch[1].toUpperCase() : 'HOLD';
+              const confidence = confidenceMatch ? confidenceMatch[1] : '?';
+              const position = positionMatch ? positionMatch[1].trim() : '';
+
+              // Store for logging
+              window._lastTAResult = { ticker, date, rounds, decision, confidence, position, reply };
+
+              // Show decision banner
+              const decBanner = document.getElementById('ta-decision');
+              const decColors = {BUY:'linear-gradient(135deg,#0d2a0d,#162016)',SELL:'linear-gradient(135deg,#2a0d0d,#201616)',HOLD:'linear-gradient(135deg,#1a1a2e,#0d1117)'};
+              const decTextColors = {BUY:'#3fb950',SELL:'#f85149',HOLD:'#8b949e'};
+              decBanner.style.background = decColors[decision] || decColors.HOLD;
+              decBanner.style.border = '1px solid ' + (decTextColors[decision] || '#30363d');
+              decBanner.style.display = 'block';
+              document.getElementById('ta-decision-action').textContent = decision;
+              document.getElementById('ta-decision-action').style.color = decTextColors[decision] || '#8b949e';
+              document.getElementById('ta-decision-ticker').textContent = ticker + ' | ' + date + ' | Confidence: ' + confidence + (position ? ' | Position: ' + position : '');
+              const fundSection = sections.fund || '';
+              document.getElementById('ta-decision-summary').textContent = fundSection.substring(0, 250) + (fundSection.length > 250 ? '...' : '');
+
+              badge.style.background = '#238636';
+              badge.style.color = '#fff';
+              badge.textContent = 'COMPLETE';
+
+            } catch(e) {
+              badge.style.background = '#f85149';
+              badge.style.color = '#fff';
+              badge.textContent = 'ERROR';
+              console.error('TradingAgents error:', e);
+            } finally {
+              btn.disabled = false;
+              btn.style.opacity = '1';
+            }
+          };
+
+          function extractSection(text, label) {
+            const idx = text.indexOf(label + ':');
+            if (idx === -1) return '';
+            const start = idx + label.length + 1;
+            const nextLabels = ['BULL_ANALYST:','BEAR_ANALYST:','MARKET_ANALYST:','NEWS_ANALYST:','RESEARCH_MANAGER:','FUND_MANAGER:','DECISION:'];
+            let end = text.length;
+            for (const nl of nextLabels) {
+              const ni = text.indexOf(nl, start + 10);
+              if (ni !== -1 && ni < end) end = ni;
+            }
+            return text.substring(start, end).trim().substring(0, 300);
+          }
+
+          window.clearTAResults = function() {
+            const agents = ['bull','bear','market','news','research','fund'];
+            const badge = document.getElementById('ta-status-badge');
+            badge.style.background = '#333';
+            badge.style.color = '#aaa';
+            badge.textContent = 'IDLE';
+            document.getElementById('ta-decision').style.display = 'none';
+            agents.forEach(a => {
+              const card = document.getElementById('ta-agent-' + a);
+              if (!card) return;
+              card.querySelector('.ta-agent-status').textContent = 'IDLE';
+              card.querySelector('.ta-agent-status').style.color = '#8b949e';
+              card.querySelector('.ta-agent-output').textContent = 'Awaiting analysis...';
+              card.querySelector('.ta-agent-output').style.color = '#8b949e';
+              card.style.borderColor = '#30363d';
+            });
+            window._lastTAResult = null;
+          };
+
+          window.logPaperTrade = function() {
+            const r = window._lastTAResult;
+            if (!r) return;
+            const tbody = document.getElementById('ta-trade-log-body');
+            const placeholder = tbody.querySelector('td[colspan]');
+            if (placeholder) placeholder.parentElement.remove();
+            const colors = {BUY:'#3fb950',SELL:'#f85149',HOLD:'#8b949e'};
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid var(--border-subtle)';
+            tr.innerHTML = '<td style="padding:6px 8px;color:var(--text-muted);">' + r.date + '</td>' +
+              '<td style="padding:6px 8px;color:var(--text-primary);font-weight:700;">' + r.ticker + '</td>' +
+              '<td style="padding:6px 8px;"><span style="background:#161b22;border:1px solid ' + (colors[r.decision]||'#aaa') + ';color:' + (colors[r.decision]||'#aaa') + ';padding:2px 10px;border-radius:8px;font-size:11px;font-weight:700;">' + r.decision + '</span></td>' +
+              '<td style="padding:6px 8px;color:var(--text-muted);">' + r.rounds + '</td>' +
+              '<td style="padding:6px 8px;color:var(--text-muted);">' + r.confidence + '</td>' +
+              '<td style="padding:6px 8px;color:var(--text-muted);">Logged via ANCIENTWON paper account</td>';
+            tbody.appendChild(tr);
+            document.getElementById('ta-log-trade-btn').textContent = 'Logged!';
+            document.getElementById('ta-log-trade-btn').style.background = '#1a5c1a';
+            setTimeout(() => { document.getElementById('ta-log-trade-btn').textContent = 'Log Paper Trade (ANCIENTWON)'; document.getElementById('ta-log-trade-btn').style.background = '#238636'; }, 2000);
+          };
+        })();
+        </script>
       </section>
 </div>
       </section>
