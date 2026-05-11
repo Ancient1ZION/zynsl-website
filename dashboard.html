@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZYN Empire — Command Center</title>
+<title>ZYN Empire â Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     ZYN EMPIRE — DASHBOARD v4 (Sky Theme)
-     Light mode · Animated sky · Colorful tabs · Real data tables
+     ZYN EMPIRE â DASHBOARD v4 (Sky Theme)
+     Light mode Â· Animated sky Â· Colorful tabs Â· Real data tables
      ============================================================ */
   /* ============================================================
-     DUAL THEME SYSTEM — Twilight (default) + Daylight (toggle)
+     DUAL THEME SYSTEM â Twilight (default) + Daylight (toggle)
      ============================================================ */
 
-  /* TWILIGHT (default) v3 — realistic blue hour, masculine palette */
+  /* TWILIGHT (default) v3 â realistic blue hour, masculine palette */
   :root {
-    /* Surfaces — deeper navy + warm undertone */
+    /* Surfaces â deeper navy + warm undertone */
     --bg-app:        #060b18;
     --bg-panel:      rgba(20, 28, 56, 0.78);
     --bg-sidebar:    rgba(11, 18, 38, 0.94);
@@ -32,13 +32,13 @@
     --border-medium: rgba(140, 165, 220, 0.22);
     --border-glow:   rgba(190, 145, 95, 0.28);
 
-    /* Text — warm off-white, dusky secondary */
+    /* Text â warm off-white, dusky secondary */
     --text-primary:  #e8ecf5;
     --text-secondary:#aab4c8;
     --text-muted:    #6a7588;
     --text-on-color: #ffffff;
 
-    /* Accents — UI variables preserved for downstream compatibility, retuned for masculine palette */
+    /* Accents â UI variables preserved for downstream compatibility, retuned for masculine palette */
     --c-blue:        #5b8fd9;
     --c-blue-soft:   rgba(91, 143, 217, 0.18);
     --c-green:       #7eb88a;
@@ -61,12 +61,12 @@
     --c-brand:       #d4a574;
     --c-brand-2:     #8db4d8;
 
-    /* Aurora gradients — toned down to bronze/blue, no pink */
+    /* Aurora gradients â toned down to bronze/blue, no pink */
     --grad-aurora:    linear-gradient(135deg, #d4a574 0%, #8b7fc4 35%, #5b8fd9 70%, #6db8c4 100%);
     --grad-card-edge: linear-gradient(135deg, rgba(212,165,116,0.40) 0%, rgba(139,127,196,0.40) 50%, rgba(91,143,217,0.40) 100%);
     --grad-text:      linear-gradient(135deg, #d4a574 0%, #8db4d8 50%, #5b8fd9 100%);
 
-    /* Sky background — v3 realistic blue hour, deep navy → indigo → bronze ember horizon */
+    /* Sky background â v3 realistic blue hour, deep navy â indigo â bronze ember horizon */
     --sky-gradient:
       radial-gradient(ellipse 1200px 500px at 50% 100%,
         rgba(190, 110, 50, 0.22) 0%,
@@ -95,7 +95,7 @@
     --topbar-h:  66px;
   }
 
-  /* DAYLIGHT theme v3 — late golden morning, sun-lit cerulean + warm sand */
+  /* DAYLIGHT theme v3 â late golden morning, sun-lit cerulean + warm sand */
   :root[data-theme="day"] {
     --bg-app:        #b0d6e8;
     --bg-panel:      rgba(252, 244, 224, 0.94);
@@ -114,7 +114,7 @@
     --text-muted:    #7a8598;
     --text-on-color: #ffffff;
 
-    /* Daytime accents — vivid but classy, no pink dominance */
+    /* Daytime accents â vivid but classy, no pink dominance */
     --c-blue:        #2c6a8a;
     --c-blue-soft:   rgba(44, 106, 138, 0.14);
     --c-green:       #3a7d44;
@@ -141,7 +141,7 @@
     --grad-card-edge: linear-gradient(135deg, rgba(184,114,45,0.40) 0%, rgba(44,106,138,0.40) 50%, rgba(45,128,116,0.40) 100%);
     --grad-text:      linear-gradient(135deg, #b8722d 0%, #2c6a8a 50%, #2d8074 100%);
 
-    /* Sky background — v3 sun-lit cerulean with warm sun glow upper-left */
+    /* Sky background â v3 sun-lit cerulean with warm sun glow upper-left */
     --sky-gradient:
       radial-gradient(ellipse 600px 400px at 18% -5%,
         rgba(255, 240, 200, 0.55) 0%,
@@ -185,7 +185,7 @@
     100% { background-position: 0% 100%; }
   }
 
-  /* Stars — 3 layers, visible only in twilight (--star-opacity from theme) */
+  /* Stars â 3 layers, visible only in twilight (--star-opacity from theme) */
   .stars-bg, .stars-mid {
     position: fixed; inset: 0; z-index: -2; pointer-events: none;
     opacity: var(--star-opacity);
@@ -232,7 +232,7 @@
   @keyframes twinkleSlow { 0%,100% { opacity: calc(var(--star-opacity) * 0.65); } 50% { opacity: calc(var(--star-opacity) * 0.95); } }
   @keyframes twinkleFast { 0%,100% { opacity: calc(var(--star-opacity) * 0.7); } 50% { opacity: calc(var(--star-opacity) * 1); } }
 
-  /* Big "named" stars with sparkle crosses — twilight only */
+  /* Big "named" stars with sparkle crosses â twilight only */
   .star-big {
     position: fixed; z-index: -1;
     width: 4px; height: 4px; background: white; border-radius: 50%;
@@ -259,7 +259,7 @@
   .sb-6 { top: 28%; left: 50%; }
   .sb-7 { top: 18%; left: 88%; }
 
-  /* Realistic crescent moon — twilight only */
+  /* Realistic crescent moon â twilight only */
   .moon-wrap {
     position: fixed; top: 70px; right: 12%; z-index: -1;
     width: 56px; height: 56px;
@@ -292,7 +292,7 @@
     box-shadow: inset -3px -3px 8px rgba(120,100,70,0.4), inset 3px 3px 8px rgba(255,245,210,0.35);
   }
 
-  /* Sun — daylight only (hidden in twilight via opacity) */
+  /* Sun â daylight only (hidden in twilight via opacity) */
   .sun-wrap {
     position: fixed; top: 90px; left: 12%; z-index: -1;
     width: 56px; height: 56px;
@@ -308,7 +308,7 @@
   }
   @keyframes sunPulse { 0% { transform: scale(1); filter: brightness(1); } 100% { transform: scale(1.04); filter: brightness(1.08); } }
 
-  /* Horizon afterglow — twilight only */
+  /* Horizon afterglow â twilight only */
   .horizon-glow {
     position: fixed;
     bottom: 18%; left: 50%; transform: translateX(-50%);
@@ -323,14 +323,14 @@
   }
   @keyframes glowBreathe { 0% { opacity: calc(var(--star-opacity) * 0.85); } 100% { opacity: var(--star-opacity); } }
 
-  /* Mountain silhouette — twilight only */
+  /* Mountain silhouette â twilight only */
   .mountains {
     position: fixed; bottom: 24%; left: 0; right: 0; height: 50px;
     z-index: -1; pointer-events: none;
     opacity: var(--star-opacity);
   }
 
-  /* Realistic clouds — multi-puff irregular shapes */
+  /* Realistic clouds â multi-puff irregular shapes */
   .clouds {
     position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
   }
@@ -345,12 +345,12 @@
   }
   @keyframes cloudDrift { from { transform: translateX(0); } to { transform: translateX(140vw); } }
 
-  /* High thin cirrus — cool tinted */
+  /* High thin cirrus â cool tinted */
   .cloud.high { width: 280px; height: 60px; }
   .cloud.high .puff {
     background: radial-gradient(ellipse, rgba(180,170,210,0.45) 0%, rgba(180,170,210,0.20) 50%, transparent 75%);
   }
-  /* ============ V3 THEME OVERLAYS — hero stars, lighthouse, sun glow, floating clouds ============ */
+  /* ============ V3 THEME OVERLAYS â hero stars, lighthouse, sun glow, floating clouds ============ */
   .tw-star-hero-1, .tw-star-hero-2, .tw-star-hero-3, .tw-lighthouse,
   .dt-sun, .dt-cloud-1, .dt-cloud-2, .dt-cloud-3 {
     position: fixed; pointer-events: none;
@@ -479,7 +479,7 @@
     filter: blur(2px);
     opacity: calc(1 - var(--star-opacity));
   }
-  /* Ocean wave layers — daylight only */
+  /* Ocean wave layers â daylight only */
   .day-waves-far {
     position: fixed; top: 47%; left: 0; right: 0; height: 8%;
     z-index: -2; pointer-events: none;
@@ -538,7 +538,7 @@
   }
   @keyframes foamSlide { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
 
-  /* Palm tree — daylight only */
+  /* Palm tree â daylight only */
   .palm {
     position: fixed; bottom: 0; left: 28px; z-index: -1;
     width: 9px; height: 90px;
@@ -996,7 +996,7 @@
   .search-box { flex: 1; min-width: 240px; position: relative; }
   .search-box input { width: 100%; padding: 8px 12px 8px 36px; border: 1px solid var(--border-soft); border-radius: 8px; font-size: 13px; background: white; transition: border 0.15s, box-shadow 0.15s; font-family: 'Inter', sans-serif; }
   .search-box input:focus { outline: none; border-color: var(--c-blue); box-shadow: 0 0 0 3px rgba(35,103,209,0.12); }
-  .search-box::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.5; }
+  .search-box::before { content: 'ð'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.5; }
   .table-info { font-size: 12px; color: var(--text-muted); }
 
   .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -1178,7 +1178,7 @@
 </style>
 </head>
 <body>
-<!-- V3 theme overlays — hero stars + lighthouse (twilight) | sun + clouds (daytime) -->
+<!-- V3 theme overlays â hero stars + lighthouse (twilight) | sun + clouds (daytime) -->
 <div class="tw-star-hero-1"></div>
 <div class="tw-star-hero-2"></div>
 <div class="tw-star-hero-3"></div>
@@ -1228,7 +1228,7 @@
 <div class="day-foam"></div>
 <div class="palm"></div>
 
-<!-- Realistic clouds — multi-puff irregular shapes -->
+<!-- Realistic clouds â multi-puff irregular shapes -->
 <div class="clouds">
   <div class="cloud high c-1"><div class="puff p1"></div><div class="puff p2"></div><div class="puff p3"></div><div class="puff p4"></div></div>
   <div class="cloud wispy c-2"><div class="puff"></div></div>
@@ -1258,20 +1258,20 @@
     <div class="top-center">
       <div class="division-pills" id="divPills">
         <div class="pill active pill-all" data-filter="all">All Divisions</div>
-        <div class="pill pill-federal" data-filter="federal"><span>🏛️</span> Federal</div>
-        <div class="pill pill-consulting" data-filter="consulting"><span>💼</span> Consulting</div>
-        <div class="pill pill-autonomous" data-filter="autonomous"><span>🤖</span> Autonomous</div>
-        <div class="pill pill-capital" data-filter="capital"><span>💹</span> Capital</div>
+        <div class="pill pill-federal" data-filter="federal"><span>ðï¸</span> Federal</div>
+        <div class="pill pill-consulting" data-filter="consulting"><span>ð¼</span> Consulting</div>
+        <div class="pill pill-autonomous" data-filter="autonomous"><span>ð¤</span> Autonomous</div>
+        <div class="pill pill-capital" data-filter="capital"><span>ð¹</span> Capital</div>
       </div>
     </div>
     <div class="top-right">
       <div class="clock">
-        <div class="clock-day" id="clockDay">—</div>
+        <div class="clock-day" id="clockDay">â</div>
         <div class="clock-time" id="clockTime">--:--:-- <span class="tz-badge">EST</span></div>
-        <div class="clock-date" id="clockDate">Loading…</div>
+        <div class="clock-date" id="clockDate">Loadingâ¦</div>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Toggle Day / Twilight">
-        <span class="theme-icon" id="themeIcon">☀️</span>
+        <span class="theme-icon" id="themeIcon">âï¸</span>
       </button>
       <div class="live-status"><span class="pulse"></span><span>LIVE</span></div>
     </div>
@@ -1280,23 +1280,23 @@
   <div class="body">
     <nav class="sidebar">
       <div class="sidebar-section">Empire</div>
-      <div class="nav-item active" data-page="command" data-color="blue"><span class="nav-icon">📊</span><span>Command</span></div>
-      <div class="nav-item" data-page="activity" data-color="cyan"><span class="nav-icon">📡</span><span>Activity</span><span class="nav-badge" id="badgeActivity">0</span></div>
-      <div class="nav-item" data-page="approvals" data-color="orange"><span class="nav-icon">📋</span><span>Approvals</span><span class="nav-badge alert" id="badgeApprovals">0</span></div>
-      <div class="nav-item" data-page="agents" data-color="purple"><span class="nav-icon">🤖</span><span>Agents</span><span class="nav-badge" id="badgeAgents">17</span></div>
-      <div class="nav-item" data-page="system" data-color="teal"><span class="nav-icon">⚙️</span><span>System</span></div>
-      <div class="nav-item" data-page="noah" data-color="orange"><span class="nav-icon">🦅</span><span>Noah</span></div>
+      <div class="nav-item active" data-page="command" data-color="blue"><span class="nav-icon">ð</span><span>Command</span></div>
+      <div class="nav-item" data-page="activity" data-color="cyan"><span class="nav-icon">ð¡</span><span>Activity</span><span class="nav-badge" id="badgeActivity">0</span></div>
+      <div class="nav-item" data-page="approvals" data-color="orange"><span class="nav-icon">ð</span><span>Approvals</span><span class="nav-badge alert" id="badgeApprovals">0</span></div>
+      <div class="nav-item" data-page="agents" data-color="purple"><span class="nav-icon">ð¤</span><span>Agents</span><span class="nav-badge" id="badgeAgents">17</span></div>
+      <div class="nav-item" data-page="system" data-color="teal"><span class="nav-icon">âï¸</span><span>System</span></div>
+      <div class="nav-item" data-page="noah" data-color="orange"><span class="nav-icon">ð¦</span><span>Noah</span></div>
 
       <div class="sidebar-section">Divisions</div>
-      <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">🏛️</span><span>Federal</span></div>
-      <div class="nav-item" data-page="consulting" data-color="purple"><span class="nav-icon">💼</span><span>Consulting</span></div>
-      <div class="nav-item" data-page="autonomous" data-color="cyan"><span class="nav-icon">🤖</span><span>Autonomous</span></div>
-      <div class="nav-item" data-page="capital" data-color="orange"><span class="nav-icon">💹</span><span>Capital</span></div>
+      <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">ðï¸</span><span>Federal</span></div>
+      <div class="nav-item" data-page="consulting" data-color="purple"><span class="nav-icon">ð¼</span><span>Consulting</span></div>
+      <div class="nav-item" data-page="autonomous" data-color="cyan"><span class="nav-icon">ð¤</span><span>Autonomous</span></div>
+      <div class="nav-item" data-page="capital" data-color="orange"><span class="nav-icon">ð¹</span><span>Capital</span></div>
 
       <div class="sidebar-section">Pipeline</div>
-      <div class="nav-item" data-page="leads" data-color="green"><span class="nav-icon">🎯</span><span>Leads</span><span class="nav-badge" id="badgeLeads">0</span></div>
-      <div class="nav-item" data-page="opportunities" data-color="pink"><span class="nav-icon">📑</span><span>Opportunities</span><span class="nav-badge" id="badgeOpps">0</span></div>
-      <div class="nav-item" data-page="crm" data-color="yellow"><span class="nav-icon">🤝</span><span>CRM</span><span class="nav-badge" id="badgeCRM">0</span></div>
+      <div class="nav-item" data-page="leads" data-color="green"><span class="nav-icon">ð¯</span><span>Leads</span><span class="nav-badge" id="badgeLeads">0</span></div>
+      <div class="nav-item" data-page="opportunities" data-color="pink"><span class="nav-icon">ð</span><span>Opportunities</span><span class="nav-badge" id="badgeOpps">0</span></div>
+      <div class="nav-item" data-page="crm" data-color="yellow"><span class="nav-icon">ð¤</span><span>CRM</span><span class="nav-badge" id="badgeCRM">0</span></div>
     </nav>
 
     <main class="main">
@@ -1304,22 +1304,22 @@
       <section class="page active" data-page="command">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon blue">📊</div>Command Center</div>
+            <div class="page-title"><div class="page-title-icon blue">ð</div>Command Center</div>
             <div class="page-sub">Real-time view of the ZYN Empire</div>
           </div>
-          <div class="refresh-info" id="refreshInfo">— · auto-refresh 30s</div>
+          <div class="refresh-info" id="refreshInfo">â Â· auto-refresh 30s</div>
         </div>
         <div class="division-grid" id="divisionGrid"></div>
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">📊 Pipeline — Empire-wide</div>
+            <div class="panel-title">ð Pipeline â Empire-wide</div>
             <div class="panel-sub" id="pipelineSub">All leads by status</div>
           </div>
           <div class="panel-body"><div class="kanban" id="kanban"></div></div>
         </div>
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">📡 Live Activity</div>
+            <div class="panel-title">ð¡ Live Activity</div>
             <div class="panel-sub">Last 24 hours</div>
           </div>
           <div class="panel-body flush"><div class="feed" id="commandFeed"></div></div>
@@ -1328,15 +1328,15 @@
       <section class="page" data-page="activity">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon cyan">📡</div>Activity Feed</div>
-            <div class="page-sub">Every event across the empire — last 24 hours · use top-bar pills to filter by division</div>
+            <div class="page-title"><div class="page-title-icon cyan">ð¡</div>Activity Feed</div>
+            <div class="page-sub">Every event across the empire â last 24 hours Â· use top-bar pills to filter by division</div>
           </div>
         </div>
         <div class="division-grid" id="activityStats" style="grid-template-columns: repeat(4, 1fr);"></div>
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">📡 Event Stream</div>
-            <div class="panel-sub" id="activityCountSub">— events</div>
+            <div class="panel-title">ð¡ Event Stream</div>
+            <div class="panel-sub" id="activityCountSub">â events</div>
           </div>
           <div class="panel-body flush"><div class="feed" id="activityFeed"></div></div>
         </div>
@@ -1345,34 +1345,34 @@
       <section class="page" data-page="approvals">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon orange">📋</div>Approvals Queue</div>
-            <div class="page-sub">Pending CEO review — type APPROVE in sheet column DECISION to send</div>
+            <div class="page-title"><div class="page-title-icon orange">ð</div>Approvals Queue</div>
+            <div class="page-sub">Pending CEO review â type APPROVE in sheet column DECISION to send</div>
           </div>
         </div>
 
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">📋 Pending Decisions</div>
-            <div class="panel-sub" id="approvalCountSub">— items waiting</div>
+            <div class="panel-title">ð Pending Decisions</div>
+            <div class="panel-sub" id="approvalCountSub">â items waiting</div>
           </div>
           <div id="approvalQueue"></div>
         </div>
 
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">⚡ How Approvals Work</div>
+            <div class="panel-title">â¡ How Approvals Work</div>
             <div class="panel-sub">Two-tier autonomous + gated send model</div>
           </div>
           <div class="panel-body">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
               <div class="division-card consulting">
-                <div class="div-header"><span class="div-emoji">🚀</span><span class="div-name">Auto-Fire (no approval)</span></div>
+                <div class="div-header"><span class="div-emoji">ð</span><span class="div-name">Auto-Fire (no approval)</span></div>
                 <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-top: 8px;">
-                  Cold outreach from <strong>Sara</strong>, intel briefs from <strong>Elijah</strong>, scrapers from <strong>Adam</strong> &amp; <strong>Enoch</strong>, daily briefs from <strong>Noah</strong> — all fire without your approval. They run autonomously every day.
+                  Cold outreach from <strong>Sara</strong>, intel briefs from <strong>Elijah</strong>, scrapers from <strong>Adam</strong> &amp; <strong>Enoch</strong>, daily briefs from <strong>Noah</strong> â all fire without your approval. They run autonomously every day.
                 </div>
               </div>
               <div class="division-card capital">
-                <div class="div-header"><span class="div-emoji">⏸️</span><span class="div-name">Gated (your APPROVE needed)</span></div>
+                <div class="div-header"><span class="div-emoji">â¸ï¸</span><span class="div-name">Gated (your APPROVE needed)</span></div>
                 <div style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-top: 8px;">
                   Anything containing <strong>contract</strong>, <strong>proposal</strong>, <strong>agreement</strong>, <strong>MSA</strong>, <strong>SOW</strong>, <strong>bid</strong>, <strong>RFP response</strong>, or <strong>"we accept"</strong> goes here. Drafts from <strong>Malik</strong> &amp; <strong>Levi</strong> typically gate.
                 </div>
@@ -1383,14 +1383,14 @@
 
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">📝 How to Approve</div>
+            <div class="panel-title">ð How to Approve</div>
           </div>
           <div class="panel-body" style="padding: 0;">
             <div class="feed">
-              <div class="feed-row"><div class="feed-time">Step 1</div><div class="feed-icon send">1</div><div class="feed-detail">Open the Google Sheet → <strong>PENDING_APPROVAL</strong> tab</div><div class="feed-tag parent">SHEET</div></div>
+              <div class="feed-row"><div class="feed-time">Step 1</div><div class="feed-icon send">1</div><div class="feed-detail">Open the Google Sheet â <strong>PENDING_APPROVAL</strong> tab</div><div class="feed-tag parent">SHEET</div></div>
               <div class="feed-row"><div class="feed-time">Step 2</div><div class="feed-icon lead">2</div><div class="feed-detail">Find the row you want to approve. Read full_body column for the email content</div><div class="feed-tag parent">REVIEW</div></div>
               <div class="feed-row"><div class="feed-time">Step 3</div><div class="feed-icon payment">3</div><div class="feed-detail">Type <strong>APPROVE</strong> in the DECISION column (column J). Hit Enter</div><div class="feed-tag parent">DECIDE</div></div>
-              <div class="feed-row"><div class="feed-time">Step 4</div><div class="feed-icon send">4</div><div class="feed-detail"><strong>sendApproved</strong> trigger fires every 15 minutes — picks up your APPROVEs and sends via Brevo</div><div class="feed-tag parent">AUTO</div></div>
+              <div class="feed-row"><div class="feed-time">Step 4</div><div class="feed-icon send">4</div><div class="feed-detail"><strong>sendApproved</strong> trigger fires every 15 minutes â picks up your APPROVEs and sends via Brevo</div><div class="feed-tag parent">AUTO</div></div>
               <div class="feed-row"><div class="feed-time">Step 5</div><div class="feed-icon payment">5</div><div class="feed-detail">SENT_LOG row appears with Brevo Message ID. Reply tracking begins via Inbox Manager</div><div class="feed-tag parent">SENT</div></div>
             </div>
           </div>
@@ -1400,7 +1400,7 @@
       <section class="page" data-page="agents">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon purple">🤖</div>Agent Roster</div>
+            <div class="page-title"><div class="page-title-icon purple">ð¤</div>Agent Roster</div>
             <div class="page-sub">17 autonomous agents driving the empire</div>
           </div>
         </div>
@@ -1410,7 +1410,7 @@
       <section class="page" data-page="system">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon teal">⚙️</div>System Health</div>
+            <div class="page-title"><div class="page-title-icon teal">âï¸</div>System Health</div>
             <div class="page-sub">Engine state, capacity, integrations</div>
           </div>
         </div>
@@ -1420,30 +1420,30 @@
       <section class="page" data-page="noah">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon orange">🦅</div>Noah — Chief Intelligence Officer</div>
-            <div class="page-sub">Chief Intelligence Officer · builds · codes · engineers · programs · terminal · diagnoses connections · runs ZYN Empire</div>
+            <div class="page-title"><div class="page-title-icon orange">ð¦</div>Noah â Chief Intelligence Officer</div>
+            <div class="page-sub">Chief Intelligence Officer Â· builds Â· codes Â· engineers Â· programs Â· terminal Â· diagnoses connections Â· runs ZYN Empire</div>
           </div>
           <div>
-            <button id="noahSuggestBtn" class="btn btn-primary" style="padding:8px 14px; border-radius:8px; background:var(--c-orange-soft); color:var(--c-orange); border:1px solid var(--c-orange-soft); cursor:pointer; font-size:13px; font-weight:600;">💡 Suggest improvement</button>
+            <button id="noahSuggestBtn" class="btn btn-primary" style="padding:8px 14px; border-radius:8px; background:var(--c-orange-soft); color:var(--c-orange); border:1px solid var(--c-orange-soft); cursor:pointer; font-size:13px; font-weight:600;">ð¡ Suggest improvement</button>
           </div>
         </div>
         <div style="display:grid; grid-template-columns: 2fr 1fr; gap:18px;">
           <div class="panel">
             <div class="panel-header">
-              <div class="panel-title">💬 Chat with Noah</div>
+              <div class="panel-title">ð¬ Chat with Noah</div>
               <div class="panel-sub" id="noahStatus">ready</div>
             </div>
             <div class="panel-body" style="display:flex; flex-direction:column; height:480px;">
               <div id="noahChatLog" style="flex:1; overflow-y:auto; padding:8px; display:flex; flex-direction:column; gap:10px;"></div>
               <div style="display:flex; gap:8px; padding-top:12px; border-top:1px solid var(--border-soft);">
-                <input id="noahChatInput" type="text" placeholder="Ask Noah about the empire, agents, signals…" style="flex:1; background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:8px; padding:10px 12px; font-size:13.5px; outline:none;" />
+                <input id="noahChatInput" type="text" placeholder="Ask Noah about the empire, agents, signalsâ¦" style="flex:1; background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:8px; padding:10px 12px; font-size:13.5px; outline:none;" />
                 <button id="noahSendBtn" style="padding:8px 18px; border-radius:8px; background:var(--c-orange); color:white; border:none; cursor:pointer; font-size:13px; font-weight:600;">Send</button>
               </div>
             </div>
           </div>
           <div class="panel">
             <div class="panel-header">
-              <div class="panel-title">🧠 Recent suggestions</div>
+              <div class="panel-title">ð§  Recent suggestions</div>
             </div>
             <div class="panel-body" id="noahSuggestionLog" style="font-size:13px; color:var(--text-secondary); min-height:200px;">
               <div style="color:var(--text-muted); font-style:italic;">Click "Suggest improvement" above to get Noah's analysis of recent activity.</div>
@@ -1453,7 +1453,7 @@
 
         <div class="panel" style="margin-top:18px;">
           <div class="panel-header">
-            <div class="panel-title">🔧 Noah — Build, Code & Terminal</div>
+            <div class="panel-title">ð§ Noah â Build, Code & Terminal</div>
             <div class="panel-sub" id="noahBuildStatus">Type a request, or prefix with <b>/</b> for terminal commands (try <code>/help</code>)</div>
           </div>
           <div class="panel-body" style="display:flex; flex-direction:column; height:380px; padding:0;">
@@ -1461,7 +1461,7 @@
               <div style="color:#666; font-style:italic;">Noah's terminal is ready. Try /help, /triggers, /health, /agents, /sheet:LEADS</div>
             </div>
             <div style="display:flex; gap:8px; padding:12px; border-top:1px solid var(--border-soft); background:#11111e;">
-              <input id="noahBuildInput" type="text" placeholder="Build, code, debug, or /command…" style="flex:1; background:#0d0d18; color:#fff; border:1px solid #444; border-radius:6px; padding:10px 14px; font-size:14px; font-family:inherit; outline:none;" />
+              <input id="noahBuildInput" type="text" placeholder="Build, code, debug, or /commandâ¦" style="flex:1; background:#0d0d18; color:#fff; border:1px solid #444; border-radius:6px; padding:10px 14px; font-size:14px; font-family:inherit; outline:none;" />
               <button id="noahBuildSend" style="padding:10px 22px; background:#ff8a3d; color:#000; border:1px solid #ff8a3d; border-radius:6px; cursor:pointer; font-size:14px; font-weight:600;">Run</button>
             </div>
           </div>
@@ -1470,14 +1470,14 @@
       <!-- ZYN v19: Noah Code Editor -->
         <div class="panel" style="margin-top:18px;">
           <div class="panel-header">
-            <div class="panel-title">📝 Noah — Code Editor</div>
+            <div class="panel-title">ð Noah â Code Editor</div>
             <div class="panel-sub" id="noahCodeStatus">Read &amp; write any file in the GitHub repo</div>
           </div>
           <div class="panel-body" style="padding:14px;">
             <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
               <label style="font-size:12px; color:var(--text-muted); font-weight:600;">FILE</label>
               <select id="noahCodeFilePicker" style="background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:6px; padding:6px 10px; font-size:13px; min-width:200px;">
-                <option value="">— quick pick —</option>
+                <option value="">â quick pick â</option>
                 <option value="dashboard.html">dashboard.html</option>
                 <option value="index.html">index.html</option>
                 <option value="README.md">README.md</option>
@@ -1487,9 +1487,9 @@
                 <option value="about.html">about.html</option>
               </select>
               <input id="noahCodePath" type="text" placeholder="or type any path (e.g. dashboard.html)" style="flex:1; min-width:240px; background:var(--bg-elevated); color:var(--text-primary); border:1px solid var(--border-soft); border-radius:6px; padding:6px 10px; font-size:13px; font-family:'SF Mono',Menlo,monospace;">
-              <button id="noahCodeLoad" style="padding:7px 16px; background:var(--c-blue,#38bdf8); color:#000; border:none; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600;">📥 Load</button>
-              <button id="noahCodeSave" style="padding:7px 16px; background:var(--c-orange); color:#000; border:none; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600;" disabled>💾 Save</button>
-              <button id="noahCodeRevert" style="padding:7px 14px; background:var(--bg-elevated); color:var(--text-secondary); border:1px solid var(--border-soft); border-radius:6px; cursor:pointer; font-size:13px;">↺ Revert</button>
+              <button id="noahCodeLoad" style="padding:7px 16px; background:var(--c-blue,#38bdf8); color:#000; border:none; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600;">ð¥ Load</button>
+              <button id="noahCodeSave" style="padding:7px 16px; background:var(--c-orange); color:#000; border:none; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600;" disabled>ð¾ Save</button>
+              <button id="noahCodeRevert" style="padding:7px 14px; background:var(--bg-elevated); color:var(--text-secondary); border:1px solid var(--border-soft); border-radius:6px; cursor:pointer; font-size:13px;">âº Revert</button>
             </div>
             <textarea id="noahCodeArea" spellcheck="false" placeholder="Click Load to fetch a file from GitHub, or pick one from the dropdown..." style="width:100%; height:480px; background:#0d0d18; color:#cfd; border:1px solid var(--border-soft); border-radius:6px; padding:12px; font-family:'SF Mono','Consolas',monospace; font-size:12px; line-height:1.5; resize:vertical; box-sizing:border-box; tab-size:2;"></textarea>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px; color:var(--text-muted); font-family:'SF Mono',Menlo,monospace;">
@@ -1503,10 +1503,10 @@
 
         <div class="card" id="noahTasksDashboard" style="margin-top:24px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">✅ Noah — Task Center <span style="font-size:12px;opacity:0.6;font-weight:normal" id="taskCenterTime"></span></h3>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">â Noah â Task Center <span style="font-size:12px;opacity:0.6;font-weight:normal" id="taskCenterTime"></span></h3>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <button onclick="refreshTaskCenter()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">🔄 Refresh</button>
-              <button onclick="runAllAutonomous()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">⚡ Run all autonomous</button>
+              <button onclick="refreshTaskCenter()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">ð Refresh</button>
+              <button onclick="runAllAutonomous()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">â¡ Run all autonomous</button>
             </div>
           </div>
           <div id="taskCenterGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px"></div>
@@ -1514,19 +1514,19 @@
         </div>
         <div class="card" id="noahGasPatches" style="margin-top:24px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">🔧 Noah — GAS Patches <span style="font-size:12px;opacity:0.6;font-weight:normal">v2 · view-based dispatch</span></h3>
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">ð§ Noah â GAS Patches <span style="font-size:12px;opacity:0.6;font-weight:normal">v2 Â· view-based dispatch</span></h3>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <span id="gasPatchStatus" style="font-size:12px;opacity:0.75">checking…</span>
-              <button onclick="copyGasPatch()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">📋 Copy</button>
-              <button onclick="testWriteLeadEndpoint()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">🔌 Test endpoint</button>
-              <button onclick="seedConsultingLeads()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(249,115,22,0.18);color:inherit;cursor:pointer">🌱 Seed 50 Consulting Leads</button>
+              <span id="gasPatchStatus" style="font-size:12px;opacity:0.75">checkingâ¦</span>
+              <button onclick="copyGasPatch()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">ð Copy</button>
+              <button onclick="testWriteLeadEndpoint()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">ð Test endpoint</button>
+              <button onclick="seedConsultingLeads()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(249,115,22,0.18);color:inherit;cursor:pointer">ð± Seed 50 Consulting Leads</button>
             </div>
           </div>
           <div style="font-size:13px;opacity:0.85;margin-bottom:10px;line-height:1.55">
-            Paste this into the Apps Script project for deployment <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">AKfycbzorSGdcjUiEy…</code>, add the single <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">case 'write_lead'</code> line to the existing doPost dispatcher, then redeploy. The deployment URL stays the same. Once live, the <strong>Seed 50 Consulting Leads</strong> button will write all 50 prospects into the LEADS sheet in ~15 seconds. Sara's 9 AM ET trigger will pick them up and queue outreach drafts.
+            Paste this into the Apps Script project for deployment <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">AKfycbzorSGdcjUiEyâ¦</code>, add the single <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">case 'write_lead'</code> line to the existing doPost dispatcher, then redeploy. The deployment URL stays the same. Once live, the <strong>Seed 50 Consulting Leads</strong> button will write all 50 prospects into the LEADS sheet in ~15 seconds. Sara's 9 AM ET trigger will pick them up and queue outreach drafts.
           </div>
           <pre id="gasPatchCode" style="background:rgba(0,0,0,0.32);padding:16px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.45;overflow:auto;max-height:420px;border:1px solid rgba(255,255,255,0.08);white-space:pre">/**
- * ZYN Empire — Apps Script doPost extension (v2 — view-based)
+ * ZYN Empire â Apps Script doPost extension (v2 â view-based)
  * Adds POST view=write_lead so the dashboard can seed leads.
  *
  * The ZYN GAS dispatches POST requests by a parameter named "view"
@@ -1624,19 +1624,19 @@ function handleWriteLead_(e) {
       <section class="page" data-page="federal">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon blue">🏛️</div>ZYN Federal Solutions</div>
-            <div class="page-sub">Government contracting · SAM.gov pipeline · Federal POC outreach</div>
+            <div class="page-title"><div class="page-title-icon blue">ðï¸</div>ZYN Federal Solutions</div>
+            <div class="page-sub">Government contracting Â· SAM.gov pipeline Â· Federal POC outreach</div>
           </div>
         </div>
         <div class="division-grid" id="federalMetrics" style="grid-template-columns: repeat(4, 1fr);"></div>
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">🎯 Federal Leads</div>
-            <div class="panel-sub" id="federalTableSub">— records</div>
+            <div class="panel-title">ð¯ Federal Leads</div>
+            <div class="panel-sub" id="federalTableSub">â records</div>
           </div>
           <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search by name, company, email…" data-table="federal-search" /></div>
-            <div class="table-info" id="federalTableInfo">Loading…</div>
+            <div class="search-box"><input type="text" placeholder="Search by name, company, emailâ¦" data-table="federal-search" /></div>
+            <div class="table-info" id="federalTableInfo">Loadingâ¦</div>
           </div>
           <div style="overflow-x:auto;"><table class="data-table" id="federalTable"></table></div>
           <div class="pagination" id="federalPagination"></div>
@@ -1646,19 +1646,19 @@ function handleWriteLead_(e) {
       <section class="page" data-page="consulting">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon purple">💼</div>ZYN Business Consulting Group</div>
+            <div class="page-title"><div class="page-title-icon purple">ð¼</div>ZYN Business Consulting Group</div>
             <div class="page-sub">Mid-market AI supply chain consulting</div>
           </div>
         </div>
         <div class="division-grid" id="consultingMetrics" style="grid-template-columns: repeat(4, 1fr);"></div>
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">🎯 Consulting Leads</div>
-            <div class="panel-sub" id="consultingTableSub">— records</div>
+            <div class="panel-title">ð¯ Consulting Leads</div>
+            <div class="panel-sub" id="consultingTableSub">â records</div>
           </div>
           <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search…" data-table="consulting-search" /></div>
-            <div class="table-info" id="consultingTableInfo">Loading…</div>
+            <div class="search-box"><input type="text" placeholder="Searchâ¦" data-table="consulting-search" /></div>
+            <div class="table-info" id="consultingTableInfo">Loadingâ¦</div>
           </div>
           <div style="overflow-x:auto;"><table class="data-table" id="consultingTable"></table></div>
           <div class="pagination" id="consultingPagination"></div>
@@ -1668,19 +1668,19 @@ function handleWriteLead_(e) {
       <section class="page" data-page="autonomous">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon cyan">🤖</div>ZYN Autonomous Systems</div>
+            <div class="page-title"><div class="page-title-icon cyan">ð¤</div>ZYN Autonomous Systems</div>
             <div class="page-sub">Custom AI agent deployment for B2B clients</div>
           </div>
         </div>
         <div class="division-grid" id="autonomousMetrics" style="grid-template-columns: repeat(4, 1fr);"></div>
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">🎯 Autonomous Leads</div>
-            <div class="panel-sub" id="autonomousTableSub">— records</div>
+            <div class="panel-title">ð¯ Autonomous Leads</div>
+            <div class="panel-sub" id="autonomousTableSub">â records</div>
           </div>
           <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search…" data-table="autonomous-search" /></div>
-            <div class="table-info" id="autonomousTableInfo">Loading…</div>
+            <div class="search-box"><input type="text" placeholder="Searchâ¦" data-table="autonomous-search" /></div>
+            <div class="table-info" id="autonomousTableInfo">Loadingâ¦</div>
           </div>
           <div style="overflow-x:auto;"><table class="data-table" id="autonomousTable"></table></div>
           <div class="pagination" id="autonomousPagination"></div>
@@ -1690,34 +1690,34 @@ function handleWriteLead_(e) {
       <section class="page" data-page="capital">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon orange">💹</div>ZYN Capital Management</div>
-            <div class="page-sub">Trading &amp; investment systems · Status: Parked · Activation pending CEO approval</div>
+            <div class="page-title"><div class="page-title-icon orange">ð¹</div>ZYN Capital Management</div>
+            <div class="page-sub">Trading &amp; investment systems Â· Status: Parked Â· Activation pending CEO approval</div>
           </div>
         </div>
         <div class="division-grid" id="capitalMetrics" style="grid-template-columns: repeat(4, 1fr);"></div>
 
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">💤 Division Status</div>
+            <div class="panel-title">ð¤ Division Status</div>
             <div class="panel-sub">Current state &amp; activation criteria</div>
           </div>
           <div class="panel-body">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
               <div class="division-card capital">
-                <div class="div-header"><span class="div-emoji">📅</span><span class="div-name">Activation Date</span></div>
+                <div class="div-header"><span class="div-emoji">ð</span><span class="div-name">Activation Date</span></div>
                 <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">TBD</div><div class="label">Awaiting CEO trigger</div></div></div>
               </div>
               <div class="division-card capital">
-                <div class="div-header"><span class="div-emoji">💰</span><span class="div-name">Capital Required</span></div>
+                <div class="div-header"><span class="div-emoji">ð°</span><span class="div-name">Capital Required</span></div>
                 <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">$10K</div><div class="label">Minimum trading float</div></div></div>
               </div>
               <div class="division-card capital">
-                <div class="div-header"><span class="div-emoji">🤖</span><span class="div-name">Agents Planned</span></div>
+                <div class="div-header"><span class="div-emoji">ð¤</span><span class="div-name">Agents Planned</span></div>
                 <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">3</div><div class="label">MiroFish, Watcher, Hedger</div></div></div>
               </div>
               <div class="division-card capital">
-                <div class="div-header"><span class="div-emoji">📈</span><span class="div-name">Target Strategy</span></div>
-                <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">Long</div><div class="label">SPY · QQQ · sector ETFs</div></div></div>
+                <div class="div-header"><span class="div-emoji">ð</span><span class="div-name">Target Strategy</span></div>
+                <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value muted">Long</div><div class="label">SPY Â· QQQ Â· sector ETFs</div></div></div>
               </div>
             </div>
           </div>
@@ -1725,50 +1725,80 @@ function handleWriteLead_(e) {
 
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">🗺️ Activation Roadmap</div>
+            <div class="panel-title">ðºï¸ Activation Roadmap</div>
             <div class="panel-sub">Steps to bring Capital Management online</div>
           </div>
           <div class="panel-body" style="padding: 0;">
             <div class="feed">
-              <div class="feed-row"><div class="feed-time">Step 1</div><div class="feed-icon send">✓</div><div class="feed-detail">Empire revenue clears $5K/month sustained for 30 days</div><div class="feed-tag capital">PRECONDITION</div></div>
-              <div class="feed-row"><div class="feed-time">Step 2</div><div class="feed-icon lead">·</div><div class="feed-detail">Allocate $10K trading float from operating reserves</div><div class="feed-tag capital">FUNDING</div></div>
-              <div class="feed-row"><div class="feed-time">Step 3</div><div class="feed-icon lead">·</div><div class="feed-detail">Connect Alpaca Markets API (paper trading first, then live)</div><div class="feed-tag capital">INTEGRATION</div></div>
-              <div class="feed-row"><div class="feed-time">Step 4</div><div class="feed-icon lead">·</div><div class="feed-detail">Deploy MiroFish prediction engine — 30 day backtest required</div><div class="feed-tag capital">AGENT</div></div>
-              <div class="feed-row"><div class="feed-time">Step 5</div><div class="feed-icon lead">·</div><div class="feed-detail">Set risk circuit breakers — max 3% drawdown / day, kill switch via Discord</div><div class="feed-tag capital">RISK</div></div>
-              <div class="feed-row"><div class="feed-time">Step 6</div><div class="feed-icon payment">$</div><div class="feed-detail">Activate live trading with 1% position sizing — scale only on positive Sharpe</div><div class="feed-tag capital">LIVE</div></div>
+              <div class="feed-row"><div class="feed-time">Step 1</div><div class="feed-icon send">â</div><div class="feed-detail">Empire revenue clears $5K/month sustained for 30 days</div><div class="feed-tag capital">PRECONDITION</div></div>
+              <div class="feed-row"><div class="feed-time">Step 2</div><div class="feed-icon lead">Â·</div><div class="feed-detail">Allocate $10K trading float from operating reserves</div><div class="feed-tag capital">FUNDING</div></div>
+              <div class="feed-row"><div class="feed-time">Step 3</div><div class="feed-icon lead">Â·</div><div class="feed-detail">Connect Alpaca Markets API (paper trading first, then live)</div><div class="feed-tag capital">INTEGRATION</div></div>
+              <div class="feed-row"><div class="feed-time">Step 4</div><div class="feed-icon lead">Â·</div><div class="feed-detail">Deploy MiroFish prediction engine â 30 day backtest required</div><div class="feed-tag capital">AGENT</div></div>
+              <div class="feed-row"><div class="feed-time">Step 5</div><div class="feed-icon lead">Â·</div><div class="feed-detail">Set risk circuit breakers â max 3% drawdown / day, kill switch via Discord</div><div class="feed-tag capital">RISK</div></div>
+              <div class="feed-row"><div class="feed-time">Step 6</div><div class="feed-icon payment">$</div><div class="feed-detail">Activate live trading with 1% position sizing â scale only on positive Sharpe</div><div class="feed-tag capital">LIVE</div></div>
             </div>
           </div>
         </div>
 
         <div class="panel">
           <div class="panel-header">
-            <div class="panel-title">⚠️ Why It's Parked</div>
+            <div class="panel-title">â ï¸ Why It's Parked</div>
           </div>
           <div class="panel-body">
             <div style="display: flex; flex-direction: column; gap: 10px; color: var(--text-secondary); font-size: 13.5px; line-height: 1.6;">
-              <div><strong style="color: var(--text-primary);">Discipline.</strong> Capital management without revenue is gambling. Empire must produce real cash flow first — Federal/Consulting/Autonomous closing deals — before risking capital on markets.</div>
+              <div><strong style="color: var(--text-primary);">Discipline.</strong> Capital management without revenue is gambling. Empire must produce real cash flow first â Federal/Consulting/Autonomous closing deals â before risking capital on markets.</div>
               <div><strong style="color: var(--text-primary);">Focus.</strong> Running 3 outbound divisions + 1 trading division simultaneously dilutes attention. Trading division activates only when outbound is mature enough to run on autopilot.</div>
               <div><strong style="color: var(--text-primary);">Edge.</strong> MiroFish prediction engine needs 30+ days of backtest data on real market conditions before any live capital exposure. Until then, it's research-only.</div>
             </div>
           </div>
-        </div>
+        
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title">&#x1F4C8; Trading Agents</div>
+            <div class="panel-sub">TauricResearch/TradingAgents &mdash; Multi-Agent LLM Financial Trading Framework (73k &#11088;)</div>
+          </div>
+          <div class="panel-body">
+            <div class="div-metric-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+              <div class="div-metric"><div class="value" id="taStatus">&#x1F7E2; Active</div><div class="label">Framework Status</div></div>
+              <div class="div-metric"><div class="value" id="taModel">LLM Multi-Agent</div><div class="label">Architecture</div></div>
+              <div class="div-metric"><div class="value" id="taRepo"><a href="https://github.com/TauricResearch/TradingAgents" target="_blank" style="color:var(--accent-orange);text-decoration:none;">TauricResearch</a></div><div class="label">GitHub Repo</div></div>
+            </div>
+            <div style="background:var(--bg-secondary);border-radius:8px;padding:14px;margin-bottom:12px;border:1px solid var(--border-subtle);">
+              <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">&#x1F916; Agent Roles</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+                <div style="padding:8px;background:var(--bg-tertiary);border-radius:6px;">&#x1F4B9; <strong>Bull Analyst</strong> &mdash; Bullish thesis</div>
+                <div style="padding:8px;background:var(--bg-tertiary);border-radius:6px;">&#x1F4C9; <strong>Bear Analyst</strong> &mdash; Bearish thesis</div>
+                <div style="padding:8px;background:var(--bg-tertiary);border-radius:6px;">&#x1F4CA; <strong>Market Analyst</strong> &mdash; Technical signals</div>
+                <div style="padding:8px;background:var(--bg-tertiary);border-radius:6px;">&#x1F4F0; <strong>News Analyst</strong> &mdash; Sentiment analysis</div>
+                <div style="padding:8px;background:var(--bg-tertiary);border-radius:6px;">&#x2696;&#xFE0F; <strong>Research Manager</strong> &mdash; Synthesis</div>
+                <div style="padding:8px;background:var(--bg-tertiary);border-radius:6px;">&#x1F4BC; <strong>Fund Manager</strong> &mdash; Final decisions</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button onclick="window.open('https://github.com/TauricResearch/TradingAgents','_blank')" style="background:var(--accent-orange);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">&#x1F4C2; View Repo</button>
+              <button onclick="window.open('https://github.com/TauricResearch/TradingAgents/blob/main/README.md','_blank')" style="background:var(--bg-secondary);color:var(--text-primary);border:1px solid var(--border-subtle);padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;">&#x1F4D6; Documentation</button>
+              <button onclick="var url=window.buildUrl({view:'noah',action:'chat',msg:'trading agents capital management'});fetch(url).then(r=>r.json()).then(d=>alert('Noah: '+d.response.substring(0,200)))" style="background:var(--bg-secondary);color:var(--text-primary);border:1px solid var(--border-subtle);padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;">&#x1F9E0; Ask Noah</button>
+            </div>
+          </div>
+        </section>
+</div>
       </section>
 
       <section class="page" data-page="leads">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon green">🎯</div>All Leads</div>
-            <div class="page-sub">Every prospect across the empire — search, sort, page</div>
+            <div class="page-title"><div class="page-title-icon green">ð¯</div>All Leads</div>
+            <div class="page-sub">Every prospect across the empire â search, sort, page</div>
           </div>
         </div>
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">Leads Table</div>
-            <div class="panel-sub" id="leadsTableSub">— records</div>
+            <div class="panel-sub" id="leadsTableSub">â records</div>
           </div>
           <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search by name, company, email…" data-table="leads-search" /></div>
-            <div class="table-info" id="leadsTableInfo">Loading…</div>
+            <div class="search-box"><input type="text" placeholder="Search by name, company, emailâ¦" data-table="leads-search" /></div>
+            <div class="table-info" id="leadsTableInfo">Loadingâ¦</div>
           </div>
           <div style="overflow-x:auto;"><table class="data-table" id="leadsTable"></table></div>
           <div class="pagination" id="leadsPagination"></div>
@@ -1778,18 +1808,18 @@ function handleWriteLead_(e) {
       <section class="page" data-page="opportunities">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon pink">📑</div>Opportunities</div>
+            <div class="page-title"><div class="page-title-icon pink">ð</div>Opportunities</div>
             <div class="page-sub">Federal solicitations &amp; commercial RFPs</div>
           </div>
         </div>
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">Opportunities Table</div>
-            <div class="panel-sub" id="oppsTableSub">— records</div>
+            <div class="panel-sub" id="oppsTableSub">â records</div>
           </div>
           <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search by title, agency, NAICS…" data-table="opps-search" /></div>
-            <div class="table-info" id="oppsTableInfo">Loading…</div>
+            <div class="search-box"><input type="text" placeholder="Search by title, agency, NAICSâ¦" data-table="opps-search" /></div>
+            <div class="table-info" id="oppsTableInfo">Loadingâ¦</div>
           </div>
           <div style="overflow-x:auto;"><table class="data-table" id="oppsTable"></table></div>
           <div class="pagination" id="oppsPagination"></div>
@@ -1799,18 +1829,18 @@ function handleWriteLead_(e) {
       <section class="page" data-page="crm">
         <div class="page-header">
           <div>
-            <div class="page-title"><div class="page-title-icon yellow">🤝</div>CRM</div>
-            <div class="page-sub">Active clients · contracts · payment status</div>
+            <div class="page-title"><div class="page-title-icon yellow">ð¤</div>CRM</div>
+            <div class="page-sub">Active clients Â· contracts Â· payment status</div>
           </div>
         </div>
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">CRM Table</div>
-            <div class="panel-sub" id="crmTableSub">— records</div>
+            <div class="panel-sub" id="crmTableSub">â records</div>
           </div>
           <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search by client, company, email…" data-table="crm-search" /></div>
-            <div class="table-info" id="crmTableInfo">Loading…</div>
+            <div class="search-box"><input type="text" placeholder="Search by client, company, emailâ¦" data-table="crm-search" /></div>
+            <div class="table-info" id="crmTableInfo">Loadingâ¦</div>
           </div>
           <div style="overflow-x:auto;"><table class="data-table" id="crmTable"></table></div>
           <div class="pagination" id="crmPagination"></div>
@@ -1881,10 +1911,10 @@ document.querySelectorAll('.search-box input').forEach(input => {
   });
 });
 
-// ============ CLOCK — locked to America/New_York (EST/EDT) ============
+// ============ CLOCK â locked to America/New_York (EST/EDT) ============
 // Tries to use server time from API as authoritative; falls back to local
 // browser time formatted in America/New_York.
-let serverOffsetMs = 0; // (server_epoch - browser_epoch) — applied to local time
+let serverOffsetMs = 0; // (server_epoch - browser_epoch) â applied to local time
 let serverTzShortLabel = 'EST';
 
 function refreshClockOffsetFromServer(d) {
@@ -1915,7 +1945,7 @@ function tickClock() {
   const now = new Date(Date.now() + serverOffsetMs);
   const tzOpts = { timeZone: 'America/New_York' };
 
-  // Time string — HH:MM:SS in EST/EDT
+  // Time string â HH:MM:SS in EST/EDT
   const timeStr = now.toLocaleTimeString('en-US', Object.assign({
     hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
   }, tzOpts));
@@ -1923,7 +1953,7 @@ function tickClock() {
   // Day of week
   const dayStr = now.toLocaleDateString('en-US', Object.assign({ weekday: 'long' }, tzOpts));
 
-  // Date — Mon Day Year
+  // Date â Mon Day Year
   const dateStr = now.toLocaleDateString('en-US', Object.assign({
     month: 'short', day: 'numeric', year: 'numeric'
   }, tzOpts));
@@ -1937,7 +1967,7 @@ function tickClock() {
 }
 tickClock(); setInterval(tickClock, 1000);
 
-// ============ THEME TOGGLE — Twilight (default) ⇄ Day ============
+// ============ THEME TOGGLE â Twilight (default) â Day ============
 let currentTheme = 'twilight';
 const themeBtn = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
@@ -1945,11 +1975,11 @@ function applyTheme(t) {
   currentTheme = t;
   if (t === 'day') {
     document.documentElement.setAttribute('data-theme', 'day');
-    if (themeIcon) themeIcon.textContent = '🌙';
+    if (themeIcon) themeIcon.textContent = 'ð';
     if (themeBtn) themeBtn.setAttribute('title', 'Switch to Twilight');
   } else {
     document.documentElement.removeAttribute('data-theme');
-    if (themeIcon) themeIcon.textContent = '☀️';
+    if (themeIcon) themeIcon.textContent = 'âï¸';
     if (themeBtn) themeBtn.setAttribute('title', 'Switch to Day');
   }
 }
@@ -1976,7 +2006,7 @@ async function fetchOverview() {
     lastData = data;
     refreshClockOffsetFromServer(data);
     renderAll(data);
-    document.getElementById('refreshInfo').textContent = 'Last updated: ' + new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/New_York' }) + ' EST · auto-refresh 30s';
+    document.getElementById('refreshInfo').textContent = 'Last updated: ' + new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'America/New_York' }) + ' EST Â· auto-refresh 30s';
   } catch (e) {
     document.getElementById('refreshInfo').textContent = 'Refresh failed: ' + e.message;
     console.error(e);
@@ -2026,10 +2056,10 @@ function renderAll(d) {
 function renderDivisionCards(d) {
   const divs = ['federal','consulting','autonomous','capital'];
   const meta = {
-    federal:    { emoji: '🏛️', name: 'Federal Solutions',  cls: 'federal' },
-    consulting: { emoji: '💼', name: 'Consulting Group',   cls: 'consulting' },
-    autonomous: { emoji: '🤖', name: 'Autonomous Systems', cls: 'autonomous' },
-    capital:    { emoji: '💹', name: 'Capital Management', cls: 'capital' }
+    federal:    { emoji: 'ðï¸', name: 'Federal Solutions',  cls: 'federal' },
+    consulting: { emoji: 'ð¼', name: 'Consulting Group',   cls: 'consulting' },
+    autonomous: { emoji: 'ð¤', name: 'Autonomous Systems', cls: 'autonomous' },
+    capital:    { emoji: 'ð¹', name: 'Capital Management', cls: 'capital' }
   };
   const grid = document.getElementById('divisionGrid');
   grid.innerHTML = '';
@@ -2062,20 +2092,20 @@ function renderDivisionMetrics(d, key) {
   const isParked = key === 'capital';
   target.innerHTML = `
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">📤\u003C/span><span class="div-name">Sends\u003C/span>\u003C/div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.sends_today || 0}\u003C/div><div class="label">Today · ${div.sends_week || 0} this week\u003C/div>\u003C/div>\u003C/div>
+      <div class="div-header"><span class="div-emoji">ð¤\u003C/span><span class="div-name">Sends\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.sends_today || 0}\u003C/div><div class="label">Today Â· ${div.sends_week || 0} this week\u003C/div>\u003C/div>\u003C/div>
     \u003C/div>
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">🎯\u003C/span><span class="div-name">Pipeline\u003C/span>\u003C/div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.leads_total || 0}\u003C/div><div class="label">${div.leads_new || 0} new · ${div.leads_contacted || 0} contacted · ${div.leads_hot || 0} hot\u003C/div>\u003C/div>\u003C/div>
+      <div class="div-header"><span class="div-emoji">ð¯\u003C/span><span class="div-name">Pipeline\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${div.leads_total || 0}\u003C/div><div class="label">${div.leads_new || 0} new Â· ${div.leads_contacted || 0} contacted Â· ${div.leads_hot || 0} hot\u003C/div>\u003C/div>\u003C/div>
     \u003C/div>
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">💰\u003C/span><span class="div-name">Revenue\u003C/span>\u003C/div>
+      <div class="div-header"><span class="div-emoji">ð°\u003C/span><span class="div-name">Revenue\u003C/span>\u003C/div>
       <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value success">$${(div.pipeline_value||0).toLocaleString()}\u003C/div><div class="label">$${(div.paid_value||0).toLocaleString()} collected\u003C/div>\u003C/div>\u003C/div>
     \u003C/div>
     <div class="division-card ${key}">
-      <div class="div-header"><span class="div-emoji">📊\u003C/span><span class="div-name">Status\u003C/span>\u003C/div>
-      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value ${isParked ? 'muted' : 'success'}">${div.status || 'ACTIVE'}\u003C/div><div class="label">${div.crm_active || 0} active · ${div.crm_paid || 0} paid\u003C/div>\u003C/div>\u003C/div>
+      <div class="div-header"><span class="div-emoji">ð\u003C/span><span class="div-name">Status\u003C/span>\u003C/div>
+      <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value ${isParked ? 'muted' : 'success'}">${div.status || 'ACTIVE'}\u003C/div><div class="label">${div.crm_active || 0} active Â· ${div.crm_paid || 0} paid\u003C/div>\u003C/div>\u003C/div>
     \u003C/div>`;
 }
 
@@ -2116,7 +2146,7 @@ function renderDivisionMetrics(d, key) {
         </div>`;
       }
       document.getElementById('kanban').innerHTML = html;
-      document.getElementById('pipelineSub').textContent = total + ' total leads tracked' + (p.no_email ? ' · ' + p.no_email + ' need email' : '') + (p.dup_skip ? ' · ' + p.dup_skip + ' dup' : '');
+      document.getElementById('pipelineSub').textContent = total + ' total leads tracked' + (p.no_email ? ' Â· ' + p.no_email + ' need email' : '') + (p.dup_skip ? ' Â· ' + p.dup_skip + ' dup' : '');
     }
 function renderActivityFeed(d) {
   const items = d.activity_feed || [];
@@ -2130,27 +2160,27 @@ function renderActivityFeed(d) {
     const replyCount = filtered.filter(i => i.type === 'reply').length;
     statsEl.innerHTML = `
       <div class="division-card federal">
-        <div class="div-header"><span class="div-emoji">📤\u003C/span><span class="div-name">Sends (24h)\u003C/span>\u003C/div>
+        <div class="div-header"><span class="div-emoji">ð¤\u003C/span><span class="div-name">Sends (24h)\u003C/span>\u003C/div>
         <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${sendCount}\u003C/div><div class="label">Cold outreach + briefs\u003C/div>\u003C/div>\u003C/div>
       \u003C/div>
       <div class="division-card autonomous">
-        <div class="div-header"><span class="div-emoji">🎯\u003C/span><span class="div-name">Leads added (24h)\u003C/span>\u003C/div>
+        <div class="div-header"><span class="div-emoji">ð¯\u003C/span><span class="div-name">Leads added (24h)\u003C/span>\u003C/div>
         <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${leadCount}\u003C/div><div class="label">Scrapers + manual\u003C/div>\u003C/div>\u003C/div>
       \u003C/div>
       <div class="division-card consulting">
-        <div class="div-header"><span class="div-emoji">💬\u003C/span><span class="div-name">Replies (24h)\u003C/span>\u003C/div>
+        <div class="div-header"><span class="div-emoji">ð¬\u003C/span><span class="div-name">Replies (24h)\u003C/span>\u003C/div>
         <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${replyCount}\u003C/div><div class="label">Inbox manager classified\u003C/div>\u003C/div>\u003C/div>
       \u003C/div>
       <div class="division-card capital">
-        <div class="div-header"><span class="div-emoji">📊\u003C/span><span class="div-name">Total events\u003C/span>\u003C/div>
+        <div class="div-header"><span class="div-emoji">ð\u003C/span><span class="div-name">Total events\u003C/span>\u003C/div>
         <div class="div-metric-grid" style="grid-template-columns: 1fr;"><div class="div-metric"><div class="value">${filtered.length}\u003C/div><div class="label">${activeFilter === 'all' ? 'all divisions' : activeFilter + ' only'}\u003C/div>\u003C/div>\u003C/div>
       \u003C/div>`;
   }
 
   const countSub = document.getElementById('activityCountSub');
-  if (countSub) countSub.textContent = filtered.length + (filtered.length === 1 ? ' event' : ' events') + (activeFilter === 'all' ? '' : ' · filtered: ' + activeFilter);
+  if (countSub) countSub.textContent = filtered.length + (filtered.length === 1 ? ' event' : ' events') + (activeFilter === 'all' ? '' : ' Â· filtered: ' + activeFilter);
 
-  const iconFor = t => ({ send: '✉', lead: '🎯', reply: '💬', payment: '💰', error: '⚠' }[t] || '·');
+  const iconFor = t => ({ send: 'â', lead: 'ð¯', reply: 'ð¬', payment: 'ð°', error: 'â ' }[t] || 'Â·');
   const tzOpts = { timeZone: 'America/New_York' };
   const renderItems = (arr, full) => arr.map(it => {
     const t = new Date(it.time);
@@ -2163,7 +2193,7 @@ function renderActivityFeed(d) {
       <div class="feed-detail">${escapeHtml(it.detail || '')}\u003C/div>
       <div class="feed-tag ${it.entity || 'parent'}">${(it.entity || 'parent').toUpperCase()}\u003C/div>
     \u003C/div>`;
-  }).join('') || '<div class="empty-state"><div class="empty-state-icon">📭\u003C/div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No recent activity\u003C/div><div>Agent runs from the last 24 hours appear here. Sara fires daily at 9am ET.\u003C/div>\u003C/div>';
+  }).join('') || '<div class="empty-state"><div class="empty-state-icon">ð­\u003C/div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No recent activity\u003C/div><div>Agent runs from the last 24 hours appear here. Sara fires daily at 9am ET.\u003C/div>\u003C/div>';
   document.getElementById('commandFeed').innerHTML  = renderItems(filtered.slice(0, 25), false);
   document.getElementById('activityFeed').innerHTML = renderItems(filtered, true);
 }
@@ -2236,34 +2266,34 @@ function renderHealth(d) {
   const trigPct = s.triggers_max ? Math.round((s.triggers / s.triggers_max) * 100) : 0;
   grid.innerHTML = `
     <div class="health-card brevo">
-      <div class="health-label">📧 Brevo Daily Cap\u003C/div>
+      <div class="health-label">ð§ Brevo Daily Cap\u003C/div>
       <div class="health-value">${s.brevo_used_today || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.brevo_cap || 280}\u003C/span>\u003C/div>
       <div class="health-progress"><div class="health-progress-fill" style="width:${brevoPct}%">\u003C/div>\u003C/div>
       <div class="health-sub">${brevoPct}% used today\u003C/div>
     \u003C/div>
     <div class="health-card triggers">
-      <div class="health-label">⏰ Triggers\u003C/div>
+      <div class="health-label">â° Triggers\u003C/div>
       <div class="health-value">${s.triggers || 0}<span style="font-size:14px; color:var(--text-muted); font-weight:500;"> / ${s.triggers_max || 20}\u003C/span>\u003C/div>
       <div class="health-progress"><div class="health-progress-fill" style="width:${trigPct}%; background: linear-gradient(90deg, var(--c-purple), var(--c-blue));">\u003C/div>\u003C/div>
       <div class="health-sub">${s.triggers_max - s.triggers > 0 ? (s.triggers_max - s.triggers) + ' free slots' : 'Operational (full capacity)'}\u003C/div>
     \u003C/div>
     <div class="health-card props">
-      <div class="health-label">🔑 Properties\u003C/div>
+      <div class="health-label">ð Properties\u003C/div>
       <div class="health-value">${s.properties || 0}\u003C/div>
       <div class="health-sub">API keys + webhooks + config\u003C/div>
     \u003C/div>
     <div class="health-card sends">
-      <div class="health-label">📈 Sends Today\u003C/div>
+      <div class="health-label">ð Sends Today\u003C/div>
       <div class="health-value">${d.sent_today || 0}\u003C/div>
       <div class="health-sub">All entities combined\u003C/div>
     \u003C/div>
     <div class="health-card bounces">
-      <div class="health-label">🛡️ Bounces (24h)\u003C/div>
+      <div class="health-label">ð¡ï¸ Bounces (24h)\u003C/div>
       <div class="health-value" style="color: ${(s.bounces_24h||0) > 0 ? 'var(--c-red)' : 'var(--c-green)'};">${s.bounces_24h || 0}\u003C/div>
       <div class="health-sub">Hard bounces detected\u003C/div>
     \u003C/div>
     <div class="health-card errors">
-      <div class="health-label">⚠️ Errors (24h)\u003C/div>
+      <div class="health-label">â ï¸ Errors (24h)\u003C/div>
       <div class="health-value" style="color: ${(s.errors_24h||0) > 0 ? 'var(--c-red)' : 'var(--c-green)'};">${s.errors_24h || 0}\u003C/div>
       <div class="health-sub">${s.last_error || 'No errors'}\u003C/div>
     \u003C/div>`;
@@ -2276,7 +2306,7 @@ function renderApprovalQueue(d) {
   if (subEl) subEl.textContent = q.length + (q.length === 1 ? ' item in queue' : ' items in queue');
   if (!el) return;
   if (!q.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✅</div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No items in approval queue</div><div style="font-size:13px; color:var(--text-muted);">All decisions processed.</div></div>`;
+    el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">â</div><div style="font-size:15px; color:var(--text-primary); margin-bottom:6px;">No items in approval queue</div><div style="font-size:13px; color:var(--text-muted);">All decisions processed.</div></div>`;
     return;
   }
   const fmtTime = (t) => {
@@ -2298,7 +2328,7 @@ function renderApprovalQueue(d) {
     const r = parseRecipient(it.recipient);
     const stateMap = {
       'PENDING': { label:'Pending Review', bg:'rgba(247,147,30,0.15)', fg:'var(--c-orange)', dot:'var(--c-orange)' },
-      'APPROVE': { label:'Approved · Awaiting Send', bg:'rgba(56,189,248,0.15)', fg:'var(--c-blue, #38bdf8)', dot:'var(--c-blue, #38bdf8)' },
+      'APPROVE': { label:'Approved Â· Awaiting Send', bg:'rgba(56,189,248,0.15)', fg:'var(--c-blue, #38bdf8)', dot:'var(--c-blue, #38bdf8)' },
       'REJECT':  { label:'Rejected', bg:'rgba(148,163,184,0.18)', fg:'var(--text-muted)', dot:'var(--text-muted)' },
       'CLEANUP-ALREADY-SENT': { label:'Sent', bg:'rgba(34,197,94,0.15)', fg:'var(--c-green)', dot:'var(--c-green)' }
     };
@@ -2306,12 +2336,12 @@ function renderApprovalQueue(d) {
     const entityTag = (it.entity || 'parent').toUpperCase();
     const time64 = encodeURIComponent(it.time);
     const buttons = (dec === 'PENDING')
-      ? `<button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" title="Approve and queue for send">✅ Approve</button>
-         <button class="zyn-reject-btn"  data-time="${escapeHtml(it.time)}" title="Reject this draft">✖ Reject</button>`
+      ? `<button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" title="Approve and queue for send">â Approve</button>
+         <button class="zyn-reject-btn"  data-time="${escapeHtml(it.time)}" title="Reject this draft">â Reject</button>`
       : (dec === 'APPROVE')
-      ? `<button class="zyn-force-btn"   data-time="${escapeHtml(it.time)}" title="Force send now">⚡ Force Send</button>
-         <button class="zyn-reject-btn"  data-time="${escapeHtml(it.time)}" title="Cancel this approval">✖ Cancel</button>`
-      : `<button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" title="Re-approve">↻ Re-Approve</button>`;
+      ? `<button class="zyn-force-btn"   data-time="${escapeHtml(it.time)}" title="Force send now">â¡ Force Send</button>
+         <button class="zyn-reject-btn"  data-time="${escapeHtml(it.time)}" title="Cancel this approval">â Cancel</button>`
+      : `<button class="zyn-approve-btn" data-time="${escapeHtml(it.time)}" title="Re-approve">â» Re-Approve</button>`;
     return `<div class="approval-card" data-time="${escapeHtml(it.time)}">
       <div class="approval-card-head">
         <div class="approval-card-meta">
@@ -2324,7 +2354,7 @@ function renderApprovalQueue(d) {
       <div class="approval-card-body">
         <div class="approval-from-to">
           <span class="approval-agent">${escapeHtml(it.agent || 'agent')}</span>
-          <span class="approval-arrow">→</span>
+          <span class="approval-arrow">â</span>
           <span class="approval-recipient">${escapeHtml(r.name)}${r.email ? ` <span class="approval-email">&lt;${escapeHtml(r.email)}&gt;</span>` : ''}</span>
         </div>
         <div class="approval-subject">${escapeHtml(it.subject || '(no subject)')}</div>
@@ -2359,7 +2389,7 @@ function renderApprovalQueue(d) {
     if (!time) return;
     const action = isApprove ? 'approve_decision' : (isReject ? 'reject_decision' : 'force_send_decision');
     const verb   = isApprove ? 'APPROVING' : (isReject ? 'REJECTING' : 'SENDING');
-    const successLabel = isApprove ? 'APPROVED ✓' : (isReject ? 'REJECTED ✓' : 'SENT ✓');
+    const successLabel = isApprove ? 'APPROVED â' : (isReject ? 'REJECTED â' : 'SENT â');
     if (isReject || isForce) {
       const confirmMsg = isReject
         ? 'Reject this draft? It will not be sent.'
@@ -2368,7 +2398,7 @@ function renderApprovalQueue(d) {
     }
     t.disabled = true;
     const orig = t.textContent;
-    t.textContent = verb + '…';
+    t.textContent = verb + 'â¦';
     try {
       const res = await callBuild(action, { time: time });
       if (res && res.ok) {
@@ -2473,7 +2503,7 @@ function renderApprovalQueue(d) {
     const wrap = document.createElement('div');
     wrap.style.cssText = 'margin-bottom:8px;';
     const color = role==='YOU' ? '#7ad' : role==='ERROR' ? '#f66' : role==='OUTPUT' ? '#9f9' : role==='TERMINAL' ? '#fa6' : '#ddd';
-    const prefix = role==='YOU' ? '> ' : role==='TERMINAL' ? '$ ' : role==='OUTPUT' ? '' : role==='ERROR' ? '! ' : '• ';
+    const prefix = role==='YOU' ? '> ' : role==='TERMINAL' ? '$ ' : role==='OUTPUT' ? '' : role==='ERROR' ? '! ' : 'â¢ ';
     wrap.innerHTML = '<span style="color:#666; font-size:10px; text-transform:uppercase; letter-spacing:.05em;">[' + role + ']</span><div style="color:' + color + '; white-space:pre-wrap; word-break:break-word; padding-left:4px;">' + prefix + (text||'').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + '</div>';
     log.appendChild(wrap);
     log.scrollTop = log.scrollHeight;
@@ -2545,7 +2575,7 @@ function renderTableShared(tableId, columns, rows, sortField, sortDir, onSort) {
   let h = '<thead><tr>';
   columns.forEach(c => {
     const sorted = c.field === sortField ? 'sorted' : '';
-    const arrow = c.field === sortField ? (sortDir === 'asc' ? '▲' : '▼') : '↕';
+    const arrow = c.field === sortField ? (sortDir === 'asc' ? 'â²' : 'â¼') : 'â';
     h += `<th class="${sorted}" data-field="${c.field}">${c.label}<span class="sort-icon">${arrow}\u003C/span>\u003C/th>`;
   });
   h += '\u003C/tr>\u003C/thead><tbody>';
@@ -2576,13 +2606,13 @@ function renderPagination(elId, data, key) {
   const start = (page - 1) * (data.rows_per_page || 25) + 1;
   const end = Math.min(start + (data.rows || []).length - 1, total);
   el.innerHTML = `
-    <div class="page-info">${total > 0 ? start + '–' + end + ' of ' + total : '0 records'}\u003C/div>
+    <div class="page-info">${total > 0 ? start + 'â' + end + ' of ' + total : '0 records'}\u003C/div>
     <div class="page-controls">
-      <button class="page-btn" data-action="first" ${page <= 1 ? 'disabled' : ''}>« First\u003C/button>
-      <button class="page-btn" data-action="prev"  ${page <= 1 ? 'disabled' : ''}>‹ Prev\u003C/button>
+      <button class="page-btn" data-action="first" ${page <= 1 ? 'disabled' : ''}>Â« First\u003C/button>
+      <button class="page-btn" data-action="prev"  ${page <= 1 ? 'disabled' : ''}>â¹ Prev\u003C/button>
       <span class="page-btn" style="cursor:default;">Page ${page} of ${tp}\u003C/span>
-      <button class="page-btn primary" data-action="next" ${page >= tp ? 'disabled' : ''}>Next ›\u003C/button>
-      <button class="page-btn" data-action="last" ${page >= tp ? 'disabled' : ''}>Last »\u003C/button>
+      <button class="page-btn primary" data-action="next" ${page >= tp ? 'disabled' : ''}>Next âº\u003C/button>
+      <button class="page-btn" data-action="last" ${page >= tp ? 'disabled' : ''}>Last Â»\u003C/button>
     \u003C/div>`;
   el.querySelectorAll('button').forEach(btn => {
     btn.onclick = () => {
@@ -2609,7 +2639,7 @@ function renderLeadsTable(d) {
     { field: 'industry',  label: 'Industry' },
     { field: 'status',    label: 'Status',   render: r => `<span class="badge badge-${(r.status||'new').toLowerCase().replace(/\s+/g,'_')}">${r.status||'new'}\u003C/span>` },
     { field: 'agent',     label: 'Agent' },
-    { field: 'value',     label: 'Value',    render: r => r.value ? '$' + r.value.toLocaleString() : '—' },
+    { field: 'value',     label: 'Value',    render: r => r.value ? '$' + r.value.toLocaleString() : 'â' },
     { field: 'entity',    label: 'Division', render: r => `<span class="feed-tag ${r.entity||'parent'}">${(r.entity||'parent').toUpperCase()}\u003C/span>` }
   ];
   const s = tableState.leads;
@@ -2621,7 +2651,7 @@ function renderLeadsTable(d) {
   });
   renderPagination('leadsPagination', d, 'leads');
   document.getElementById('leadsTableSub').textContent = (d.total || 0) + ' records';
-  document.getElementById('leadsTableInfo').textContent = (d.total || 0) + ' total · ' + (s.search ? 'filtered' : 'unfiltered');
+  document.getElementById('leadsTableInfo').textContent = (d.total || 0) + ' total Â· ' + (s.search ? 'filtered' : 'unfiltered');
 }
 
 function renderOppsTable(d) {
@@ -2630,7 +2660,7 @@ function renderOppsTable(d) {
     { field: 'title',     label: 'Title',  render: r => `<strong>${escapeHtml(r.title)}\u003C/strong>` },
     { field: 'agency',    label: 'Agency' },
     { field: 'naics',     label: 'NAICS' },
-    { field: 'value',     label: 'Value',  render: r => r.value ? '$' + r.value.toLocaleString() : '—' },
+    { field: 'value',     label: 'Value',  render: r => r.value ? '$' + r.value.toLocaleString() : 'â' },
     { field: 'due_date',  label: 'Due',    render: r => formatDate(r.due_date) },
     { field: 'status',    label: 'Status', render: r => `<span class="badge badge-${(r.status||'NEW').toLowerCase()}">${r.status||'NEW'}\u003C/span>` },
     { field: 'entity',    label: 'Division', render: r => `<span class="feed-tag ${r.entity||'federal'}">${(r.entity||'federal').toUpperCase()}\u003C/span>` }
@@ -2644,7 +2674,7 @@ function renderOppsTable(d) {
   });
   renderPagination('oppsPagination', d, 'opps');
   document.getElementById('oppsTableSub').textContent = (d.total || 0) + ' records';
-  document.getElementById('oppsTableInfo').textContent = (d.total || 0) + ' total · ' + (s.search ? 'filtered' : 'unfiltered');
+  document.getElementById('oppsTableInfo').textContent = (d.total || 0) + ' total Â· ' + (s.search ? 'filtered' : 'unfiltered');
 }
 
 function renderCrmTable(d) {
@@ -2652,10 +2682,10 @@ function renderCrmTable(d) {
     { field: 'timestamp',     label: 'Added',     render: r => formatDate(r.timestamp) },
     { field: 'client_name',   label: 'Client',    render: r => `<strong>${escapeHtml(r.client_name)}\u003C/strong>` },
     { field: 'company',       label: 'Company' },
-    { field: 'pipeline_stage',label: 'Stage',     render: r => `<span class="badge badge-${(r.pipeline_stage||'').toLowerCase().replace(/\s+/g,'_') || 'default'}">${r.pipeline_stage||'—'}\u003C/span>` },
-    { field: 'deal_value',    label: 'Deal $',    render: r => r.deal_value ? '$' + r.deal_value.toLocaleString() : '—' },
-    { field: 'monthly_value', label: 'MRR',       render: r => r.monthly_value ? '$' + r.monthly_value.toLocaleString() + '/mo' : '—' },
-    { field: 'payment_status',label: 'Payment',   render: r => `<span class="badge badge-${(r.payment_status||'').toLowerCase() || 'default'}">${r.payment_status||'—'}\u003C/span>` },
+    { field: 'pipeline_stage',label: 'Stage',     render: r => `<span class="badge badge-${(r.pipeline_stage||'').toLowerCase().replace(/\s+/g,'_') || 'default'}">${r.pipeline_stage||'â'}\u003C/span>` },
+    { field: 'deal_value',    label: 'Deal $',    render: r => r.deal_value ? '$' + r.deal_value.toLocaleString() : 'â' },
+    { field: 'monthly_value', label: 'MRR',       render: r => r.monthly_value ? '$' + r.monthly_value.toLocaleString() + '/mo' : 'â' },
+    { field: 'payment_status',label: 'Payment',   render: r => `<span class="badge badge-${(r.payment_status||'').toLowerCase() || 'default'}">${r.payment_status||'â'}\u003C/span>` },
     { field: 'entity',        label: 'Division',  render: r => `<span class="feed-tag ${r.entity||'parent'}">${(r.entity||'parent').toUpperCase()}\u003C/span>` }
   ];
   const s = tableState.crm;
@@ -2667,7 +2697,7 @@ function renderCrmTable(d) {
   });
   renderPagination('crmPagination', d, 'crm');
   document.getElementById('crmTableSub').textContent = (d.total || 0) + ' records';
-  document.getElementById('crmTableInfo').textContent = (d.total || 0) + ' total · ' + (s.search ? 'filtered' : 'unfiltered');
+  document.getElementById('crmTableInfo').textContent = (d.total || 0) + ' total Â· ' + (s.search ? 'filtered' : 'unfiltered');
 }
 
 function renderDivisionTable(entity, d) {
@@ -2679,7 +2709,7 @@ function renderDivisionTable(entity, d) {
     { field: 'industry',  label: 'Industry' },
     { field: 'status',    label: 'Status',   render: r => `<span class="badge badge-${(r.status||'new').toLowerCase().replace(/\s+/g,'_')}">${r.status||'new'}\u003C/span>` },
     { field: 'agent',     label: 'Agent' },
-    { field: 'value',     label: 'Value',    render: r => r.value ? '$' + r.value.toLocaleString() : '—' }
+    { field: 'value',     label: 'Value',    render: r => r.value ? '$' + r.value.toLocaleString() : 'â' }
   ];
   const s = tableState[entity];
   renderTableShared(entity + 'Table', cols, d.rows, s.sort, s.dir, field => {
@@ -2692,13 +2722,13 @@ function renderDivisionTable(entity, d) {
   const subEl = document.getElementById(entity + 'TableSub');
   const infoEl = document.getElementById(entity + 'TableInfo');
   if (subEl) subEl.textContent = (d.total || 0) + ' records';
-  if (infoEl) infoEl.textContent = (d.total || 0) + ' total · ' + (s.search ? 'filtered' : 'unfiltered');
+  if (infoEl) infoEl.textContent = (d.total || 0) + ' total Â· ' + (s.search ? 'filtered' : 'unfiltered');
 }
 
 function formatDate(iso) {
-  if (!iso) return '—';
+  if (!iso) return 'â';
   const d = new Date(iso);
-  if (isNaN(d.getTime())) return '—';
+  if (isNaN(d.getTime())) return 'â';
   return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' });
 }
 function escapeHtml(s) {
@@ -2738,7 +2768,7 @@ function noahSendMessage() {
   fetch(buildUrl({ view: 'noah', action: 'chat', msg: msg }))
     .then(r => r.json())
     .then(data => {
-      if (data && data.response) { var __mdl = data.model ? ('\n\n— via ' + data.model) : ''; noahAppendMessage('noah', data.response + __mdl); }
+      if (data && data.response) { var __mdl = data.model ? ('\n\nâ via ' + data.model) : ''; noahAppendMessage('noah', data.response + __mdl); }
       else noahAppendMessage('noah', 'I had trouble responding. Try again.');
       if (status) status.textContent = 'ready';
     })
@@ -2782,7 +2812,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setDirty(d){
     const x = $id('noahCodeDirty');
     if (!x) return;
-    x.textContent = d ? '• unsaved changes' : '✓ saved';
+    x.textContent = d ? 'â¢ unsaved changes' : 'â saved';
     x.style.color = d ? 'var(--c-orange)' : 'var(--c-green)';
   }
   let originalContent = '';
@@ -2791,7 +2821,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const picker = $id('noahCodeFilePicker');
     const path = $id('noahCodePath').value.trim() || (picker ? picker.value : '') || '';
     if (!path) { setStatus('Pick a file or type a path first', 'var(--c-orange)'); return; }
-    setStatus('Loading ' + path + '…');
+    setStatus('Loading ' + path + 'â¦');
     try {
       const res = await (window.zynCallBuild || callBuild)('read_file', { path: path, include_content: 'true' });
       if (!res || !res.ok) { setStatus('Load failed: ' + (res && res.error || 'unknown'), '#ef4444'); return; }
@@ -2805,8 +2835,8 @@ document.addEventListener('DOMContentLoaded', () => {
       originalContent = content;
       currentPath = res.path || path;
       $id('noahCodeSave').disabled = false;
-      setStatus('Loaded ' + currentPath + ' — ' + (res.size || content.length) + ' bytes — sha ' + (res.sha || '').slice(0,8), 'var(--c-green)');
-      setMeta('path: ' + currentPath + ' · ' + content.length.toLocaleString() + ' chars · ' + content.split('\n').length + ' lines');
+      setStatus('Loaded ' + currentPath + ' â ' + (res.size || content.length) + ' bytes â sha ' + (res.sha || '').slice(0,8), 'var(--c-green)');
+      setMeta('path: ' + currentPath + ' Â· ' + content.length.toLocaleString() + ' chars Â· ' + content.split('\n').length + ' lines');
       setDirty(false);
     } catch (err) { setStatus('Network error: ' + err, '#ef4444'); }
   }
@@ -2816,7 +2846,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newContent === originalContent) { setStatus('No changes to save', 'var(--text-muted)'); return; }
     if (!confirm('Save ' + currentPath + ' to GitHub main? This will commit ' + newContent.length + ' chars.')) return;
     const summary = prompt('Commit message:', 'Edit ' + currentPath + ' via Noah Code Editor') || ('Edit ' + currentPath);
-    setStatus('Saving …');
+    setStatus('Saving â¦');
     $id('noahCodeSave').disabled = true;
     try {
       const res = await (window.zynCallBuild || callBuild)('write_file', { path: currentPath, content: newContent, summary: summary });
@@ -2827,7 +2857,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       originalContent = newContent;
       setDirty(false);
-      setStatus('Saved — commit ' + (res.commit_sha || '').slice(0,8) + ' — ' + (res.bytes || newContent.length) + ' bytes', 'var(--c-green)');
+      setStatus('Saved â commit ' + (res.commit_sha || '').slice(0,8) + ' â ' + (res.bytes || newContent.length) + ' bytes', 'var(--c-green)');
       $id('noahCodeSave').disabled = false;
     } catch (err) {
       setStatus('Network error: ' + err, '#ef4444');
@@ -2882,7 +2912,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(wireCodeEditor, 1000);
   setTimeout(wireCodeEditor, 3000);
 })();
-// ========== MONACO EDITOR UPGRADE (Microsoft Monaco — same engine as VS Code, MIT-licensed, free forever) ==========
+// ========== MONACO EDITOR UPGRADE (Microsoft Monaco â same engine as VS Code, MIT-licensed, free forever) ==========
 (function(){
   const MONACO_VER = '0.52.0';
   const MONACO_CDN = 'https://cdn.jsdelivr.net/npm/monaco-editor@' + MONACO_VER + '/min';
@@ -3301,7 +3331,7 @@ document.addEventListener("DOMContentLoaded", function() {
   } catch (e) { console.warn("deep-link handler:", e); }
 });
 
-  // ═══ CONSULTING LEAD SEED v1.0 ═══
+  // âââ CONSULTING LEAD SEED v1.0 âââ
   const CONSULTING_SEED = [
     {n:"Director of Operations",co:"Booz Allen Hamilton",em:"ops.federal@boozallen.com",val:8500000,src:"USASpending",notes:"NAICS 541611 | Top DoD mgmt consulting"},
     {n:"VP Business Development",co:"Deloitte Federal Services",em:"federal.growth@deloittefederal.com",val:12000000,src:"USASpending",notes:"NAICS 541611 | Big4 federal"},
@@ -3405,7 +3435,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   window.testWriteLeadEndpoint = async function(){
-    gasLog('Pinging view=write_lead with dry-run payload…', 'info');
+    gasLog('Pinging view=write_lead with dry-run payloadâ¦', 'info');
     try {
       const r = await fetch(GAS_URL, {
         method:'POST',
@@ -3420,20 +3450,20 @@ document.addEventListener("DOMContentLoaded", function() {
       const j = await r.json();
       const status = document.getElementById('gasPatchStatus');
       if (j && (j.written || (j.ok && j.written !== false))) {
-        gasLog('✅ Endpoint LIVE — response: ' + JSON.stringify(j), 'ok');
-        if (status) { status.textContent = '✅ endpoint live'; status.style.color = '#34d399'; }
+        gasLog('â Endpoint LIVE â response: ' + JSON.stringify(j), 'ok');
+        if (status) { status.textContent = 'â endpoint live'; status.style.color = '#34d399'; }
         return true;
       } else if (j && /unsupported view/i.test(j.error || '')) {
-        gasLog('❌ Endpoint not deployed yet — GAS responded: ' + JSON.stringify(j), 'err');
-        if (status) { status.textContent = '❌ patch not deployed'; status.style.color = '#f87171'; }
+        gasLog('â Endpoint not deployed yet â GAS responded: ' + JSON.stringify(j), 'err');
+        if (status) { status.textContent = 'â patch not deployed'; status.style.color = '#f87171'; }
         return false;
       } else if (j && /unauthorized|key/i.test(j.error || j.message || '')) {
-        gasLog('⚠ Auth gate rejected key: ' + JSON.stringify(j), 'err');
-        if (status) { status.textContent = '⚠ auth fail'; status.style.color = '#fbbf24'; }
+        gasLog('â  Auth gate rejected key: ' + JSON.stringify(j), 'err');
+        if (status) { status.textContent = 'â  auth fail'; status.style.color = '#fbbf24'; }
         return false;
       } else {
-        gasLog('❓ Unknown response: ' + JSON.stringify(j).slice(0,300), 'err');
-        if (status) { status.textContent = '❓ unknown'; status.style.color = '#fbbf24'; }
+        gasLog('â Unknown response: ' + JSON.stringify(j).slice(0,300), 'err');
+        if (status) { status.textContent = 'â unknown'; status.style.color = '#fbbf24'; }
         return false;
       }
     } catch(e) {
@@ -3498,13 +3528,13 @@ document.addEventListener("DOMContentLoaded", function() {
   window.seedConsultingLeads = async function(){
     const list = window.CONSULTING_50 || [];
     if (!list.length) { gasLog('No consulting leads in CONSULTING_50', 'err'); return; }
-    gasLog('Pre-flight check on write_lead endpoint…', 'info');
+    gasLog('Pre-flight check on write_lead endpointâ¦', 'info');
     const live = await window.testWriteLeadEndpoint();
     if (!live) {
-      gasLog('Aborting seed — endpoint not deployed yet. Paste the GAS patch and redeploy first.', 'err');
+      gasLog('Aborting seed â endpoint not deployed yet. Paste the GAS patch and redeploy first.', 'err');
       return;
     }
-    gasLog('Endpoint live. Seeding ' + list.length + ' consulting leads…', 'info');
+    gasLog('Endpoint live. Seeding ' + list.length + ' consulting leadsâ¦', 'info');
     let written = 0, skipped = 0, failed = 0;
     for (let i = 0; i < list.length; i++) {
       const L = list[i];
@@ -3521,19 +3551,19 @@ document.addEventListener("DOMContentLoaded", function() {
             source: 'USASpending+SAM.gov',
             status: 'new',
             agent: 'Adam',
-            notes: 'NAICS ' + L.naics + ' federal contractor — seed batch via dashboard',
+            notes: 'NAICS ' + L.naics + ' federal contractor â seed batch via dashboard',
             value: String(L.value),
             entity: 'consulting'
           })
         });
         const j = await r.json();
-        if (j.written) { written++; gasLog((i+1)+'/'+list.length+' ✓ wrote '+L.company+' (row '+(j.row||'?')+')', 'ok'); }
-        else if (j.skipped) { skipped++; gasLog((i+1)+'/'+list.length+' ⊘ skipped '+L.company+' ('+(j.reason||'')+')', 'info'); }
-        else { failed++; gasLog((i+1)+'/'+list.length+' ✗ failed '+L.company+' — '+JSON.stringify(j).slice(0,120), 'err'); }
-      } catch(e) { failed++; gasLog((i+1)+'/'+list.length+' ✗ network: '+e.message, 'err'); }
+        if (j.written) { written++; gasLog((i+1)+'/'+list.length+' â wrote '+L.company+' (row '+(j.row||'?')+')', 'ok'); }
+        else if (j.skipped) { skipped++; gasLog((i+1)+'/'+list.length+' â skipped '+L.company+' ('+(j.reason||'')+')', 'info'); }
+        else { failed++; gasLog((i+1)+'/'+list.length+' â failed '+L.company+' â '+JSON.stringify(j).slice(0,120), 'err'); }
+      } catch(e) { failed++; gasLog((i+1)+'/'+list.length+' â network: '+e.message, 'err'); }
       await new Promise(r => setTimeout(r, 250));
     }
-    gasLog('━━━ Done. '+written+' written, '+skipped+' skipped (dup), '+failed+' failed. ━━━', 'ok');
+    gasLog('âââ Done. '+written+' written, '+skipped+' skipped (dup), '+failed+' failed. âââ', 'ok');
     if (typeof fetchOverview === 'function') { try { fetchOverview(); } catch(_){} }
   };
 
@@ -3582,10 +3612,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const grid = document.getElementById('taskCenterGrid');
     const time = document.getElementById('taskCenterTime');
     if (!grid) return;
-    grid.innerHTML = '<div style="opacity:0.6;font-size:13px;padding:20px;text-align:center;grid-column:1/-1">Loading task state…</div>';
+    grid.innerHTML = '<div style="opacity:0.6;font-size:13px;padding:20px;text-align:center;grid-column:1/-1">Loading task stateâ¦</div>';
     try {
       const o = await fetchOverviewData();
-      if (time) time.textContent = '· refreshed ' + new Date().toLocaleTimeString();
+      if (time) time.textContent = 'Â· refreshed ' + new Date().toLocaleTimeString();
       const cards = [];
 
       // Card 1: Live sending status
@@ -3593,7 +3623,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const cap = o.daily_cap || 280;
       const headroom = cap - sendsToday;
       cards.push(makeCard({
-        title: '📤 Live Email Sends',
+        title: 'ð¤ Live Email Sends',
         status: sendsToday > 0 ? 'sending' : 'queued',
         statusType: sendsToday > 0 ? 'ok' : 'info',
         metric: sendsToday + ' / ' + cap,
@@ -3607,24 +3637,24 @@ document.addEventListener("DOMContentLoaded", function() {
       const consulting = o.divisions?.consulting || {};
       const consultingLeads = consulting.leads_total || 0;
       cards.push(makeCard({
-        title: '🎯 Consulting — 50/day target',
+        title: 'ð¯ Consulting â 50/day target',
         status: consultingLeads >= 50 ? 'on track' : 'needs seed',
         statusType: consultingLeads >= 50 ? 'ok' : 'blocked',
         metric: consultingLeads + ' leads',
         desc: '50 prospects staged in CONSULTING_50. Requires write_lead endpoint deployed in Apps Script. Once live, seed populates LEADS sheet in ~15s.',
         action: 'document.getElementById("noahGasPatches").scrollIntoView({block:"center"})',
-        actionLabel: 'Open GAS Patches →',
+        actionLabel: 'Open GAS Patches â',
         actionColor: 'rgba(249,115,22,0.22)'
       }));
 
       // Card 3: No-email federal leads
       const noEmail = o.pipeline?.no_email || 0;
       cards.push(makeCard({
-        title: '📧 No-Email Federal Leads',
+        title: 'ð§ No-Email Federal Leads',
         status: noEmail > 0 ? 'pending enrichment' : 'cleared',
         statusType: noEmail > 50 ? 'warn' : noEmail > 0 ? 'info' : 'ok',
         metric: noEmail + ' leads',
-        desc: 'Federal leads without contact emails. Mariam\'s research trigger enriches these on schedule. No action needed — autonomous.',
+        desc: 'Federal leads without contact emails. Mariam\'s research trigger enriches these on schedule. No action needed â autonomous.',
         action: 'tcLog("No-email enrichment runs via mariamResearchProspect trigger on schedule.", "info")',
         actionLabel: 'Status only'
       }));
@@ -3633,7 +3663,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const queue = o.approval_queue || [];
       const queuedApproved = queue.filter(q => q.decision === 'APPROVE').length;
       cards.push(makeCard({
-        title: '✓ Approval Queue',
+        title: 'â Approval Queue',
         status: queuedApproved > 0 ? 'processing' : 'drained',
         statusType: queuedApproved > 0 ? 'info' : 'ok',
         metric: queuedApproved + ' approved',
@@ -3646,7 +3676,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const enabled = o.agents_enabled || 0;
       const total = o.agents_total || 0;
       cards.push(makeCard({
-        title: '🤖 Agent Roster',
+        title: 'ð¤ Agent Roster',
         status: enabled === total ? 'all healthy' : 'check',
         statusType: enabled === total ? 'ok' : 'warn',
         metric: enabled + ' / ' + total,
@@ -3660,7 +3690,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const errors = sys.errors_24h || 0;
       const bounces = sys.bounces_24h || 0;
       cards.push(makeCard({
-        title: '🩺 System Health',
+        title: 'ð©º System Health',
         status: (errors+bounces) === 0 ? 'green' : 'check logs',
         statusType: (errors+bounces) === 0 ? 'ok' : 'warn',
         metric: (sys.triggers||0) + ' / ' + (sys.triggers_max||20) + ' triggers',
@@ -3671,26 +3701,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Card 7: Capital division (parked)
       cards.push(makeCard({
-        title: '💰 Capital Management',
+        title: 'ð° Capital Management',
         status: 'PARKED',
         statusType: 'blocked',
-        desc: 'Intentionally parked per design. Activation requires explicit go-ahead — do not auto-enable.',
+        desc: 'Intentionally parked per design. Activation requires explicit go-ahead â do not auto-enable.',
         action: 'tcLog("Capital intentionally parked. No action.", "info")',
         actionLabel: 'Acknowledge'
       }));
 
       // Card 8: Discord webhook (offline)
       cards.push(makeCard({
-        title: '💬 Discord Webhook',
+        title: 'ð¬ Discord Webhook',
         status: 'logged out',
         statusType: 'blocked',
         desc: 'Both Discord accounts logged out per prior session diagnostics. Webhooks confirmed good. Reconnect at discord.com when ready.',
         action: 'window.open("https://discord.com/login", "_blank")',
-        actionLabel: 'Open Discord →'
+        actionLabel: 'Open Discord â'
       }));
 
       grid.innerHTML = cards.join('');
-      tcLog('Task center refreshed — ' + cards.length + ' cards, all systems mapped.', 'ok');
+      tcLog('Task center refreshed â ' + cards.length + ' cards, all systems mapped.', 'ok');
     } catch(e) {
       grid.innerHTML = '<div style="color:#f87171;padding:20px">Error: ' + e.message + '</div>';
       tcLog('Refresh error: ' + e.message, 'err');
@@ -3698,30 +3728,30 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   window.runAllAutonomous = async function(){
-    tcLog('━━━ Running all autonomous tasks ━━━', 'info');
-    tcLog('1. Refreshing overview data…', 'info');
+    tcLog('âââ Running all autonomous tasks âââ', 'info');
+    tcLog('1. Refreshing overview dataâ¦', 'info');
     if (typeof window.fetchOverview === 'function') {
-      try { await window.fetchOverview(); tcLog('   ✓ Overview refreshed', 'ok'); }
-      catch(e) { tcLog('   ✗ ' + e.message, 'err'); }
+      try { await window.fetchOverview(); tcLog('   â Overview refreshed', 'ok'); }
+      catch(e) { tcLog('   â ' + e.message, 'err'); }
     } else {
-      tcLog('   ⚠ fetchOverview not available', 'warn');
+      tcLog('   â  fetchOverview not available', 'warn');
     }
-    tcLog('2. Probing write_lead endpoint…', 'info');
+    tcLog('2. Probing write_lead endpointâ¦', 'info');
     if (typeof window.testWriteLeadEndpoint === 'function') {
       const live = await window.testWriteLeadEndpoint();
       if (live) {
-        tcLog('   ✓ Endpoint live — auto-firing consulting seed', 'ok');
+        tcLog('   â Endpoint live â auto-firing consulting seed', 'ok');
         if (typeof window.seedConsultingLeads === 'function') {
           await window.seedConsultingLeads();
-          tcLog('   ✓ Consulting seed completed', 'ok');
+          tcLog('   â Consulting seed completed', 'ok');
         }
       } else {
-        tcLog('   ⊘ Endpoint not deployed — skipping seed (paste GAS patch first)', 'warn');
+        tcLog('   â Endpoint not deployed â skipping seed (paste GAS patch first)', 'warn');
       }
     }
-    tcLog('3. Re-rendering task cards…', 'info');
+    tcLog('3. Re-rendering task cardsâ¦', 'info');
     await window.refreshTaskCenter();
-    tcLog('━━━ Autonomous run complete ━━━', 'ok');
+    tcLog('âââ Autonomous run complete âââ', 'ok');
   };
 
   // Auto-refresh on load
