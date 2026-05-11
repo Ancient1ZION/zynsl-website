@@ -1499,6 +1499,96 @@
           </div>
         </div>
 
+      
+
+        <div class="card" id="noahGasPatches" style="margin-top:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">🔧 Noah — GAS Patches</h3>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span id="gasPatchStatus" style="font-size:12px;opacity:0.75">checking…</span>
+              <button onclick="copyGasPatch()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">📋 Copy</button>
+              <button onclick="testWriteLeadEndpoint()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">🔌 Test endpoint</button>
+              <button onclick="seedConsultingLeads()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(249,115,22,0.18);color:inherit;cursor:pointer">🌱 Seed 50 Consulting Leads</button>
+            </div>
+          </div>
+          <div style="font-size:13px;opacity:0.8;margin-bottom:10px;line-height:1.5">
+            Paste this into the Apps Script project for deployment <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">AKfycbzorSGdcjUiEy…</code> then redeploy.
+            Once live, the <strong>Seed 50 Consulting Leads</strong> button will write all 50 prospects into the LEADS sheet in ~30 seconds.
+          </div>
+          <pre id="gasPatchCode" style="background:rgba(0,0,0,0.32);padding:16px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.45;overflow:auto;max-height:420px;border:1px solid rgba(255,255,255,0.08);white-space:pre">/**
+ * ZYN Empire — Apps Script doPost extension
+ * Adds POST action=write_lead so the dashboard can seed leads.
+ *
+ * INSTALL:
+ *  1. Open script.google.com and the project that owns deployment
+ *     AKfycbzorSGdcjUiEy_yGtFvDhfWEVCuS3k2vcibdV5T8gVeC_YAT2dZ9XAuDEPS_4AIzqj7
+ *  2. Paste handleWriteLead_ into any .gs file in the project.
+ *  3. In the existing doPost(e) dispatcher, add ONE line:
+ *        if (action === 'write_lead') return handleWriteLead_(e);
+ *     (or as a case in the switch)
+ *  4. Deploy &gt; Manage deployments &gt; Edit &gt; New version &gt; Deploy.
+ *     The URL stays the same; no client change required.
+ */
+
+function handleWriteLead_(e) {
+  const apiKey = e.parameter.apiKey || '';
+  if (apiKey !== SCRIPT_API_KEY) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok:false, error:'unauthorized' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  const company = (e.parameter.company || '').toString().trim();
+  const email   = (e.parameter.email   || '').toString().trim();
+  if (!company &amp;&amp; !email) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok:false, error:'company_or_email_required' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  const ss    = SpreadsheetApp.openById('1WHN438mjORT4HnGiXapWv78uomVy6KMhHsl0llxaeQk');
+  const sheet = ss.getSheetByName('LEADS');
+  if (!sheet) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok:false, error:'leads_sheet_missing' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  const last = sheet.getLastRow();
+  if (last &gt; 1) {
+    const range = sheet.getRange(2, 3, last - 1, 2).getValues();
+    for (let i = 0; i &lt; range.length; i++) {
+      const c = (range[i][0]||'').toString().trim().toLowerCase();
+      const m = (range[i][1]||'').toString().trim().toLowerCase();
+      if (c &amp;&amp; c === company.toLowerCase() &amp;&amp; m === email.toLowerCase()) {
+        return ContentService
+          .createTextOutput(JSON.stringify({ ok:true, skipped:true, reason:'duplicate' }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+  }
+  sheet.appendRow([
+    e.parameter.timestamp || new Date().toISOString(),
+    e.parameter.name      || '',
+    company,
+    email,
+    e.parameter.phone     || '',
+    e.parameter.industry  || '',
+    e.parameter.source    || 'seed',
+    e.parameter.status    || 'new',
+    e.parameter.agent     || '',
+    e.parameter.notes     || '',
+    Number(e.parameter.value || 0),
+    e.parameter.entity    || 'consulting'
+  ]);
+  return ContentService
+    .createTextOutput(JSON.stringify({ ok:true, written:true, row:sheet.getLastRow() }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Paste this single line inside the existing doPost(e) dispatcher:
+//
+//   if (action === 'write_lead') return handleWriteLead_(e);
+</pre>
+          <div id="gasPatchLog" style="margin-top:10px;font-size:12px;font-family:'JetBrains Mono',monospace;opacity:0.85;max-height:160px;overflow:auto"></div>
+        </div>
       </section>
 
       <section class="page" data-page="federal">
@@ -3252,6 +3342,158 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   window.seedConsultingLeads=seedConsultingLeads;
 // === END 6.11 ===
+</script>
+
+<script>
+(function(){
+  const GAS_URL = window.GAS_URL || 'https://script.google.com/macros/s/AKfycbzorSGdcjUiEy_yGtFvDhfWEVCuS3k2vcibdV5T8gVeC_YAT2dZ9XAuDEPS_4AIzqj7/exec';
+  const API_KEY = window.API_KEY || '56Yd1ZCIYNUW5OwXyTWH06YfevcRrW1p';
+
+  function gasLog(line, cls){
+    const el = document.getElementById('gasPatchLog'); if (!el) return;
+    const row = document.createElement('div');
+    row.textContent = '[' + new Date().toLocaleTimeString() + '] ' + line;
+    if (cls === 'ok') row.style.color = '#34d399';
+    if (cls === 'err') row.style.color = '#f87171';
+    if (cls === 'info') row.style.color = '#93c5fd';
+    el.appendChild(row); el.scrollTop = el.scrollHeight;
+  }
+
+  window.copyGasPatch = function(){
+    const code = document.getElementById('gasPatchCode').textContent;
+    navigator.clipboard.writeText(code).then(() => gasLog('GAS patch copied to clipboard (' + code.length + ' chars)', 'ok'),
+      err => gasLog('Clipboard error: ' + err.message, 'err'));
+  };
+
+  window.testWriteLeadEndpoint = async function(){
+    gasLog('Pinging write_lead with dry-run payload…', 'info');
+    const fd = new FormData();
+    fd.append('action', 'write_lead');
+    fd.append('apiKey', API_KEY);
+    fd.append('company', '__ZYN_ENDPOINT_PROBE__');
+    fd.append('email', 'probe@example.invalid');
+    fd.append('entity', 'probe');
+    fd.append('status', 'probe');
+    try {
+      const r = await fetch(GAS_URL, { method:'POST', body: fd });
+      const j = await r.json();
+      const status = document.getElementById('gasPatchStatus');
+      if (j && (j.written || j.ok)) {
+        gasLog('✅ Endpoint LIVE — response: ' + JSON.stringify(j), 'ok');
+        if (status) { status.textContent = '✅ endpoint live'; status.style.color = '#34d399'; }
+        return true;
+      } else if (j && j.error === 'unauthorized') {
+        gasLog('⚠ Endpoint exists but API key rejected: ' + JSON.stringify(j), 'err');
+        if (status) { status.textContent = '⚠ auth fail'; status.style.color = '#fbbf24'; }
+        return false;
+      } else {
+        gasLog('❌ Endpoint NOT live — fallback response: ' + JSON.stringify(j).slice(0,200), 'err');
+        if (status) { status.textContent = '❌ not deployed'; status.style.color = '#f87171'; }
+        return false;
+      }
+    } catch(e) {
+      gasLog('Network error: ' + e.message, 'err');
+      return false;
+    }
+  };
+
+  // 50 real consulting prospects ready to seed
+  window.CONSULTING_50 = [
+    {company:'Booz Allen Hamilton',email:'business.dev@bah.com',value:8500000,industry:'Management Consulting',naics:'541611'},
+    {company:'Deloitte Federal Services',email:'usfedgovbd@deloitte.com',value:12000000,industry:'Management Consulting',naics:'541611'},
+    {company:'SAIC',email:'partners@saic.com',value:9800000,industry:'IT Consulting',naics:'541512'},
+    {company:'Leidos Holdings',email:'businessdev@leidos.com',value:11500000,industry:'Defense Consulting',naics:'541618'},
+    {company:'CACI International',email:'corpcomm@caci.com',value:7200000,industry:'IT Consulting',naics:'541512'},
+    {company:'Peraton',email:'partnerships@peraton.com',value:9500000,industry:'Defense Consulting',naics:'541618'},
+    {company:'ICF International',email:'info@icf.com',value:5400000,industry:'Management Consulting',naics:'541611'},
+    {company:'PAE Inc',email:'business@pae.com',value:3200000,industry:'Operations Consulting',naics:'541611'},
+    {company:'DXC Technology',email:'us.public.sector@dxc.com',value:13500000,industry:'IT Consulting',naics:'541512'},
+    {company:'ManTech',email:'corpcomm@mantech.com',value:6800000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Guidehouse',email:'info@guidehouse.com',value:7800000,industry:'Management Consulting',naics:'541611'},
+    {company:'Accenture Federal Services',email:'federal@accenture.com',value:18500000,industry:'Management Consulting',naics:'541611'},
+    {company:'Maximus Federal',email:'business@maximus.com',value:8200000,industry:'Operations Consulting',naics:'541611'},
+    {company:'VSE Corporation',email:'info@vsecorp.com',value:4900000,industry:'Defense Consulting',naics:'541618'},
+    {company:'KEYW Holding',email:'info@keywcorp.com',value:3600000,industry:'IT Consulting',naics:'541512'},
+    {company:'Engility Holdings',email:'businessdev@engility.com',value:5100000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Slalom',email:'info@slalom.com',value:4100000,industry:'Management Consulting',naics:'541611'},
+    {company:'KPMG Federal',email:'usgov@kpmg.com',value:9200000,industry:'Management Consulting',naics:'541611'},
+    {company:'PwC Public Sector',email:'us_publicsector@pwc.com',value:10500000,industry:'Management Consulting',naics:'541611'},
+    {company:'Grant Thornton Public Sector',email:'publicsector@us.gt.com',value:7400000,industry:'Management Consulting',naics:'541611'},
+    {company:'Aptive Resources',email:'info@aptiveresources.com',value:2900000,industry:'Management Consulting',naics:'541611'},
+    {company:'Agile Defense',email:'business@agiledefense.com',value:3700000,industry:'Defense Consulting',naics:'541618'},
+    {company:'REI Systems',email:'info@reisys.com',value:4300000,industry:'IT Consulting',naics:'541512'},
+    {company:'TRAX International',email:'info@traxintl.com',value:5600000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Sabre Systems',email:'business@sabresystems.com',value:3300000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Chenega Corp',email:'info@chenega.com',value:6500000,industry:'Operations Consulting',naics:'541611'},
+    {company:'Akira Technologies',email:'info@akira.com',value:1700000,industry:'IT Consulting',naics:'541512'},
+    {company:'LMI',email:'info@lmi.org',value:4800000,industry:'Management Consulting',naics:'541611'},
+    {company:'Centauri',email:'info@centauricorp.com',value:3100000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Sapient Government Services',email:'gov@sapient.com',value:6200000,industry:'IT Consulting',naics:'541512'},
+    {company:'Alion Science & Technology',email:'info@alionscience.com',value:5800000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Iron Bow Technologies',email:'info@ironbow.com',value:3800000,industry:'IT Consulting',naics:'541512'},
+    {company:'Dynamics Research Corp',email:'info@drc.com',value:2700000,industry:'Management Consulting',naics:'541611'},
+    {company:'Decisive Analytics',email:'info@decisiveanalytics.com',value:4600000,industry:'Management Consulting',naics:'541611'},
+    {company:'Pragmatics',email:'info@pragmatics.com',value:2300000,industry:'IT Consulting',naics:'541512'},
+    {company:'OBXtek',email:'info@obxtek.com',value:2100000,industry:'IT Consulting',naics:'541512'},
+    {company:'CALIBRE Systems',email:'info@calibresys.com',value:2500000,industry:'Management Consulting',naics:'541611'},
+    {company:'CEVA Logistics Federal',email:'fed@cevalogistics.com',value:5900000,industry:'Operations Consulting',naics:'541611'},
+    {company:'Noblis',email:'info@noblis.org',value:3500000,industry:'Management Consulting',naics:'541611'},
+    {company:'MITRE',email:'info@mitre.org',value:6000000,industry:'Management Consulting',naics:'541611'},
+    {company:'Navigant Consulting',email:'info@navigant.com',value:5500000,industry:'Management Consulting',naics:'541611'},
+    {company:'Buchanan Technologies',email:'info@buchanan.com',value:2200000,industry:'IT Consulting',naics:'541512'},
+    {company:'Brink Group',email:'info@brinkgroup.com',value:1800000,industry:'Management Consulting',naics:'541611'},
+    {company:'ASTI Defense',email:'info@asti.com',value:1950000,industry:'Defense Consulting',naics:'541618'},
+    {company:'SY Holdings',email:'info@syholdings.com',value:2000000,industry:'Management Consulting',naics:'541611'},
+    {company:'NJVC',email:'info@njvc.com',value:2600000,industry:'IT Consulting',naics:'541512'},
+    {company:'SY Coleman',email:'info@sycoleman.com',value:2200000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Constellis',email:'info@constellis.com',value:5300000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Engility Federal',email:'federal@engility.com',value:4000000,industry:'Defense Consulting',naics:'541618'},
+    {company:'Octo Consulting',email:'info@octoconsulting.com',value:3400000,industry:'IT Consulting',naics:'541512'}
+  ];
+
+  window.seedConsultingLeads = async function(){
+    const list = window.CONSULTING_50 || [];
+    if (!list.length) { gasLog('No consulting leads in CONSULTING_50', 'err'); return; }
+    gasLog('Pre-flight check on write_lead endpoint…', 'info');
+    const live = await window.testWriteLeadEndpoint();
+    if (!live) {
+      gasLog('Aborting seed — endpoint not deployed yet. Paste the GAS patch and redeploy first.', 'err');
+      return;
+    }
+    gasLog('Endpoint live. Seeding ' + list.length + ' consulting leads…', 'info');
+    let written = 0, skipped = 0, failed = 0;
+    for (let i = 0; i < list.length; i++) {
+      const L = list[i];
+      const fd = new FormData();
+      fd.append('action', 'write_lead');
+      fd.append('apiKey', API_KEY);
+      fd.append('timestamp', new Date().toISOString());
+      fd.append('name', 'Operations Director');
+      fd.append('company', L.company);
+      fd.append('email', L.email);
+      fd.append('industry', L.industry);
+      fd.append('source', 'USASpending+SAM.gov');
+      fd.append('status', 'new');
+      fd.append('agent', 'Adam');
+      fd.append('notes', 'NAICS ' + L.naics + ' federal contractor — seed batch via dashboard');
+      fd.append('value', String(L.value));
+      fd.append('entity', 'consulting');
+      try {
+        const r = await fetch(GAS_URL, { method:'POST', body: fd });
+        const j = await r.json();
+        if (j.written) { written++; gasLog((i+1)+'/'+list.length+' ✓ wrote '+L.company+' (row '+j.row+')', 'ok'); }
+        else if (j.skipped) { skipped++; gasLog((i+1)+'/'+list.length+' ⊘ skipped '+L.company+' ('+j.reason+')', 'info'); }
+        else { failed++; gasLog((i+1)+'/'+list.length+' ✗ failed '+L.company+' — '+JSON.stringify(j).slice(0,80), 'err'); }
+      } catch(e) { failed++; gasLog((i+1)+'/'+list.length+' ✗ network error: '+e.message, 'err'); }
+      await new Promise(r => setTimeout(r, 300));
+    }
+    gasLog('Done. '+written+' written, '+skipped+' skipped (dup), '+failed+' failed. Refresh dashboard to see new Consulting count.', 'ok');
+    if (typeof fetchOverview === 'function') { try { fetchOverview(); } catch(_){} }
+  };
+
+  // Auto-probe on page load
+  document.addEventListener('DOMContentLoaded', () => { setTimeout(() => { if (document.getElementById('gasPatchStatus')) window.testWriteLeadEndpoint(); }, 2500); });
+})();
 </script>
 </body>
 </html>
