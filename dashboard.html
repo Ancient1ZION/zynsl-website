@@ -1973,7 +1973,8 @@ function renderDivisionMetrics(d, key) {
         { key: 'lost',          label: 'Lost',         class: 'lost' },
         { key: 'unsubscribed',  label: 'Unsub',        class: 'unsub' },
         { key: 'bad_email',     label: 'Bad Email',    class: 'bademail' },
-        { key: 'dup_skip',      label: 'Duplicate',    class: 'dup' }
+        { key: 'dup_skip',      label: 'Duplicate',    class: 'dup' },
+      { key: 'no_email',    label: 'No Email',   class: 'noemail' }
       ];
       const stageTotal = stages.reduce((s, st) => s + (p[st.key] || 0), 0);
       const leadsAll = (typeof d.leads === 'number') ? d.leads : stageTotal;
@@ -1995,7 +1996,7 @@ function renderDivisionMetrics(d, key) {
         </div>`;
       }
       document.getElementById('kanban').innerHTML = html;
-      document.getElementById('pipelineSub').textContent = total + ' total leads tracked';
+      document.getElementById('pipelineSub').textContent = total + ' total leads tracked' + (p.no_email ? ' · ' + p.no_email + ' need email' : '') + (p.dup_skip ? ' · ' + p.dup_skip + ' dup' : '');
     }
 function renderActivityFeed(d) {
   const items = d.activity_feed || [];
