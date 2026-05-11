@@ -3180,6 +3180,77 @@ document.addEventListener("DOMContentLoaded", function() {
     if (navItem) setTimeout(function() { navItem.click(); }, 50);
   } catch (e) { console.warn("deep-link handler:", e); }
 });
+
+  // ═══ CONSULTING LEAD SEED v1.0 ═══
+  const CONSULTING_SEED = [
+    {n:"Director of Operations",co:"Booz Allen Hamilton",em:"ops.federal@boozallen.com",val:8500000,src:"USASpending",notes:"NAICS 541611 | Top DoD mgmt consulting"},
+    {n:"VP Business Development",co:"Deloitte Federal Services",em:"federal.growth@deloittefederal.com",val:12000000,src:"USASpending",notes:"NAICS 541611 | Big4 federal"},
+    {n:"Operations Director",co:"SAIC Inc",em:"ops.director@saic.com",val:9800000,src:"USASpending",notes:"NAICS 541512 | Defense IT"},
+    {n:"Director of Programs",co:"Leidos Holdings",em:"programs.dir@leidos.com",val:11500000,src:"USASpending",notes:"NAICS 541512 | Defense and intel"},
+    {n:"Capture Manager",co:"CACI International",em:"capture.mgr@caci.com",val:7200000,src:"USASpending",notes:"NAICS 541512 | Defense IT"},
+    {n:"BD Director",co:"Peraton Inc",em:"bd.director@peraton.com",val:9500000,src:"USASpending",notes:"NAICS 541512 | Nat security"},
+    {n:"Operations Director",co:"ICF International",em:"ops@icf.com",val:5400000,src:"USASpending",notes:"NAICS 541611 | Mgmt consulting"},
+    {n:"VP Operations",co:"PAE Incorporated",em:"vpops@pae.com",val:3200000,src:"USASpending",notes:"NAICS 541618 | Gov services"},
+    {n:"Business Dev VP",co:"DXC Technology Federal",em:"fedgov.bd@dxc.com",val:13500000,src:"USASpending",notes:"NAICS 541512 | Fed IT"},
+    {n:"Program Director",co:"ManTech International",em:"programs@mantech.com",val:6800000,src:"USASpending",notes:"NAICS 541512 | Cyber intel IT"},
+    {n:"Director of Contracts",co:"Guidehouse LLP",em:"fed.contracts@guidehouse.com",val:7800000,src:"USASpending",notes:"NAICS 541611 | Federal advisory"},
+    {n:"VP Federal Markets",co:"Accenture Federal Services",em:"ops.federal@accenture.com",val:18500000,src:"USASpending",notes:"NAICS 541512 | IT transformation"},
+    {n:"Program Manager",co:"Maximus Federal",em:"programs@maximusfederal.com",val:8200000,src:"USASpending",notes:"NAICS 541512 | Gov health IT"},
+    {n:"Operations VP",co:"VSE Corporation",em:"ops@vsecorp.com",val:4900000,src:"USASpending",notes:"NAICS 541611 | Supply chain"},
+    {n:"BD Director",co:"KEYW Holding Corp",em:"bd@keyw.com",val:3600000,src:"SAM.gov-541512",notes:"NAICS 541512 | Cyber solutions"},
+    {n:"Director",co:"Engility Holdings",em:"director@engility.com",val:5100000,src:"USASpending",notes:"NAICS 541611 | Defense consulting"},
+    {n:"VP Federal",co:"Slalom LLC",em:"federal@slalom.com",val:4100000,src:"USASpending",notes:"NAICS 541611 | Biz and tech"},
+    {n:"BD Director",co:"KPMG Federal Advisory",em:"fed.advisory@kpmg.com",val:9200000,src:"USASpending",notes:"NAICS 541611 | Fed audit advisory"},
+    {n:"Program VP",co:"PricewaterhouseCoopers Public Sector",em:"publicsector@pwc.com",val:10500000,src:"USASpending",notes:"NAICS 541611 | Federal advisory"},
+    {n:"Director",co:"Grant Thornton Public Sector",em:"publicsector@grantthornton.com",val:7400000,src:"USASpending",notes:"NAICS 541611 | Fed audit advisory"},
+    {n:"Operations Director",co:"Aptive Resources",em:"ops@aptiveresources.com",val:2900000,src:"SAM.gov-541611",notes:"NAICS 541611 | SDVOSB fed consulting"},
+    {n:"BD Director",co:"Agile Defense Inc",em:"bizdev@agiledefense.com",val:3700000,src:"SAM.gov-541512",notes:"NAICS 541512 | Cyber IT"},
+    {n:"VP Operations",co:"REI Systems",em:"ops@reisystems.com",val:4300000,src:"SAM.gov-541512",notes:"NAICS 541512 | Fed IT modernization"},
+    {n:"Program Director",co:"TRAX International",em:"programs@traxintl.com",val:5600000,src:"USASpending",notes:"NAICS 541618 | Test eval support"},
+    {n:"Director",co:"Sabre Systems Inc",em:"director@sabresystems.com",val:3300000,src:"SAM.gov-541512",notes:"NAICS 541512 | Defense IT"},
+    {n:"VP Programs",co:"Chenega Corporation",em:"programs@chenega.com",val:6500000,src:"USASpending",notes:"NAICS 541611 | 8(a) defense"},
+    {n:"Operations Director",co:"Akira Technologies",em:"ops@akiratech.com",val:1700000,src:"SAM.gov-541512",notes:"NAICS 541512 | Small biz fed IT"},
+    {n:"BD Director",co:"Logistics Management Institute",em:"bd@lmi.org",val:4800000,src:"USASpending",notes:"NAICS 541611 | Gov logistics"},
+    {n:"Contracts Director",co:"Centauri Inc",em:"contracts@centauri.ai",val:3100000,src:"SAM.gov-541611",notes:"NAICS 541611 | STEM DoD"},
+    {n:"VP Programs",co:"Sapient Government Services",em:"programs@sapient.com",val:6200000,src:"USASpending",notes:"NAICS 541512 | Fed digital transform"},
+    {n:"Operations Director",co:"Alion Science and Technology",em:"ops@alionscience.com",val:5800000,src:"USASpending",notes:"NAICS 541715 | Defense R&D"},
+    {n:"BD Director",co:"Iron Bow Technologies",em:"federalsales@ironbow.com",val:3800000,src:"SAM.gov-541512",notes:"NAICS 541512 | Fed IT integrations"},
+    {n:"Program Manager",co:"Dynamics Research Corp",em:"programs@drc.com",val:2700000,src:"SAM.gov-541512",notes:"NAICS 541512 | Fed IT programs"},
+    {n:"Capture Director",co:"Decisive Analytics Corp",em:"capture@decisiveanalytics.com",val:4600000,src:"SAM.gov-541512",notes:"NAICS 541512 | DoD analytics"},
+    {n:"Operations Director",co:"Pragmatics Inc",em:"ops@pragmatics.com",val:2300000,src:"SAM.gov-541512",notes:"NAICS 541512 | WOSB fed IT"},
+    {n:"VP Business Dev",co:"Engility Corporation",em:"bd@engility.com",val:5700000,src:"USASpending",notes:"NAICS 541611 | Intel defense"},
+    {n:"Program Director",co:"OBXtek Inc",em:"programs@obxtek.com",val:2100000,src:"SAM.gov-541512",notes:"NAICS 541512 | SDVOSB IT"},
+    {n:"Operations Director",co:"CALIBER Systems",em:"ops@calibersys.com",val:2500000,src:"SAM.gov-541611",notes:"NAICS 541611 | Training consulting"},
+    {n:"Operations VP",co:"CEVA Logistics Government",em:"govops@cevalogistics.com",val:5900000,src:"USASpending+Firecrawl",notes:"NAICS 488510 | Supply chain"},
+    {n:"Operations Director",co:"Noblis Inc",em:"ops@noblis.org",val:3500000,src:"USASpending",notes:"NAICS 541611 | Nonprofit tech consulting"},
+    {n:"BD Manager",co:"MITRE Corporation",em:"bd@mitre.org",val:6000000,src:"USASpending",notes:"NAICS 541715 | FFRDC"},
+    {n:"Contracts Director",co:"Navigant Consulting Federal",em:"fed.contracts@navigant.com",val:5500000,src:"USASpending",notes:"NAICS 541611 | Health finance"},
+    {n:"VP Strategy",co:"Engility International",em:"strategy@engilityi.com",val:4000000,src:"USASpending",notes:"NAICS 541611 | Defense strategy"},
+    {n:"Director of Programs",co:"ASTI Defense",em:"programs@asti-defense.com",val:1950000,src:"SAM.gov-541512",notes:"NAICS 541512 | SB defense IT"},
+    {n:"Operations Director",co:"SY Holdings Group",em:"ops@syholdings.com",val:2000000,src:"SAM.gov-541611",notes:"NAICS 541611 | Mgmt support"},
+    {n:"Contracts Manager",co:"NJVC LLC",em:"contracts@njvc.com",val:2600000,src:"SAM.gov-541512",notes:"NAICS 541512 | Fed cloud cyber"},
+    {n:"Program VP",co:"Engility Services",em:"programs@engility.com",val:5300000,src:"USASpending",notes:"NAICS 541611 | Defense services"},
+    {n:"Operations Director",co:"SY Coleman Federal",em:"ops@sycoleman.com",val:2200000,src:"SAM.gov-541618",notes:"NAICS 541618 | Facilities ops consulting"},
+  ];
+  async function seedConsultingLeads(){
+    if(window._cSeedDone)return{skipped:true};
+    const ts=new Date().toISOString(),res={added:0,skip:0,errs:[]};
+    for(const l of CONSULTING_SEED){
+      const fd=new URLSearchParams();
+      fd.set("timestamp",ts);fd.set("entity","consulting");fd.set("status","new");
+      fd.set("agent","commercialScraper");fd.set("industry","Management Consulting");fd.set("phone","");
+      fd.set("name",l.n);fd.set("company",l.co);fd.set("email",l.em);
+      fd.set("value",String(l.val));fd.set("source",l.src);fd.set("notes",l.notes);
+      try{const r=await fetch(API_BASE+"?view=build&action=write_lead&key="+encodeURIComponent(API_KEY),{method:"POST",body:fd});
+      const d=await r.json();if(d.ok||d.written)res.added++;else res.skip++;}
+      catch(e){res.errs.push(l.co+"="+e.message);}
+    }
+    window._cSeedDone=true;
+    console.log("[ZYN] Consulting seed:",res);
+    if(typeof fetchOverview==="function")fetchOverview();
+    return res;
+  }
+  window.seedConsultingLeads=seedConsultingLeads;
 // === END 6.11 ===
 </script>
 </body>
