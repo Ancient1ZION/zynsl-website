@@ -2411,7 +2411,7 @@ function renderApprovalQueue(d) {
 
 function renderBadges(d) {
   document.getElementById('badgeAgents').textContent = d.agents_total || 17;
-  document.getElementById('badgeApprovals').textContent = (d.approval_queue || []).length;
+  document.getElementById('badgeApprovals').textContent = (d.pending_approval || (d.approval_queue||[]).length);
   document.getElementById('badgeActivity').textContent = (d.activity_feed || []).length;
   document.getElementById('badgeLeads').textContent = d.leads || 0;
   document.getElementById('badgeOpps').textContent = d.opportunities || 0;
