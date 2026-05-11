@@ -75,6 +75,3 @@ PRs welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the development loop
 ## License
 
 MIT — see [`LICENSE`](./LICENSE). Fork freely.
-
-<!-- noah-save-test-pass-1778453194697 -->
-<!-- noah-save-test-1778457519441 -->
