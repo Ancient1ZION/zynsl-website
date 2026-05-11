@@ -2738,7 +2738,7 @@ function noahSendMessage() {
   fetch(buildUrl({ view: 'noah', action: 'chat', msg: msg }))
     .then(r => r.json())
     .then(data => {
-      if (data && data.response) noahAppendMessage('noah', data.response);
+      if (data && data.response) { var __mdl = data.model ? ('\n\n— via ' + data.model) : ''; noahAppendMessage('noah', data.response + __mdl); }
       else noahAppendMessage('noah', 'I had trouble responding. Try again.');
       if (status) status.textContent = 'ready';
     })
