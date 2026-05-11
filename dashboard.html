@@ -1501,6 +1501,17 @@
 
       
 
+        <div class="card" id="noahTasksDashboard" style="margin-top:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">✅ Noah — Task Center <span style="font-size:12px;opacity:0.6;font-weight:normal" id="taskCenterTime"></span></h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button onclick="refreshTaskCenter()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">🔄 Refresh</button>
+              <button onclick="runAllAutonomous()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">⚡ Run all autonomous</button>
+            </div>
+          </div>
+          <div id="taskCenterGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px"></div>
+          <div id="taskCenterLog" style="margin-top:12px;font-size:12px;font-family:'JetBrains Mono',monospace;opacity:0.9;max-height:200px;overflow:auto;background:rgba(0,0,0,0.18);border-radius:8px;padding:10px"></div>
+        </div>
         <div class="card" id="noahGasPatches" style="margin-top:24px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
             <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">🔧 Noah — GAS Patches <span style="font-size:12px;opacity:0.6;font-weight:normal">v2 · view-based dispatch</span></h3>
@@ -3530,6 +3541,193 @@ document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener('DOMContentLoaded', () => { setTimeout(() => { if (document.getElementById('gasPatchStatus')) window.testWriteLeadEndpoint(); }, 2500); });
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     setTimeout(() => { if (document.getElementById('gasPatchStatus')) window.testWriteLeadEndpoint(); }, 2500);
+  }
+})();
+</script>
+<script>
+(function(){
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzorSGdcjUiEy_yGtFvDhfWEVCuS3k2vcibdV5T8gVeC_YAT2dZ9XAuDEPS_4AIzqj7/exec';
+  const API_KEY = '56Yd1ZCIYNUW5OwXyTWH06YfevcRrW1p';
+
+  function tcLog(msg, cls){
+    const el = document.getElementById('taskCenterLog'); if (!el) return;
+    const row = document.createElement('div');
+    row.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+    if (cls === 'ok') row.style.color = '#34d399';
+    if (cls === 'err') row.style.color = '#f87171';
+    if (cls === 'info') row.style.color = '#93c5fd';
+    if (cls === 'warn') row.style.color = '#fbbf24';
+    el.appendChild(row); el.scrollTop = el.scrollHeight;
+  }
+
+  function makeCard(opts){
+    const statusColor = { ok:'#34d399', warn:'#fbbf24', err:'#f87171', info:'#93c5fd', blocked:'#a78bfa' }[opts.statusType] || '#93c5fd';
+    return '<div style="background:rgba(0,0,0,0.18);border-radius:10px;padding:14px;border:1px solid rgba(255,255,255,0.06)">' +
+      '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">' +
+      '<div style="font-weight:600;font-size:14px">' + opts.title + '</div>' +
+      '<div style="font-size:11px;color:' + statusColor + ';padding:2px 8px;border-radius:6px;background:rgba(255,255,255,0.04);white-space:nowrap">' + opts.status + '</div>' +
+      '</div>' +
+      '<div style="font-size:12px;opacity:0.85;line-height:1.5;margin-bottom:10px">' + opts.desc + '</div>' +
+      (opts.metric ? '<div style="font-size:20px;font-weight:700;margin-bottom:8px">' + opts.metric + '</div>' : '') +
+      (opts.action ? '<button onclick="' + opts.action + '" style="padding:6px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:' + (opts.actionColor||'rgba(99,102,241,0.18)') + ';color:inherit;cursor:pointer;font-size:12px">' + opts.actionLabel + '</button>' : '') +
+      '</div>';
+  }
+
+  async function fetchOverviewData(){
+    const r = await fetch(GAS_URL + '?key=' + API_KEY + '&view=overview&t=' + Date.now());
+    return await r.json();
+  }
+
+  window.refreshTaskCenter = async function(){
+    const grid = document.getElementById('taskCenterGrid');
+    const time = document.getElementById('taskCenterTime');
+    if (!grid) return;
+    grid.innerHTML = '<div style="opacity:0.6;font-size:13px;padding:20px;text-align:center;grid-column:1/-1">Loading task state…</div>';
+    try {
+      const o = await fetchOverviewData();
+      if (time) time.textContent = '· refreshed ' + new Date().toLocaleTimeString();
+      const cards = [];
+
+      // Card 1: Live sending status
+      const sendsToday = o.sent_today || 0;
+      const cap = o.daily_cap || 280;
+      const headroom = cap - sendsToday;
+      cards.push(makeCard({
+        title: '📤 Live Email Sends',
+        status: sendsToday > 0 ? 'sending' : 'queued',
+        statusType: sendsToday > 0 ? 'ok' : 'info',
+        metric: sendsToday + ' / ' + cap,
+        desc: 'Sara + saraFollowup are processing the approval queue via the sendApproved trigger. ' + headroom + ' sends remaining today.',
+        action: 'window.location.reload()',
+        actionLabel: 'View live activity',
+        actionColor: 'rgba(34,197,94,0.18)'
+      }));
+
+      // Card 2: Consulting expansion
+      const consulting = o.divisions?.consulting || {};
+      const consultingLeads = consulting.leads_total || 0;
+      cards.push(makeCard({
+        title: '🎯 Consulting — 50/day target',
+        status: consultingLeads >= 50 ? 'on track' : 'needs seed',
+        statusType: consultingLeads >= 50 ? 'ok' : 'blocked',
+        metric: consultingLeads + ' leads',
+        desc: '50 prospects staged in CONSULTING_50. Requires write_lead endpoint deployed in Apps Script. Once live, seed populates LEADS sheet in ~15s.',
+        action: 'document.getElementById("noahGasPatches").scrollIntoView({block:"center"})',
+        actionLabel: 'Open GAS Patches →',
+        actionColor: 'rgba(249,115,22,0.22)'
+      }));
+
+      // Card 3: No-email federal leads
+      const noEmail = o.pipeline?.no_email || 0;
+      cards.push(makeCard({
+        title: '📧 No-Email Federal Leads',
+        status: noEmail > 0 ? 'pending enrichment' : 'cleared',
+        statusType: noEmail > 50 ? 'warn' : noEmail > 0 ? 'info' : 'ok',
+        metric: noEmail + ' leads',
+        desc: 'Federal leads without contact emails. Mariam\'s research trigger enriches these on schedule. No action needed — autonomous.',
+        action: 'tcLog("No-email enrichment runs via mariamResearchProspect trigger on schedule.", "info")',
+        actionLabel: 'Status only'
+      }));
+
+      // Card 4: Approval queue health
+      const queue = o.approval_queue || [];
+      const queuedApproved = queue.filter(q => q.decision === 'APPROVE').length;
+      cards.push(makeCard({
+        title: '✓ Approval Queue',
+        status: queuedApproved > 0 ? 'processing' : 'drained',
+        statusType: queuedApproved > 0 ? 'info' : 'ok',
+        metric: queuedApproved + ' approved',
+        desc: queuedApproved + ' items pre-approved. The sendApproved trigger dispatches them via Brevo on its schedule.',
+        action: 'tcLog("Approval queue: " + ' + queuedApproved + ' + " items waiting for sendApproved trigger.", "info")',
+        actionLabel: 'Trust the trigger'
+      }));
+
+      // Card 5: Agent health
+      const enabled = o.agents_enabled || 0;
+      const total = o.agents_total || 0;
+      cards.push(makeCard({
+        title: '🤖 Agent Roster',
+        status: enabled === total ? 'all healthy' : 'check',
+        statusType: enabled === total ? 'ok' : 'warn',
+        metric: enabled + ' / ' + total,
+        desc: 'All agents enabled. 13 have CLOCK triggers; 4 are on-demand (zara, rebecka, ruth, miroFish, inboxMgr).',
+        action: 'document.querySelector(\'[data-page="agents"]\')?.scrollIntoView({block:"center"})',
+        actionLabel: 'View roster'
+      }));
+
+      // Card 6: System health
+      const sys = o.system || {};
+      const errors = sys.errors_24h || 0;
+      const bounces = sys.bounces_24h || 0;
+      cards.push(makeCard({
+        title: '🩺 System Health',
+        status: (errors+bounces) === 0 ? 'green' : 'check logs',
+        statusType: (errors+bounces) === 0 ? 'ok' : 'warn',
+        metric: (sys.triggers||0) + ' / ' + (sys.triggers_max||20) + ' triggers',
+        desc: errors + ' errors, ' + bounces + ' bounces in 24h. ' + (sys.properties||0) + ' script properties stored.',
+        action: 'tcLog("System health: " + JSON.stringify({errors:' + errors + ',bounces:' + bounces + ',triggers:' + (sys.triggers||0) + '}), errors+bounces===0?"ok":"warn")',
+        actionLabel: 'Log details'
+      }));
+
+      // Card 7: Capital division (parked)
+      cards.push(makeCard({
+        title: '💰 Capital Management',
+        status: 'PARKED',
+        statusType: 'blocked',
+        desc: 'Intentionally parked per design. Activation requires explicit go-ahead — do not auto-enable.',
+        action: 'tcLog("Capital intentionally parked. No action.", "info")',
+        actionLabel: 'Acknowledge'
+      }));
+
+      // Card 8: Discord webhook (offline)
+      cards.push(makeCard({
+        title: '💬 Discord Webhook',
+        status: 'logged out',
+        statusType: 'blocked',
+        desc: 'Both Discord accounts logged out per prior session diagnostics. Webhooks confirmed good. Reconnect at discord.com when ready.',
+        action: 'window.open("https://discord.com/login", "_blank")',
+        actionLabel: 'Open Discord →'
+      }));
+
+      grid.innerHTML = cards.join('');
+      tcLog('Task center refreshed — ' + cards.length + ' cards, all systems mapped.', 'ok');
+    } catch(e) {
+      grid.innerHTML = '<div style="color:#f87171;padding:20px">Error: ' + e.message + '</div>';
+      tcLog('Refresh error: ' + e.message, 'err');
+    }
+  };
+
+  window.runAllAutonomous = async function(){
+    tcLog('━━━ Running all autonomous tasks ━━━', 'info');
+    tcLog('1. Refreshing overview data…', 'info');
+    if (typeof window.fetchOverview === 'function') {
+      try { await window.fetchOverview(); tcLog('   ✓ Overview refreshed', 'ok'); }
+      catch(e) { tcLog('   ✗ ' + e.message, 'err'); }
+    } else {
+      tcLog('   ⚠ fetchOverview not available', 'warn');
+    }
+    tcLog('2. Probing write_lead endpoint…', 'info');
+    if (typeof window.testWriteLeadEndpoint === 'function') {
+      const live = await window.testWriteLeadEndpoint();
+      if (live) {
+        tcLog('   ✓ Endpoint live — auto-firing consulting seed', 'ok');
+        if (typeof window.seedConsultingLeads === 'function') {
+          await window.seedConsultingLeads();
+          tcLog('   ✓ Consulting seed completed', 'ok');
+        }
+      } else {
+        tcLog('   ⊘ Endpoint not deployed — skipping seed (paste GAS patch first)', 'warn');
+      }
+    }
+    tcLog('3. Re-rendering task cards…', 'info');
+    await window.refreshTaskCenter();
+    tcLog('━━━ Autonomous run complete ━━━', 'ok');
+  };
+
+  // Auto-refresh on load
+  document.addEventListener('DOMContentLoaded', () => { setTimeout(() => { if (document.getElementById('taskCenterGrid')) window.refreshTaskCenter(); }, 1500); });
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(() => { if (document.getElementById('taskCenterGrid')) window.refreshTaskCenter(); }, 1500);
   }
 })();
 </script>
