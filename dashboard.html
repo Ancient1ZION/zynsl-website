@@ -1502,41 +1502,53 @@
       
 
         <div class="card" id="noahGasPatches" style="margin-top:24px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">🔧 Noah — GAS Patches</h3>
-            <div style="display:flex;gap:8px;align-items:center">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif">🔧 Noah — GAS Patches <span style="font-size:12px;opacity:0.6;font-weight:normal">v2 · view-based dispatch</span></h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <span id="gasPatchStatus" style="font-size:12px;opacity:0.75">checking…</span>
               <button onclick="copyGasPatch()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(99,102,241,0.18);color:inherit;cursor:pointer">📋 Copy</button>
               <button onclick="testWriteLeadEndpoint()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(34,197,94,0.18);color:inherit;cursor:pointer">🔌 Test endpoint</button>
               <button onclick="seedConsultingLeads()" style="padding:6px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(249,115,22,0.18);color:inherit;cursor:pointer">🌱 Seed 50 Consulting Leads</button>
             </div>
           </div>
-          <div style="font-size:13px;opacity:0.8;margin-bottom:10px;line-height:1.5">
-            Paste this into the Apps Script project for deployment <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">AKfycbzorSGdcjUiEy…</code> then redeploy.
-            Once live, the <strong>Seed 50 Consulting Leads</strong> button will write all 50 prospects into the LEADS sheet in ~30 seconds.
+          <div style="font-size:13px;opacity:0.85;margin-bottom:10px;line-height:1.55">
+            Paste this into the Apps Script project for deployment <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">AKfycbzorSGdcjUiEy…</code>, add the single <code style="background:rgba(0,0,0,0.25);padding:2px 6px;border-radius:4px">case 'write_lead'</code> line to the existing doPost dispatcher, then redeploy. The deployment URL stays the same. Once live, the <strong>Seed 50 Consulting Leads</strong> button will write all 50 prospects into the LEADS sheet in ~15 seconds. Sara's 9 AM ET trigger will pick them up and queue outreach drafts.
           </div>
           <pre id="gasPatchCode" style="background:rgba(0,0,0,0.32);padding:16px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.45;overflow:auto;max-height:420px;border:1px solid rgba(255,255,255,0.08);white-space:pre">/**
- * ZYN Empire — Apps Script doPost extension
- * Adds POST action=write_lead so the dashboard can seed leads.
+ * ZYN Empire — Apps Script doPost extension (v2 — view-based)
+ * Adds POST view=write_lead so the dashboard can seed leads.
+ *
+ * The ZYN GAS dispatches POST requests by a parameter named "view"
+ * and authenticates with a parameter named "key" (matching SCRIPT_API_KEY).
+ * Existing views include: build (with sub-action), overview, capital.
  *
  * INSTALL:
  *  1. Open script.google.com and the project that owns deployment
  *     AKfycbzorSGdcjUiEy_yGtFvDhfWEVCuS3k2vcibdV5T8gVeC_YAT2dZ9XAuDEPS_4AIzqj7
- *  2. Paste handleWriteLead_ into any .gs file in the project.
- *  3. In the existing doPost(e) dispatcher, add ONE line:
- *        if (action === 'write_lead') return handleWriteLead_(e);
- *     (or as a case in the switch)
- *  4. Deploy &gt; Manage deployments &gt; Edit &gt; New version &gt; Deploy.
- *     The URL stays the same; no client change required.
+ *  2. Open the .gs file with doPost(e).
+ *  3. Paste handleWriteLead_ anywhere in the project.
+ *  4. Inside doPost(e), in the switch on (e.parameter.view), add:
+ *        case 'write_lead': return handleWriteLead_(e);
+ *     (or as an if-branch matching the existing pattern)
+ *  5. Deploy &gt; Manage deployments &gt; Edit &gt; New version &gt; Deploy.
+ *     The deployment URL stays the same.
+ *
+ * The client call (already wired in this dashboard) is:
+ *   POST &lt;GAS_URL&gt;
+ *   body (URLSearchParams or FormData):
+ *     view=write_lead
+ *     key=&lt;SCRIPT_API_KEY&gt;
+ *     company=...  email=...  industry=...  value=...  entity=consulting  status=new
  */
 
 function handleWriteLead_(e) {
-  const apiKey = e.parameter.apiKey || '';
-  if (apiKey !== SCRIPT_API_KEY) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok:false, error:'unauthorized' }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
+  // Auth is presumed already enforced by the parent doPost via SCRIPT_API_KEY/key.
+  // If your doPost does NOT pre-auth all views, uncomment the next block:
+  // if ((e.parameter.key || '') !== SCRIPT_API_KEY) {
+  //   return ContentService.createTextOutput(JSON.stringify({ ok:false, error:'unauthorized' }))
+  //     .setMimeType(ContentService.MimeType.JSON);
+  // }
+
   const company = (e.parameter.company || '').toString().trim();
   const email   = (e.parameter.email   || '').toString().trim();
   if (!company &amp;&amp; !email) {
@@ -1544,6 +1556,7 @@ function handleWriteLead_(e) {
       .createTextOutput(JSON.stringify({ ok:false, error:'company_or_email_required' }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+
   const ss    = SpreadsheetApp.openById('1WHN438mjORT4HnGiXapWv78uomVy6KMhHsl0llxaeQk');
   const sheet = ss.getSheetByName('LEADS');
   if (!sheet) {
@@ -1551,9 +1564,11 @@ function handleWriteLead_(e) {
       .createTextOutput(JSON.stringify({ ok:false, error:'leads_sheet_missing' }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+
+  // De-dup on (company,email)
   const last = sheet.getLastRow();
   if (last &gt; 1) {
-    const range = sheet.getRange(2, 3, last - 1, 2).getValues();
+    const range = sheet.getRange(2, 3, last - 1, 2).getValues(); // cols C..D
     for (let i = 0; i &lt; range.length; i++) {
       const c = (range[i][0]||'').toString().trim().toLowerCase();
       const m = (range[i][1]||'').toString().trim().toLowerCase();
@@ -1564,30 +1579,34 @@ function handleWriteLead_(e) {
       }
     }
   }
+
   sheet.appendRow([
     e.parameter.timestamp || new Date().toISOString(),
-    e.parameter.name      || '',
+    e.parameter.name      || 'Operations Director',
     company,
     email,
     e.parameter.phone     || '',
     e.parameter.industry  || '',
     e.parameter.source    || 'seed',
     e.parameter.status    || 'new',
-    e.parameter.agent     || '',
+    e.parameter.agent     || 'Adam',
     e.parameter.notes     || '',
     Number(e.parameter.value || 0),
     e.parameter.entity    || 'consulting'
   ]);
+
   return ContentService
-    .createTextOutput(JSON.stringify({ ok:true, written:true, row:sheet.getLastRow() }))
+    .createTextOutput(JSON.stringify({
+      ok: true, written: true, row: sheet.getLastRow(), company: company
+    }))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// Paste this single line inside the existing doPost(e) dispatcher:
+// In the existing doPost(e) dispatcher, add this single case (matching the existing pattern):
 //
-//   if (action === 'write_lead') return handleWriteLead_(e);
+//   case 'write_lead': return handleWriteLead_(e);
 </pre>
-          <div id="gasPatchLog" style="margin-top:10px;font-size:12px;font-family:'JetBrains Mono',monospace;opacity:0.85;max-height:160px;overflow:auto"></div>
+          <div id="gasPatchLog" style="margin-top:10px;font-size:12px;font-family:'JetBrains Mono',monospace;opacity:0.9;max-height:180px;overflow:auto;background:rgba(0,0,0,0.18);border-radius:8px;padding:8px"></div>
         </div>
       </section>
 
@@ -3365,30 +3384,45 @@ document.addEventListener("DOMContentLoaded", function() {
       err => gasLog('Clipboard error: ' + err.message, 'err'));
   };
 
+  // Build payload using URLSearchParams + view= + key= (matches existing GAS dispatch shape)
+  function buildPayload(view, params){
+    const p = new URLSearchParams();
+    p.set('view', view);
+    p.set('key', API_KEY);
+    for (const k of Object.keys(params || {})) p.set(k, String(params[k]));
+    return p;
+  }
+
   window.testWriteLeadEndpoint = async function(){
-    gasLog('Pinging write_lead with dry-run payload…', 'info');
-    const fd = new FormData();
-    fd.append('action', 'write_lead');
-    fd.append('apiKey', API_KEY);
-    fd.append('company', '__ZYN_ENDPOINT_PROBE__');
-    fd.append('email', 'probe@example.invalid');
-    fd.append('entity', 'probe');
-    fd.append('status', 'probe');
+    gasLog('Pinging view=write_lead with dry-run payload…', 'info');
     try {
-      const r = await fetch(GAS_URL, { method:'POST', body: fd });
+      const r = await fetch(GAS_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
+        body: buildPayload('write_lead', {
+          company: '__ZYN_ENDPOINT_PROBE__',
+          email: 'probe@example.invalid',
+          entity: 'probe',
+          status: 'probe'
+        })
+      });
       const j = await r.json();
       const status = document.getElementById('gasPatchStatus');
-      if (j && (j.written || j.ok)) {
+      if (j && (j.written || (j.ok && j.written !== false))) {
         gasLog('✅ Endpoint LIVE — response: ' + JSON.stringify(j), 'ok');
         if (status) { status.textContent = '✅ endpoint live'; status.style.color = '#34d399'; }
         return true;
-      } else if (j && j.error === 'unauthorized') {
-        gasLog('⚠ Endpoint exists but API key rejected: ' + JSON.stringify(j), 'err');
+      } else if (j && /unsupported view/i.test(j.error || '')) {
+        gasLog('❌ Endpoint not deployed yet — GAS responded: ' + JSON.stringify(j), 'err');
+        if (status) { status.textContent = '❌ patch not deployed'; status.style.color = '#f87171'; }
+        return false;
+      } else if (j && /unauthorized|key/i.test(j.error || j.message || '')) {
+        gasLog('⚠ Auth gate rejected key: ' + JSON.stringify(j), 'err');
         if (status) { status.textContent = '⚠ auth fail'; status.style.color = '#fbbf24'; }
         return false;
       } else {
-        gasLog('❌ Endpoint NOT live — fallback response: ' + JSON.stringify(j).slice(0,200), 'err');
-        if (status) { status.textContent = '❌ not deployed'; status.style.color = '#f87171'; }
+        gasLog('❓ Unknown response: ' + JSON.stringify(j).slice(0,300), 'err');
+        if (status) { status.textContent = '❓ unknown'; status.style.color = '#fbbf24'; }
         return false;
       }
     } catch(e) {
@@ -3397,7 +3431,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  // 50 real consulting prospects ready to seed
   window.CONSULTING_50 = [
     {company:'Booz Allen Hamilton',email:'business.dev@bah.com',value:8500000,industry:'Management Consulting',naics:'541611'},
     {company:'Deloitte Federal Services',email:'usfedgovbd@deloitte.com',value:12000000,industry:'Management Consulting',naics:'541611'},
@@ -3464,35 +3497,40 @@ document.addEventListener("DOMContentLoaded", function() {
     let written = 0, skipped = 0, failed = 0;
     for (let i = 0; i < list.length; i++) {
       const L = list[i];
-      const fd = new FormData();
-      fd.append('action', 'write_lead');
-      fd.append('apiKey', API_KEY);
-      fd.append('timestamp', new Date().toISOString());
-      fd.append('name', 'Operations Director');
-      fd.append('company', L.company);
-      fd.append('email', L.email);
-      fd.append('industry', L.industry);
-      fd.append('source', 'USASpending+SAM.gov');
-      fd.append('status', 'new');
-      fd.append('agent', 'Adam');
-      fd.append('notes', 'NAICS ' + L.naics + ' federal contractor — seed batch via dashboard');
-      fd.append('value', String(L.value));
-      fd.append('entity', 'consulting');
       try {
-        const r = await fetch(GAS_URL, { method:'POST', body: fd });
+        const r = await fetch(GAS_URL, {
+          method:'POST',
+          headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
+          body: buildPayload('write_lead', {
+            timestamp: new Date().toISOString(),
+            name: 'Operations Director',
+            company: L.company,
+            email: L.email,
+            industry: L.industry,
+            source: 'USASpending+SAM.gov',
+            status: 'new',
+            agent: 'Adam',
+            notes: 'NAICS ' + L.naics + ' federal contractor — seed batch via dashboard',
+            value: String(L.value),
+            entity: 'consulting'
+          })
+        });
         const j = await r.json();
-        if (j.written) { written++; gasLog((i+1)+'/'+list.length+' ✓ wrote '+L.company+' (row '+j.row+')', 'ok'); }
-        else if (j.skipped) { skipped++; gasLog((i+1)+'/'+list.length+' ⊘ skipped '+L.company+' ('+j.reason+')', 'info'); }
-        else { failed++; gasLog((i+1)+'/'+list.length+' ✗ failed '+L.company+' — '+JSON.stringify(j).slice(0,80), 'err'); }
-      } catch(e) { failed++; gasLog((i+1)+'/'+list.length+' ✗ network error: '+e.message, 'err'); }
-      await new Promise(r => setTimeout(r, 300));
+        if (j.written) { written++; gasLog((i+1)+'/'+list.length+' ✓ wrote '+L.company+' (row '+(j.row||'?')+')', 'ok'); }
+        else if (j.skipped) { skipped++; gasLog((i+1)+'/'+list.length+' ⊘ skipped '+L.company+' ('+(j.reason||'')+')', 'info'); }
+        else { failed++; gasLog((i+1)+'/'+list.length+' ✗ failed '+L.company+' — '+JSON.stringify(j).slice(0,120), 'err'); }
+      } catch(e) { failed++; gasLog((i+1)+'/'+list.length+' ✗ network: '+e.message, 'err'); }
+      await new Promise(r => setTimeout(r, 250));
     }
-    gasLog('Done. '+written+' written, '+skipped+' skipped (dup), '+failed+' failed. Refresh dashboard to see new Consulting count.', 'ok');
+    gasLog('━━━ Done. '+written+' written, '+skipped+' skipped (dup), '+failed+' failed. ━━━', 'ok');
     if (typeof fetchOverview === 'function') { try { fetchOverview(); } catch(_){} }
   };
 
-  // Auto-probe on page load
+  // Auto-probe on load (delayed)
   document.addEventListener('DOMContentLoaded', () => { setTimeout(() => { if (document.getElementById('gasPatchStatus')) window.testWriteLeadEndpoint(); }, 2500); });
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(() => { if (document.getElementById('gasPatchStatus')) window.testWriteLeadEndpoint(); }, 2500);
+  }
 })();
 </script>
 </body>
