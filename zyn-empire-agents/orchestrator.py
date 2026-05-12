@@ -17,7 +17,7 @@ CHANGELOG (patch 2026-05-12b — volume targets):
   - Midnight reset: reset_daily_counters() zeros all CONTROL counters at 00:00 UTC
   - run_rebecka(), run_zuri() dispatch functions added (every_2h / every_4h)
   - run_sara(), run_lea() updated with quota-aware dispatch
-  - run_adam_scrape(), run_micah(), run_asher(), run_benji() wired into tick
+  - run_adam_scrape(), run_micah(), run_asher(), run_miro_grants() wired into tick
   - Federal daily scrape progress logged + Discord alert when 50/day hit
 
 CHANGELOG (patch 2026-05-12):
@@ -627,17 +627,17 @@ def run_lea(agents):
 
 
 # ---------------------------------------------------------------------------
-# Federal division — adam + scraper (50 leads/day) + asher + micah + benji
+# Federal division — adam + scraper (50 leads/day) + asher + micah + miro (grants)
 # ---------------------------------------------------------------------------
 
 _last_adam   = 0.0
 _last_micah  = 0.0
 _last_asher  = 0.0
-_last_benji  = 0.0
+_last_miro_grants  = 0.0
 ADAM_INTERVAL  = 4 * 3600
 MICAH_INTERVAL = 6 * 3600
 ASHER_INTERVAL = 6 * 3600
-BENJI_INTERVAL = 8 * 3600
+MIRO_GRANTS_INTERVAL = 8 * 3600
 
 
 def run_adam_scrape(agents):
@@ -743,17 +743,17 @@ def run_asher(agents):
         logger.error(f"run_asher: {e}")
 
 
-def run_benji(agents):
-    """Dispatch benji to find grants and draft LOIs."""
-    global _last_benji
+def run_miro_grants(agents):
+    """Dispatch miro (grants track) to find grants and draft LOIs."""
+    global _last_miro_grants
     now = time.time()
-    if now - _last_benji < BENJI_INTERVAL:
+    if now - _last_miro_grants < MIRO_GRANTS_INTERVAL:
         return
-    _last_benji = now
+    _last_miro_grants = now
 
-    agent = agents.get("benji")
+    agent = agents.get("miro")
     if not agent:
-        logger.warning("benji not in registry")
+        logger.warning("miro not in registry (grants track)")
         return
 
     start = time.time()
@@ -766,11 +766,11 @@ def run_benji(agents):
             "Never send without CEO approval."
         )
         duration = int((time.time() - start) * 1000)
-        audit_log("benjiRun", "benji", "OK", duration_ms=duration)
+        audit_log("miroGrantsRun", "miro", "OK", duration_ms=duration)
     except Exception as e:
         duration = int((time.time() - start) * 1000)
-        audit_log("benjiRun", "benji", "ERROR", duration_ms=duration, message=str(e)[:400])
-        logger.error(f"run_benji: {e}")
+        audit_log("miroGrantsRun", "miro", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_miro_grants: {e}")
 
 
 # ---------------------------------------------------------------------------
@@ -837,7 +837,7 @@ def supervisor_tick(agents):
         run_adam_scrape(agents)      # 50 leads/day  every 4h
         run_micah(agents)            # prime outreach every 6h
         run_asher(agents)            # bid drafts     every 6h
-        run_benji(agents)            # grant LOIs     every 8h
+        run_miro_grants(agents)    # grant LOIs     every 8h (was benji)
 
         duration = int((time.time() - start) * 1000)
         audit_log("supervisor_tick", "noah", "OK", duration_ms=duration,
