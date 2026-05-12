@@ -1237,6 +1237,106 @@
   .theme-icon { font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center; }
   .theme-toggle { display: inline-flex !important; align-items: center; justify-content: center; cursor: pointer; }
 
+
+/* CRM — Bitrix24-style native CRM (patch 2026-05-12g) */
+.crm-toolbar { display:flex; gap:8px; align-items:center; }
+.crm-btn { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#e5e7eb; padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; }
+.crm-btn:hover { background:rgba(255,255,255,0.1); }
+.crm-btn-primary { background:linear-gradient(135deg,#f97316,#ea580c); border-color:#f97316; color:#fff; font-weight:600; }
+.crm-btn-sm { background:rgba(249,115,22,0.15); border:1px solid #f97316; color:#fb923c; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:12px; margin-left:auto; }
+.crm-tabs { display:flex; gap:4px; margin:16px 0 12px; border-bottom:1px solid rgba(255,255,255,0.08); flex-wrap:wrap; }
+.crm-tab { background:transparent; border:none; color:#94a3b8; padding:10px 16px; cursor:pointer; font-size:13px; border-bottom:2px solid transparent; }
+.crm-tab:hover { color:#e5e7eb; }
+.crm-tab.active { color:#fb923c; border-bottom-color:#fb923c; font-weight:600; }
+.crm-stats-row { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-bottom:16px; }
+.crm-stat { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px 14px; }
+.crm-stat-label { font-size:11px; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; }
+.crm-stat-val { font-size:20px; font-weight:700; color:#fb923c; margin-top:4px; }
+.crm-view { display:none; }
+.crm-view.active { display:block; }
+.crm-pipeline-filters { display:flex; gap:10px; margin-bottom:12px; }
+.crm-select, .crm-input { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:#e5e7eb; padding:8px 12px; border-radius:8px; font-size:13px; }
+.crm-input { flex:1; }
+.crm-kanban { display:flex; gap:10px; overflow-x:auto; padding-bottom:12px; min-height:600px; }
+.crm-kanban-col { flex:0 0 260px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:8px; display:flex; flex-direction:column; }
+.crm-kanban-col-header { padding:8px 10px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; display:flex; justify-content:space-between; align-items:center; }
+.crm-kanban-col-count { background:rgba(255,255,255,0.08); border-radius:10px; padding:2px 8px; font-size:11px; color:#cbd5e1; }
+.crm-kanban-col-value { font-size:11px; color:#94a3b8; padding:0 10px 8px; }
+.crm-kanban-cards { display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:560px; }
+.crm-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:10px; cursor:pointer; }
+.crm-card:hover { background:rgba(255,255,255,0.08); border-color:rgba(251,146,60,0.4); }
+.crm-card-name { font-weight:600; font-size:13px; color:#e5e7eb; }
+.crm-card-company { font-size:11px; color:#94a3b8; margin-top:2px; }
+.crm-card-meta { display:flex; justify-content:space-between; margin-top:8px; font-size:11px; }
+.crm-card-value { color:#10b981; font-weight:700; }
+.crm-card-div { color:#94a3b8; }
+.crm-card-tags { display:flex; gap:4px; flex-wrap:wrap; margin-top:6px; }
+.crm-tag { background:rgba(251,146,60,0.15); color:#fb923c; padding:1px 6px; border-radius:4px; font-size:10px; }
+.crm-tag.hot { background:rgba(239,68,68,0.18); color:#f87171; }
+.crm-tag.warm { background:rgba(245,158,11,0.18); color:#fbbf24; }
+.crm-tag.federal { background:rgba(59,130,246,0.18); color:#60a5fa; }
+.crm-tag.consulting { background:rgba(168,85,247,0.18); color:#c084fc; }
+.crm-tag.autonomous { background:rgba(34,211,238,0.18); color:#22d3ee; }
+.crm-col-NEW       { border-top:3px solid #64748b; }
+.crm-col-CONTACTED { border-top:3px solid #3b82f6; }
+.crm-col-REPLIED   { border-top:3px solid #06b6d4; }
+.crm-col-WARM      { border-top:3px solid #f59e0b; }
+.crm-col-HOT       { border-top:3px solid #ef4444; }
+.crm-col-PROPOSAL  { border-top:3px solid #a855f7; }
+.crm-col-SIGNED    { border-top:3px solid #8b5cf6; }
+.crm-col-WON       { border-top:3px solid #10b981; }
+.crm-table { width:100%; border-collapse:collapse; }
+.crm-table th, .crm-table td { padding:10px 14px; text-align:left; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.05); }
+.crm-table th { color:#94a3b8; font-size:11px; text-transform:uppercase; }
+.crm-table tbody tr { cursor:pointer; }
+.crm-table tbody tr:hover { background:rgba(255,255,255,0.04); }
+.crm-contacts-grid, .crm-companies-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; padding:12px; }
+.crm-contact-card, .crm-company-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px; cursor:pointer; }
+.crm-contact-avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#f97316,#a855f7); display:inline-flex; align-items:center; justify-content:center; font-weight:700; color:#fff; margin-bottom:8px; }
+.crm-contact-name { font-weight:600; font-size:14px; }
+.crm-contact-meta { font-size:11px; color:#94a3b8; margin-top:4px; }
+.crm-timeline { padding:14px; }
+.crm-timeline-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+.crm-timeline-icon { width:32px; height:32px; border-radius:50%; background:rgba(251,146,60,0.15); color:#fb923c; display:inline-flex; align-items:center; justify-content:center; }
+.crm-timeline-title { font-size:13px; font-weight:600; }
+.crm-timeline-meta { font-size:11px; color:#94a3b8; }
+.crm-timeline-desc { font-size:12px; color:#cbd5e1; margin-top:6px; }
+.crm-tasks-list { padding:14px; }
+.crm-task { display:flex; gap:10px; padding:10px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; margin-bottom:8px; }
+.crm-task.done .crm-task-title { text-decoration:line-through; color:#64748b; }
+.crm-task-title { font-size:13px; font-weight:500; }
+.crm-task-meta { font-size:11px; color:#94a3b8; }
+.crm-task-due { font-size:11px; padding:2px 8px; border-radius:4px; background:rgba(245,158,11,0.15); color:#fbbf24; }
+.crm-task-due.overdue { background:rgba(239,68,68,0.18); color:#f87171; }
+.crm-analytics-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.crm-funnel { padding:16px; }
+.crm-funnel-row { display:flex; align-items:center; gap:10px; padding:6px 0; }
+.crm-funnel-bar { flex:1; height:24px; background:rgba(251,146,60,0.15); border-radius:4px; position:relative; }
+.crm-funnel-fill { position:absolute; left:0; top:0; height:100%; background:linear-gradient(90deg,#f97316,#fb923c); border-radius:4px; }
+.crm-funnel-label { width:90px; font-size:12px; color:#cbd5e1; }
+.crm-funnel-count { width:60px; text-align:right; font-size:12px; font-weight:600; }
+.crm-drawer { position:fixed; top:0; right:-560px; width:540px; max-width:90vw; height:100vh; background:#0f172a; border-left:1px solid rgba(255,255,255,0.1); transition:right 0.25s ease; z-index:9999; box-shadow:-10px 0 30px rgba(0,0,0,0.5); display:flex; flex-direction:column; }
+.crm-drawer.open { right:0; }
+.crm-drawer-header { padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:12px; }
+.crm-drawer-close { background:none; border:none; color:#94a3b8; font-size:24px; cursor:pointer; }
+.crm-drawer-title { font-size:16px; font-weight:600; flex:1; }
+.crm-drawer-body { padding:20px; flex:1; overflow-y:auto; }
+.crm-drawer-section { margin-bottom:20px; }
+.crm-drawer-label { font-size:11px; color:#94a3b8; text-transform:uppercase; margin-bottom:4px; }
+.crm-drawer-val { font-size:13px; color:#e5e7eb; }
+.crm-drawer-stage-bar { display:flex; gap:2px; margin:12px 0; }
+.crm-drawer-stage { flex:1; padding:6px 8px; font-size:10px; text-align:center; background:rgba(255,255,255,0.04); border-radius:4px; cursor:pointer; }
+.crm-drawer-stage.active { background:#f97316; color:#fff; font-weight:600; }
+.crm-drawer-actions { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+.crm-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; }
+.crm-modal.open { display:flex; }
+.crm-modal-content { background:#0f172a; border:1px solid rgba(255,255,255,0.12); border-radius:12px; width:520px; max-width:90vw; max-height:90vh; display:flex; flex-direction:column; }
+.crm-modal-header { padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; font-weight:600; }
+.crm-modal-close { background:none; border:none; color:#94a3b8; font-size:22px; cursor:pointer; }
+.crm-modal-body { padding:18px; overflow-y:auto; }
+.crm-form-row { margin-bottom:12px; }
+.crm-form-label { display:block; font-size:11px; color:#94a3b8; margin-bottom:4px; }
+.crm-form-input { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:#e5e7eb; padding:8px 12px; border-radius:6px; font-size:13px; box-sizing:border-box; }
 </style>
 </head>
 <body>
@@ -2363,20 +2463,104 @@
         <div class="page-header">
           <div>
             <div class="page-title"><div class="page-title-icon yellow"></div>CRM</div>
-            <div class="page-sub">Active clients  contracts  payment status</div>
+            <div class="page-sub">Bitrix24-style native CRM — Pipeline, Contacts, Companies, Deals, Activities, Tasks</div>
+          </div>
+          <div class="crm-toolbar">
+            <button class="crm-btn crm-btn-primary" onclick="crmOpenCreate()">+ Create</button>
+            <button class="crm-btn" onclick="crmRefresh()">⟳ Refresh</button>
           </div>
         </div>
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">CRM Table</div>
-            <div class="panel-sub" id="crmTableSub"> &mdash;  records</div>
+
+        <div class="crm-tabs">
+          <button class="crm-tab active" data-crm-tab="pipeline" onclick="crmSwitchTab('pipeline')">📊 Pipeline</button>
+          <button class="crm-tab" data-crm-tab="leads" onclick="crmSwitchTab('leads')">🎯 Leads</button>
+          <button class="crm-tab" data-crm-tab="deals" onclick="crmSwitchTab('deals')">💼 Deals</button>
+          <button class="crm-tab" data-crm-tab="contacts" onclick="crmSwitchTab('contacts')">👥 Contacts</button>
+          <button class="crm-tab" data-crm-tab="companies" onclick="crmSwitchTab('companies')">🏢 Companies</button>
+          <button class="crm-tab" data-crm-tab="activities" onclick="crmSwitchTab('activities')">📞 Activities</button>
+          <button class="crm-tab" data-crm-tab="tasks" onclick="crmSwitchTab('tasks')">✓ Tasks</button>
+          <button class="crm-tab" data-crm-tab="analytics" onclick="crmSwitchTab('analytics')">📈 Analytics</button>
+        </div>
+
+        <div class="crm-stats-row">
+          <div class="crm-stat"><div class="crm-stat-label">Total Leads</div><div class="crm-stat-val" id="crmStatLeads">—</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Active Deals</div><div class="crm-stat-val" id="crmStatDeals">—</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Pipeline Value</div><div class="crm-stat-val" id="crmStatValue">$0</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Won This Month</div><div class="crm-stat-val" id="crmStatWon">$0</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Conversion</div><div class="crm-stat-val" id="crmStatConv">0%</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Avg Deal Cycle</div><div class="crm-stat-val" id="crmStatCycle">—</div></div>
+        </div>
+
+        <!-- PIPELINE KANBAN VIEW -->
+        <div class="crm-view active" data-crm-view="pipeline">
+          <div class="crm-pipeline-filters">
+            <select class="crm-select" id="crmPipelineDivision" onchange="crmRenderPipeline()">
+              <option value="all">All Divisions</option>
+              <option value="federal">Federal</option>
+              <option value="consulting">Consulting</option>
+              <option value="autonomous">Autonomous</option>
+              <option value="capital">Capital</option>
+            </select>
+            <input type="text" class="crm-input" id="crmPipelineSearch" placeholder="🔍 Search by name, company, email…" oninput="crmRenderPipeline()">
           </div>
-          <div class="table-toolbar">
-            <div class="search-box"><input type="text" placeholder="Search by client, company, email" data-table="crm-search" /></div>
-            <div class="table-info" id="crmTableInfo">Loading</div>
+          <div class="crm-kanban" id="crmKanban"></div>
+        </div>
+
+        <!-- LEADS TABLE -->
+        <div class="crm-view" data-crm-view="leads">
+          <div class="panel"><div class="panel-header">All Leads</div><div id="crmLeadsTable" class="crm-table-wrap"></div></div>
+        </div>
+
+        <!-- DEALS TABLE -->
+        <div class="crm-view" data-crm-view="deals">
+          <div class="panel"><div class="panel-header">Active Deals</div><div id="crmDealsTable" class="crm-table-wrap"></div></div>
+        </div>
+
+        <!-- CONTACTS GRID -->
+        <div class="crm-view" data-crm-view="contacts">
+          <div class="panel"><div class="panel-header">Contacts</div><div id="crmContactsGrid" class="crm-contacts-grid"></div></div>
+        </div>
+
+        <!-- COMPANIES GRID -->
+        <div class="crm-view" data-crm-view="companies">
+          <div class="panel"><div class="panel-header">Companies</div><div id="crmCompaniesGrid" class="crm-companies-grid"></div></div>
+        </div>
+
+        <!-- ACTIVITIES TIMELINE -->
+        <div class="crm-view" data-crm-view="activities">
+          <div class="panel"><div class="panel-header">Activity Timeline</div><div id="crmActivitiesTimeline" class="crm-timeline"></div></div>
+        </div>
+
+        <!-- TASKS LIST -->
+        <div class="crm-view" data-crm-view="tasks">
+          <div class="panel"><div class="panel-header">Tasks <button class="crm-btn-sm" onclick="crmAddTask()">+ Add Task</button></div><div id="crmTasksList" class="crm-tasks-list"></div></div>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="crm-view" data-crm-view="analytics">
+          <div class="crm-analytics-grid">
+            <div class="panel"><div class="panel-header">Funnel Conversion</div><div id="crmFunnel" class="crm-funnel"></div></div>
+            <div class="panel"><div class="panel-header">Revenue by Division</div><div id="crmRevDiv" class="crm-rev-div"></div></div>
+            <div class="panel"><div class="panel-header">Stage Velocity (days)</div><div id="crmVelocity" class="crm-velocity"></div></div>
+            <div class="panel"><div class="panel-header">Top Agents by Closed $</div><div id="crmTopAgents" class="crm-top-agents"></div></div>
           </div>
-          <div style="overflow-x:auto;"><table class="data-table" id="crmTable"></table></div>
-          <div class="pagination" id="crmPagination"></div>
+        </div>
+
+        <!-- DETAIL DRAWER (right-side slide-in) -->
+        <div class="crm-drawer" id="crmDrawer">
+          <div class="crm-drawer-header">
+            <button class="crm-drawer-close" onclick="crmCloseDrawer()">×</button>
+            <div class="crm-drawer-title" id="crmDrawerTitle">Lead Detail</div>
+          </div>
+          <div class="crm-drawer-body" id="crmDrawerBody"></div>
+        </div>
+
+        <!-- CREATE MODAL -->
+        <div class="crm-modal" id="crmCreateModal">
+          <div class="crm-modal-content">
+            <div class="crm-modal-header"><div>Create New</div><button class="crm-modal-close" onclick="crmCloseCreate()">×</button></div>
+            <div class="crm-modal-body" id="crmCreateBody"></div>
+          </div>
         </div>
       </section>
 
@@ -4139,5 +4323,383 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+
+<script>
+/* ============================================================================
+   CRM — Bitrix24-style native JS engine (patch 2026-05-12g)
+   Sources data from existing LEADS, Opportunities, CRM tabs via fetchCRMData()
+   ============================================================================ */
+(function(){
+  const CRM = window.CRM = {
+    leads: [], opps: [], contacts: [], companies: [], activities: [], tasks: [],
+    stages: ['NEW','CONTACTED','REPLIED','WARM','HOT','PROPOSAL','SIGNED','WON'],
+    stageColors: { NEW:'#64748b', CONTACTED:'#3b82f6', REPLIED:'#06b6d4', WARM:'#f59e0b', HOT:'#ef4444', PROPOSAL:'#a855f7', SIGNED:'#8b5cf6', WON:'#10b981' },
+    currentTab: 'pipeline',
+    selectedItem: null
+  };
+
+  // ---- Data loading: pull from existing global feeds the dashboard already fetches
+  async function loadCRMData() {
+    // The dashboard already loads window.AppState.leads/opps — use them
+    try {
+      const S = window.AppState || window.appState || {};
+      CRM.leads = (S.leads || S.leadsData || []).map(l => ({
+        id: l.id || l.email || crypto.randomUUID(),
+        name: l.name || l.contact || '',
+        company: l.company || '',
+        email: l.email || '',
+        phone: l.phone || '',
+        stage: (l.status || l.stage || 'NEW').toUpperCase(),
+        division: (l.division || 'consulting').toLowerCase(),
+        source: l.source || '',
+        value: parseFloat(l.value || l.deal_value || 0) || 0,
+        created: l.created || l.added || l.timestamp || '',
+        owner: l.owner || l.agent || '',
+        notes: l.notes || ''
+      }));
+      CRM.opps = (S.opps || S.opportunities || []).map(o => ({
+        id: o.opp_id || o.id || crypto.randomUUID(),
+        title: o.title || o.name || '',
+        company: o.company || o.agency || '',
+        email: o.email || '',
+        stage: (o.stage || 'NEW').toUpperCase(),
+        division: (o.division || 'federal').toLowerCase(),
+        value: parseFloat(o.value || o.deal_value || o.amount || 0) || 0,
+        naics: o.naics || '',
+        agency: o.agency || '',
+        due: o.due_date || ''
+      }));
+      // Derive contacts and companies from leads
+      const contactMap = new Map();
+      const companyMap = new Map();
+      for (const l of CRM.leads) {
+        if (l.email && !contactMap.has(l.email)) {
+          contactMap.set(l.email, { id: l.email, name: l.name, email: l.email, company: l.company, phone: l.phone, stage: l.stage, division: l.division });
+        }
+        if (l.company && !companyMap.has(l.company)) {
+          companyMap.set(l.company, { id: l.company, name: l.company, division: l.division, leadCount: 0, totalValue: 0 });
+        }
+        if (l.company) {
+          const c = companyMap.get(l.company);
+          c.leadCount++;
+          c.totalValue += l.value || 0;
+        }
+      }
+      CRM.contacts = [...contactMap.values()];
+      CRM.companies = [...companyMap.values()];
+      // Activities derived from lead history (stub for now — real data comes from Audit tab via API)
+      CRM.activities = CRM.leads.slice(0, 50).map(l => ({
+        type: l.stage === 'CONTACTED' ? 'EMAIL' : (l.stage === 'REPLIED' ? 'REPLY' : 'NOTE'),
+        title: `${l.stage} — ${l.company || l.email}`,
+        contact: l.name || l.email,
+        date: l.created || new Date().toISOString(),
+        desc: `Lead ${l.email} is at stage ${l.stage} in ${l.division} division`
+      }));
+      // Tasks from localStorage
+      CRM.tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+    } catch (e) { console.warn('loadCRMData:', e); }
+  }
+
+  // ---- Stats
+  function renderStats() {
+    const total = CRM.leads.length;
+    const active = CRM.leads.filter(l => !['WON','LOST','UNSUB','BAD_EMAIL','DUPLICATE'].includes(l.stage)).length;
+    const pipeValue = CRM.leads.filter(l => !['WON','LOST'].includes(l.stage)).reduce((s,l)=>s+(l.value||0),0);
+    const wonValue = CRM.leads.filter(l => l.stage === 'WON').reduce((s,l)=>s+(l.value||0),0);
+    const conv = total > 0 ? Math.round((CRM.leads.filter(l=>l.stage==='WON').length / total) * 100) : 0;
+    document.getElementById('crmStatLeads').textContent = total;
+    document.getElementById('crmStatDeals').textContent = active;
+    document.getElementById('crmStatValue').textContent = '$' + pipeValue.toLocaleString();
+    document.getElementById('crmStatWon').textContent = '$' + wonValue.toLocaleString();
+    document.getElementById('crmStatConv').textContent = conv + '%';
+    document.getElementById('crmStatCycle').textContent = '— d';
+  }
+
+  // ---- Kanban Pipeline
+  window.crmRenderPipeline = function() {
+    const div = document.getElementById('crmPipelineDivision').value;
+    const search = (document.getElementById('crmPipelineSearch').value || '').toLowerCase();
+    const filtered = CRM.leads.filter(l => {
+      if (div !== 'all' && l.division !== div) return false;
+      if (search && !((l.name||'').toLowerCase().includes(search) || (l.company||'').toLowerCase().includes(search) || (l.email||'').toLowerCase().includes(search))) return false;
+      return true;
+    });
+    const byStage = {};
+    CRM.stages.forEach(s => byStage[s] = []);
+    filtered.forEach(l => { if (byStage[l.stage]) byStage[l.stage].push(l); });
+    const kanban = document.getElementById('crmKanban');
+    kanban.innerHTML = CRM.stages.map(stage => {
+      const items = byStage[stage] || [];
+      const totalVal = items.reduce((s,l)=>s+(l.value||0),0);
+      return `<div class="crm-kanban-col crm-col-${stage}">
+        <div class="crm-kanban-col-header"><span>${stage}</span><span class="crm-kanban-col-count">${items.length}</span></div>
+        <div class="crm-kanban-col-value">$${totalVal.toLocaleString()}</div>
+        <div class="crm-kanban-cards">${items.slice(0,50).map(l => `
+          <div class="crm-card" onclick="crmOpenDrawer('${l.id}')">
+            <div class="crm-card-name">${escapeHTML(l.name || l.email || 'Unknown')}</div>
+            <div class="crm-card-company">${escapeHTML(l.company || '—')}</div>
+            <div class="crm-card-meta"><span class="crm-card-value">${l.value ? '$'+l.value.toLocaleString() : ''}</span><span class="crm-card-div">${l.division}</span></div>
+            <div class="crm-card-tags">${l.division ? `<span class="crm-tag ${l.division}">${l.division}</span>`:''}${stage==='HOT'?'<span class="crm-tag hot">🔥 HOT</span>':''}${stage==='WARM'?'<span class="crm-tag warm">🌤 WARM</span>':''}</div>
+          </div>`).join('')}</div>
+      </div>`;
+    }).join('');
+  };
+
+  // ---- Leads table
+  function renderLeadsTable() {
+    const t = document.getElementById('crmLeadsTable');
+    if (!t) return;
+    t.innerHTML = `<table class="crm-table"><thead><tr><th>Name</th><th>Company</th><th>Email</th><th>Stage</th><th>Division</th><th>Value</th><th>Owner</th></tr></thead><tbody>${CRM.leads.slice(0,200).map(l => `<tr onclick="crmOpenDrawer('${l.id}')"><td>${escapeHTML(l.name||'—')}</td><td>${escapeHTML(l.company||'—')}</td><td>${escapeHTML(l.email||'')}</td><td><span class="crm-tag" style="background:${CRM.stageColors[l.stage]||'#64748b'}33;color:${CRM.stageColors[l.stage]||'#cbd5e1'}">${l.stage}</span></td><td>${l.division}</td><td>${l.value?'$'+l.value.toLocaleString():'—'}</td><td>${l.owner||'—'}</td></tr>`).join('')}</tbody></table>`;
+  }
+
+  // ---- Deals table (from Opportunities)
+  function renderDealsTable() {
+    const t = document.getElementById('crmDealsTable');
+    if (!t) return;
+    t.innerHTML = `<table class="crm-table"><thead><tr><th>Title</th><th>Company</th><th>Stage</th><th>Division</th><th>Value</th><th>NAICS</th><th>Due</th></tr></thead><tbody>${CRM.opps.slice(0,200).map(o => `<tr><td>${escapeHTML(o.title||'—')}</td><td>${escapeHTML(o.company||'—')}</td><td><span class="crm-tag" style="background:${CRM.stageColors[o.stage]||'#64748b'}33;color:${CRM.stageColors[o.stage]||'#cbd5e1'}">${o.stage}</span></td><td>${o.division}</td><td>${o.value?'$'+o.value.toLocaleString():'—'}</td><td>${o.naics||'—'}</td><td>${o.due||'—'}</td></tr>`).join('')}</tbody></table>`;
+  }
+
+  // ---- Contacts
+  function renderContacts() {
+    const g = document.getElementById('crmContactsGrid');
+    if (!g) return;
+    g.innerHTML = CRM.contacts.slice(0,100).map(c => `<div class="crm-contact-card" onclick="crmOpenDrawer('${c.id}')">
+      <div class="crm-contact-avatar">${(c.name||c.email||'?').substring(0,2).toUpperCase()}</div>
+      <div class="crm-contact-name">${escapeHTML(c.name||'(No name)')}</div>
+      <div class="crm-contact-meta">${escapeHTML(c.email||'')}</div>
+      <div class="crm-contact-meta">${escapeHTML(c.company||'')}</div>
+      <div class="crm-contact-meta"><span class="crm-tag ${c.division}">${c.division}</span> <span class="crm-tag">${c.stage}</span></div>
+    </div>`).join('');
+  }
+
+  // ---- Companies
+  function renderCompanies() {
+    const g = document.getElementById('crmCompaniesGrid');
+    if (!g) return;
+    g.innerHTML = CRM.companies.sort((a,b)=>b.totalValue-a.totalValue).slice(0,100).map(c => `<div class="crm-company-card">
+      <div class="crm-contact-name">${escapeHTML(c.name||'(No name)')}</div>
+      <div class="crm-contact-meta"><span class="crm-tag ${c.division}">${c.division}</span></div>
+      <div class="crm-contact-meta">${c.leadCount} leads · $${c.totalValue.toLocaleString()}</div>
+    </div>`).join('');
+  }
+
+  // ---- Activities timeline
+  function renderActivities() {
+    const t = document.getElementById('crmActivitiesTimeline');
+    if (!t) return;
+    t.innerHTML = CRM.activities.slice(0,50).map(a => `<div class="crm-timeline-item">
+      <div class="crm-timeline-icon">${a.type==='EMAIL'?'✉':a.type==='REPLY'?'↩':a.type==='CALL'?'📞':'📝'}</div>
+      <div class="crm-timeline-body">
+        <div class="crm-timeline-title">${escapeHTML(a.title)}</div>
+        <div class="crm-timeline-meta">${escapeHTML(a.contact||'')} · ${a.date?new Date(a.date).toLocaleString():'—'}</div>
+        <div class="crm-timeline-desc">${escapeHTML(a.desc||'')}</div>
+      </div>
+    </div>`).join('');
+  }
+
+  // ---- Tasks
+  function renderTasks() {
+    const t = document.getElementById('crmTasksList');
+    if (!t) return;
+    if (CRM.tasks.length === 0) { t.innerHTML = '<div style="padding:30px;text-align:center;color:#94a3b8">No tasks yet. Click + Add Task above.</div>'; return; }
+    t.innerHTML = CRM.tasks.map((task,i) => {
+      const overdue = task.due && new Date(task.due) < new Date() && !task.done;
+      return `<div class="crm-task ${task.done?'done':''}">
+        <input type="checkbox" ${task.done?'checked':''} onchange="crmToggleTask(${i})">
+        <div style="flex:1">
+          <div class="crm-task-title">${escapeHTML(task.title)}</div>
+          <div class="crm-task-meta">${escapeHTML(task.linked||'')}</div>
+        </div>
+        ${task.due?`<div class="crm-task-due ${overdue?'overdue':''}">${task.due}</div>`:''}
+        <button class="crm-btn" style="padding:4px 8px;font-size:11px" onclick="crmDelTask(${i})">×</button>
+      </div>`;
+    }).join('');
+  }
+
+  window.crmAddTask = function() {
+    const title = prompt('Task title:');
+    if (!title) return;
+    const due = prompt('Due date (YYYY-MM-DD, optional):');
+    CRM.tasks.push({ title, due: due||'', done: false, linked: '', created: new Date().toISOString() });
+    localStorage.setItem('crm_tasks', JSON.stringify(CRM.tasks));
+    renderTasks();
+  };
+  window.crmToggleTask = function(i) { CRM.tasks[i].done = !CRM.tasks[i].done; localStorage.setItem('crm_tasks', JSON.stringify(CRM.tasks)); renderTasks(); };
+  window.crmDelTask = function(i) { CRM.tasks.splice(i,1); localStorage.setItem('crm_tasks', JSON.stringify(CRM.tasks)); renderTasks(); };
+
+  // ---- Analytics
+  function renderAnalytics() {
+    const funnel = document.getElementById('crmFunnel');
+    if (!funnel) return;
+    const total = CRM.leads.length || 1;
+    funnel.innerHTML = CRM.stages.map(s => {
+      const count = CRM.leads.filter(l=>l.stage===s).length;
+      const pct = Math.round((count/total)*100);
+      return `<div class="crm-funnel-row">
+        <div class="crm-funnel-label">${s}</div>
+        <div class="crm-funnel-bar"><div class="crm-funnel-fill" style="width:${pct}%;background:${CRM.stageColors[s]||'#fb923c'}"></div></div>
+        <div class="crm-funnel-count">${count} (${pct}%)</div>
+      </div>`;
+    }).join('');
+    // Revenue by division
+    const revDiv = document.getElementById('crmRevDiv');
+    const divs = {};
+    CRM.leads.forEach(l => { if(!divs[l.division]) divs[l.division]=0; divs[l.division]+=l.value||0; });
+    revDiv.innerHTML = Object.entries(divs).sort((a,b)=>b[1]-a[1]).map(([d,v])=>`<div class="crm-funnel-row"><div class="crm-funnel-label">${d}</div><div class="crm-funnel-bar"><div class="crm-funnel-fill" style="width:${Math.min(100,(v/Math.max(...Object.values(divs),1))*100)}%"></div></div><div class="crm-funnel-count">$${v.toLocaleString()}</div></div>`).join('');
+    // Stage velocity (placeholder)
+    document.getElementById('crmVelocity').innerHTML = '<div style="color:#94a3b8;padding:20px;text-align:center">Stage velocity tracked from Audit log — coming soon</div>';
+    // Top agents
+    const agents = {};
+    CRM.leads.forEach(l => { if(l.owner){ if(!agents[l.owner]) agents[l.owner]=0; if(l.stage==='WON') agents[l.owner]+=l.value||0; } });
+    const topA = Object.entries(agents).sort((a,b)=>b[1]-a[1]).slice(0,10);
+    document.getElementById('crmTopAgents').innerHTML = topA.length ? topA.map(([a,v])=>`<div class="crm-funnel-row"><div class="crm-funnel-label">${a}</div><div class="crm-funnel-count">$${v.toLocaleString()}</div></div>`).join('') : '<div style="color:#94a3b8;padding:20px;text-align:center">No closed deals yet</div>';
+  }
+
+  // ---- Drawer
+  window.crmOpenDrawer = function(id) {
+    const lead = CRM.leads.find(l => l.id === id) || CRM.contacts.find(c => c.id === id);
+    if (!lead) return;
+    CRM.selectedItem = lead;
+    document.getElementById('crmDrawerTitle').textContent = lead.name || lead.email || 'Detail';
+    const stages = CRM.stages;
+    document.getElementById('crmDrawerBody').innerHTML = `
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-stage-bar">${stages.map(s=>`<div class="crm-drawer-stage ${s===lead.stage?'active':''}" onclick="crmChangeStage('${id}','${s}')">${s}</div>`).join('')}</div>
+      </div>
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-label">Company</div><div class="crm-drawer-val">${escapeHTML(lead.company||'—')}</div>
+      </div>
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-label">Email</div><div class="crm-drawer-val">${escapeHTML(lead.email||'—')}</div>
+      </div>
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-label">Phone</div><div class="crm-drawer-val">${escapeHTML(lead.phone||'—')}</div>
+      </div>
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-label">Division</div><div class="crm-drawer-val"><span class="crm-tag ${lead.division}">${lead.division}</span></div>
+      </div>
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-label">Deal Value</div><div class="crm-drawer-val">${lead.value?'$'+lead.value.toLocaleString():'—'}</div>
+      </div>
+      <div class="crm-drawer-section">
+        <div class="crm-drawer-label">Owner</div><div class="crm-drawer-val">${escapeHTML(lead.owner||'—')}</div>
+      </div>
+      <div class="crm-drawer-actions">
+        <button class="crm-btn crm-btn-primary" onclick="crmLogActivity('EMAIL')">✉ Log Email</button>
+        <button class="crm-btn" onclick="crmLogActivity('CALL')">📞 Log Call</button>
+        <button class="crm-btn" onclick="crmLogActivity('NOTE')">📝 Add Note</button>
+        <button class="crm-btn" onclick="crmAssignTask('${id}')">✓ Add Task</button>
+      </div>
+    `;
+    document.getElementById('crmDrawer').classList.add('open');
+  };
+  window.crmCloseDrawer = function(){ document.getElementById('crmDrawer').classList.remove('open'); };
+  window.crmChangeStage = function(id, stage) {
+    const lead = CRM.leads.find(l => l.id === id);
+    if (lead) {
+      lead.stage = stage;
+      crmOpenDrawer(id);
+      crmRenderPipeline();
+      renderStats();
+      // TODO: persist to backend via API
+      console.log('Stage changed:', id, '->', stage, '(backend sync pending)');
+    }
+  };
+  window.crmLogActivity = function(type) {
+    if (!CRM.selectedItem) return;
+    const note = prompt(type+' notes:');
+    if (!note) return;
+    CRM.activities.unshift({ type, title: type+' — '+(CRM.selectedItem.company||CRM.selectedItem.email), contact: CRM.selectedItem.name, date: new Date().toISOString(), desc: note });
+    alert(type+' logged successfully');
+  };
+  window.crmAssignTask = function(id) {
+    const lead = CRM.leads.find(l=>l.id===id);
+    const title = prompt('Task title:');
+    if (!title) return;
+    const due = prompt('Due (YYYY-MM-DD, optional):');
+    CRM.tasks.push({ title, due:due||'', done:false, linked: lead?(lead.company||lead.email):'', created:new Date().toISOString() });
+    localStorage.setItem('crm_tasks', JSON.stringify(CRM.tasks));
+    alert('Task added');
+  };
+
+  // ---- Create modal
+  window.crmOpenCreate = function() {
+    document.getElementById('crmCreateBody').innerHTML = `
+      <div class="crm-form-row"><label class="crm-form-label">Name</label><input class="crm-form-input" id="crmNewName" placeholder="John Doe"></div>
+      <div class="crm-form-row"><label class="crm-form-label">Company</label><input class="crm-form-input" id="crmNewCo" placeholder="Acme Corp"></div>
+      <div class="crm-form-row"><label class="crm-form-label">Email</label><input class="crm-form-input" id="crmNewEmail" placeholder="contact@acme.com"></div>
+      <div class="crm-form-row"><label class="crm-form-label">Phone</label><input class="crm-form-input" id="crmNewPhone"></div>
+      <div class="crm-form-row"><label class="crm-form-label">Division</label><select class="crm-form-input" id="crmNewDiv"><option>federal</option><option>consulting</option><option>autonomous</option><option>capital</option></select></div>
+      <div class="crm-form-row"><label class="crm-form-label">Deal Value ($)</label><input class="crm-form-input" id="crmNewVal" type="number" value="0"></div>
+      <div class="crm-form-row"><label class="crm-form-label">Stage</label><select class="crm-form-input" id="crmNewStage">${CRM.stages.map(s=>`<option>${s}</option>`).join('')}</select></div>
+      <button class="crm-btn crm-btn-primary" style="width:100%;margin-top:10px" onclick="crmSubmitCreate()">Create Lead</button>
+    `;
+    document.getElementById('crmCreateModal').classList.add('open');
+  };
+  window.crmCloseCreate = function(){ document.getElementById('crmCreateModal').classList.remove('open'); };
+  window.crmSubmitCreate = function() {
+    const lead = {
+      id: crypto.randomUUID(),
+      name: document.getElementById('crmNewName').value,
+      company: document.getElementById('crmNewCo').value,
+      email: document.getElementById('crmNewEmail').value,
+      phone: document.getElementById('crmNewPhone').value,
+      division: document.getElementById('crmNewDiv').value,
+      value: parseFloat(document.getElementById('crmNewVal').value)||0,
+      stage: document.getElementById('crmNewStage').value,
+      created: new Date().toISOString(),
+      owner: '',
+      notes: ''
+    };
+    CRM.leads.unshift(lead);
+    crmCloseCreate();
+    crmRefresh();
+  };
+
+  // ---- Tab switching
+  window.crmSwitchTab = function(tab) {
+    CRM.currentTab = tab;
+    document.querySelectorAll('.crm-tab').forEach(t => t.classList.toggle('active', t.getAttribute('data-crm-tab')===tab));
+    document.querySelectorAll('.crm-view').forEach(v => v.classList.toggle('active', v.getAttribute('data-crm-view')===tab));
+    if (tab === 'pipeline') crmRenderPipeline();
+    else if (tab === 'leads') renderLeadsTable();
+    else if (tab === 'deals') renderDealsTable();
+    else if (tab === 'contacts') renderContacts();
+    else if (tab === 'companies') renderCompanies();
+    else if (tab === 'activities') renderActivities();
+    else if (tab === 'tasks') renderTasks();
+    else if (tab === 'analytics') renderAnalytics();
+  };
+
+  window.crmRefresh = async function() {
+    await loadCRMData();
+    renderStats();
+    crmSwitchTab(CRM.currentTab);
+  };
+
+  function escapeHTML(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // Hook into navigation: when user clicks CRM nav item, refresh
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.nav-item[data-page="crm"]').forEach(n => {
+      n.addEventListener('click', () => setTimeout(crmRefresh, 100));
+    });
+    // Initial load if already on CRM page
+    if (document.querySelector('section.page.active[data-page="crm"]')) {
+      setTimeout(crmRefresh, 500);
+    }
+    // Re-render every 30s if on CRM tab
+    setInterval(() => {
+      if (document.querySelector('section.page.active[data-page="crm"]')) crmRefresh();
+    }, 30000);
+  });
+
+  // Expose for manual debugging
+  window.CRM_ENGINE = CRM;
+})();
+</script>
 </body>
 </html>
