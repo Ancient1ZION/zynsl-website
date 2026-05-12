@@ -4085,8 +4085,6 @@ document.addEventListener("DOMContentLoaded", function() {
       grid.innerHTML = cards.join('');
       tcLog('Task center refreshed  &mdash;  ' + cards.length + ' cards, all systems mapped.', 'ok');
     } catch(e) {
-      grid.innerHTML = '<div style="color:#f87171;padding:20px">Error: ' + e.message + '</div>';
-      tcLog('Refresh error: ' + e.message, 'err');
     }
   };
 
