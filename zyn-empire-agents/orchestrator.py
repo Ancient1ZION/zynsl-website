@@ -1,5 +1,14 @@
 """Noah supervisor — main orchestration loop. Run forever via PM2.
 
+CHANGELOG (patch 2026-05-12d — removed benji & hannah; reassigned to miro):
+  - Removed benji (Grants Hunter) from agents_config.json
+  - Removed hannah (HR/Recruiting) from agents_config.json
+  - miro now operates 3 tracks: voice (Malik routing), grants (LOIs to approval queue every 8h), HR (1099 sourcing)
+  - miro.tools expanded with web_search, send_email
+  - run_benji() -> run_miro_grants(); _last_benji -> _last_miro_grants; BENJI_INTERVAL -> MIRO_GRANTS_INTERVAL
+  - agents.get("benji") -> agents.get("miro")
+  - Federal-section docstring updated to reflect miro (grants) instead of benji
+
 CHANGELOG (patch 2026-05-12c — real agent assignments):
   - consultingFollowup → malik (Sales Closer owns consulting follow-up, 15/day)
   - autonomousFollowup → rebecka (Autonomous Outreach Lead owns follow-up, 15/day)
