@@ -10,7 +10,8 @@
         "sheets_read",
         "sheets_write",
         "discord_notify",
-        "web_search"
+        "web_search",
+        "crm_sync_bitrix24"
       ],
       "persona": "You are Noah, the supervisor. You read the empire state and decide which agent should act next. You are decisive and concise.",
       "memory_key": "empire_supervisor",
@@ -35,7 +36,10 @@
         "sheets_write",
         "send_email",
         "discord_notify",
-        "update_lead_stage"
+        "update_lead_stage",
+        "write_lead_bitrix24",
+        "update_lead_stage_bitrix24",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Malik, the closer. Persistent, polite, results-driven. You handle objections with empathy.",
       "memory_key": "sales_pipeline",
@@ -63,7 +67,8 @@
         "web_search",
         "sheets_write",
         "discord_notify",
-        "write_lead"
+        "write_lead",
+        "write_lead_bitrix24"
       ],
       "persona": "You are Adam, the gov scout. Methodical, focused on 95%+ match opportunities only.",
       "memory_key": "gov_pipeline",
@@ -88,7 +93,10 @@
         "web_search",
         "send_email",
         "sheets_write",
-        "discord_notify"
+        "discord_notify",
+        "write_lead_bitrix24",
+        "update_lead_stage_bitrix24",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Sara, the outreach specialist. Warm, personal, never spammy.",
       "memory_key": "outreach_queue",
@@ -116,7 +124,9 @@
         "gmail_read",
         "inbox_write",
         "update_lead_stage",
-        "send_email"
+        "send_email",
+        "update_lead_stage_bitrix24",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Elijah, the content lead. Bold voice, data-driven angles.",
       "memory_key": "inbox_content_pipeline",
@@ -186,7 +196,9 @@
         "sheets_read",
         "sheets_write",
         "discord_notify",
-        "web_search"
+        "web_search",
+        "write_lead_bitrix24",
+        "update_lead_stage_bitrix24"
       ],
       "persona": "You are Ruth, CRM hygienist. Detail-obsessed.",
       "memory_key": "crm_state",
@@ -210,7 +222,10 @@
         "sheets_read",
         "sheets_write",
         "send_email",
-        "discord_notify"
+        "discord_notify",
+        "write_lead_bitrix24",
+        "update_lead_stage_bitrix24",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Lea, client success. Proactive, relationship-first.",
       "memory_key": "retention",
@@ -280,7 +295,8 @@
         "discord_notify",
         "web_search",
         "sam_gov_search",
-        "write_lead"
+        "write_lead",
+        "write_lead_bitrix24"
       ],
       "persona": "You are David, tech lead. Pragmatic, ship-it mentality.",
       "memory_key": "tech_pipeline",
@@ -375,7 +391,8 @@
         "sheets_write",
         "web_search",
         "discord_notify",
-        "send_email"
+        "send_email",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Asher, bid writer. Concise, compliant, win-themes-driven.",
       "memory_key": "bids_grants_pipeline",
@@ -401,7 +418,10 @@
         "send_email",
         "sheets_write",
         "discord_notify",
-        "update_lead_stage"
+        "update_lead_stage",
+        "write_lead_bitrix24",
+        "update_lead_stage_bitrix24",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Rebecka, the relentless autonomous-division outreach lead. You are precise, warm, and data-driven. Every email you send is tailored — never generic. You know that operations directors are busy; your emails are short, punchy, and respect their time.",
       "memory_key": "rebecka_outreach_state",
@@ -427,7 +447,10 @@
         "send_email",
         "sheets_write",
         "discord_notify",
-        "update_lead_stage"
+        "update_lead_stage",
+        "write_lead_bitrix24",
+        "update_lead_stage_bitrix24",
+        "bitrix24_add_activity"
       ],
       "persona": "You are Zuri, the content and comms lead. Your emails read like valuable intel drops, not sales pitches. You open with a hook that proves you understand the prospect's world before you mention ZYN.",
       "memory_key": "zuri_outreach_state",
