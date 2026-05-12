@@ -41,10 +41,18 @@ CHANGELOG (patch 2026-05-12):
 CHANGELOG (patch 2026-05-10):
   - Import audit_log, crm_sync, inbox_write from tools
   - Wrap supervisor_tick with audit_log (start/end/error)
-  - Call crm_sync() each tick to promote opps into CRM
+  - Call crm_sync_bitrix24()  # syncs to both Sheets + Bitrix24
+each tick to promote opps into CRM
   - Added inboxMgr dispatch so replies are parsed every tick
   - Improved STOP-check to use ensure_tab (no crash if CONTROL missing)
   - 5-minute tick cadence preserved
+CHANGELOG (patch 2026-05-12f — Bitrix24 CRM integration):
+  - crm_sync() -> crm_sync_bitrix24(): opp promotions sync to Bitrix24 Deals + Sheets
+  - update_lead_stage() -> update_lead_stage_bitrix24(): stage updates hit Sheets + Bitrix24
+  - Auto-creates Bitrix24 Deals at HOT/PROPOSAL/SIGNED/WON stages
+  - write_lead_bitrix24(): dual-write new leads to both Sheets and Bitrix24
+  - bitrix24_add_activity(): agents can log email sends as CRM activities
+
 """
 import os
 import json
@@ -69,6 +77,10 @@ from tools import (
     write_lead,
     ensure_tab,
     get_leads,
+    write_lead_bitrix24,
+    update_lead_stage_bitrix24,
+    crm_sync_bitrix24,
+    bitrix24_add_activity,
 )
 
 # ---------------------------------------------------------------------------
@@ -205,7 +217,7 @@ def advance_stages(agents):
             intent = padded[intent_col].strip().upper() if intent_col >= 0 and padded[intent_col] else "UNREAD"
             target_stage = INTENT_STAGE_MAP.get(intent, "REPLIED")
 
-            result = update_lead_stage(from_email, target_stage)
+            result = update_lead_stage_bitrix24(from_email, target_stage)
             if result.get("ok"):
                 advanced += 1
                 # Mark Inbox row as READ
@@ -491,7 +503,7 @@ def run_rebecka(agents):
             f"Send cold outreach emails to up to {batch} AUTONOMOUS leads with status NEW. "
             "Pick the {batch} leads most recently added that have not been contacted. "
             "For each: personalise the email around their operations role, send via send_email(), "
-            "then call update_lead_stage(email, 'CONTACTED'). "
+            "then call update_lead_stage_bitrix24(email, 'CONTACTED'). "
             "After each successful send, report back the count so we can track quota."
         )
         sent = batch  # optimistic; real tracking via _increment_counter
@@ -533,7 +545,7 @@ def run_zuri(agents):
             "that rebecka has not yet contacted today. "
             "Open each email with a relevant AI-in-operations insight or data point, then connect it "
             "to what ZYN Autonomous Systems does. Keep each email under 120 words. "
-            "Send via send_email(), then call update_lead_stage(email, 'CONTACTED')."
+            "Send via send_email(), then call update_lead_stage_bitrix24(email, 'CONTACTED')."
         )
         _increment_counter("zuri", batch)
         duration = int((time.time() - start) * 1000)
@@ -582,7 +594,7 @@ def run_sara(agents):
             f"Send cold outreach emails to up to {batch} CONSULTING leads with status NEW. "
             "Personalise each email around AI supply-chain consulting value for mid-market companies. "
             "Keep emails under 150 words. Send via send_email(), "
-            "then call update_lead_stage(email, 'CONTACTED') for each successful send."
+            "then call update_lead_stage_bitrix24(email, 'CONTACTED') for each successful send."
         )
         _increment_counter("sara", batch)
         duration = int((time.time() - start) * 1000)
@@ -621,7 +633,7 @@ def run_lea(agents):
             f"Send outreach emails to up to {batch} CONSULTING leads with status NEW or CONTACTED. "
             "Focus on client-success angle: reducing operational overhead, unlocking revenue from "
             "existing stack. For any active retainers in CRM, send a QBR or check-in sequence. "
-            "Send via send_email(), then call update_lead_stage(email, 'CONTACTED') for new touches."
+            "Send via send_email(), then call update_lead_stage_bitrix24(email, 'CONTACTED') for new touches."
         )
         _increment_counter("lea", batch)
         duration = int((time.time() - start) * 1000)
@@ -817,8 +829,8 @@ def supervisor_tick(agents):
         )
 
         # Sync opps into CRM every tick
-        sync_result = crm_sync()
-        if sync_result.get("synced", 0) > 0:
+        sync_result = crm_sync_bitrix24()  # syncs to both Sheets + Bitrix24
+if sync_result.get("synced", 0) > 0:
             logger.info(f"supervisor_tick: crm_sync promoted {sync_result['synced']} opps")
             discord_notify(
                 "noah",
