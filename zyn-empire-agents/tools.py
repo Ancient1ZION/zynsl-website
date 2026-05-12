@@ -15,6 +15,8 @@ CHANGELOG (patch 2026-05-10):
   - inbox_write(): parsed replies written to Inbox tab
   - _open_tab(): now calls ensure_tab so missing tabs never silently fail
   - crm_sync(): promotes HOT/REPLIED/PROPOSAL/SIGNED/WON opps into CRM tab
+  - update_lead_stage(): advances LEADS status column on reply classification (fixes stage-write bug)
+  - write_lead(): moves staged CONSULTING_50 leads into live LEADS pipeline (unblocks consulting 50/day)
   - get_leads() / get_opps(): typed dict accessors for sheet rows
 """
 from __future__ import annotations
@@ -212,6 +214,158 @@ def inbox_write(
 # ---------------------------------------------------------------------------
 # CRM sync — promotes active opps into the CRM tab
 # ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
+# Lead stage advancement — updates status column in LEADS tab
+# ---------------------------------------------------------------------------
+
+def update_lead_stage(
+    email: str,
+    new_stage: str,
+    matched_lead_row: int = -1,
+) -> Dict[str, Any]:
+    """
+    Update the 'status' column for a lead row in the LEADS tab.
+
+    Matches by email address. If matched_lead_row is provided (1-based index
+    into the sheet, row 1 = header), uses that directly to avoid a second scan.
+
+    Returns {"ok": True, "row": row_index} or {"ok": False, "error": ...}.
+    """
+    if not email:
+        return {"ok": False, "error": "email required"}
+    valid_stages = {
+        "NEW", "CONTACTED", "REPLIED", "WARM", "HOT",
+        "PROPOSAL", "SIGNED", "WON", "LOST",
+        "UNSUB", "BAD_EMAIL", "DUPLICATE", "NO_EMAIL", "OTHER",
+    }
+    stage_upper = new_stage.strip().upper()
+    if stage_upper not in valid_stages:
+        logger.warning(f"update_lead_stage: invalid stage {new_stage!r}")
+        return {"ok": False, "error": f"invalid stage: {new_stage}"}
+
+    ws = _open_tab("LEADS")
+    if ws is None:
+        return {"ok": False, "error": "LEADS tab unavailable"}
+
+    try:
+        all_rows = ws.get_all_values()
+        if not all_rows or len(all_rows) < 2:
+            return {"ok": False, "error": "LEADS tab is empty"}
+
+        headers = [h.lower().strip() for h in all_rows[0]]
+        try:
+            email_col = headers.index("email")
+            status_col = headers.index("status")
+        except ValueError as e:
+            return {"ok": False, "error": f"column not found: {e}"}
+
+        # Find the row — prefer the pre-matched index if given
+        row_idx = matched_lead_row if matched_lead_row > 1 else -1
+        if row_idx < 2:
+            for i, row in enumerate(all_rows[1:], start=2):
+                padded = row + [""] * max(0, len(headers) - len(row))
+                if padded[email_col].strip().lower() == email.strip().lower():
+                    row_idx = i
+                    break
+
+        if row_idx < 2:
+            return {"ok": False, "error": f"lead not found for email: {email}"}
+
+        # Sheet columns are 1-indexed; status_col is 0-indexed from headers
+        col_letter = chr(ord("A") + status_col)
+        cell = f"{col_letter}{row_idx}"
+        ws.update(cell, [[stage_upper]], value_input_option="USER_ENTERED")
+        logger.info(f"update_lead_stage: row={row_idx} email={email} -> {stage_upper}")
+        audit_log(
+            "update_lead_stage", "inboxMgr", "OK",
+            message=f"row={row_idx} email={email} stage={stage_upper}",
+        )
+        return {"ok": True, "row": row_idx, "stage": stage_upper}
+
+    except Exception as e:
+        logger.error(f"update_lead_stage({email!r}, {new_stage!r}): {e}")
+        return {"ok": False, "error": str(e)}
+
+
+# ---------------------------------------------------------------------------
+# write_lead — move staged consulting leads into live LEADS tab
+# ---------------------------------------------------------------------------
+
+def write_lead(
+    name: str,
+    company: str,
+    email: str,
+    division: str,
+    source: str = "CONSULTING_50",
+    status: str = "NEW",
+    extra: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Write a single enriched lead row into the LEADS tab.
+
+    Deduplicates by email — skips if the email already exists.
+    Used by the commercialScraperRun trigger to move staged Consulting
+    prospects from CONSULTING_50 into the live LEADS pipeline.
+
+    Returns {"ok": True, "skipped": False} on insert,
+            {"ok": True, "skipped": True} on dupe,
+            {"ok": False, "error": ...} on failure.
+    """
+    if not email:
+        return {"ok": False, "error": "email required for write_lead"}
+
+    ws = _open_tab("LEADS")
+    if ws is None:
+        return {"ok": False, "error": "LEADS tab unavailable"}
+
+    try:
+        all_rows = ws.get_all_values()
+        headers = [h.lower().strip() for h in all_rows[0]] if all_rows else []
+        email_col = headers.index("email") if "email" in headers else 2
+
+        # Deduplicate
+        existing_emails = {
+            r[email_col].strip().lower()
+            for r in all_rows[1:]
+            if r and len(r) > email_col and r[email_col]
+        }
+        if email.strip().lower() in existing_emails:
+            logger.info(f"write_lead: skipped duplicate {email}")
+            return {"ok": True, "skipped": True, "reason": "duplicate email"}
+
+        now = datetime.utcnow().isoformat() + "Z"
+        extras = extra or {}
+        row = [
+            now,                              # created_at
+            name.strip(),                     # name
+            email.strip(),                    # email
+            company.strip(),                  # company
+            division.strip().upper(),         # division
+            source,                           # source
+            status.strip().upper(),           # status
+            "",                               # contacted_at
+            "",                               # replied_at
+            extras.get("title", ""),          # title / role
+            extras.get("linkedin", ""),       # linkedin_url
+            extras.get("phone", ""),          # phone
+            extras.get("notes", ""),          # notes
+        ]
+
+        result = sheets_append("LEADS", row)
+        if result.get("ok"):
+            logger.info(f"write_lead: inserted {email} ({company}) div={division}")
+            audit_log(
+                "write_lead", "scraper", "OK",
+                message=f"email={email} company={company} div={division}",
+            )
+        return result
+
+    except Exception as e:
+        logger.error(f"write_lead({email!r}): {e}")
+        return {"ok": False, "error": str(e)}
+
 
 def crm_sync() -> Dict[str, Any]:
     """
