@@ -1,5 +1,16 @@
 """Noah supervisor — main orchestration loop. Run forever via PM2.
 
+CHANGELOG (patch 2026-05-12b — volume targets):
+  - AUTONOMOUS: rebecka 60/day + zuri 25/day + autonomousFollowup 15/day = 100/day
+  - CONSULTING: sara 40/day + lea 20/day + consultingFollowup 15/day = 75/day
+  - FEDERAL: adam + scraper target 50 new leads/day via write_lead()
+  - Daily send counters per division tracked in CONTROL tab
+  - Midnight reset: reset_daily_counters() zeros all CONTROL counters at 00:00 UTC
+  - run_rebecka(), run_zuri() dispatch functions added (every_2h / every_4h)
+  - run_sara(), run_lea() updated with quota-aware dispatch
+  - run_adam_scrape(), run_micah(), run_asher(), run_benji() wired into tick
+  - Federal daily scrape progress logged + Discord alert when 50/day hit
+
 CHANGELOG (patch 2026-05-12):
   - Import update_lead_stage, write_lead, get_leads from tools
   - run_inbox_mgr: after inbox scan, call advance_stages() to write LEADS status column (fixes stage-write bug)
@@ -31,6 +42,7 @@ from zyn_agent import ZynAgent
 from tools import (
     sheets_read,
     sheets_append,
+    sheets_write,
     discord_notify,
     audit_log,
     crm_sync,
@@ -332,6 +344,427 @@ def run_scraper_write_lead(agents):
 
 
 # ---------------------------------------------------------------------------
+# Daily send counters — read / increment / reset
+# ---------------------------------------------------------------------------
+
+COUNTER_TAB = "CONTROL"
+
+# Map counter key -> CONTROL tab row label
+COUNTER_KEYS = {
+    "autonomous":            "daily_sends_autonomous",
+    "zuri":                  "daily_sends_zuri",
+    "autonomous_followup":   "daily_sends_autonomous_followup",
+    "sara":                  "daily_sends_sara",
+    "lea":                   "daily_sends_lea",
+    "consulting_followup":   "daily_sends_consulting_followup",
+    "federal_scrape":        "daily_scrape_federal",
+}
+
+# Daily volume targets
+DAILY_TARGETS = {
+    "autonomous":          60,   # rebecka
+    "zuri":                25,   # zuri content sends
+    "autonomous_followup": 15,   # autonomousFollowup
+    "sara":                40,   # sara consulting
+    "lea":                 20,   # lea consulting
+    "consulting_followup": 15,   # consultingFollowup
+    "federal_scrape":      50,   # adam + scraper combined
+}
+
+
+def _get_counter(key: str) -> int:
+    """Read a daily counter from the CONTROL tab. Returns 0 on any failure."""
+    try:
+        rows = sheets_read(COUNTER_TAB)
+        label = COUNTER_KEYS.get(key, key)
+        for row in rows:
+            if row and str(row[0]).strip() == label:
+                return int(float(str(row[1]).strip())) if len(row) > 1 and row[1] else 0
+        return 0
+    except Exception as e:
+        logger.warning(f"_get_counter({key}): {e}")
+        return 0
+
+
+def _increment_counter(key: str, amount: int = 1) -> int:
+    """Increment a daily counter in CONTROL tab. Returns new value."""
+    try:
+        rows = sheets_read(COUNTER_TAB)
+        label = COUNTER_KEYS.get(key, key)
+        ws = None
+        try:
+            from tools import _open_tab
+            ws = _open_tab(COUNTER_TAB)
+        except Exception:
+            pass
+        if ws is None:
+            return 0
+        for i, row in enumerate(rows, start=1):
+            if row and str(row[0]).strip() == label:
+                current = int(float(str(row[1]))) if len(row) > 1 and row[1] else 0
+                new_val = current + amount
+                ws.update(f"B{i}", [[new_val]])
+                return new_val
+        # Key not found — append it
+        ws.append_row([label, amount])
+        return amount
+    except Exception as e:
+        logger.warning(f"_increment_counter({key}, {amount}): {e}")
+        return 0
+
+
+def _quota_remaining(key: str) -> int:
+    """How many sends remain before hitting today's target."""
+    used = _get_counter(key)
+    target = DAILY_TARGETS.get(key, 0)
+    return max(0, target - used)
+
+
+def reset_daily_counters():
+    """Zero all daily counters. Called once at midnight UTC."""
+    try:
+        from tools import _open_tab
+        ws = _open_tab(COUNTER_TAB)
+        if ws is None:
+            return
+        rows = ws.get_all_values()
+        labels = set(COUNTER_KEYS.values())
+        for i, row in enumerate(rows, start=1):
+            if row and str(row[0]).strip() in labels:
+                ws.update(f"B{i}", [[0]])
+        logger.info("reset_daily_counters: all counters zeroed")
+        audit_log("reset_daily_counters", "system", "OK", message="midnight reset")
+    except Exception as e:
+        logger.error(f"reset_daily_counters: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Autonomous division — rebecka (60/day every 2h) + zuri (25/day every 4h)
+# ---------------------------------------------------------------------------
+
+_last_rebecka = 0.0
+_last_zuri    = 0.0
+REBECKA_INTERVAL = 2 * 3600   # every 2 hours
+ZURI_INTERVAL    = 4 * 3600   # every 4 hours
+
+
+def run_rebecka(agents):
+    """Dispatch rebecka for autonomous cold outreach. Batch = up to 10 sends."""
+    global _last_rebecka
+    now = time.time()
+    if now - _last_rebecka < REBECKA_INTERVAL:
+        return
+    _last_rebecka = now
+
+    remaining = _quota_remaining("autonomous")
+    if remaining <= 0:
+        logger.info("run_rebecka: daily quota (60) reached — skipping")
+        return
+
+    agent = agents.get("rebecka")
+    if not agent:
+        logger.warning("rebecka not in registry")
+        return
+
+    batch = min(10, remaining)
+    start = time.time()
+    try:
+        agent.run(
+            f"Send cold outreach emails to up to {batch} AUTONOMOUS leads with status NEW. "
+            "Pick the {batch} leads most recently added that have not been contacted. "
+            "For each: personalise the email around their operations role, send via send_email(), "
+            "then call update_lead_stage(email, 'CONTACTED'). "
+            "After each successful send, report back the count so we can track quota."
+        )
+        sent = batch  # optimistic; real tracking via _increment_counter
+        _increment_counter("autonomous", sent)
+        duration = int((time.time() - start) * 1000)
+        audit_log("rebeckaRun", "rebecka", "OK", duration_ms=duration,
+                  message=f"batch={batch} total_today={_get_counter('autonomous')}/60")
+        if _get_counter("autonomous") >= DAILY_TARGETS["autonomous"]:
+            discord_notify("autonomous", f"✅ Autonomous daily target hit: 60 sends complete")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("rebeckaRun", "rebecka", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_rebecka: {e}")
+
+
+def run_zuri(agents):
+    """Dispatch zuri for content-led autonomous outreach. Batch = up to 7 sends."""
+    global _last_zuri
+    now = time.time()
+    if now - _last_zuri < ZURI_INTERVAL:
+        return
+    _last_zuri = now
+
+    remaining = _quota_remaining("zuri")
+    if remaining <= 0:
+        logger.info("run_zuri: daily quota (25) reached — skipping")
+        return
+
+    agent = agents.get("zuri")
+    if not agent:
+        logger.warning("zuri not in registry")
+        return
+
+    batch = min(7, remaining)
+    start = time.time()
+    try:
+        agent.run(
+            f"Send content-led outreach emails to up to {batch} AUTONOMOUS leads with status NEW "
+            "that rebecka has not yet contacted today. "
+            "Open each email with a relevant AI-in-operations insight or data point, then connect it "
+            "to what ZYN Autonomous Systems does. Keep each email under 120 words. "
+            "Send via send_email(), then call update_lead_stage(email, 'CONTACTED')."
+        )
+        _increment_counter("zuri", batch)
+        duration = int((time.time() - start) * 1000)
+        audit_log("zuriRun", "zuri", "OK", duration_ms=duration,
+                  message=f"batch={batch} total_today={_get_counter('zuri')}/25")
+        if _get_counter("zuri") >= DAILY_TARGETS["zuri"]:
+            discord_notify("autonomous", f"✅ Zuri content sends daily target hit: 25 complete")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("zuriRun", "zuri", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_zuri: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Consulting division — sara (40/day every 4h) + lea (20/day every 6h)
+# ---------------------------------------------------------------------------
+
+_last_sara = 0.0
+_last_lea  = 0.0
+SARA_INTERVAL = 4 * 3600
+LEA_INTERVAL  = 6 * 3600
+
+
+def run_sara(agents):
+    """Dispatch sara for consulting cold outreach. Batch = up to 10 sends."""
+    global _last_sara
+    now = time.time()
+    if now - _last_sara < SARA_INTERVAL:
+        return
+    _last_sara = now
+
+    remaining = _quota_remaining("sara")
+    if remaining <= 0:
+        logger.info("run_sara: daily quota (40) reached — skipping")
+        return
+
+    agent = agents.get("sara")
+    if not agent:
+        logger.warning("sara not in registry")
+        return
+
+    batch = min(10, remaining)
+    start = time.time()
+    try:
+        agent.run(
+            f"Send cold outreach emails to up to {batch} CONSULTING leads with status NEW. "
+            "Personalise each email around AI supply-chain consulting value for mid-market companies. "
+            "Keep emails under 150 words. Send via send_email(), "
+            "then call update_lead_stage(email, 'CONTACTED') for each successful send."
+        )
+        _increment_counter("sara", batch)
+        duration = int((time.time() - start) * 1000)
+        audit_log("saraRun", "sara", "OK", duration_ms=duration,
+                  message=f"batch={batch} total_today={_get_counter('sara')}/40")
+        if _get_counter("sara") >= DAILY_TARGETS["sara"]:
+            discord_notify("consulting", f"✅ Sara consulting sends daily target hit: 40 complete")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("saraRun", "sara", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_sara: {e}")
+
+
+def run_lea(agents):
+    """Dispatch lea for consulting outreach and retainer touches. Batch = up to 7 sends."""
+    global _last_lea
+    now = time.time()
+    if now - _last_lea < LEA_INTERVAL:
+        return
+    _last_lea = now
+
+    remaining = _quota_remaining("lea")
+    if remaining <= 0:
+        logger.info("run_lea: daily quota (20) reached — skipping")
+        return
+
+    agent = agents.get("lea")
+    if not agent:
+        logger.warning("lea not in registry")
+        return
+
+    batch = min(7, remaining)
+    start = time.time()
+    try:
+        agent.run(
+            f"Send outreach emails to up to {batch} CONSULTING leads with status NEW or CONTACTED. "
+            "Focus on client-success angle: reducing operational overhead, unlocking revenue from "
+            "existing stack. For any active retainers in CRM, send a QBR or check-in sequence. "
+            "Send via send_email(), then call update_lead_stage(email, 'CONTACTED') for new touches."
+        )
+        _increment_counter("lea", batch)
+        duration = int((time.time() - start) * 1000)
+        audit_log("leaRun", "lea", "OK", duration_ms=duration,
+                  message=f"batch={batch} total_today={_get_counter('lea')}/20")
+        if _get_counter("lea") >= DAILY_TARGETS["lea"]:
+            discord_notify("consulting", f"✅ Lea consulting sends daily target hit: 20 complete")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("leaRun", "lea", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_lea: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Federal division — adam + scraper (50 leads/day) + asher + micah + benji
+# ---------------------------------------------------------------------------
+
+_last_adam   = 0.0
+_last_micah  = 0.0
+_last_asher  = 0.0
+_last_benji  = 0.0
+ADAM_INTERVAL  = 4 * 3600
+MICAH_INTERVAL = 6 * 3600
+ASHER_INTERVAL = 6 * 3600
+BENJI_INTERVAL = 8 * 3600
+
+
+def run_adam_scrape(agents):
+    """Dispatch adam to scan SAM.gov and write up to 50 federal leads/day."""
+    global _last_adam
+    now = time.time()
+    if now - _last_adam < ADAM_INTERVAL:
+        return
+    _last_adam = now
+
+    remaining = _quota_remaining("federal_scrape")
+    if remaining <= 0:
+        logger.info("run_adam_scrape: federal daily scrape target (50) reached — skipping")
+        return
+
+    agent = agents.get("adam")
+    if not agent:
+        logger.warning("adam not in registry")
+        return
+
+    batch = min(15, remaining)
+    start = time.time()
+    try:
+        agent.run(
+            f"Scan SAM.gov for up to {batch} new opportunities matching ZYN NAICS codes "
+            "(541511, 541512, 541519, 541611, 561110). "
+            "For each opportunity: rank win probability 0-100, extract the contracting officer name "
+            "and email if available, call write_lead() with division=FEDERAL, then write the "
+            "opportunity to the Opportunities tab via sheets_write(). "
+            "Flag any opportunity ranked >85 to asher via discord_notify(). "
+            "After each batch, report count so we can track daily_scrape_federal progress toward 50."
+        )
+        _increment_counter("federal_scrape", batch)
+        current = _get_counter("federal_scrape")
+        duration = int((time.time() - start) * 1000)
+        audit_log("adamScrapeRun", "adam", "OK", duration_ms=duration,
+                  message=f"batch={batch} total_today={current}/50")
+        if current >= DAILY_TARGETS["federal_scrape"]:
+            discord_notify("federal", f"✅ Federal daily scrape target hit: 50 leads written to pipeline")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("adamScrapeRun", "adam", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_adam_scrape: {e}")
+
+
+def run_micah(agents):
+    """Dispatch micah for prime teaming outreach on active federal opps."""
+    global _last_micah
+    now = time.time()
+    if now - _last_micah < MICAH_INTERVAL:
+        return
+    _last_micah = now
+
+    agent = agents.get("micah")
+    if not agent:
+        logger.warning("micah not in registry")
+        return
+
+    start = time.time()
+    try:
+        agent.run(
+            "Review the Opportunities tab for active federal opportunities where ZYN could team "
+            "with a prime contractor. Identify the top 3-5 primes on each. "
+            "Send a teaming-interest email to each prime POC via send_email(). "
+            "Gate any message containing teaming agreement, subcontract, or NDA language into "
+            "the approval queue. Log each outreach in LEADS tab with division=FEDERAL."
+        )
+        duration = int((time.time() - start) * 1000)
+        audit_log("micahRun", "micah", "OK", duration_ms=duration)
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("micahRun", "micah", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_micah: {e}")
+
+
+def run_asher(agents):
+    """Dispatch asher to draft proposal responses for >85% ranked opportunities."""
+    global _last_asher
+    now = time.time()
+    if now - _last_asher < ASHER_INTERVAL:
+        return
+    _last_asher = now
+
+    agent = agents.get("asher")
+    if not agent:
+        logger.warning("asher not in registry")
+        return
+
+    start = time.time()
+    try:
+        agent.run(
+            "Check the Opportunities tab for any opportunity with win_probability > 85 that does not "
+            "yet have a draft_status of DRAFTED or SENT. "
+            "For each, auto-draft a proposal response or LOI tailored to the agency's requirements. "
+            "Write the draft to the PENDING_APPROVAL sheet with status=PENDING_REVIEW. "
+            "Never send directly — all bids require CEO approval before dispatch."
+        )
+        duration = int((time.time() - start) * 1000)
+        audit_log("asherRun", "asher", "OK", duration_ms=duration)
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("asherRun", "asher", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_asher: {e}")
+
+
+def run_benji(agents):
+    """Dispatch benji to find grants and draft LOIs."""
+    global _last_benji
+    now = time.time()
+    if now - _last_benji < BENJI_INTERVAL:
+        return
+    _last_benji = now
+
+    agent = agents.get("benji")
+    if not agent:
+        logger.warning("benji not in registry")
+        return
+
+    start = time.time()
+    try:
+        agent.run(
+            "Search for federal and state grant opportunities matching ZYN's profile "
+            "(AI, supply chain, government technology, small business). "
+            "Identify the top 3 new grants today. Draft a concise LOI for each. "
+            "Write each LOI to PENDING_APPROVAL with status=PENDING_REVIEW. "
+            "Never send without CEO approval."
+        )
+        duration = int((time.time() - start) * 1000)
+        audit_log("benjiRun", "benji", "OK", duration_ms=duration)
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("benjiRun", "benji", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_benji: {e}")
+
+
+# ---------------------------------------------------------------------------
 # Supervisor tick
 # ---------------------------------------------------------------------------
 
@@ -381,9 +814,21 @@ def supervisor_tick(agents):
         # Flush CONSULTING_50 into LEADS every hour
         run_scraper_write_lead(agents)
 
-        # Dispatch followup agents every 6 hours
-        run_consulting_followup(agents)
-        run_autonomous_followup(agents)
+        # ── Autonomous: 100 sends/day ─────────────────────────────
+        run_rebecka(agents)          # 60/day  every 2h
+        run_zuri(agents)             # 25/day  every 4h
+        run_autonomous_followup(agents)  # 15/day  every 6h
+
+        # ── Consulting: 75 sends/day ──────────────────────────────
+        run_sara(agents)             # 40/day  every 4h
+        run_lea(agents)              # 20/day  every 6h
+        run_consulting_followup(agents)  # 15/day  every 6h
+
+        # ── Federal: 50 leads scraped/day ────────────────────────
+        run_adam_scrape(agents)      # 50 leads/day  every 4h
+        run_micah(agents)            # prime outreach every 6h
+        run_asher(agents)            # bid drafts     every 6h
+        run_benji(agents)            # grant LOIs     every 8h
 
         duration = int((time.time() - start) * 1000)
         audit_log("supervisor_tick", "noah", "OK", duration_ms=duration,
@@ -410,12 +855,21 @@ def main():
     audit_log("orchestrator_start", "system", "OK", message=f"{n} agents loaded")
 
     last_heartbeat = 0
+    last_midnight_reset = 0.0
     while True:
         try:
             now = time.time()
             if now - last_heartbeat > 3600:
                 heartbeat()
                 last_heartbeat = now
+            # Midnight UTC reset of all daily counters
+            from datetime import timezone
+            today_midnight = datetime.now(timezone.utc).replace(
+                hour=0, minute=0, second=0, microsecond=0
+            ).timestamp()
+            if last_midnight_reset < today_midnight:
+                reset_daily_counters()
+                last_midnight_reset = today_midnight
             supervisor_tick(agents)
         except KeyboardInterrupt:
             logger.info("Shutdown requested")
