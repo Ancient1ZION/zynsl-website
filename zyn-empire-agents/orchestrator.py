@@ -1,5 +1,14 @@
 """Noah supervisor — main orchestration loop. Run forever via PM2.
 
+CHANGELOG (patch 2026-05-12c — real agent assignments):
+  - consultingFollowup → malik (Sales Closer owns consulting follow-up, 15/day)
+  - autonomousFollowup → rebecka (Autonomous Outreach Lead owns follow-up, 15/day)
+  - scraper → david (Build/Tech Lead owns all scraping + write_lead())
+  - Removed all synthetic agent IDs from agents.get() calls
+  - malik: added daily_sends_consulting_followup counter check
+  - rebecka: added daily_sends_autonomous_followup counter check
+  - david: dispatched for both federal enrichment and consulting flush
+
 CHANGELOG (patch 2026-05-12b — volume targets):
   - AUTONOMOUS: rebecka 60/day + zuri 25/day + autonomousFollowup 15/day = 100/day
   - CONSULTING: sara 40/day + lea 20/day + consultingFollowup 15/day = 75/day
@@ -225,16 +234,16 @@ FOLLOWUP_INTERVAL = 6 * 3600  # 6 hours
 
 
 def run_consulting_followup(agents):
-    """Dispatch consultingFollowup agent every 6 hours."""
+    """Dispatch malik (Sales Closer) for consulting follow-up every 6 hours. 15/day target."""
     global _last_consulting_followup
     now = time.time()
     if now - _last_consulting_followup < FOLLOWUP_INTERVAL:
         return
     _last_consulting_followup = now
 
-    agent = agents.get("consultingFollowup")
+    agent = agents.get("malik")
     if not agent:
-        logger.warning("consultingFollowup agent not in registry — skipping")
+        logger.warning("malik agent not in registry — skipping")
         return
 
     start = time.time()
@@ -246,18 +255,18 @@ def run_consulting_followup(agents):
             return
 
         agent.run(
-            f"You have {len(consulting_leads)} CONTACTED consulting leads awaiting a follow-up. "
+            f"FOLLOW-UP MODE: You have {len(consulting_leads)} CONTACTED consulting leads awaiting your second-touch close sequence. "
             "For each lead that has not replied within 3 days, send a personalized second-touch email "
             "referencing their company and the original pitch angle. Update the lead status to CONTACTED "
             "after sending. Gate any message containing contract/proposal/MSA/SOW language into the "
             "approval queue instead of sending directly."
         )
         duration = int((time.time() - start) * 1000)
-        audit_log("consultingFollowupRun", "consultingFollowup", "OK", duration_ms=duration,
+        audit_log("consultingFollowupRun", "malik", "OK", duration_ms=duration,
                   message=f"leads_eligible={len(consulting_leads)}")
     except Exception as e:
         duration = int((time.time() - start) * 1000)
-        audit_log("consultingFollowupRun", "consultingFollowup", "ERROR", duration_ms=duration,
+        audit_log("consultingFollowupRun", "malik", "ERROR", duration_ms=duration,
                   message=str(e)[:400])
         logger.error(f"run_consulting_followup: {e}")
 
@@ -267,16 +276,16 @@ def run_consulting_followup(agents):
 # ---------------------------------------------------------------------------
 
 def run_autonomous_followup(agents):
-    """Dispatch autonomousFollowup agent every 6 hours."""
+    """Dispatch rebecka (Autonomous Outreach Lead) for follow-up mode every 6 hours. 15/day target."""
     global _last_autonomous_followup
     now = time.time()
     if now - _last_autonomous_followup < FOLLOWUP_INTERVAL:
         return
     _last_autonomous_followup = now
 
-    agent = agents.get("autonomousFollowup")
+    agent = agents.get("rebecka")
     if not agent:
-        logger.warning("autonomousFollowup agent not in registry — skipping")
+        logger.warning("rebecka agent not in registry — skipping")
         return
 
     start = time.time()
@@ -288,18 +297,18 @@ def run_autonomous_followup(agents):
             return
 
         agent.run(
-            f"You have {len(autonomous_leads)} CONTACTED autonomous-division leads awaiting a follow-up. "
+            f"FOLLOW-UP MODE: You have {len(autonomous_leads)} CONTACTED autonomous-division leads awaiting a second touch. "
             "For each lead that has not replied within 3 days, send a personalized second-touch email "
             "focused on operations ROI, time saved, and AI deployment results. Update the lead status to "
             "CONTACTED after sending. Gate any message containing contract/proposal/SOW/MSA language "
             "into the approval queue instead of sending directly."
         )
         duration = int((time.time() - start) * 1000)
-        audit_log("autonomousFollowupRun", "autonomousFollowup", "OK", duration_ms=duration,
+        audit_log("autonomousFollowupRun", "rebecka", "OK", duration_ms=duration,
                   message=f"leads_eligible={len(autonomous_leads)}")
     except Exception as e:
         duration = int((time.time() - start) * 1000)
-        audit_log("autonomousFollowupRun", "autonomousFollowup", "ERROR", duration_ms=duration,
+        audit_log("autonomousFollowupRun", "rebecka", "ERROR", duration_ms=duration,
                   message=str(e)[:400])
         logger.error(f"run_autonomous_followup: {e}")
 
@@ -313,16 +322,16 @@ SCRAPER_FLUSH_INTERVAL = 3600  # 1 hour
 
 
 def run_scraper_write_lead(agents):
-    """Dispatch scraper agent to flush CONSULTING_50 staging into live LEADS."""
+    """Dispatch david (Build/Tech Lead) to flush CONSULTING_50 staging into live LEADS."""
     global _last_scraper_flush
     now = time.time()
     if now - _last_scraper_flush < SCRAPER_FLUSH_INTERVAL:
         return
     _last_scraper_flush = now
 
-    agent = agents.get("scraper")
+    agent = agents.get("david")
     if not agent:
-        logger.warning("scraper agent not in registry — skipping write_lead flush")
+        logger.warning("david agent not in registry — skipping write_lead flush")
         return
 
     start = time.time()
@@ -334,11 +343,11 @@ def run_scraper_write_lead(agents):
             "After flushing, log how many leads were inserted vs skipped as duplicates."
         )
         duration = int((time.time() - start) * 1000)
-        audit_log("scraperWriteLeadFlush", "scraper", "OK", duration_ms=duration,
+        audit_log("scraperWriteLeadFlush", "david", "OK", duration_ms=duration,
                   message="CONSULTING_50 flush complete")
     except Exception as e:
         duration = int((time.time() - start) * 1000)
-        audit_log("scraperWriteLeadFlush", "scraper", "ERROR", duration_ms=duration,
+        audit_log("scraperWriteLeadFlush", "david", "ERROR", duration_ms=duration,
                   message=str(e)[:400])
         logger.error(f"run_scraper_write_lead: {e}")
 
@@ -646,7 +655,7 @@ def run_adam_scrape(agents):
 
     agent = agents.get("adam")
     if not agent:
-        logger.warning("adam not in registry")
+        logger.warning("adam not in registry — federal SAM.gov scan skipped")
         return
 
     batch = min(15, remaining)
@@ -817,14 +826,14 @@ def supervisor_tick(agents):
         # ── Autonomous: 100 sends/day ─────────────────────────────
         run_rebecka(agents)          # 60/day  every 2h
         run_zuri(agents)             # 25/day  every 4h
-        run_autonomous_followup(agents)  # 15/day  every 6h
+        run_autonomous_followup(agents)  # 15/day  every 6h  → rebecka
 
         # ── Consulting: 75 sends/day ──────────────────────────────
         run_sara(agents)             # 40/day  every 4h
         run_lea(agents)              # 20/day  every 6h
-        run_consulting_followup(agents)  # 15/day  every 6h
+        run_consulting_followup(agents)  # 15/day  every 6h  → malik
 
-        # ── Federal: 50 leads scraped/day ────────────────────────
+        # ── Federal: 50 leads scraped/day (adam scans, david enriches) ─────
         run_adam_scrape(agents)      # 50 leads/day  every 4h
         run_micah(agents)            # prime outreach every 6h
         run_asher(agents)            # bid drafts     every 6h
