@@ -9,6 +9,20 @@ Every public tool follows three contracts:
 This is the trust boundary: above this line, the orchestrator + LLM see only
 clean results or empty lists. Exceptions live below this line.
 
+CHANGELOG (patch 2026-05-12f — Bitrix24 CRM integration layer):
+  - Added BITRIX24_WEBHOOK env var
+  - bitrix24_call(): core REST caller with timeout + soft-fail
+  - bitrix24_create_lead(): maps ZYN lead fields to Bitrix24 CRM.Lead entity
+  - bitrix24_update_lead(): update stage/status on existing Bitrix24 lead by ID
+  - bitrix24_create_deal(): promotes lead to Bitrix24 Deal (Opportunity)
+  - bitrix24_add_activity(): logs emails, calls, notes on a deal/lead
+  - bitrix24_get_lead(): fetch a lead by ID
+  - bitrix24_find_lead_by_email(): search by email for dedup
+  - write_lead_bitrix24(): drop-in replacement for write_lead() that syncs to both Sheets + Bitrix24
+  - update_lead_stage_bitrix24(): updates stage in both Sheets + Bitrix24
+  - crm_sync_bitrix24(): promotes HOT+ opps to Bitrix24 Deals + Sheets CRM tab
+  - ZYN pipeline stage → Bitrix24 STATUS mapping table included
+
 CHANGELOG (patch 2026-05-10):
   - ensure_tab(): auto-creates missing sheet tabs with correct headers
   - audit_log(): every trigger/agent action logged to Audit tab
@@ -582,6 +596,7 @@ def web_search(query: str, num: int = 5) -> List[Dict[str, str]]:
 # ---------------------------------------------------------------------------
 
 SAM_API_KEY = os.getenv("SAM_API_KEY", "")
+BITRIX24_WEBHOOK = os.getenv("BITRIX24_WEBHOOK", "")  # https://yourname.bitrix24.com/rest/1/xxxxxx/
 SAM_BASE = "https://api.sam.gov/opportunities/v2/search"
 
 
@@ -602,3 +617,364 @@ def sam_gov_search(naics: str, limit: int = 10) -> List[Dict[str, Any]]:
     except Exception as e:
         logger.error(f"sam_gov_search({naics}): {e}")
         return []
+
+
+# ===========================================================================
+# BITRIX24 CRM INTEGRATION LAYER  (patch 2026-05-12f)
+# ===========================================================================
+# All functions follow the same soft-fail contract as the rest of tools.py.
+# Set BITRIX24_WEBHOOK env var to your Bitrix24 inbound webhook URL:
+#   https://yourname.bitrix24.com/rest/1/<token>/
+#
+# ZYN Pipeline Stage → Bitrix24 Lead STATUS mapping:
+#   NEW          → NEW
+#   CONTACTED    → IN_PROCESS
+#   REPLIED      → IN_PROCESS
+#   WARM         → IN_PROCESS
+#   HOT          → RC_CONVERTED  (ready to convert to Deal)
+#   PROPOSAL     → RC_CONVERTED
+#   SIGNED       → CONVERTED
+#   WON          → CONVERTED
+#   LOST         → JUNK
+#   UNSUB        → JUNK
+#   BAD_EMAIL    → JUNK
+#   DUPLICATE    → JUNK
+#
+# ZYN Division → Bitrix24 Source mapping:
+#   federal      → WEB (government/federal)
+#   consulting   → CALL (outbound consulting outreach)
+#   autonomous   → EMAIL (autonomous outreach)
+#   capital      → OTHER
+# ===========================================================================
+
+_ZYN_STAGE_TO_BITRIX = {
+    "NEW":        "NEW",
+    "CONTACTED":  "IN_PROCESS",
+    "REPLIED":    "IN_PROCESS",
+    "WARM":       "IN_PROCESS",
+    "HOT":        "RC_CONVERTED",
+    "PROPOSAL":   "RC_CONVERTED",
+    "SIGNED":     "CONVERTED",
+    "WON":        "CONVERTED",
+    "LOST":       "JUNK",
+    "UNSUB":      "JUNK",
+    "BAD_EMAIL":  "JUNK",
+    "DUPLICATE":  "JUNK",
+    "NO_EMAIL":   "JUNK",
+    "OTHER":      "NEW",
+}
+
+_ZYN_DIVISION_TO_SOURCE = {
+    "federal":    "WEB",
+    "consulting": "CALL",
+    "autonomous": "EMAIL",
+    "capital":    "OTHER",
+}
+
+# Bitrix24 Deal stage IDs (standard pipeline — override if you rename stages)
+_ZYN_STAGE_TO_DEAL = {
+    "HOT":       "C1:1",   # New
+    "PROPOSAL":  "C1:2",   # Proposal/Price Quote
+    "SIGNED":    "C1:3",   # Negotiation & Discount
+    "WON":       "C1:WON",
+    "LOST":      "C1:LOSE",
+}
+
+
+def bitrix24_call(method: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Core Bitrix24 REST API caller. All other b24 functions go through this.
+    Returns parsed JSON response or {"error": "..."} on failure.
+    """
+    if not BITRIX24_WEBHOOK:
+        logger.warning("bitrix24_call: BITRIX24_WEBHOOK not configured")
+        return {"error": "BITRIX24_WEBHOOK not set"}
+    url = BITRIX24_WEBHOOK.rstrip("/") + "/" + method + ".json"
+    try:
+        resp = requests.post(url, json=params, timeout=DEFAULT_TIMEOUT)
+        resp.raise_for_status()
+        data = resp.json()
+        if "error" in data:
+            logger.warning(f"bitrix24_call({method}): API error {data['error']}: {data.get('error_description','')}")
+        return data
+    except Exception as e:
+        logger.error(f"bitrix24_call({method}): {e}")
+        return {"error": str(e)}
+
+
+def bitrix24_find_lead_by_email(email: str) -> Optional[int]:
+    """
+    Search Bitrix24 for a lead by email. Returns lead ID (int) or None.
+    Used for deduplication before creating a new lead.
+    """
+    if not email:
+        return None
+    result = bitrix24_call("crm.lead.list", {
+        "filter": {"EMAIL": email},
+        "select": ["ID", "EMAIL"],
+    })
+    items = result.get("result", [])
+    if items:
+        return int(items[0]["ID"])
+    return None
+
+
+def bitrix24_create_lead(
+    name: str,
+    company: str,
+    email: str,
+    division: str,
+    status: str = "NEW",
+    phone: str = "",
+    title: str = "",
+    comments: str = "",
+    extra: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Create a new lead in Bitrix24 CRM.
+    Maps ZYN fields → Bitrix24 CRM.Lead entity fields.
+    Returns {"ok": True, "bitrix_id": <int>} or {"ok": False, "error": ...}.
+    Deduplicates by email — skips if lead already exists.
+    """
+    if not email:
+        return {"ok": False, "error": "email required"}
+
+    # Dedup check
+    existing_id = bitrix24_find_lead_by_email(email)
+    if existing_id:
+        logger.info(f"bitrix24_create_lead: lead {email} already exists (ID {existing_id}), skipping")
+        return {"ok": True, "skipped": True, "bitrix_id": existing_id}
+
+    b24_status = _ZYN_STAGE_TO_BITRIX.get(status.upper(), "NEW")
+    b24_source = _ZYN_DIVISION_TO_SOURCE.get(division.lower(), "OTHER")
+
+    fields = {
+        "NAME":       name.split()[0] if name else "",
+        "LAST_NAME":  " ".join(name.split()[1:]) if len(name.split()) > 1 else "",
+        "COMPANY_TITLE": company,
+        "STATUS_ID":  b24_status,
+        "SOURCE_ID":  b24_source,
+        "TITLE":      title or f"{company} — {division.title()} Lead",
+        "COMMENTS":   comments or f"ZYN Empire auto-imported | Division: {division} | Source: agent",
+        "EMAIL":      [{"VALUE": email, "VALUE_TYPE": "WORK"}],
+    }
+    if phone:
+        fields["PHONE"] = [{"VALUE": phone, "VALUE_TYPE": "WORK"}]
+    if extra:
+        fields.update(extra)
+
+    result = bitrix24_call("crm.lead.add", {"fields": fields})
+    bitrix_id = result.get("result")
+    if bitrix_id:
+        logger.info(f"bitrix24_create_lead: created lead {email} → Bitrix ID {bitrix_id}")
+        return {"ok": True, "skipped": False, "bitrix_id": int(bitrix_id)}
+    return {"ok": False, "error": result.get("error", "unknown error from Bitrix24")}
+
+
+def bitrix24_update_lead(
+    bitrix_id: int,
+    new_stage: str,
+    extra_fields: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Update an existing Bitrix24 lead's STATUS_ID (pipeline stage).
+    Returns {"ok": True} or {"ok": False, "error": ...}.
+    """
+    b24_status = _ZYN_STAGE_TO_BITRIX.get(new_stage.upper(), "IN_PROCESS")
+    fields = {"STATUS_ID": b24_status}
+    if extra_fields:
+        fields.update(extra_fields)
+    result = bitrix24_call("crm.lead.update", {"id": bitrix_id, "fields": fields})
+    if result.get("result") is True:
+        return {"ok": True, "bitrix_id": bitrix_id, "new_status": b24_status}
+    return {"ok": False, "error": result.get("error", "update failed")}
+
+
+def bitrix24_get_lead(bitrix_id: int) -> Dict[str, Any]:
+    """Fetch a Bitrix24 lead by ID. Returns field dict or empty dict on failure."""
+    result = bitrix24_call("crm.lead.get", {"id": bitrix_id})
+    return result.get("result", {})
+
+
+def bitrix24_create_deal(
+    title: str,
+    company: str,
+    email: str,
+    stage: str = "HOT",
+    deal_value: float = 0.0,
+    division: str = "consulting",
+    currency: str = "USD",
+    comments: str = "",
+) -> Dict[str, Any]:
+    """
+    Create a Bitrix24 Deal (Opportunity) for leads that reach HOT/PROPOSAL/SIGNED.
+    Deals represent active revenue opportunities in the Bitrix24 pipeline.
+    Returns {"ok": True, "deal_id": <int>} or {"ok": False, "error": ...}.
+    """
+    stage_id = _ZYN_STAGE_TO_DEAL.get(stage.upper(), "C1:1")
+    fields = {
+        "TITLE":        title or f"{company} — {division.title()} Deal",
+        "COMPANY_TITLE": company,
+        "STAGE_ID":     stage_id,
+        "OPPORTUNITY":  deal_value,
+        "CURRENCY_ID":  currency,
+        "COMMENTS":     comments or f"ZYN Empire auto-deal | Division: {division}",
+        "SOURCE_ID":    _ZYN_DIVISION_TO_SOURCE.get(division.lower(), "OTHER"),
+        "EMAIL":        [{"VALUE": email, "VALUE_TYPE": "WORK"}],
+    }
+    result = bitrix24_call("crm.deal.add", {"fields": fields})
+    deal_id = result.get("result")
+    if deal_id:
+        logger.info(f"bitrix24_create_deal: created deal '{title}' → Deal ID {deal_id}")
+        return {"ok": True, "deal_id": int(deal_id)}
+    return {"ok": False, "error": result.get("error", "deal creation failed")}
+
+
+def bitrix24_add_activity(
+    entity_type: str,
+    entity_id: int,
+    activity_type: str,
+    subject: str,
+    description: str = "",
+    direction: int = 2,
+) -> Dict[str, Any]:
+    """
+    Log an activity (email send, call, note) on a Bitrix24 lead or deal.
+    entity_type: 'LEAD' or 'DEAL'
+    activity_type: 'EMAIL' | 'CALL' | 'TASK'
+    direction: 1=inbound, 2=outbound
+    Returns {"ok": True, "activity_id": <int>} or {"ok": False, "error": ...}.
+    """
+    type_map = {"EMAIL": 4, "CALL": 2, "TASK": 6}
+    owner_type = 1 if entity_type.upper() == "LEAD" else 2
+    fields = {
+        "OWNER_TYPE_ID": owner_type,
+        "OWNER_ID":      entity_id,
+        "TYPE_ID":       type_map.get(activity_type.upper(), 4),
+        "SUBJECT":       subject,
+        "DESCRIPTION":   description,
+        "DIRECTION":     direction,
+        "COMPLETED":     "Y",
+    }
+    result = bitrix24_call("crm.activity.add", {"fields": fields})
+    activity_id = result.get("result")
+    if activity_id:
+        return {"ok": True, "activity_id": int(activity_id)}
+    return {"ok": False, "error": result.get("error", "activity log failed")}
+
+
+def write_lead_bitrix24(
+    name: str,
+    company: str,
+    email: str,
+    division: str,
+    source: str = "agent",
+    status: str = "NEW",
+    extra: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Dual-write: creates lead in BOTH Google Sheets (write_lead) AND Bitrix24.
+    This is the primary entry point for all new lead creation going forward.
+    Falls back gracefully — Sheets write failure does NOT block Bitrix24 and vice versa.
+    Returns combined result dict.
+    """
+    sheets_result = write_lead(name, company, email, division, source, status, extra)
+    b24_result = bitrix24_create_lead(name, company, email, division, status, extra=extra)
+    return {
+        "sheets": sheets_result,
+        "bitrix24": b24_result,
+        "ok": sheets_result.get("ok", False) or b24_result.get("ok", False),
+    }
+
+
+def update_lead_stage_bitrix24(
+    email: str,
+    new_stage: str,
+    bitrix_id: Optional[int] = None,
+) -> Dict[str, Any]:
+    """
+    Dual-update: updates stage in BOTH Google Sheets AND Bitrix24.
+    If bitrix_id not provided, auto-looks it up by email.
+    Also auto-creates a Bitrix24 Deal when stage reaches HOT or above.
+    """
+    sheets_result = update_lead_stage(email, new_stage)
+
+    # Resolve bitrix_id
+    if not bitrix_id:
+        bitrix_id = bitrix24_find_lead_by_email(email)
+
+    b24_result: Dict[str, Any] = {"ok": False, "error": "bitrix_id not found"}
+    deal_result: Dict[str, Any] = {}
+
+    if bitrix_id:
+        b24_result = bitrix24_update_lead(bitrix_id, new_stage)
+        # Auto-promote to Deal at HOT/PROPOSAL/SIGNED/WON
+        if new_stage.upper() in {"HOT", "PROPOSAL", "SIGNED", "WON"}:
+            lead_data = bitrix24_get_lead(bitrix_id)
+            company = lead_data.get("COMPANY_TITLE", "")
+            deal_result = bitrix24_create_deal(
+                title=f"{company} — Deal",
+                company=company,
+                email=email,
+                stage=new_stage,
+                division="consulting",
+            )
+    else:
+        # Lead doesn't exist in Bitrix24 yet — create it now
+        b24_result = bitrix24_create_lead("", "", email, "consulting", new_stage)
+
+    return {
+        "sheets": sheets_result,
+        "bitrix24": b24_result,
+        "deal": deal_result,
+        "ok": sheets_result.get("ok", False) or b24_result.get("ok", False),
+    }
+
+
+def crm_sync_bitrix24() -> Dict[str, Any]:
+    """
+    Enhanced crm_sync that promotes HOT+ opportunities into BOTH:
+      1. Google Sheets CRM tab (existing behavior via crm_sync())
+      2. Bitrix24 Deals pipeline (new behavior)
+    Returns {synced_sheets: int, synced_bitrix: int, errors: int}.
+    """
+    sheets_result = crm_sync()
+    synced_bitrix = 0
+    errors = 0
+
+    try:
+        opps = get_opps()
+        active_stages = {"HOT", "REPLIED", "PROPOSAL", "SIGNED", "WON"}
+        for opp in opps:
+            stage = str(opp.get("stage", "")).upper()
+            if stage not in active_stages:
+                continue
+            email = opp.get("email", "")
+            company = opp.get("company", opp.get("name", ""))
+            division = opp.get("division", "consulting")
+            deal_value = float(opp.get("deal_value", opp.get("value", 0)) or 0)
+            if not email:
+                continue
+            # Check if deal already exists in Bitrix24 by finding the lead
+            b24_lead_id = bitrix24_find_lead_by_email(email)
+            deal_result = bitrix24_create_deal(
+                title=f"{company} — {stage} Deal",
+                company=company,
+                email=email,
+                stage=stage,
+                deal_value=deal_value,
+                division=division,
+            )
+            if deal_result.get("ok"):
+                synced_bitrix += 1
+            else:
+                errors += 1
+    except Exception as e:
+        logger.error(f"crm_sync_bitrix24: {e}")
+        errors += 1
+
+    return {
+        "synced_sheets": sheets_result.get("synced", 0),
+        "synced_bitrix": synced_bitrix,
+        "errors": errors + sheets_result.get("errors", 0),
+    }
