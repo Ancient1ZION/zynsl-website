@@ -5,8 +5,8 @@ CHANGELOG (patch 2026-05-12d — removed benji & hannah; reassigned to miro):
   - Removed hannah (HR/Recruiting) from agents_config.json
   - miro now operates 3 tracks: voice (Malik routing), grants (LOIs to approval queue every 8h), HR (1099 sourcing)
   - miro.tools expanded with web_search, send_email
-  - run_benji() -> run_miro_grants(); _last_benji -> _last_miro_grants; BENJI_INTERVAL -> MIRO_GRANTS_INTERVAL
-  - agents.get("benji") -> agents.get("miro")
+  - run_benji() -> run_miro_grants(); _last_benji -> _last_asher_grants; BENJI_INTERVAL -> ASHER_GRANTS_INTERVAL
+  - agents.get("benji") -> agents.get("asher")
   - Federal-section docstring updated to reflect miro (grants) instead of benji
 
 CHANGELOG (patch 2026-05-12c — real agent assignments):
@@ -125,11 +125,11 @@ def heartbeat():
 # Inbox manager dispatch — parse inbound replies every tick
 # ---------------------------------------------------------------------------
 
-def run_inbox_mgr(agents):
-    """Dispatch inboxMgr agent to parse replies and write to Inbox tab."""
-    agent = agents.get("inboxMgr")
+def run_elijah_inbox(agents):
+    """Dispatch elijah (Content / Inbox Manager) to parse replies and write to Inbox tab."""
+    agent = agents.get("elijah")
     if not agent:
-        logger.warning("inboxMgr agent not found in registry")
+        logger.warning("elijah agent not found in registry (inbox track)")
         return
     start = time.time()
     try:
@@ -330,8 +330,8 @@ _last_scraper_flush = 0.0
 SCRAPER_FLUSH_INTERVAL = 3600  # 1 hour
 
 
-def run_scraper_write_lead(agents):
-    """Dispatch david (Build/Tech Lead) to flush CONSULTING_50 staging into live LEADS."""
+def run_david_scrape(agents):
+    """Dispatch david (Build/Tech Lead / Scraper) to scrape leads and flush staging into live LEADS."""
     global _last_scraper_flush
     now = time.time()
     if now - _last_scraper_flush < SCRAPER_FLUSH_INTERVAL:
@@ -358,7 +358,7 @@ def run_scraper_write_lead(agents):
         duration = int((time.time() - start) * 1000)
         audit_log("scraperWriteLeadFlush", "david", "ERROR", duration_ms=duration,
                   message=str(e)[:400])
-        logger.error(f"run_scraper_write_lead: {e}")
+        logger.error(f"run_david_scrape: {e}")
 
 
 # ---------------------------------------------------------------------------
@@ -642,11 +642,11 @@ def run_lea(agents):
 _last_adam   = 0.0
 _last_micah  = 0.0
 _last_asher  = 0.0
-_last_miro_grants  = 0.0
+_last_asher_grants  = 0.0
 ADAM_INTERVAL  = 4 * 3600
 MICAH_INTERVAL = 6 * 3600
 ASHER_INTERVAL = 6 * 3600
-MIRO_GRANTS_INTERVAL = 8 * 3600
+ASHER_GRANTS_INTERVAL = 8 * 3600
 
 
 def run_adam_scrape(agents):
@@ -752,17 +752,17 @@ def run_asher(agents):
         logger.error(f"run_asher: {e}")
 
 
-def run_miro_grants(agents):
-    """Dispatch miro (grants track) to find grants and draft LOIs."""
-    global _last_miro_grants
+def run_asher_grants(agents):
+    """Dispatch asher (Bid Writer / Grants Hunter) to find grants and draft LOIs."""
+    global _last_asher_grants
     now = time.time()
-    if now - _last_miro_grants < MIRO_GRANTS_INTERVAL:
+    if now - _last_asher_grants < ASHER_GRANTS_INTERVAL:
         return
-    _last_miro_grants = now
+    _last_asher_grants = now
 
-    agent = agents.get("miro")
+    agent = agents.get("asher")
     if not agent:
-        logger.warning("miro not in registry (grants track)")
+        logger.warning("asher not in registry (grants track)")
         return
 
     start = time.time()
@@ -775,11 +775,11 @@ def run_miro_grants(agents):
             "Never send without CEO approval."
         )
         duration = int((time.time() - start) * 1000)
-        audit_log("miroGrantsRun", "miro", "OK", duration_ms=duration)
+        audit_log("asherGrantsRun", "asher", "OK", duration_ms=duration)
     except Exception as e:
         duration = int((time.time() - start) * 1000)
-        audit_log("miroGrantsRun", "miro", "ERROR", duration_ms=duration, message=str(e)[:400])
-        logger.error(f"run_miro_grants: {e}")
+        audit_log("asherGrantsRun", "asher", "ERROR", duration_ms=duration, message=str(e)[:400])
+        logger.error(f"run_asher_grants: {e}")
 
 
 # ---------------------------------------------------------------------------
@@ -826,11 +826,11 @@ def supervisor_tick(agents):
             )
 
         # Run inbox manager every tick + advance LEADS stages
-        run_inbox_mgr(agents)
+        run_elijah_inbox(agents)
         advance_stages(agents)
 
         # Flush CONSULTING_50 into LEADS every hour
-        run_scraper_write_lead(agents)
+        run_david_scrape(agents)
 
         # ── Autonomous: 100 sends/day ─────────────────────────────
         run_rebecka(agents)          # 60/day  every 2h
@@ -846,7 +846,7 @@ def supervisor_tick(agents):
         run_adam_scrape(agents)      # 50 leads/day  every 4h
         run_micah(agents)            # prime outreach every 6h
         run_asher(agents)            # bid drafts     every 6h
-        run_miro_grants(agents)    # grant LOIs     every 8h (was benji)
+        run_asher_grants(agents)    # grant LOIs     every 8h (was benji)
 
         duration = int((time.time() - start) * 1000)
         audit_log("supervisor_tick", "noah", "OK", duration_ms=duration,
