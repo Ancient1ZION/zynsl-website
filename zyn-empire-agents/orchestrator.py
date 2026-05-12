@@ -1,5 +1,14 @@
 """Noah supervisor — main orchestration loop. Run forever via PM2.
 
+CHANGELOG (patch 2026-05-12):
+  - Import update_lead_stage, write_lead, get_leads from tools
+  - run_inbox_mgr: after inbox scan, call advance_stages() to write LEADS status column (fixes stage-write bug)
+  - advance_stages(): reads Inbox UNREAD rows, calls update_lead_stage() for each matched lead
+  - run_consulting_followup(): dispatches consultingFollowup agent every 6h
+  - run_autonomous_followup(): dispatches autonomousFollowup agent every 6h
+  - supervisor_tick: wires both followup agents into the tick loop
+  - run_scraper_write_lead(): dispatches scraper to flush CONSULTING_50 into LEADS via write_lead()
+
 CHANGELOG (patch 2026-05-10):
   - Import audit_log, crm_sync, inbox_write from tools
   - Wrap supervisor_tick with audit_log (start/end/error)
@@ -26,7 +35,10 @@ from tools import (
     audit_log,
     crm_sync,
     inbox_write,
+    update_lead_stage,
+    write_lead,
     ensure_tab,
+    get_leads,
 )
 
 # ---------------------------------------------------------------------------
@@ -107,6 +119,219 @@ def run_inbox_mgr(agents):
         logger.error(f"inboxMgr tick failed: {e}")
 
 # ---------------------------------------------------------------------------
+# Stage advancement — write LEADS status column from Inbox tab
+# ---------------------------------------------------------------------------
+
+# Intent-to-stage mapping
+INTENT_STAGE_MAP = {
+    "INTERESTED": "REPLIED",
+    "WARM":        "WARM",
+    "HOT":         "HOT",
+    "OBJECTION":   "REPLIED",
+    "OPT_OUT":     "UNSUB",
+    "BOUNCED":     "BAD_EMAIL",
+    "UNREAD":      "REPLIED",  # fallback: any reply advances to REPLIED
+}
+
+def advance_stages(agents):
+    """
+    Read UNREAD rows from Inbox tab, advance matched LEADS row status,
+    mark Inbox rows as READ. Dispatches inboxMgr's update_lead_stage tool
+    by calling it directly via the tools layer.
+    """
+    try:
+        inbox_rows = sheets_read("Inbox")
+        if not inbox_rows or len(inbox_rows) < 2:
+            return
+        headers = [h.lower().strip() for h in inbox_rows[0]]
+        # Expected columns: timestamp, from_email, from_name, subject,
+        #                   body_snippet, matched_lead_id, division, status
+        try:
+            email_col  = headers.index("from_email")
+            status_col = headers.index("status")
+            intent_col = headers.index("intent") if "intent" in headers else -1
+        except ValueError:
+            logger.warning("advance_stages: Inbox tab missing expected headers")
+            return
+
+        inbox_ws = None
+        try:
+            from tools import _open_tab
+            inbox_ws = _open_tab("Inbox")
+        except Exception:
+            pass
+
+        advanced = 0
+        for i, row in enumerate(inbox_rows[1:], start=2):
+            padded = row + [""] * max(0, len(headers) - len(row))
+            if padded[status_col].upper() != "UNREAD":
+                continue
+
+            from_email = padded[email_col].strip()
+            if not from_email:
+                continue
+
+            # Determine target stage from intent column if available
+            intent = padded[intent_col].strip().upper() if intent_col >= 0 and padded[intent_col] else "UNREAD"
+            target_stage = INTENT_STAGE_MAP.get(intent, "REPLIED")
+
+            result = update_lead_stage(from_email, target_stage)
+            if result.get("ok"):
+                advanced += 1
+                # Mark Inbox row as READ
+                if inbox_ws:
+                    try:
+                        col_letter = chr(ord("A") + status_col)
+                        inbox_ws.update(f"{col_letter}{i}", [["READ"]])
+                    except Exception as e:
+                        logger.warning(f"advance_stages: could not mark row {i} READ: {e}")
+                # Alert Malik on HOT
+                if target_stage == "HOT":
+                    discord_notify(
+                        "malik",
+                        f"🔥 HOT lead: {from_email} just replied — ready for close sequence"
+                    )
+            else:
+                logger.warning(f"advance_stages: no LEADS match for {from_email}: {result.get('error')}")
+
+        if advanced:
+            logger.info(f"advance_stages: advanced {advanced} lead(s)")
+            audit_log("advance_stages", "inboxMgr", "OK", message=f"advanced={advanced}")
+
+    except Exception as e:
+        logger.error(f"advance_stages: {e}")
+        audit_log("advance_stages", "inboxMgr", "ERROR", message=str(e)[:400])
+
+
+# ---------------------------------------------------------------------------
+# Consulting followup dispatch
+# ---------------------------------------------------------------------------
+
+_last_consulting_followup = 0.0
+_last_autonomous_followup = 0.0
+FOLLOWUP_INTERVAL = 6 * 3600  # 6 hours
+
+
+def run_consulting_followup(agents):
+    """Dispatch consultingFollowup agent every 6 hours."""
+    global _last_consulting_followup
+    now = time.time()
+    if now - _last_consulting_followup < FOLLOWUP_INTERVAL:
+        return
+    _last_consulting_followup = now
+
+    agent = agents.get("consultingFollowup")
+    if not agent:
+        logger.warning("consultingFollowup agent not in registry — skipping")
+        return
+
+    start = time.time()
+    try:
+        contacted_leads = get_leads(status_filter="CONTACTED")
+        consulting_leads = [l for l in contacted_leads if l.get("division", "").upper() == "CONSULTING"]
+        if not consulting_leads:
+            logger.info("run_consulting_followup: no CONTACTED consulting leads to follow up")
+            return
+
+        agent.run(
+            f"You have {len(consulting_leads)} CONTACTED consulting leads awaiting a follow-up. "
+            "For each lead that has not replied within 3 days, send a personalized second-touch email "
+            "referencing their company and the original pitch angle. Update the lead status to CONTACTED "
+            "after sending. Gate any message containing contract/proposal/MSA/SOW language into the "
+            "approval queue instead of sending directly."
+        )
+        duration = int((time.time() - start) * 1000)
+        audit_log("consultingFollowupRun", "consultingFollowup", "OK", duration_ms=duration,
+                  message=f"leads_eligible={len(consulting_leads)}")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("consultingFollowupRun", "consultingFollowup", "ERROR", duration_ms=duration,
+                  message=str(e)[:400])
+        logger.error(f"run_consulting_followup: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Autonomous followup dispatch
+# ---------------------------------------------------------------------------
+
+def run_autonomous_followup(agents):
+    """Dispatch autonomousFollowup agent every 6 hours."""
+    global _last_autonomous_followup
+    now = time.time()
+    if now - _last_autonomous_followup < FOLLOWUP_INTERVAL:
+        return
+    _last_autonomous_followup = now
+
+    agent = agents.get("autonomousFollowup")
+    if not agent:
+        logger.warning("autonomousFollowup agent not in registry — skipping")
+        return
+
+    start = time.time()
+    try:
+        contacted_leads = get_leads(status_filter="CONTACTED")
+        autonomous_leads = [l for l in contacted_leads if l.get("division", "").upper() == "AUTONOMOUS"]
+        if not autonomous_leads:
+            logger.info("run_autonomous_followup: no CONTACTED autonomous leads to follow up")
+            return
+
+        agent.run(
+            f"You have {len(autonomous_leads)} CONTACTED autonomous-division leads awaiting a follow-up. "
+            "For each lead that has not replied within 3 days, send a personalized second-touch email "
+            "focused on operations ROI, time saved, and AI deployment results. Update the lead status to "
+            "CONTACTED after sending. Gate any message containing contract/proposal/SOW/MSA language "
+            "into the approval queue instead of sending directly."
+        )
+        duration = int((time.time() - start) * 1000)
+        audit_log("autonomousFollowupRun", "autonomousFollowup", "OK", duration_ms=duration,
+                  message=f"leads_eligible={len(autonomous_leads)}")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("autonomousFollowupRun", "autonomousFollowup", "ERROR", duration_ms=duration,
+                  message=str(e)[:400])
+        logger.error(f"run_autonomous_followup: {e}")
+
+
+# ---------------------------------------------------------------------------
+# Scraper write_lead flush — moves CONSULTING_50 staged leads into LEADS tab
+# ---------------------------------------------------------------------------
+
+_last_scraper_flush = 0.0
+SCRAPER_FLUSH_INTERVAL = 3600  # 1 hour
+
+
+def run_scraper_write_lead(agents):
+    """Dispatch scraper agent to flush CONSULTING_50 staging into live LEADS."""
+    global _last_scraper_flush
+    now = time.time()
+    if now - _last_scraper_flush < SCRAPER_FLUSH_INTERVAL:
+        return
+    _last_scraper_flush = now
+
+    agent = agents.get("scraper")
+    if not agent:
+        logger.warning("scraper agent not in registry — skipping write_lead flush")
+        return
+
+    start = time.time()
+    try:
+        agent.run(
+            "Read all rows from the CONSULTING_50 staging sheet. "
+            "For each row, call write_lead() with division=CONSULTING and the lead's name, company, "
+            "and email. write_lead() will deduplicate automatically — do not pre-filter. "
+            "After flushing, log how many leads were inserted vs skipped as duplicates."
+        )
+        duration = int((time.time() - start) * 1000)
+        audit_log("scraperWriteLeadFlush", "scraper", "OK", duration_ms=duration,
+                  message="CONSULTING_50 flush complete")
+    except Exception as e:
+        duration = int((time.time() - start) * 1000)
+        audit_log("scraperWriteLeadFlush", "scraper", "ERROR", duration_ms=duration,
+                  message=str(e)[:400])
+        logger.error(f"run_scraper_write_lead: {e}")
+
+
+# ---------------------------------------------------------------------------
 # Supervisor tick
 # ---------------------------------------------------------------------------
 
@@ -149,8 +374,16 @@ def supervisor_tick(agents):
                 f"\U0001f4c8 CRM sync: {sync_result['synced']} opps promoted to CRM"
             )
 
-        # Run inbox manager every tick
+        # Run inbox manager every tick + advance LEADS stages
         run_inbox_mgr(agents)
+        advance_stages(agents)
+
+        # Flush CONSULTING_50 into LEADS every hour
+        run_scraper_write_lead(agents)
+
+        # Dispatch followup agents every 6 hours
+        run_consulting_followup(agents)
+        run_autonomous_followup(agents)
 
         duration = int((time.time() - start) * 1000)
         audit_log("supervisor_tick", "noah", "OK", duration_ms=duration,
