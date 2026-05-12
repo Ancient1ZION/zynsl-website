@@ -1573,7 +1573,6 @@
             </div>
           </div>
           <div id="taskCenterGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px"></div>
-          <div id="taskCenterLog" style="margin-top:12px;font-size:12px;font-family:'JetBrains Mono',monospace;opacity:0.9;max-height:200px;overflow:auto;background:rgba(0,0,0,0.18);border-radius:8px;padding:10px"></div>
         </div>
       </section>
 
@@ -4083,7 +4082,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }));
 
       grid.innerHTML = cards.join('');
-      tcLog('Task center refreshed  &mdash;  ' + cards.length + ' cards, all systems mapped.', 'ok');
     } catch(e) {
     }
   };
