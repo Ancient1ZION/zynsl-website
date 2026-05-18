@@ -1,0 +1,2519 @@
+{
+  "nodes": [
+    {
+      "id": "agents_config_code_editor_graphify_json",
+      "label": "agents_config.code_editor_graphify.json",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_agents",
+      "label": "agents",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "label": "llm_wikiv2_runtime",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2038"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2039"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2040"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_component",
+      "label": "component",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2041"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_loader",
+      "label": "loader",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2042"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_tools",
+      "label": "tools",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2043"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_loaded_for",
+      "label": "loaded_for",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2049"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_supervisor_agent",
+      "label": "supervisor_agent",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2050"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_updated_at",
+      "label": "updated_at",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2051"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "label": "code_editor_graphify_runtime",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2053"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2054"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2055"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_loader",
+      "label": "loader",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2056"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "label": "tools",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_loaded_for",
+      "label": "loaded_for",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2065"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_supervisor_agent",
+      "label": "supervisor_agent",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2066"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_opencode_exe",
+      "label": "opencode_exe",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2067"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_vscode_cmd",
+      "label": "vscode_cmd",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2068"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_graphify_exe",
+      "label": "graphify_exe",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2069"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_updated_at",
+      "label": "updated_at",
+      "file_type": "code",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2070"
+    },
+    {
+      "id": "agents_config_live_json",
+      "label": "agents_config.live.json",
+      "file_type": "code",
+      "source_file": "agents_config.live.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_live_agents",
+      "label": "agents",
+      "file_type": "code",
+      "source_file": "agents_config.live.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "agents_config_wikiv2_json",
+      "label": "agents_config.wikiv2.json",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_agents",
+      "label": "agents",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "label": "llm_wikiv2_runtime",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1156"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1157"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1158"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_component",
+      "label": "component",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1159"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_loader",
+      "label": "loader",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1160"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_tools",
+      "label": "tools",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1161"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_loaded_for",
+      "label": "loaded_for",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1167"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_supervisor_agent",
+      "label": "supervisor_agent",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1168"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_updated_at",
+      "label": "updated_at",
+      "file_type": "code",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1169"
+    },
+    {
+      "id": "augment_agents_code_editor_graphify_js",
+      "label": "augment_agents_code_editor_graphify.js",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_fs",
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_cfg",
+      "label": "cfg",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_tools",
+      "label": "tools",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_skills",
+      "label": "skills",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_existingtools",
+      "label": "existingTools",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L64"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_existingskills",
+      "label": "existingSkills",
+      "file_type": "code",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L68"
+    },
+    {
+      "id": "llm_wikiv2_langflow_tools_py",
+      "label": "llm_wikiv2_langflow_tools.py",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_customcomponent",
+      "label": "CustomComponent",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2error",
+      "label": "LLMWikiV2Error",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "exception",
+      "label": "Exception",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "label": "LLMWikiV2Client",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_request",
+      "label": "._request()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L50"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_search",
+      "label": ".search()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L112"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_get_page",
+      "label": ".get_page()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_ask",
+      "label": ".ask()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L124"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_upsert_page",
+      "label": ".upsert_page()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L137"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_search",
+      "label": "llm_wikiv2_search()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L159"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_get_page",
+      "label": "llm_wikiv2_get_page()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L179"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_ask",
+      "label": "llm_wikiv2_ask()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L195"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_upsert_page",
+      "label": "llm_wikiv2_upsert_page()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L221"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_get_tools",
+      "label": "get_tools()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L250"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent",
+      "label": "LLMWikiV2ToolsComponent",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L265"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent_build_config",
+      "label": ".build_config()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L272"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent_build",
+      "label": ".build()",
+      "file_type": "code",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L292"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_1",
+      "label": "llm_wikiv2_langflow_tools.py  Importlib-loadable Langflow-compatible component a",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_34",
+      "label": "Non-fatal wrapper exception for LLM WikiV2 tool errors.",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_38",
+      "label": "Small standard-library HTTP client for LLM WikiV2 endpoints.",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_162",
+      "label": "Search LLM WikiV2 for relevant pages.      Args:         query: Search phrase or",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L162"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_180",
+      "label": "Retrieve a single LLM WikiV2 page by ID.      Args:         page_id: Unique page",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L180"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_200",
+      "label": "Ask LLM WikiV2 a natural-language question using wiki context.      Args:",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L200"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_227",
+      "label": "Create or update a page in LLM WikiV2.      Args:         title: Page title.",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L227"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_251",
+      "label": "Return importlib-discoverable callable tools for agent runtimes.      Returns:",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L251"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_266",
+      "label": "Langflow CustomComponent exposing LLM WikiV2 callable tools.",
+      "file_type": "rationale",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L266"
+    },
+    {
+      "id": "noah_all_agents_wikiv2_loader_py",
+      "label": "noah_all_agents_wikiv2_loader.py",
+      "file_type": "code",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_load_wikiv2_callables",
+      "label": "load_wikiv2_callables()",
+      "file_type": "code",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L55"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_register_wikiv2_tools_for_all_agents",
+      "label": "register_wikiv2_tools_for_all_agents()",
+      "file_type": "code",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_get_agent_tool_registry",
+      "label": "get_agent_tool_registry()",
+      "file_type": "code",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L138"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_1",
+      "label": "noah_all_agents_wikiv2_loader.py  Runtime helper that attaches the LLM WikiV2 to",
+      "file_type": "rationale",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_56",
+      "label": "Import the WikiV2 tool module and return its callable tools by name.      Return",
+      "file_type": "rationale",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L56"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_77",
+      "label": "Append LLM WikiV2 tool names and skill metadata to Noah and every agent.      Th",
+      "file_type": "rationale",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L77"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_139",
+      "label": "Return a discoverable registry payload for Noah and agent orchestrators.      Re",
+      "file_type": "rationale",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L139"
+    },
+    {
+      "id": "noah_code_editor_graphify_tools_py",
+      "label": "noah_code_editor_graphify_tools.py",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "label": "_safe_path()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "label": "_run()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_opencode_editor",
+      "label": "open_opencode_editor()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L88"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_vscode_editor",
+      "label": "open_vscode_editor()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L107"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_update_project",
+      "label": "graphify_update_project()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_query",
+      "label": "graphify_query()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L152"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_explain",
+      "label": "graphify_explain()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L174"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_install_platform",
+      "label": "graphify_install_platform()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L194"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_get_tools",
+      "label": "get_tools()",
+      "file_type": "code",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L215"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_1",
+      "label": "noah_code_editor_graphify_tools.py  Importlib-loadable tools that let Noah and t",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_89",
+      "label": "Open OpenCode Desktop against a workspace-relative path.      Args:         path",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L89"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_108",
+      "label": "Open VS Code against a workspace-relative path.      Args:         path: File or",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L108"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_127",
+      "label": "Rebuild or update the Graphify graph for a workspace-relative project path.",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L127"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_153",
+      "label": "Query a Graphify graph with a natural-language question.      Args:         ques",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L153"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_175",
+      "label": "Explain a Graphify node and its neighbors.      Args:         node: Node label o",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L175"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_195",
+      "label": "Install Graphify integration for a supported local platform.      Args:",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L195"
+    },
+    {
+      "id": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_216",
+      "label": "Return importlib-discoverable code editor and Graphify tools.",
+      "file_type": "rationale",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L216"
+    },
+    {
+      "id": "opencode_opencode_json",
+      "label": "opencode.json",
+      "file_type": "code",
+      "source_file": ".opencode\\opencode.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "opencode_opencode_plugin",
+      "label": "plugin",
+      "file_type": "code",
+      "source_file": ".opencode\\opencode.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "opencode_plugins_graphify_js",
+      "label": "graphify.js",
+      "file_type": "code",
+      "source_file": ".opencode\\plugins\\graphify.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "plugins_graphify_graphifyplugin",
+      "label": "GraphifyPlugin()",
+      "file_type": "code",
+      "source_file": ".opencode\\plugins\\graphify.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_json",
+      "label": "agents_config.json",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_agents",
+      "label": "agents",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "label": "llm_wikiv2_runtime",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2038"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2039"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2040"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_component",
+      "label": "component",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2041"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_loader",
+      "label": "loader",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2042"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_tools",
+      "label": "tools",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2043"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_loaded_for",
+      "label": "loaded_for",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2049"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_supervisor_agent",
+      "label": "supervisor_agent",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2050"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_updated_at",
+      "label": "updated_at",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2051"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "label": "code_editor_graphify_runtime",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2053"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2054"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2055"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_loader",
+      "label": "loader",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2056"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "label": "tools",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_loaded_for",
+      "label": "loaded_for",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2065"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_supervisor_agent",
+      "label": "supervisor_agent",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2066"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_opencode_exe",
+      "label": "opencode_exe",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2067"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_vscode_cmd",
+      "label": "vscode_cmd",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2068"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_graphify_exe",
+      "label": "graphify_exe",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2069"
+    },
+    {
+      "id": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_updated_at",
+      "label": "updated_at",
+      "file_type": "code",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2070"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "links": [
+    {
+      "source": "agents_config_code_editor_graphify_json",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_agents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_config_code_editor_graphify_json",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2038",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2039",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2040",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_component",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2041",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_loader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2042",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2043",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_search",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_get_page",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_ask",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_upsert_page",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_loaded_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2049",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_supervisor_agent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2050",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_llm_wikiv2_runtime_updated_at",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2051",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_config_code_editor_graphify_json",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2053",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2054",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2055",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_loader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2056",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "target": "ref_open_opencode_editor",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "target": "ref_open_vscode_editor",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_update_project",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_query",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_explain",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_install_platform",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_loaded_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2065",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_supervisor_agent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2066",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_opencode_exe",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2067",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_vscode_cmd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2068",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_graphify_exe",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2069",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_code_editor_graphify_code_editor_graphify_runtime_updated_at",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.code_editor_graphify.json",
+      "source_location": "L2070",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_config_live_json",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_live_agents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.live.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_config_wikiv2_json",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_agents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_config_wikiv2_json",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1156",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1157",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1158",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_component",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1159",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_loader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1160",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1161",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_search",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1161",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_get_page",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1161",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_ask",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1161",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_upsert_page",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1161",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_loaded_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1167",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_supervisor_agent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1168",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime",
+      "target": "repair_dashboard_https_ancient1zion_github_io_agents_config_wikiv2_llm_wikiv2_runtime_updated_at",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "agents_config.wikiv2.json",
+      "source_location": "L1169",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_fs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_cfg",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_skills",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_existingtools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "augment_agents_code_editor_graphify_js",
+      "target": "repair_dashboard_https_ancient1zion_github_io_augment_agents_code_editor_graphify_existingskills",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "augment_agents_code_editor_graphify.js",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "urllib_error",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "urllib_parse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "langflow_custom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "langflow",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_customcomponent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2error",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2error",
+      "target": "exception",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_request",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_search",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_get_page",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_ask",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_upsert_page",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_search",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_get_page",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L179",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_ask",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_upsert_page",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_get_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "llm_wikiv2_langflow_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L265",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_customcomponent",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L265",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent_build_config",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L272",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent_build",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L292",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_search",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_get_page",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_ask",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_upsert_page",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_request",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_search",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_search",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_get_page",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_get_page",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_ask",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_ask",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_upsert_page",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client_upsert_page",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L240",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent_build",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L299",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_1",
+      "target": "llm_wikiv2_langflow_tools_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_34",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2error",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_38",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2client",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_162",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_search",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_180",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_get_page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_200",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_ask",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L200",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_227",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llm_wikiv2_upsert_page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_251",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_get_tools",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L251",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_rationale_266",
+      "target": "repair_dashboard_https_ancient1zion_github_io_llm_wikiv2_langflow_tools_llmwikiv2toolscomponent",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_wikiv2_langflow_tools.py",
+      "source_location": "L266",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_all_agents_wikiv2_loader_py",
+      "target": "copy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_all_agents_wikiv2_loader_py",
+      "target": "importlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_all_agents_wikiv2_loader_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_all_agents_wikiv2_loader_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_load_wikiv2_callables",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_all_agents_wikiv2_loader_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_register_wikiv2_tools_for_all_agents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_all_agents_wikiv2_loader_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_get_agent_tool_registry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L138",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_get_agent_tool_registry",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_load_wikiv2_callables",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_1",
+      "target": "noah_all_agents_wikiv2_loader_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_56",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_load_wikiv2_callables",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_77",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_register_wikiv2_tools_for_all_agents",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_rationale_139",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_all_agents_wikiv2_loader_get_agent_tool_registry",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_all_agents_wikiv2_loader.py",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_opencode_editor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_vscode_editor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_update_project",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_query",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_explain",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_install_platform",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "noah_code_editor_graphify_tools_py",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_get_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_opencode_editor",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_opencode_editor",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_vscode_editor",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_vscode_editor",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_update_project",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_update_project",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_query",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L167",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_query",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_explain",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_safe_path",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_explain",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_install_platform",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_1",
+      "target": "noah_code_editor_graphify_tools_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_89",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_opencode_editor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_108",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_open_vscode_editor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_127",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_update_project",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_153",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_query",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_175",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_explain",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L175",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_195",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_graphify_install_platform",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_rationale_216",
+      "target": "repair_dashboard_https_ancient1zion_github_io_noah_code_editor_graphify_tools_get_tools",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "noah_code_editor_graphify_tools.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "opencode_opencode_json",
+      "target": "opencode_opencode_plugin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode\\opencode.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "opencode_opencode_plugin",
+      "target": "ref_opencode_plugins_graphify_js",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode\\opencode.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "opencode_plugins_graphify_js",
+      "target": "fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode\\plugins\\graphify.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "opencode_plugins_graphify_js",
+      "target": "path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode\\plugins\\graphify.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "opencode_plugins_graphify_js",
+      "target": "plugins_graphify_graphifyplugin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode\\plugins\\graphify.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_json",
+      "target": "zyn_empire_agents_agents_config_agents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_json",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2038",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2039",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2040",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_component",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2041",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_loader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2042",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2043",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_search",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_get_page",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_ask",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_tools",
+      "target": "ref_llm_wikiv2_upsert_page",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2043",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_loaded_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2049",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_supervisor_agent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2050",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_llm_wikiv2_runtime",
+      "target": "zyn_empire_agents_agents_config_llm_wikiv2_runtime_updated_at",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2051",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_json",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2053",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2054",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2055",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_loader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2056",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "target": "ref_open_opencode_editor",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "target": "ref_open_vscode_editor",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_update_project",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_query",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_explain",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_tools",
+      "target": "ref_graphify_install_platform",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2057",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_loaded_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2065",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_supervisor_agent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2066",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_opencode_exe",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2067",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_vscode_cmd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2068",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_graphify_exe",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2069",
+      "weight": 1.0
+    },
+    {
+      "source": "zyn_empire_agents_agents_config_code_editor_graphify_runtime",
+      "target": "zyn_empire_agents_agents_config_code_editor_graphify_runtime_updated_at",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "zyn-empire-agents\\agents_config.json",
+      "source_location": "L2070",
+      "weight": 1.0
+    }
+  ]
+}
