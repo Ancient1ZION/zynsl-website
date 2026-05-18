@@ -1009,7 +1009,7 @@
   .search-box { flex: 1; min-width: 240px; position: relative; }
   .search-box input { width: 100%; padding: 8px 12px 8px 36px; border: 1px solid var(--border-soft); border-radius: 8px; font-size: 13px; background: white; transition: border 0.15s, box-shadow 0.15s; font-family: 'Inter', sans-serif; }
   .search-box input:focus { outline: none; border-color: var(--c-blue); box-shadow: 0 0 0 3px rgba(35,103,209,0.12); }
-  .search-box::before { content: "🔍"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.5; }
+  .search-box::before { content: "ðŸ”"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; opacity: 0.5; }
   .table-info { font-size: 12px; color: var(--text-muted); }
 
   .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -1238,7 +1238,7 @@
   .theme-toggle { display: inline-flex !important; align-items: center; justify-content: center; cursor: pointer; }
 
 
-/* CRM — Bitrix24-style native CRM (patch 2026-05-12g) */
+/* CRM â€” Bitrix24-style native CRM (patch 2026-05-12g) */
 .crm-toolbar { display:flex; gap:8px; align-items:center; }
 .crm-btn { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:#e5e7eb; padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; }
 .crm-btn:hover { background:rgba(255,255,255,0.1); }
@@ -1449,6 +1449,7 @@
       <div class="nav-item" data-page="agents" data-color="purple"><span class="nav-icon">&#129302;</span><span>Agents</span><span class="nav-badge" id="badgeAgents">17</span></div>
       <div class="nav-item" data-page="system" data-color="teal"><span class="nav-icon">&#9881;</span><span>System</span></div>
       <div class="nav-item" data-page="noah" data-color="orange"><span class="nav-icon">&#129504;</span><span>Noah</span></div>
+      <div class="nav-item" data-page="workflow" data-color="cyan"><span class="nav-icon">&#128279;</span><span>Workflow</span></div>
 
       <div class="sidebar-section">Divisions</div>
       <div class="nav-item" data-page="federal" data-color="blue"><span class="nav-icon">&#127963;</span><span>Federal</span></div>
@@ -1673,6 +1674,110 @@
             </div>
           </div>
           <div id="taskCenterGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px"></div>
+        </div>
+      </section>
+
+      <section class="page" data-page="workflow">
+        <div class="page-header">
+          <div>
+            <div class="page-title"><div class="page-title-icon cyan"></div>Workflow Connections</div>
+            <div class="page-sub">Discord channel  website  dashboard  Noah agent workflow</div>
+          </div>
+          <div class="refresh-info" id="workflowStatus">Ready</div>
+        </div>
+
+        <div class="division-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div class="division-card autonomous">
+            <div class="div-header"><span class="div-emoji"></span><span class="div-name">Discord Channel</span></div>
+            <div class="div-metric-grid" style="grid-template-columns:1fr;">
+              <div class="div-metric">
+                <div class="value" id="workflowDiscordState">linked</div>
+                <div class="label">Guild 1490888092708769995  Channel 1492443239314362438</div>
+              </div>
+            </div>
+          </div>
+          <div class="division-card federal">
+            <div class="div-header"><span class="div-emoji"></span><span class="div-name">Website</span></div>
+            <div class="div-metric-grid" style="grid-template-columns:1fr;">
+              <div class="div-metric">
+                <div class="value" id="workflowWebsiteState">checking</div>
+                <div class="label">ancient1zion.github.io/zynsl-website</div>
+              </div>
+            </div>
+          </div>
+          <div class="division-card consulting">
+            <div class="div-header"><span class="div-emoji"></span><span class="div-name">Agent Workflow</span></div>
+            <div class="div-metric-grid" style="grid-template-columns:1fr;">
+              <div class="div-metric">
+                <div class="value success">all agents</div>
+                <div class="label">Noah supervised runtime tools</div>
+              </div>
+            </div>
+          </div>
+          <div class="division-card capital">
+            <div class="div-header"><span class="div-emoji"></span><span class="div-name">Notifications</span></div>
+            <div class="div-metric-grid" style="grid-template-columns:1fr;">
+              <div class="div-metric">
+                <div class="value muted" id="workflowNotifyState">credential gated</div>
+                <div class="label">Uses webhook or bot token when configured</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Connection Links</div>
+              <div class="panel-sub">Open live surfaces without leaving the dashboard workflow</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="page-btn primary" type="button" onclick="window.openWorkflowDiscord()">Open Discord Channel</button>
+              <button class="page-btn" type="button" onclick="window.openWorkflowWebsite()">Open Website</button>
+              <button class="page-btn" type="button" onclick="window.openWorkflowDashboard()">Open Public Dashboard</button>
+              <button class="page-btn" type="button" onclick="window.checkWorkflowWebsite()">Check Website</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Workflow Event</div>
+              <div class="panel-sub">Send a controlled event to the Discord workflow when credentials are configured</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div style="display:grid;grid-template-columns:minmax(160px,220px) 1fr auto;gap:10px;align-items:center;">
+              <select id="workflowSeverity" class="page-btn" style="height:34px;background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border-soft);">
+                <option value="info">info</option>
+                <option value="ok">ok</option>
+                <option value="warn">warn</option>
+                <option value="error">error</option>
+              </select>
+              <input id="workflowMessage" type="text" placeholder="Workflow event for Noah and Discord" style="min-width:0;background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border-soft);border-radius:6px;padding:8px 10px;">
+              <button class="page-btn primary" type="button" onclick="window.sendWorkflowEvent()">Send Event</button>
+            </div>
+            <div id="workflowLog" style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-secondary);white-space:pre-wrap;">No events sent this session.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Noah Routing</div>
+              <div class="panel-sub">Runtime tools attached to Noah and every agent</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="feed">
+              <div class="feed-row"><div class="feed-time">Discord</div><div class="feed-icon send"></div><div class="feed-detail">Open channel, send workflow notifications with webhook/token, fetch recent messages with bot token.</div><div class="feed-tag autonomous">CONNECTED</div></div>
+              <div class="feed-row"><div class="feed-time">Website</div><div class="feed-icon lead"></div><div class="feed-detail">Health check public website and dashboard URLs for deploy/repair workflows.</div><div class="feed-tag federal">CONNECTED</div></div>
+              <div class="feed-row"><div class="feed-time">Noah</div><div class="feed-icon payment"></div><div class="feed-detail">Supervisor routes notifications, repairs, build results, and web status into the all-agent workflow.</div><div class="feed-tag parent">SUPERVISOR</div></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -2167,7 +2272,7 @@
 
         <!-- JS Engine -->
         <script>
-// ===== TradingAgents v2 â Real Futures Data + Structured Output =====
+// ===== TradingAgents v2 Ã¢Â€Â” Real Futures Data + Structured Output =====
 (function() {
   // Set default date to today
   const dInput = document.getElementById("ta-date-input");
@@ -2463,32 +2568,32 @@
         <div class="page-header">
           <div>
             <div class="page-title"><div class="page-title-icon yellow"></div>CRM</div>
-            <div class="page-sub">Bitrix24-style native CRM — Pipeline, Contacts, Companies, Deals, Activities, Tasks</div>
+            <div class="page-sub">Bitrix24-style native CRM â€” Pipeline, Contacts, Companies, Deals, Activities, Tasks</div>
           </div>
           <div class="crm-toolbar">
             <button class="crm-btn crm-btn-primary" onclick="crmOpenCreate()">+ Create</button>
-            <button class="crm-btn" onclick="crmRefresh()">⟳ Refresh</button>
+            <button class="crm-btn" onclick="crmRefresh()">âŸ³ Refresh</button>
           </div>
         </div>
 
         <div class="crm-tabs">
-          <button class="crm-tab active" data-crm-tab="pipeline" onclick="crmSwitchTab('pipeline')">📊 Pipeline</button>
-          <button class="crm-tab" data-crm-tab="leads" onclick="crmSwitchTab('leads')">🎯 Leads</button>
-          <button class="crm-tab" data-crm-tab="deals" onclick="crmSwitchTab('deals')">💼 Deals</button>
-          <button class="crm-tab" data-crm-tab="contacts" onclick="crmSwitchTab('contacts')">👥 Contacts</button>
-          <button class="crm-tab" data-crm-tab="companies" onclick="crmSwitchTab('companies')">🏢 Companies</button>
-          <button class="crm-tab" data-crm-tab="activities" onclick="crmSwitchTab('activities')">📞 Activities</button>
-          <button class="crm-tab" data-crm-tab="tasks" onclick="crmSwitchTab('tasks')">✓ Tasks</button>
-          <button class="crm-tab" data-crm-tab="analytics" onclick="crmSwitchTab('analytics')">📈 Analytics</button>
+          <button class="crm-tab active" data-crm-tab="pipeline" onclick="crmSwitchTab('pipeline')">ðŸ“Š Pipeline</button>
+          <button class="crm-tab" data-crm-tab="leads" onclick="crmSwitchTab('leads')">ðŸŽ¯ Leads</button>
+          <button class="crm-tab" data-crm-tab="deals" onclick="crmSwitchTab('deals')">ðŸ’¼ Deals</button>
+          <button class="crm-tab" data-crm-tab="contacts" onclick="crmSwitchTab('contacts')">ðŸ‘¥ Contacts</button>
+          <button class="crm-tab" data-crm-tab="companies" onclick="crmSwitchTab('companies')">ðŸ¢ Companies</button>
+          <button class="crm-tab" data-crm-tab="activities" onclick="crmSwitchTab('activities')">ðŸ“ž Activities</button>
+          <button class="crm-tab" data-crm-tab="tasks" onclick="crmSwitchTab('tasks')">âœ“ Tasks</button>
+          <button class="crm-tab" data-crm-tab="analytics" onclick="crmSwitchTab('analytics')">ðŸ“ˆ Analytics</button>
         </div>
 
         <div class="crm-stats-row">
-          <div class="crm-stat"><div class="crm-stat-label">Total Leads</div><div class="crm-stat-val" id="crmStatLeads">—</div></div>
-          <div class="crm-stat"><div class="crm-stat-label">Active Deals</div><div class="crm-stat-val" id="crmStatDeals">—</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Total Leads</div><div class="crm-stat-val" id="crmStatLeads">â€”</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Active Deals</div><div class="crm-stat-val" id="crmStatDeals">â€”</div></div>
           <div class="crm-stat"><div class="crm-stat-label">Pipeline Value</div><div class="crm-stat-val" id="crmStatValue">$0</div></div>
           <div class="crm-stat"><div class="crm-stat-label">Won This Month</div><div class="crm-stat-val" id="crmStatWon">$0</div></div>
           <div class="crm-stat"><div class="crm-stat-label">Conversion</div><div class="crm-stat-val" id="crmStatConv">0%</div></div>
-          <div class="crm-stat"><div class="crm-stat-label">Avg Deal Cycle</div><div class="crm-stat-val" id="crmStatCycle">—</div></div>
+          <div class="crm-stat"><div class="crm-stat-label">Avg Deal Cycle</div><div class="crm-stat-val" id="crmStatCycle">â€”</div></div>
         </div>
 
         <!-- PIPELINE KANBAN VIEW -->
@@ -2501,7 +2606,7 @@
               <option value="autonomous">Autonomous</option>
               <option value="capital">Capital</option>
             </select>
-            <input type="text" class="crm-input" id="crmPipelineSearch" placeholder="🔍 Search by name, company, email…" oninput="crmRenderPipeline()">
+            <input type="text" class="crm-input" id="crmPipelineSearch" placeholder="ðŸ” Search by name, company, emailâ€¦" oninput="crmRenderPipeline()">
           </div>
           <div class="crm-kanban" id="crmKanban"></div>
         </div>
@@ -2549,7 +2654,7 @@
         <!-- DETAIL DRAWER (right-side slide-in) -->
         <div class="crm-drawer" id="crmDrawer">
           <div class="crm-drawer-header">
-            <button class="crm-drawer-close" onclick="crmCloseDrawer()">×</button>
+            <button class="crm-drawer-close" onclick="crmCloseDrawer()">Ã—</button>
             <div class="crm-drawer-title" id="crmDrawerTitle">Lead Detail</div>
           </div>
           <div class="crm-drawer-body" id="crmDrawerBody"></div>
@@ -2558,7 +2663,7 @@
         <!-- CREATE MODAL -->
         <div class="crm-modal" id="crmCreateModal">
           <div class="crm-modal-content">
-            <div class="crm-modal-header"><div>Create New</div><button class="crm-modal-close" onclick="crmCloseCreate()">×</button></div>
+            <div class="crm-modal-header"><div>Create New</div><button class="crm-modal-close" onclick="crmCloseCreate()">Ã—</button></div>
             <div class="crm-modal-body" id="crmCreateBody"></div>
           </div>
         </div>
@@ -2599,6 +2704,7 @@ document.querySelectorAll('.nav-item').forEach(el => {
     if (page === 'federal')       loadDivisionTable('federal');
     if (page === 'consulting')    loadDivisionTable('consulting');
     if (page === 'autonomous')    loadDivisionTable('autonomous');
+    if (page === 'capital')       loadDivisionTable('capital');
   });
 });
 
@@ -2710,7 +2816,17 @@ applyTheme('twilight');
 
 function buildUrl(params) {
   const p = new URLSearchParams({ key: ENDPOINT_KEY, t: Date.now() });
-  for (const k in (params || {})) if (params[k] !== '' && params[k] != null) p.set(k, params[k]);
+  if (typeof params === 'string') {
+    const query = params.startsWith('?') ? params.slice(1) : params;
+    const legacyParams = new URLSearchParams(query);
+    legacyParams.forEach((value, key) => {
+      if (value !== '' && value != null) p.set(key, value);
+    });
+  } else {
+    for (const k in (params || {})) {
+      if (params[k] !== '' && params[k] != null) p.set(k, params[k]);
+    }
+  }
   return ENDPOINT + '?' + p.toString();
 }
 
@@ -3323,7 +3439,7 @@ function renderPagination(elId, data, key) {
   const start = (page - 1) * (data.rows_per_page || 25) + 1;
   const end = Math.min(start + (data.rows || []).length - 1, total);
   el.innerHTML = `
-    <div class="page-info">${total > 0 ? start + '' + end + ' of ' + total : '0 records'}\u003C/div>
+    <div class="page-info">${total > 0 ? start + '-' + end + ' of ' + total : '0 records'}\u003C/div>
     <div class="page-controls">
       <button class="page-btn" data-action="first" ${page <= 1 ? 'disabled' : ''}> First\u003C/button>
       <button class="page-btn" data-action="prev"  ${page <= 1 ? 'disabled' : ''}> Prev\u003C/button>
@@ -3457,6 +3573,7 @@ setInterval(fetchOverview, REFRESH_MS);
         loadDivisionTable('federal');
         loadDivisionTable('consulting');
         loadDivisionTable('autonomous');
+        loadDivisionTable('capital');
 
 // ========== NOAH CHAT ==========
 let noahLastChatTs = '';
@@ -3485,7 +3602,7 @@ function noahSendMessage() {
   fetch(buildUrl({ view: 'noah', action: 'chat', msg: msg }))
     .then(r => r.json())
     .then(data => {
-      if (data && data.response) { var __mdl = data.model ? ('\n\n —  via ' + data.model) : ''; noahAppendMessage('noah', data.response + __mdl); }
+      if (data && data.response) { var __mdl = data.model ? ('\n\n â€”  via ' + data.model) : ''; noahAppendMessage('noah', data.response + __mdl); }
       else noahAppendMessage('noah', 'I had trouble responding. Try again.');
       if (status) status.textContent = 'ready';
     })
@@ -4255,14 +4372,14 @@ document.addEventListener("DOMContentLoaded", function() {
         actionLabel: 'Acknowledge'
       }));
 
-      // Card 8: Discord webhook (offline)
+      // Card 8: Discord + website workflow
       cards.push(makeCard({
-        title: ' Discord Webhook',
-        status: 'logged out',
-        statusType: 'blocked',
-        desc: 'Both Discord accounts logged out per prior session diagnostics. Webhooks confirmed good. Reconnect at discord.com when ready.',
-        action: 'window.open("https://discord.com/login", "_blank")',
-        actionLabel: 'Open Discord '
+        title: ' Discord + Website Workflow',
+        status: 'linked',
+        statusType: 'ok',
+        desc: 'Dashboard is linked to the Discord channel and public website. Notification sends are credential-gated through Noah tools.',
+        action: "document.querySelector('[data-page=\"workflow\"]')?.click()",
+        actionLabel: 'Open Workflow'
       }));
 
       grid.innerHTML = cards.join('');
@@ -4312,7 +4429,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var theme = document.documentElement.getAttribute('data-theme');
     var icon = document.getElementById('themeIcon');
     if (!icon) return;
-    icon.textContent = (theme === 'day') ? '☀️' : '🌙';
+    icon.textContent = (theme === 'day') ? 'â˜€ï¸' : 'ðŸŒ™';
   }
   document.addEventListener('DOMContentLoaded', function() {
     updateZynThemeIcon();
@@ -4326,7 +4443,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
 /* ============================================================================
-   CRM — Bitrix24-style native JS engine (patch 2026-05-12g)
+   CRM â€” Bitrix24-style native JS engine (patch 2026-05-12g)
    Sources data from existing LEADS, Opportunities, CRM tabs via fetchCRMData()
    ============================================================================ */
 (function(){
@@ -4340,7 +4457,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // ---- Data loading: pull from existing global feeds the dashboard already fetches
   async function loadCRMData() {
-    // The dashboard already loads window.AppState.leads/opps — use them
+    // The dashboard already loads window.AppState.leads/opps â€” use them
     try {
       const S = window.AppState || window.appState || {};
       CRM.leads = (S.leads || S.leadsData || []).map(l => ({
@@ -4387,10 +4504,10 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       CRM.contacts = [...contactMap.values()];
       CRM.companies = [...companyMap.values()];
-      // Activities derived from lead history (stub for now — real data comes from Audit tab via API)
+      // Activities derived from lead history (stub for now â€” real data comes from Audit tab via API)
       CRM.activities = CRM.leads.slice(0, 50).map(l => ({
         type: l.stage === 'CONTACTED' ? 'EMAIL' : (l.stage === 'REPLIED' ? 'REPLY' : 'NOTE'),
-        title: `${l.stage} — ${l.company || l.email}`,
+        title: `${l.stage} â€” ${l.company || l.email}`,
         contact: l.name || l.email,
         date: l.created || new Date().toISOString(),
         desc: `Lead ${l.email} is at stage ${l.stage} in ${l.division} division`
@@ -4412,7 +4529,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('crmStatValue').textContent = '$' + pipeValue.toLocaleString();
     document.getElementById('crmStatWon').textContent = '$' + wonValue.toLocaleString();
     document.getElementById('crmStatConv').textContent = conv + '%';
-    document.getElementById('crmStatCycle').textContent = '— d';
+    document.getElementById('crmStatCycle').textContent = 'â€” d';
   }
 
   // ---- Kanban Pipeline
@@ -4437,9 +4554,9 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="crm-kanban-cards">${items.slice(0,50).map(l => `
           <div class="crm-card" onclick="crmOpenDrawer('${l.id}')">
             <div class="crm-card-name">${escapeHTML(l.name || l.email || 'Unknown')}</div>
-            <div class="crm-card-company">${escapeHTML(l.company || '—')}</div>
+            <div class="crm-card-company">${escapeHTML(l.company || 'â€”')}</div>
             <div class="crm-card-meta"><span class="crm-card-value">${l.value ? '$'+l.value.toLocaleString() : ''}</span><span class="crm-card-div">${l.division}</span></div>
-            <div class="crm-card-tags">${l.division ? `<span class="crm-tag ${l.division}">${l.division}</span>`:''}${stage==='HOT'?'<span class="crm-tag hot">🔥 HOT</span>':''}${stage==='WARM'?'<span class="crm-tag warm">🌤 WARM</span>':''}</div>
+            <div class="crm-card-tags">${l.division ? `<span class="crm-tag ${l.division}">${l.division}</span>`:''}${stage==='HOT'?'<span class="crm-tag hot">ðŸ”¥ HOT</span>':''}${stage==='WARM'?'<span class="crm-tag warm">ðŸŒ¤ WARM</span>':''}</div>
           </div>`).join('')}</div>
       </div>`;
     }).join('');
@@ -4449,14 +4566,14 @@ document.addEventListener("DOMContentLoaded", function() {
   function renderLeadsTable() {
     const t = document.getElementById('crmLeadsTable');
     if (!t) return;
-    t.innerHTML = `<table class="crm-table"><thead><tr><th>Name</th><th>Company</th><th>Email</th><th>Stage</th><th>Division</th><th>Value</th><th>Owner</th></tr></thead><tbody>${CRM.leads.slice(0,200).map(l => `<tr onclick="crmOpenDrawer('${l.id}')"><td>${escapeHTML(l.name||'—')}</td><td>${escapeHTML(l.company||'—')}</td><td>${escapeHTML(l.email||'')}</td><td><span class="crm-tag" style="background:${CRM.stageColors[l.stage]||'#64748b'}33;color:${CRM.stageColors[l.stage]||'#cbd5e1'}">${l.stage}</span></td><td>${l.division}</td><td>${l.value?'$'+l.value.toLocaleString():'—'}</td><td>${l.owner||'—'}</td></tr>`).join('')}</tbody></table>`;
+    t.innerHTML = `<table class="crm-table"><thead><tr><th>Name</th><th>Company</th><th>Email</th><th>Stage</th><th>Division</th><th>Value</th><th>Owner</th></tr></thead><tbody>${CRM.leads.slice(0,200).map(l => `<tr onclick="crmOpenDrawer('${l.id}')"><td>${escapeHTML(l.name||'â€”')}</td><td>${escapeHTML(l.company||'â€”')}</td><td>${escapeHTML(l.email||'')}</td><td><span class="crm-tag" style="background:${CRM.stageColors[l.stage]||'#64748b'}33;color:${CRM.stageColors[l.stage]||'#cbd5e1'}">${l.stage}</span></td><td>${l.division}</td><td>${l.value?'$'+l.value.toLocaleString():'â€”'}</td><td>${l.owner||'â€”'}</td></tr>`).join('')}</tbody></table>`;
   }
 
   // ---- Deals table (from Opportunities)
   function renderDealsTable() {
     const t = document.getElementById('crmDealsTable');
     if (!t) return;
-    t.innerHTML = `<table class="crm-table"><thead><tr><th>Title</th><th>Company</th><th>Stage</th><th>Division</th><th>Value</th><th>NAICS</th><th>Due</th></tr></thead><tbody>${CRM.opps.slice(0,200).map(o => `<tr><td>${escapeHTML(o.title||'—')}</td><td>${escapeHTML(o.company||'—')}</td><td><span class="crm-tag" style="background:${CRM.stageColors[o.stage]||'#64748b'}33;color:${CRM.stageColors[o.stage]||'#cbd5e1'}">${o.stage}</span></td><td>${o.division}</td><td>${o.value?'$'+o.value.toLocaleString():'—'}</td><td>${o.naics||'—'}</td><td>${o.due||'—'}</td></tr>`).join('')}</tbody></table>`;
+    t.innerHTML = `<table class="crm-table"><thead><tr><th>Title</th><th>Company</th><th>Stage</th><th>Division</th><th>Value</th><th>NAICS</th><th>Due</th></tr></thead><tbody>${CRM.opps.slice(0,200).map(o => `<tr><td>${escapeHTML(o.title||'â€”')}</td><td>${escapeHTML(o.company||'â€”')}</td><td><span class="crm-tag" style="background:${CRM.stageColors[o.stage]||'#64748b'}33;color:${CRM.stageColors[o.stage]||'#cbd5e1'}">${o.stage}</span></td><td>${o.division}</td><td>${o.value?'$'+o.value.toLocaleString():'â€”'}</td><td>${o.naics||'â€”'}</td><td>${o.due||'â€”'}</td></tr>`).join('')}</tbody></table>`;
   }
 
   // ---- Contacts
@@ -4479,7 +4596,7 @@ document.addEventListener("DOMContentLoaded", function() {
     g.innerHTML = CRM.companies.sort((a,b)=>b.totalValue-a.totalValue).slice(0,100).map(c => `<div class="crm-company-card">
       <div class="crm-contact-name">${escapeHTML(c.name||'(No name)')}</div>
       <div class="crm-contact-meta"><span class="crm-tag ${c.division}">${c.division}</span></div>
-      <div class="crm-contact-meta">${c.leadCount} leads · $${c.totalValue.toLocaleString()}</div>
+      <div class="crm-contact-meta">${c.leadCount} leads Â· $${c.totalValue.toLocaleString()}</div>
     </div>`).join('');
   }
 
@@ -4488,10 +4605,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const t = document.getElementById('crmActivitiesTimeline');
     if (!t) return;
     t.innerHTML = CRM.activities.slice(0,50).map(a => `<div class="crm-timeline-item">
-      <div class="crm-timeline-icon">${a.type==='EMAIL'?'✉':a.type==='REPLY'?'↩':a.type==='CALL'?'📞':'📝'}</div>
+      <div class="crm-timeline-icon">${a.type==='EMAIL'?'âœ‰':a.type==='REPLY'?'â†©':a.type==='CALL'?'ðŸ“ž':'ðŸ“'}</div>
       <div class="crm-timeline-body">
         <div class="crm-timeline-title">${escapeHTML(a.title)}</div>
-        <div class="crm-timeline-meta">${escapeHTML(a.contact||'')} · ${a.date?new Date(a.date).toLocaleString():'—'}</div>
+        <div class="crm-timeline-meta">${escapeHTML(a.contact||'')} Â· ${a.date?new Date(a.date).toLocaleString():'â€”'}</div>
         <div class="crm-timeline-desc">${escapeHTML(a.desc||'')}</div>
       </div>
     </div>`).join('');
@@ -4511,7 +4628,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="crm-task-meta">${escapeHTML(task.linked||'')}</div>
         </div>
         ${task.due?`<div class="crm-task-due ${overdue?'overdue':''}">${task.due}</div>`:''}
-        <button class="crm-btn" style="padding:4px 8px;font-size:11px" onclick="crmDelTask(${i})">×</button>
+        <button class="crm-btn" style="padding:4px 8px;font-size:11px" onclick="crmDelTask(${i})">Ã—</button>
       </div>`;
     }).join('');
   }
@@ -4547,7 +4664,7 @@ document.addEventListener("DOMContentLoaded", function() {
     CRM.leads.forEach(l => { if(!divs[l.division]) divs[l.division]=0; divs[l.division]+=l.value||0; });
     revDiv.innerHTML = Object.entries(divs).sort((a,b)=>b[1]-a[1]).map(([d,v])=>`<div class="crm-funnel-row"><div class="crm-funnel-label">${d}</div><div class="crm-funnel-bar"><div class="crm-funnel-fill" style="width:${Math.min(100,(v/Math.max(...Object.values(divs),1))*100)}%"></div></div><div class="crm-funnel-count">$${v.toLocaleString()}</div></div>`).join('');
     // Stage velocity (placeholder)
-    document.getElementById('crmVelocity').innerHTML = '<div style="color:#94a3b8;padding:20px;text-align:center">Stage velocity tracked from Audit log — coming soon</div>';
+    document.getElementById('crmVelocity').innerHTML = '<div style="color:#94a3b8;padding:20px;text-align:center">Stage velocity tracked from Audit log â€” coming soon</div>';
     // Top agents
     const agents = {};
     CRM.leads.forEach(l => { if(l.owner){ if(!agents[l.owner]) agents[l.owner]=0; if(l.stage==='WON') agents[l.owner]+=l.value||0; } });
@@ -4567,28 +4684,28 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="crm-drawer-stage-bar">${stages.map(s=>`<div class="crm-drawer-stage ${s===lead.stage?'active':''}" onclick="crmChangeStage('${id}','${s}')">${s}</div>`).join('')}</div>
       </div>
       <div class="crm-drawer-section">
-        <div class="crm-drawer-label">Company</div><div class="crm-drawer-val">${escapeHTML(lead.company||'—')}</div>
+        <div class="crm-drawer-label">Company</div><div class="crm-drawer-val">${escapeHTML(lead.company||'â€”')}</div>
       </div>
       <div class="crm-drawer-section">
-        <div class="crm-drawer-label">Email</div><div class="crm-drawer-val">${escapeHTML(lead.email||'—')}</div>
+        <div class="crm-drawer-label">Email</div><div class="crm-drawer-val">${escapeHTML(lead.email||'â€”')}</div>
       </div>
       <div class="crm-drawer-section">
-        <div class="crm-drawer-label">Phone</div><div class="crm-drawer-val">${escapeHTML(lead.phone||'—')}</div>
+        <div class="crm-drawer-label">Phone</div><div class="crm-drawer-val">${escapeHTML(lead.phone||'â€”')}</div>
       </div>
       <div class="crm-drawer-section">
         <div class="crm-drawer-label">Division</div><div class="crm-drawer-val"><span class="crm-tag ${lead.division}">${lead.division}</span></div>
       </div>
       <div class="crm-drawer-section">
-        <div class="crm-drawer-label">Deal Value</div><div class="crm-drawer-val">${lead.value?'$'+lead.value.toLocaleString():'—'}</div>
+        <div class="crm-drawer-label">Deal Value</div><div class="crm-drawer-val">${lead.value?'$'+lead.value.toLocaleString():'â€”'}</div>
       </div>
       <div class="crm-drawer-section">
-        <div class="crm-drawer-label">Owner</div><div class="crm-drawer-val">${escapeHTML(lead.owner||'—')}</div>
+        <div class="crm-drawer-label">Owner</div><div class="crm-drawer-val">${escapeHTML(lead.owner||'â€”')}</div>
       </div>
       <div class="crm-drawer-actions">
-        <button class="crm-btn crm-btn-primary" onclick="crmLogActivity('EMAIL')">✉ Log Email</button>
-        <button class="crm-btn" onclick="crmLogActivity('CALL')">📞 Log Call</button>
-        <button class="crm-btn" onclick="crmLogActivity('NOTE')">📝 Add Note</button>
-        <button class="crm-btn" onclick="crmAssignTask('${id}')">✓ Add Task</button>
+        <button class="crm-btn crm-btn-primary" onclick="crmLogActivity('EMAIL')">âœ‰ Log Email</button>
+        <button class="crm-btn" onclick="crmLogActivity('CALL')">ðŸ“ž Log Call</button>
+        <button class="crm-btn" onclick="crmLogActivity('NOTE')">ðŸ“ Add Note</button>
+        <button class="crm-btn" onclick="crmAssignTask('${id}')">âœ“ Add Task</button>
       </div>
     `;
     document.getElementById('crmDrawer').classList.add('open');
@@ -4609,7 +4726,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!CRM.selectedItem) return;
     const note = prompt(type+' notes:');
     if (!note) return;
-    CRM.activities.unshift({ type, title: type+' — '+(CRM.selectedItem.company||CRM.selectedItem.email), contact: CRM.selectedItem.name, date: new Date().toISOString(), desc: note });
+    CRM.activities.unshift({ type, title: type+' â€” '+(CRM.selectedItem.company||CRM.selectedItem.email), contact: CRM.selectedItem.name, date: new Date().toISOString(), desc: note });
     alert(type+' logged successfully');
   };
   window.crmAssignTask = function(id) {
@@ -4699,6 +4816,106 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Expose for manual debugging
   window.CRM_ENGINE = CRM;
+})();
+</script>
+<script>
+// ========== ZYN Workflow: Discord + Website + Noah routing ==========
+(function(){
+  const WORKFLOW = {
+    discordGuildId: '1490888092708769995',
+    discordChannelId: '1492443239314362438',
+    discordUrl: 'https://discord.com/channels/1490888092708769995/1492443239314362438',
+    websiteUrl: 'https://ancient1zion.github.io/zynsl-website/',
+    dashboardUrl: 'https://ancient1zion.github.io/zynsl-website/dashboard.html'
+  };
+
+  function wfSet(id, text, color) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text;
+    if (color) el.style.color = color;
+  }
+
+  function wfLog(text, level) {
+    const log = document.getElementById('workflowLog');
+    const status = document.getElementById('workflowStatus');
+    const stamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const line = '[' + stamp + '] ' + (level || 'info').toUpperCase() + '  ' + text;
+    if (log) log.textContent = (log.textContent === 'No events sent this session.' ? '' : log.textContent + '\n') + line;
+    if (status) status.textContent = text;
+  }
+
+  window.ZYN_WORKFLOW = WORKFLOW;
+
+  window.openWorkflowDiscord = function() {
+    window.open(WORKFLOW.discordUrl, '_blank', 'noopener,noreferrer');
+    wfLog('Opened Discord channel ' + WORKFLOW.discordChannelId, 'ok');
+  };
+
+  window.openWorkflowWebsite = function() {
+    window.open(WORKFLOW.websiteUrl, '_blank', 'noopener,noreferrer');
+    wfLog('Opened public website', 'ok');
+  };
+
+  window.openWorkflowDashboard = function() {
+    window.open(WORKFLOW.dashboardUrl, '_blank', 'noopener,noreferrer');
+    wfLog('Opened public dashboard', 'ok');
+  };
+
+  window.checkWorkflowWebsite = async function() {
+    wfSet('workflowWebsiteState', 'checking', 'var(--c-orange)');
+    wfLog('Checking website reachability', 'info');
+    try {
+      const resp = await fetch(WORKFLOW.websiteUrl, { cache: 'no-cache', mode: 'cors' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      wfSet('workflowWebsiteState', 'online', 'var(--c-green)');
+      wfLog('Website online: HTTP ' + resp.status, 'ok');
+      return true;
+    } catch (err) {
+      wfSet('workflowWebsiteState', 'check failed', 'var(--c-red)');
+      wfLog('Website check failed: ' + err.message, 'error');
+      return false;
+    }
+  };
+
+  window.sendWorkflowEvent = async function() {
+    const severity = (document.getElementById('workflowSeverity') || {}).value || 'info';
+    const input = document.getElementById('workflowMessage');
+    const message = input && input.value ? input.value.trim() : '';
+    if (!message) {
+      wfLog('Type a workflow event before sending', 'warn');
+      return;
+    }
+    const payload = '[Workflow ' + severity.toUpperCase() + '] ' + message +
+      '\nDiscord: ' + WORKFLOW.discordUrl +
+      '\nWebsite: ' + WORKFLOW.websiteUrl +
+      '\nDashboard: ' + WORKFLOW.dashboardUrl;
+    wfLog('Routing event to Noah workflow', severity);
+    try {
+      const resp = await fetch(buildUrl({ view: 'noah', action: 'chat', msg: payload }));
+      const data = await resp.json();
+      if (data && data.error) throw new Error(data.error);
+      wfSet('workflowNotifyState', 'routed', 'var(--c-green)');
+      wfLog('Noah accepted workflow event', 'ok');
+      if (input) input.value = '';
+    } catch (err) {
+      wfSet('workflowNotifyState', 'local only', 'var(--c-orange)');
+      wfLog('Noah route failed: ' + err.message + '  Event kept in dashboard log.', 'warn');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    wfSet('workflowDiscordState', 'linked', 'var(--c-green)');
+    wfSet('workflowNotifyState', 'Noah gated', 'var(--c-orange)');
+    setTimeout(function(){
+      if (document.querySelector('section.page.active[data-page="workflow"]')) {
+        window.checkWorkflowWebsite();
+      }
+    }, 300);
+    document.querySelectorAll('.nav-item[data-page="workflow"]').forEach(function(n) {
+      n.addEventListener('click', function() { setTimeout(window.checkWorkflowWebsite, 250); });
+    });
+  });
 })();
 </script>
 </body>
