@@ -774,5 +774,27 @@
   document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
   document.querySelectorAll('.govcon-tab').forEach(tab=>{tab.addEventListener('click',function(){document.querySelectorAll('.govcon-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')})});
   </script>
+  <!-- CRM TEST SCRIPT: DO NOT DELETE -->
+<script>
+async function loadCRMData() {
+    // Make sure your Google Apps Script Web App URL goes right here between the quotes
+    const webAppUrl =AKfycbxbvBoa4QkzrjaGITZIGqI1Wapwy4YXMFYj2p6jBqvLkoV1Tiohg-B2hRJSTPcb_eNiCQ
+    
+    try {
+        const response = await fetch(webAppUrl);
+        const result = await response.json();
+        
+        if (result.status === "success") {
+            console.log("Agent Ruth synced the CRM Data:", result.data);
+            alert("Success! The CRM is connected to the dashboard.");
+        }
+    } catch (error) {
+        console.error("Failed to sync CRM:", error);
+    }
+}
+
+// Start the function
+loadCRMData();
+</script>
 </body>
 </html>
